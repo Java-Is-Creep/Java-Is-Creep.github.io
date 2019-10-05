@@ -1,31 +1,29 @@
-Slooow.shopState = function(game) {
+Slooow.marathonState = function(game) {
 }
 
-Slooow.shopState.prototype = {
+Slooow.marathonState.prototype = {
 
     init : function() {
-        if (game.global.DEBUG_MODE) {
-            console.log("[DEBUG] Entering **SHOP** state");
-        }
-    },
+		if (game.global.DEBUG_MODE) {
+			console.log("[DEBUG] Entering **MARATHON** state");
+		}
+	},
 
-    preload : function() {
-    },
+	preload : function() {
+		
+	},
 
-    create : function() {
-
-        console.log()
+	create : function() {
+        //Background
+        var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
+		b.anchor.set (0.5, 0.5)
+        b.scale.setTo (1.2,1.2)
 
         var style = {
 			font : "40px Arial",
 			fill : "#000000",
 			align : "center"
-        };
-        
-        //Background
-        var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
-		b.anchor.set (0.5, 0.5)
-        b.scale.setTo (1.2,1.2)
+		};
 
         //Boton desconectar
 		buttonBack = game.add.button(50,
@@ -43,8 +41,10 @@ Slooow.shopState.prototype = {
         function actionOnClickBack(){
             game.state.start('mainMenuState')
         }
-    },
+	},
 
-    update : function() {
-    }
+	update : function() {
+			
+		
+	}
 }

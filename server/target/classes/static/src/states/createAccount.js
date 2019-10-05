@@ -72,10 +72,10 @@ Slooow.createAccountState.prototype = {
 
         //Boton crear cuenta
         buttonCreateAccount = game.add.button(game.world.centerX ,
-            game.world.centerY + 140, 'seaSnail', actionOnClickCreate, this,
+            game.world.centerY + 140, 'button', actionOnClickCreate, this,
             0, 0, 0)
         buttonCreateAccount.anchor.set(0.5)
-        buttonCreateAccount.scale.setTo(0.3, 0.3)
+        buttonCreateAccount.scale.setTo(0.4, 0.3)
 
         //Texto boton crear cuenta
         textButtonInit = game.add.text(game.world.centerX ,
@@ -85,14 +85,14 @@ Slooow.createAccountState.prototype = {
 
 
         //Boton atras
-        buttonBack = game.add.button(40 ,
-            40  , 'seaSnail', actionOnClickBack, this,
+        buttonBack = game.add.button(50 ,
+            40  , 'button', actionOnClickBack, this,
             0, 0, 0)
         buttonBack.anchor.set(0.5)
-        buttonBack.scale.setTo(0.3, 0.3)
+        buttonBack.scale.setTo(0.2, 0.3)
 
         //Texto atras
-        textButtonBack = game.add.text(40 ,
+        textButtonBack = game.add.text(50 ,
             40, 'Back', style2)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5, 0.5)
@@ -107,7 +107,10 @@ Slooow.createAccountState.prototype = {
                         pass : passwordInput.value,
                         confirmPass : confirmPasswordInput.value
                     }
-					game.global.socket.send(JSON.stringify(msg))
+                    game.global.socket.send(JSON.stringify(msg))
+                    
+                    game.global.username = usernameInput.value
+                    game.global.password = passwordInput.value
 					//inicioSesionNameButton.text.setText('')
 					//inicioSesionNameButton.value = undefined
 					//inicioSesionPassButton.text.setText('')
