@@ -2,29 +2,46 @@ package server;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/*
+ * 
+ * Clase que comprobará todas las acciones del caracol de interacción con el jugador
+ * ya sean acelerar, frenar o usar un objeto 
+ * 
+*/
+
 public class SnailInGame {
+
+	//TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;
 	final int colliderOfsetX = 50;
 	final int colliderOfsetY = 50;
 
-	// valores iniciales
-	public final int MAXSTAMINA = 300; // 151 de base son 5 seg, 300 dura 10 segundos, se resta 1 de estamina por
-										// segundo
+	/*	  
+	 *	VALORES INICIALES
+	 * 	DEBERÍAN CAMBIAR SEGÚN CADA CARACOL
+	 */
+
+	//151 de stamina significa 5 seg con stamina, 300 son 10 segundos, se resta 1 de stamina por segundo
+	public final int MAXSTAMINA = 300; 
 	public final int MAXVELOCIDADX = 3;
 	public final int MAXVELOCIDADY = 3;
-	public final float ACELERATIONX = 0.05f; // deberian ser la misma aceleracion.
+	//Deben ser la misma aceleracion.
+	public final float ACELERATIONX = 0.05f;
 	public final float ACALERATIONY = 0.05f;
 	public final float GRAVITY = 0.3f;
 	public final float BREAKFORCE = 0.1f;
-	public final float STAMINALOSE = 1; // tarda 5 segundos en perder la stamina
-	public final float STAMINANORMALRECOVER = 2.5f; // tarda 2 segundos en recargar la stamina
-	public final float STAMINARUNOUTRECOVER = 1.5f; // tarda 3.33 segundos en recargar la stamina
+	//Tarda 5 segundos en perder la stamina
+	public final float STAMINALOSE = 1;
+	//Tarda 2 segundos en recargar la stamina 
+	public final float STAMINANORMALRECOVER = 2.5f;
+	//Tarda 3.33 segundos en recargar la stamina 
+	public final float STAMINARUNOUTRECOVER = 1.5f; 
 	public final float MAXGRAVITYSPEED = -20;
 	public final float MASS = 1;
 	public final float SPEEDXLOSE = 1.02f;
-	// OPERACION 151 / (1.5f * 30 fps)
+	//Tiempo que se tarda en recargar la stamina 151 / (1.5f * 30 fps) = 3.33 segundos
 
-	// Valores maximos que pueden ser cambiado con power ups momentameamente
+	//Valores maximos que pueden ser cambiado con power ups momentameamente
 	public int maxStamina;
 	public float maxSpeedX;
 	public float maxSpeedY;
@@ -35,6 +52,7 @@ public class SnailInGame {
 	public float breakForce;
 	public boolean runOutStamina;
 
+	//Flags de colisiones
 	public boolean isOnFloor = true;
 	public boolean isOnWall = false;
 	public boolean isOnSlope = false;
@@ -45,14 +63,16 @@ public class SnailInGame {
 	public float stamina;
 	public float posX = 20;
 	public float posY = 20;
+	//Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
 	GenericPowerUp powerUp;
 
-	// interaccion con el escenario
+	//Interacción con el escenario
 
-	ReentrantLock lastMovementLock = new ReentrantLock(); // se puede tocar tanto en el manejador de mensajes como en el
-															// loop de la sala
-
+	//Se accede a lastMovement tanto en esta clase como en el WebSocketSnailHandler
+	ReentrantLock lastMovementLock = new ReentrantLock(); 
+	
+	//Inicialización según el caracol
 	public SnailInGame() {
 		speedX = 0;
 		speedY = 0;
@@ -63,12 +83,11 @@ public class SnailInGame {
 		acelerationX = ACELERATIONX;
 		acelerationY = ACALERATIONY;
 		breakForce = BREAKFORCE;
-
 		stamina = MAXSTAMINA;
 		collider = new SquareCollider(colliderOfsetX, colliderOfsetY, posX, posY);
 	}
 
-	// Resetea los valores en caso de que hallas consumido algun power up
+	//Resetea los valores en caso de que hayas consumido algun power up
 	public void restoreValues() {
 		maxStamina = MAXSTAMINA;
 		maxSpeedX = MAXVELOCIDADX;
@@ -91,12 +110,12 @@ public class SnailInGame {
 		boolean useObject = lastMovement.useObject;
 		lastMovementLock.unlock();
 
-		// si tienes stamina haces funcionamiento normal
+		//Si tienes stamina haces funcionamiento normal
 		if (!runOutStamina) {
-			// comprobamos si aceleramos o no para perder o quitar stamina
+			//Comprobamos si aceleramos o no para perder o quitar stamina
 			if (!isStopping) {
-
-				if ((!isOnFloor) && (!isOnWall) && (!isOnSlope)) { // si estas cayendo no pierdes stamina, sino que recuperas parte
+				//Si estas cayendo no pierdes stamina, sino que recuperas parte
+				if ((!isOnFloor) && (!isOnWall) && (!isOnSlope)) {
 					stamina += STAMINARUNOUTRECOVER;
 				} else {
 					stamina -= STAMINALOSE;
@@ -109,7 +128,7 @@ public class SnailInGame {
 				stamina += STAMINANORMALRECOVER;
 			}
 
-			// comprobamos si esta en el suelo para que avance
+			//Comprobamos si esta en el suelo para que avance
 			if (isOnFloor) {
 				if (!isStopping) {
 					speedX += acelerationX * MASS;
@@ -128,7 +147,8 @@ public class SnailInGame {
 				}
 			}
 
-			if (isOnSlope) { // de momento no se contempla que una rampa llege a una escalera
+			//TODO contemplar que una rampa llege a una escalera
+			if (isOnSlope) { 
 				System.out.println("estamos en slope");
 				maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians));
 				maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians));
@@ -140,29 +160,30 @@ public class SnailInGame {
 					speedY += (acelerationY * MASS);
 					System.out.println("velocidad en cuestaX: " + speedX);
 					System.out.println("velocidad en cuestaY: " + speedY);
-				} else { // si estas frenando no te caes
+				} //Si estas frenando no te caes
+				 else { 
 					speedX -= breakForce * MASS ;
 					speedY -= breakForce * MASS ;
-					if (speedY < 0) { // si estoy frenando no puedo caerme
+					//Si estoy frenando no puedo caerme
+					if (speedY < 0) { 
 						speedY = 0;
 					}
 				}
-			} else { // hago esto para comprobar que no se pase de velocidad
+			} //Hago esto para comprobar que no se pase de velocidad al haberla cambiado para la cuesta
+			else { 
 				maxSpeedX = MAXVELOCIDADX;
 				maxSpeedY = MAXVELOCIDADY;
 				slopeRadians = 0;
 			}
 
-			// si esta en la pared sube
+			//Si está en la pared la escala
 			if (isOnWall) {
 				speedX = 0;
 				if (!isStopping) {
 					speedY += acelerationY * MASS;
 				} else {
 					if (!isOnFloor) {
-
 						speedY -= GRAVITY * MASS;
-
 					} else {
 						speedY = 0;
 					}
@@ -176,7 +197,8 @@ public class SnailInGame {
 			if ((!isOnFloor) && (!isOnWall) && (!isOnSlope)) {
 				speedX = speedX / SPEEDXLOSE;
 			}
-		} else { // si te quedas sin estamina te quedas parado hasta que te recuperes,
+		}//Si te quedas sin estamina te quedas parado hasta que te recuperes, 
+		else { 
 			stamina += STAMINARUNOUTRECOVER;
 			if ((!isOnFloor) && (!isOnWall) && (!isOnSlope)) {
 				speedX = speedX / SPEEDXLOSE;
@@ -192,7 +214,7 @@ public class SnailInGame {
 				stamina = maxStamina;
 			}
 		}
-		// Ajustamos las velocidades
+		//Ajustamos las velocidades
 		
 
 		// actualizamos posiciones
@@ -209,10 +231,12 @@ public class SnailInGame {
 			posX += speedX;
 			posY += speedY;
 		}
-
+		//Avisas al collider de que recalcule la posición
 		collider.recalculatePosition(posX, posY);
 	}
 
+
+	//Comprueba que no te pases de tu velocidad Máxima
 	public void adjustSpeed(float maxX, float maxY) {
 		
 		if (speedX > maxX) {

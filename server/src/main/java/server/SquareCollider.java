@@ -1,6 +1,17 @@
 package server;
 
-public class SquareCollider { // el centro de los colliders sera la esquina de abajo izq
+
+/**
+ * +
+ * ^			El (0,0) de los colliders se ubica en la parte inferior izquierda
+ * |			Se asocia a todos los objetos que deban tener colisión del juego, caracoles, objetos y suelos
+ * |			Por alguna extraña razón los offset son el ancho y el largo
+ * |_______>	maxX y maxY y minX y minY son las esquinas del collider
+ * ESQ IZQ	+ 
+ * 
+ */
+public class SquareCollider {
+
 	float ofssetX;
 	float ofssetY;
 	float maxX;
@@ -14,6 +25,7 @@ public class SquareCollider { // el centro de los colliders sera la esquina de a
 		recalculatePosition(posX, posY);
 	}
 
+	//Calcula el tamaño del collider
 	public void recalculatePosition(float posX, float posY) {
 		maxX = posX + ofssetX;
 		minX = posX;
@@ -31,14 +43,19 @@ public class SquareCollider { // el centro de los colliders sera la esquina de a
 		}
 	}
 
-	public boolean hayColision(PlayerConected jugador) { // hay que intentar que solo se compruebe lo que es visible
+	//TODO Compruebar solo lo que es visible
+	public boolean hayColision(PlayerConected jugador) { 
 		// System.out.println("Collider info: maxX: " +maxX + " minX: " +minX + " maxY:
 		// " +maxY + " minY: " + minY);
 		// System.out.println("Player info: maxX: " +jugador.mySnail.collider.maxX + "
 		// minX: " +jugador.mySnail.collider.minX + " maxY: "
 		// +jugador.mySnail.collider.maxY + " minY: " + jugador.mySnail.collider.minY);
-		if ((maxX >= jugador.mySnail.collider.maxX) && (minX <= jugador.mySnail.collider.maxX)) { // comprobamos las
-																									// maxX
+
+		//Compruebas la intersección de forma no analítica entre los tamaños de los colliders
+
+		//Comprobamos las maxX
+		if ((maxX >= jugador.mySnail.collider.maxX) && (minX <= jugador.mySnail.collider.maxX)) {
+			//
 			if ((maxY >= jugador.mySnail.collider.maxY) && (minY <= jugador.mySnail.collider.maxY)) { // comprobamos las
 																										// maxY
 				return true;

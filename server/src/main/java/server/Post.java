@@ -1,7 +1,8 @@
 package server;
 
-
-public class Post { // en caso de que no coincidan
+//Todos los mensajes recibidos por el cliente se castean a esta clase, es un wrapper del mensaje
+//Si falta algún parámetro al construirlo se incializa a NULL y los parámetro que sobren se ignoran
+public class Post { 
 	String event;
 
 	String playerName;
@@ -9,7 +10,4 @@ public class Post { // en caso de que no coincidan
 	
 	boolean isStopping;
 	boolean useObject;
-
-
-
 }
