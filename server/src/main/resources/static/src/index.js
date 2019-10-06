@@ -2,6 +2,7 @@ var game;
 
 window.onload = function () {
     game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv');
+    //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
     console.log('Despues cargar juego');
 
     //Variables globales compartidas entre escenas
@@ -75,6 +76,7 @@ window.onload = function () {
 
     this.game.state.add('bootState', Slooow.bootState);
     this.game.state.add('preloadState', Slooow.preloadState);
+    this.game.state.add('initGameState', Slooow.initGameState);
     this.game.state.add('initSesionState', Slooow.initSesionState);
     this.game.state.add('createAccountState', Slooow.createAccountState);
     this.game.state.add('mainMenuState', Slooow.mainMenuState);

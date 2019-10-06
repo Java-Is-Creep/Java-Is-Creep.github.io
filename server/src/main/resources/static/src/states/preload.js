@@ -26,7 +26,7 @@ Slooow.preloadState.prototype = {
 
 	update : function() {
 		//if (typeof game.global.myPlayer.id !== 'undefined') {
-			game.state.start('initSesionState')
+			game.state.start('initGameState')
 		//}
 	}
 }
