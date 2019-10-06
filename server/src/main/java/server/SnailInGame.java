@@ -22,6 +22,7 @@ public class SnailInGame {
 	 */
 
 	//151 de stamina significa 5 seg con stamina, 300 son 10 segundos, se resta 1 de stamina por segundo
+	//Tiempo que se tarda en recargar la stamina si se acaba o nos dan 151 / (1.5f * 30 fps) = 3.33 segundos
 	public final int MAXSTAMINA = 300; 
 	public final int MAXVELOCIDADX = 3;
 	public final int MAXVELOCIDADY = 3;
@@ -39,7 +40,7 @@ public class SnailInGame {
 	public final float MAXGRAVITYSPEED = -20;
 	public final float MASS = 1;
 	public final float SPEEDXLOSE = 1.02f;
-	//Tiempo que se tarda en recargar la stamina 151 / (1.5f * 30 fps) = 3.33 segundos
+	
 
 	//Valores maximos que pueden ser cambiado con power ups momentameamente
 	public int maxStamina;
@@ -56,7 +57,9 @@ public class SnailInGame {
 	public boolean isOnFloor = true;
 	public boolean isOnWall = false;
 	public boolean isOnSlope = false;
+	public boolean isOnObstacle = false;
 	public double slopeRadians = 0;
+	public SpikesObstacle obstacle = null;
 
 	public float speedX;
 	public float speedY;
@@ -109,6 +112,20 @@ public class SnailInGame {
 		boolean isStopping = lastMovement.isStopping;
 		boolean useObject = lastMovement.useObject;
 		lastMovementLock.unlock();
+
+		if(isOnObstacle){
+			if(obstacle != null) {
+				if(!isOnWall && !isOnSlope){
+					obstacle.playerCrash();
+					crashObstacle();
+					isOnObstacle = false;
+					System.out.println("////////////////////");
+					obstacle.toString();
+					System.out.println("////////////////////");
+				}
+			}
+			
+		}
 
 		//Si tienes stamina haces funcionamiento normal
 		if (!runOutStamina) {
@@ -257,6 +274,11 @@ public class SnailInGame {
 		lastMovementLock.lock();
 		lastMovement = new LastMovement(isStoping, useObject);
 		lastMovementLock.unlock();
+	}
+
+	public void crashObstacle(){
+		stamina = 0;
+		runOutStamina = true;
 	}
 
 }

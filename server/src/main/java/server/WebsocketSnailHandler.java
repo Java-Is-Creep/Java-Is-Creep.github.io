@@ -49,7 +49,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 * De momento comienza la partida también 
 		 */
 		case "SINGLEPLAYER":
-			jug = new PlayerConected(newSession, post.playerName);
+			jug = new PlayerConected(newSession, post.playerName,lockSession);
 			game.jugadoresConectados.putIfAbsent(jug.getSession(), jug); 
 			game.room1 = new SinglePlayerRoom(post.roomName,jug);
 			break;
