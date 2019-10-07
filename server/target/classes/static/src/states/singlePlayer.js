@@ -31,7 +31,13 @@ Slooow.singlePlayerState.prototype = {
 			fill: "#000000",
 			align: "center"
 		};
-		game.global.player.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style);
+
+		var style2 = {
+			font: "40px Arial",
+			fill: "#ffffff",
+			align: "center"
+		}
+		game.global.player.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style2);
 		/*
 				//Background
 				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
