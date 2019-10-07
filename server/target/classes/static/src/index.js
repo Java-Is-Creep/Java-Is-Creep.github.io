@@ -23,7 +23,7 @@ window.onload = function () {
         //Array de rampas. Tiene: x, y, width, height
         arraySlopes : [],
         //Array de obstaculos tipo pincho. Tiene: posX, posY
-        arrayObstacleSpikes: []  
+        arrayObstacleSpikes: [] 
     }
     console.log('Despues crear game global');
 
@@ -51,6 +51,7 @@ window.onload = function () {
                 }
                 game.global.player.x = Math.floor(msg.posX)
                 game.global.player.y = game.world.height  - (Math.floor(msg.posY))
+                game.global.player.stamina.setText(msg.stamina)
                 break
 
             case 'DRAWMAP':
@@ -103,7 +104,7 @@ window.onload = function () {
                         case 'POWERUP':
                             //Por ahora no hace nada
                             break;
-                        case 'OBSTACLEPOINT':
+                        case 'OBSTACLE':
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
@@ -111,7 +112,9 @@ window.onload = function () {
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
                             numOfObstacleSpikes++
                             break                
-
+                        default:
+                            this.console.log('tipo sin reconocer ' + type[i])
+                            break
                     }
                 }
                 /*
@@ -132,7 +135,7 @@ window.onload = function () {
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 var i = 0
-                for (var spike in arrayObstacleSpikes){
+                for (var spike in game.global.arrayObstacleSpikes){
                     spike.posX = arrayPosX[i]
                     spike.posY = arrayPosY[i];
                     i++
