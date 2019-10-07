@@ -29,7 +29,7 @@ public class SpikesObstacle extends MapObstacle {
         MAXTIMEACTIVE = timeActive;
         activePosY = posY;
         posYnotActive = posY - (height + 5);
-        posY = posYnotActive;
+        estate = Estate.ACTIVE;
         this.tickTime = tickTime;
         System.out.println("pos y active: " + activePosY + " pos y no active: " +posYnotActive);
 
