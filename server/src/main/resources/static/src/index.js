@@ -23,7 +23,9 @@ window.onload = function () {
         //Array de rampas. Tiene: x, y, width, height
         arraySlopes : [],
         //Array de obstaculos tipo pincho. Tiene: posX, posY
-        arrayObstacleSpikes: [] 
+        arrayObstacleSpikes: [] ,
+        //Array de power ups
+        arrayPowerUps: []
     }
     console.log('Despues crear game global');
 
@@ -74,6 +76,7 @@ window.onload = function () {
                 var numOfWalls = 0;
                 var numOfSlopes = 0;
                 var numOfObstacleSpikes = 0;
+                var numOfPowerUps = 0;
 
                 for (var i = 0; i<type.length; i++){
                     switch (type[i]){
@@ -111,7 +114,15 @@ window.onload = function () {
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
                             numOfObstacleSpikes++
-                            break                
+                            break  
+                        case 'GENERICPOWERUP':
+                            this.game.global.arrayPowerUps[numOfPowerUps] = new Object()
+                            this.game.global.arrayPowerUps[numOfPowerUps].x = arrayPosX[i]
+                            this.game.global.arrayPowerUps[numOfPowerUps].y = arrayPosY[i]
+                            this.game.global.arrayPowerUps[numOfPowerUps].height = arrayHeight[i]
+                            this.game.global.arrayPowerUps[numOfPowerUps].width = arrayWidth[i]
+                            numOfPowerUps++
+                            break                  
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break

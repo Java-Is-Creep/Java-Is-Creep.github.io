@@ -25,6 +25,9 @@ Slooow.singlePlayerState.prototype = {
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
+		this.eKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
+		game.input.keyboard.addKeyCapture([Phaser.Keyboard.E]);
+
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
 		var style = {
 			font: "40px Arial",
@@ -114,6 +117,15 @@ Slooow.singlePlayerState.prototype = {
 			this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
 		}
 
+		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
+			console.log(game.global.arrayPowerUps[i].x)
+			console.log(game.global.arrayPowerUps[i].y)
+			console.log(game.global.arrayPowerUps[i].height)
+			console.log(game.global.arrayPowerUps[i].width)
+			console.log('screen height' + game.world.height)
+			this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
+		}
+
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
@@ -125,14 +137,15 @@ Slooow.singlePlayerState.prototype = {
 
 		let msg = {
 			event: 'UPDATEINPUT',
-			isStopping: false,
+			isSprinting: false,
 			useObject: false
 		}
 
 		if (this.wKey.isDown) {
-			msg.isStopping = true;
-		} else if (this.wKey.isUp) {
-
+			msg.isSprinting = true;
+		} 
+		if (this.eKey.isDown){
+			msg.useObject = true
 		}
 		game.global.socket.send(JSON.stringify(msg))
 
