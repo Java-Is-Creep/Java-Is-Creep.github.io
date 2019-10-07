@@ -50,8 +50,6 @@ ___
 
 
 -	Gatocol: Un mini salto, permite no caer en trampillas, saltar para alcanzar antes el final de un tramo de pared, etc.
-
-
 ![Error al cargar la imagen](./snailSprites/catSnail.png)
 
 
