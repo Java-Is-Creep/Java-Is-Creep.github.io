@@ -136,8 +136,8 @@ window.onload = function () {
                 var arrayPosY = JSON.parse(msg.posY)
                 var i = 0
                 for (var spike in game.global.arrayObstacleSpikes){
-                    spike.posX = arrayPosX[i]
-                    spike.posY = arrayPosY[i];
+                    spike.x = arrayPosX[i]
+                    spike.y = arrayPosY[i];
                     i++
                 }
         }
