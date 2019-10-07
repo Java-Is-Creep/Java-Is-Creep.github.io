@@ -197,11 +197,8 @@ public class SnailInGame {
 
 			//TODO contemplar que una rampa llege a una escalera
 			if (isOnSlope) { 
-				System.out.println("estamos en slope");
 				maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians));
 				maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians));
-				System.out.println("maxima velocidad en cuestaX: " + maxSpeedX);
-				System.out.println("maxima velocidad en cuestaY: " + maxSpeedY);
 
 				if (speedX < maxSpeedInSlopeX) {
 					speedX += acelerationX * MASS;
