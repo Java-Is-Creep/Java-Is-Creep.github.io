@@ -18,6 +18,7 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
 		game.global.player.anchor.setTo(0.5, 0.5);
 		game.global.player.scale.setTo(0.3, 0.3)
+		game.global.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style);
 	},
 
 	create: function () {
@@ -38,7 +39,6 @@ Slooow.singlePlayerState.prototype = {
 		*/
 		//Boton desconectar
 
-		stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style);
 
 		buttonBack = game.add.button(50,
 			40, 'button', actionOnClickBack, this,
@@ -127,6 +127,8 @@ Slooow.singlePlayerState.prototype = {
 		} else if (this.wKey.isUp) {
 
 		}
+		game.global.socket.send(JSON.stringify(msg))
+
 
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
 			console.log('pintar pichos')
@@ -134,10 +136,9 @@ Slooow.singlePlayerState.prototype = {
 			this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
 		}
 
-		game.global.socket.send(JSON.stringify(msg))
+		
 
 
-		//Actualizar stamina
-		stamina.setText(game.global.stamina)
+		
 	}
 }
