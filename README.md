@@ -42,17 +42,17 @@ Si se pierde la estamina, se tiene que esperar hasta recuperarla entera, y volve
 Lateral: diseños sin profundidad. Los personajes se superponen (lo cual obliga a que vayas en el primer carril siempre y que todas las trampas y power-ups estén en el mismo lugar para todos)
 
 
-![Error al cargar la imagen](.\ReadmeImages\gameView.jpg)
+![Error al cargar la imagen](./ReadmeImages/gameView.jpg)
 ___
 ## Personajes + Habilidades
 -	Caracol marino: Soltar baba en todos los carriles, disminuyendo la velocidad en ese tramo.
-![Error al cargar la imagen](.\snailSprites\seaSnail.png)
+![Error al cargar la imagen](./snailSprites/seaSnail.png)
 
 
 -	Gatocol: Un mini salto, permite no caer en trampillas, saltar para alcanzar antes el final de un tramo de pared, etc.
 
 
-![Error al cargar la imagen](.\snailSprites\catSnail.png)
+![Error al cargar la imagen](./snailSprites/catSnail.png)
 
 
 -	Caracol Normal: Convertirse en rueda (sin moverse) y ser inmune durante unos segundos. Puede servirte para no perder vida/estamina por culpa de un fuego, puerta, objeto enemigo, etc. 
