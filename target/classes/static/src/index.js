@@ -19,7 +19,7 @@ window.onload = function () {
     }
     console.log('Despues crear game global');
 
-    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8976/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
