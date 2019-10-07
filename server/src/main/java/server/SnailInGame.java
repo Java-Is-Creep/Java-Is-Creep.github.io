@@ -129,8 +129,10 @@ public class SnailInGame {
 		lastMovementLock.unlock();
 
 		if(useObject){
-			if(powerUp != null){
-				powerUp.consumirPowerUp();
+			if(!usingPowerUp){
+				if(powerUp != null){
+					powerUp.consumirPowerUp();
+				}
 			}
 		}
 

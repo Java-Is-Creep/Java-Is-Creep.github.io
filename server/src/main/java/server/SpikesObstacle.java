@@ -1,19 +1,7 @@
 
 package server;
 
-import java.io.IOException;
-
-import com.google.gson.JsonObject;
-
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-
 public class SpikesObstacle extends MapObstacle {
-    private float timeToActive;
-    private float timeActive;
-    private float MAXTIMETOACTIVE;
-    private float MAXTIMEACTIVE;
-    private float tickTime;
     private int posYnotActive;
     private int activePosY;
     private int increment = 1;
@@ -21,16 +9,13 @@ public class SpikesObstacle extends MapObstacle {
     enum Estate { ACTIVE, NOTACTIVE, GOINGUP,GOINGDOWN}
     Estate estate = Estate.NOTACTIVE;
 
-    public SpikesObstacle(int width, int height, int posX, int posY, type myTipe, int timeToActive,int timeActive, int tickTime) {
-        super(width, height, posX, posY, myTipe);
+    public SpikesObstacle(int width, int height, int posX, int posY, type myType, int timeToActive,int timeActive, int tickTime) {
+        super(width, height, posX, posY, myType,timeToActive,timeActive,tickTime);
         this.timeToActive = timeToActive ;
         MAXTIMETOACTIVE = timeToActive ;
-        this.timeActive = timeActive;
-        MAXTIMEACTIVE = timeActive;
         activePosY = posY;
         posYnotActive = posY - (height + 5);
         estate = Estate.ACTIVE;
-        this.tickTime = tickTime;
         System.out.println("pos y active: " + activePosY + " pos y no active: " +posYnotActive);
 
     }
@@ -68,6 +53,7 @@ public class SpikesObstacle extends MapObstacle {
         }
     }
 
+    @Override
     public void update() {
         switch(estate){
             case ACTIVE:
@@ -91,20 +77,6 @@ public class SpikesObstacle extends MapObstacle {
         collider.recalculatePosition(posX, posY);
         */
     }
-
-    /*
-    public void sendObstacleUpdate() {
-        JsonObject obstacleStats = new JsonObject();
-        obstacleStats.addProperty("event", "SPIKEOBSTACLEUPDATE");
-        obstacleStats.addProperty("posX", posX);
-        obstacleStats.addProperty("posY", posX);
-        try {
-            playerSession.sendMessage(new TextMessage(obstacleStats.toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    */
 
     public void playerCrash(){
         estate = Estate.GOINGDOWN;

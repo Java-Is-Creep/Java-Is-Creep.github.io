@@ -10,15 +10,15 @@ public class MapObject { // clase principal de la que heredaran todos los objeto
 		GROUND,WALL,OBSTACLE,POWERUP,OBSTACLEPOINT,SLOPE,GENERICPOWERUP,DOOR
 	}
 	
-	type myTipe;
+	type myType;
 
-	public MapObject(int width, int height, int posX, int posY, type myTipe) {
+	public MapObject(int width, int height, int posX, int posY, type myType) {
 		collider = new SquareCollider(width,height,posX,posY);
 		this.width = width;
 		this.height = height;
 		this.posX = posX;
 		this.posY = posY;
-		this.myTipe = myTipe;
+		this.myType = myType;
 	}
 	
 	public void collisionInfo() {

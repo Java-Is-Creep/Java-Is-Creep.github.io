@@ -25,6 +25,7 @@ public  class GenericPowerUp {
 		if(timeRemaining == 0) {
 			snailTarget.restoreValues();
 			snailTarget.setUsingPowerUp(false);
+			snailTarget.powerUp = null;
 			System.out.println("Se acabo el tiempo de powerUp");
 		}
 	}
