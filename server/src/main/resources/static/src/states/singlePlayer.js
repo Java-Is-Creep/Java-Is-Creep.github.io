@@ -137,7 +137,7 @@ Slooow.singlePlayerState.prototype = {
 		game.global.socket.send(JSON.stringify(msg))
 
 
-		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
+		for (var i = 0; i < game.global.arrayObstacleSpikes.length ; i++) {
 			console.log('pintar pichos')
 
 			this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
