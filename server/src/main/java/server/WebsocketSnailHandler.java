@@ -60,7 +60,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 */
 		case "UPDATEINPUT":
 			jug = game.bucarJugadorConectado(newSession);
-			jug.mySnail.updateMovement(post.isStopping, post.useObject);
+			jug.mySnail.updateMovement(post.isSprinting, post.useObject);
 			break;
 
 		default:
