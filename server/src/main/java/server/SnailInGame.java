@@ -146,7 +146,10 @@ public class SnailInGame {
 			if (!isAcelerating) {
 
 				if(!isOnWall){
-					stamina += STAMINANORMALRECOVER;
+					if(stamina < MAXSTAMINA){
+						stamina += STAMINANORMALRECOVER;
+					}
+					
 				} else {
 					stamina -= STAMINAWALLLOSE;
 				}

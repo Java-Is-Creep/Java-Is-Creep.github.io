@@ -16,7 +16,7 @@ public class SpikesObstacle extends MapObstacle {
     private float tickTime;
     private int posYnotActive;
     private int activePosY;
-    private int increment = 5;
+    private int increment = 1;
 
     enum Estate { ACTIVE, NOTACTIVE, GOINGUP,GOINGDOWN}
     Estate estate = Estate.NOTACTIVE;
@@ -29,7 +29,9 @@ public class SpikesObstacle extends MapObstacle {
         MAXTIMEACTIVE = timeActive;
         activePosY = posY;
         posYnotActive = posY - (height + 5);
+        posY = posYnotActive;
         this.tickTime = tickTime;
+        System.out.println("pos y active: " + activePosY + " pos y no active: " +posYnotActive);
 
     }
 

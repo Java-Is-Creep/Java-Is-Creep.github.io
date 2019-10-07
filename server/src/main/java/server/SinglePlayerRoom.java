@@ -125,7 +125,7 @@ public class SinglePlayerRoom {
 		// tiene que haber debajo un suelo
 		// minimo tiene que estar mas tiempopreparandose qu elo que tarda en recargar el caracol.
 		// 4000 serian 4.04 seg de preparacion y estaria activo cerca de 1 seg
-		SpikesObstacle spike1 = new SpikesObstacle(100, 20, 100, 400, type.OBSTACLE, 15000,4000, TICKTIME); 
+		SpikesObstacle spike1 = new SpikesObstacle(100, 100, 100, 400, type.OBSTACLE, 15000,4000, TICKTIME); 
 		map.addMapObject(spike1);
 		spikesArray.add(spike1);
 		map.addMapObject(new MapGround(100, 20, 100, 400, type.GROUND));
@@ -207,6 +207,7 @@ public class SinglePlayerRoom {
 			msg.addProperty("event", "TICK");
 			msg.addProperty("posX", player.mySnail.posX);
 			msg.addProperty("posY", player.mySnail.posY);
+			msg.addProperty("stamina", player.mySnail.stamina);
 			
 			try {
 				player.sessionLock.lock();
