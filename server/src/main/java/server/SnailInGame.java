@@ -79,7 +79,8 @@ public class SnailInGame {
 	public float posY = 20;
 	//Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
-	GenericPowerUp powerUp;
+	GenericPowerUp powerUp = null;
+	private boolean usingPowerUp = false;
 
 	//Interacción con el escenario
 
@@ -114,6 +115,7 @@ public class SnailInGame {
 		if (powerUp != null) {
 			powerUp.consumirPowerUp();
 			powerUp = null;
+			usingPowerUp = true;
 		}
 	}
 
@@ -125,6 +127,16 @@ public class SnailInGame {
 		boolean isAcelerating = lastMovement.isAcelerating;
 		boolean useObject = lastMovement.useObject;
 		lastMovementLock.unlock();
+
+		if(useObject){
+			if(powerUp != null){
+				powerUp.consumirPowerUp();
+			}
+		}
+
+		if(usingPowerUp){
+			powerUp.decrementarTiempo();
+		}
 
 		if(isOnObstacle){
 			if(obstacle != null) {
@@ -299,6 +311,14 @@ public class SnailInGame {
 	public void crashObstacle(){
 		stamina = 0;
 		runOutStamina = true;
+	}
+
+	public boolean isUsingPowerUp() {
+		return usingPowerUp;
+	}
+
+	public void setUsingPowerUp(boolean usingPowerUp) {
+		this.usingPowerUp = usingPowerUp;
 	}
 
 }

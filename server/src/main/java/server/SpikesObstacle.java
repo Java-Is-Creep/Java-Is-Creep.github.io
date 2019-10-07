@@ -85,9 +85,11 @@ public class SpikesObstacle extends MapObstacle {
             default:
 
         }
+        /*
         System.out.println(estate);
         System.out.println("PosX es: "+posX + "PosY es: " + posY);
         collider.recalculatePosition(posX, posY);
+        */
     }
 
     /*

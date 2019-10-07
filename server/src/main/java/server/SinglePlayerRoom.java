@@ -110,29 +110,34 @@ public class SinglePlayerRoom {
 	public void createMap() {
 		// MAPA 1
 		/*
-		 * map.addMapObject(new MapGround(300,20,0,0,type.GROUND)); map.addMapObject(new
-		 * MapGround(200,20,300,0,type.GROUND)); map.addMapObject(new
-		 * MapWall(20,400,500,0,type.WALL)); map.addMapObject(new
-		 * MapGround(100,20,500,400,type.GROUND)); map.addMapObject(new
-		 * MapGround(300,20,800,400,type.GROUND)); map.addMapObject(new
-		 * MapGround(300,20,600,200,type.GROUND)); map.addMapObject(new
-		 * MapWall(20,200,800,200,type.WALL));
+		  map.addMapObject(new MapGround(300,20,0,0,type.GROUND)); map.addMapObject(new
+		  MapGround(200,20,300,0,type.GROUND)); map.addMapObject(new
+		  MapWall(20,400,500,0,type.WALL)); map.addMapObject(new
+		  MapGround(100,20,500,400,type.GROUND)); map.addMapObject(new
+		  MapGround(300,20,800,400,type.GROUND)); map.addMapObject(new
+		  MapGround(300,20,600,200,type.GROUND)); map.addMapObject(new
+		  MapWall(20,200,800,200,type.WALL));
 		 */
 
+		 
 		// Mapa2
 		map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
 		map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL));
 		// tiene que haber debajo un suelo
-		// minimo tiene que estar mas tiempopreparandose qu elo que tarda en recargar el caracol.
+		// minimo tiene que estar mas tiempopreparandose qu elo que tarda en recargar el
+		// caracol.
 		// 4000 serian 4.04 seg de preparacion y estaria activo cerca de 1 seg
-		SpikesObstacle spike1 = new SpikesObstacle(100, 100, 100, 400, type.OBSTACLE, 15000,4000, TICKTIME); 
+		SpikesObstacle spike1 = new SpikesObstacle(100, 100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
 		map.addMapObject(spike1);
 		spikesArray.add(spike1);
 		map.addMapObject(new MapGround(100, 20, 100, 400, type.GROUND));
 		// 30º con 300u de width = 173u de height
 		map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400, type.SLOPE));
 		map.addMapObject(new MapGround(300, 20, 480, 220, type.GROUND));
+		map.addMapObject(new MapPowerUp(40, 40, 550, 220, type.POWERUP));
+		map.addMapObject(new MapGround(300, 20, 780, 220, type.GROUND));
 		// map.addMapObject(new MapWall(20,200,900,193,type.WALL));
+		
 	}
 
 	public void checkCollisions() {
@@ -168,10 +173,14 @@ public class SinglePlayerRoom {
 					if ((auxSpikes.estate) == ACTIVE) {
 						player.mySnail.obstacle = auxSpikes;
 						obstacleCollision = true;
-						System.out.println(auxSpikes.toString());	
+						System.out.println(auxSpikes.toString());
 						System.out.println("ColisionPinchos");
 					}
-					
+
+					break;
+				case POWERUP:
+					MapPowerUp powerAux = (MapPowerUp) object;
+					powerAux.playerCrash(player.mySnail);
 					break;
 				default:
 					System.out.println("COLISION RARA");
@@ -179,51 +188,48 @@ public class SinglePlayerRoom {
 
 			}
 		}
-		//Envia los datos al caracol el cual calcula sus fisicas
+		// Envia los datos al caracol el cual calcula sus fisicas
 		player.mySnail.isOnFloor = groundCollision;
 		player.mySnail.isOnWall = wallCollision;
 		player.mySnail.isOnSlope = slopeCollision;
 		player.mySnail.slopeRadians = slopeRadians;
 		player.mySnail.isOnObstacle = obstacleCollision;
-		
-		
+
 		/*
-		System.out.println(" collision con suelo es: " + groundCollision);
-		System.out.println(" collision con pared es: " + wallCollision);
-		System.out.println(" collision con slope es: " + slopeCollision);
-		*/
-		
+		 * System.out.println(" collision con suelo es: " + groundCollision);
+		 * System.out.println(" collision con pared es: " + wallCollision);
+		 * System.out.println(" collision con slope es: " + slopeCollision);
+		 */
+
 	}
-	
-	
+
 	public void tick() {
 		Runnable task = () -> {
-			
+
 			checkCollisions();
 			sendObstacleUpdate();
-			
+
 			player.mySnail.updateSnail();
 			JsonObject msg = new JsonObject();
 			msg.addProperty("event", "TICK");
 			msg.addProperty("posX", player.mySnail.posX);
 			msg.addProperty("posY", player.mySnail.posY);
 			msg.addProperty("stamina", player.mySnail.stamina);
-			
+
 			try {
 				player.sessionLock.lock();
 				player.getSession().sendMessage(new TextMessage(msg.toString()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} finally{
+			} finally {
 				player.sessionLock.unlock();
 			}
 		};
 
-		//Delay inicial de la sala, empieza un segundo y continua ejecutando el tick cada 33 milisegundos
+		// Delay inicial de la sala, empieza un segundo y continua ejecutando el tick
+		// cada 33 milisegundos
 		executor.scheduleAtFixedRate(task, 1000, TICKTIME, TimeUnit.MILLISECONDS);
 	}
-	
+
 }
-
-
