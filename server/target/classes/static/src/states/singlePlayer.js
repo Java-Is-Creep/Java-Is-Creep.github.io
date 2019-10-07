@@ -25,34 +25,35 @@ Slooow.singlePlayerState.prototype = {
 
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
 		var style = {
-			font : "40px Arial",
-			fill : "#000000",
-			align : "center"
+			font: "40px Arial",
+			fill: "#000000",
+			align: "center"
 		};
-/*
-		//Background
-        var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
-		b.anchor.set (0.5, 0.5)
-        b.scale.setTo (1.2,1.2)
-*/
+		/*
+				//Background
+				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
+				b.anchor.set (0.5, 0.5)
+				b.scale.setTo (1.2,1.2)
+		*/
 		//Boton desconectar
 		buttonBack = game.add.button(50,
-            40, 'button', actionOnClickBack, this,
-            0, 0, 0)
-        buttonBack.anchor.set(0.5)
-        buttonBack.scale.setTo(0.2, 0.3)
+			40, 'button', actionOnClickBack, this,
+			0, 0, 0)
+		buttonBack.anchor.set(0.5)
+		buttonBack.scale.setTo(0.2, 0.3)
 
-        //Texto desconectar
+		//Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, 'Back', style)
-        textButtonBack.anchor.set(0.5)
-        textButtonBack.scale.setTo(0.5,0.5)
+			40, 'Back', style)
+		textButtonBack.anchor.set(0.5)
+		textButtonBack.scale.setTo(0.5, 0.5)
 
 
 		this.graphics = game.add.graphics(0, 0);
 		console.log('Dibujar rectangulo');
 		this.graphics.lineStyle(2, 0x0000FF, 1);
 		//this.graphics.drawRect(50, 250, 500, 100);
+		/*
 		var i = 0;
 		for (var mapObject in game.global.mapObjects) {
 				console.log(game.global.mapObjects[i].x)	
@@ -64,13 +65,48 @@ Slooow.singlePlayerState.prototype = {
 			this.graphics.drawRect(game.global.mapObjects[i].x, game.world.height -  game.global.mapObjects[i].y, game.global.mapObjects[i].width, -game.global.mapObjects[i].height)
 			i++;
 		}
+*/
+		//Pintamos los suelos
+		for (var i = 0; i < game.global.arrayGrounds.length; i++) {
+			console.log(game.global.arrayGrounds[i].x)
+			console.log(game.global.arrayGrounds[i].y)
+			console.log(game.global.arrayGrounds[i].height)
+			console.log(game.global.arrayGrounds[i].width)
+			console.log('screen height' + game.world.height)
+			this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, -game.global.arrayGrounds[i].height)
+		}
 
+		for (var i = 0; i < game.global.arrayWalls.length; i++) {
+			console.log(game.global.arrayWalls[i].x)
+			console.log(game.global.arrayWalls[i].y)
+			console.log(game.global.arrayWalls[i].height)
+			console.log(game.global.arrayWalls[i].width)
+			console.log('screen height' + game.world.height)
+			this.graphics.drawRect(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, -game.global.arrayWalls[i].height)
+		}
+
+		for (var i = 0; i < game.global.arraySlopes.length; i++) {
+			console.log(game.global.arraySlopes[i].x)
+			console.log(game.global.arraySlopes[i].y)
+			console.log(game.global.arraySlopes[i].height)
+			console.log(game.global.arraySlopes[i].width)
+			console.log('screen height' + game.world.height)
+			this.graphics.drawRect(game.global.arraySlopes[i].x, game.world.height - game.global.arraySlopes[i].y, game.global.arraySlopes[i].width, -game.global.arraySlopes[i].height)
+		}
 		
-        
-        function actionOnClickBack(){
+		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
+			console.log(game.global.arrayObstacleSpikes[i].x)
+			console.log(game.global.arrayObstacleSpikes[i].y)
+			console.log(game.global.arrayObstacleSpikes[i].height)
+			console.log(game.global.arrayObstacleSpikes[i].width)
+			console.log('screen height' + game.world.height)
+			this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
+		}
+
+		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
-            game.state.start('mainMenuState')
-        }
+			game.state.start('mainMenuState')
+		}
 	},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
@@ -88,7 +124,10 @@ Slooow.singlePlayerState.prototype = {
 
 		}
 
-		
+		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
+			console.log('pintar pichos')
+			this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
+		}
 
 		game.global.socket.send(JSON.stringify(msg))
 	}
