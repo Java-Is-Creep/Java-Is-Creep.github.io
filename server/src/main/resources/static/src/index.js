@@ -15,7 +15,15 @@ window.onload = function () {
         mapObjects: [],
         mapDrawn: false,
         username: '',
-        password: ''
+        password: '',
+        //Array de suelos. Tiene: x, y, width, height
+        arrayGrounds: [],
+        //Array de paredes. Tiene: x, y, width, height
+        arrayWalls: [],
+        //Array de rampas. Tiene: x, y, width, height
+        arraySlopes : [],
+        //Array de obstaculos tipo pincho. Tiene: posX, posY
+        arrayObstacleSpikes: []  
     }
     console.log('Despues crear game global');
 
@@ -52,25 +60,83 @@ window.onload = function () {
                 console.log (msg.heightArray)
                 console.log (msg.widthArray)
                 */
+
+                //Arrays con los parametros de todos los objetos del mapa. Dependiendo del tipo se guardaran
+                //En un array u otro
                 var arrayPosX =  JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 var arrayHeight = JSON.parse(msg.height)
                 var arrayWidth = JSON.parse(msg.width)
+                var type = JSON.parse(msg.myType) 
 
+                var numOfGrounds = 0;
+                var numOfWalls = 0;
+                var numOfSlopes = 0;
+                var numOfObstacleSpikes = 0;
+
+                for (var i = 0; i<type.length; i++){
+                    switch (type[i]){
+                        case 'GROUND':
+                            this.game.global.arrayGrounds[numOfGrounds] = new Object()
+                            this.game.global.arrayGrounds[numOfGrounds].x = arrayPosX[i]
+                            this.game.global.arrayGrounds[numOfGrounds].y = arrayPosY[i]
+                            this.game.global.arrayGrounds[numOfGrounds].height = arrayHeight[i]
+                            this.game.global.arrayGrounds[numOfGrounds].width = arrayWidth[i]
+                            numOfGrounds++
+                            break
+                        case 'WALL':
+                            this.game.global.arrayWalls[numOfWalls] = new Object()
+                            this.game.global.arrayWalls[numOfWalls].x = arrayPosX[i]
+                            this.game.global.arrayWalls[numOfWalls].y = arrayPosY[i]
+                            this.game.global.arrayWalls[numOfWalls].height = arrayHeight[i]
+                            this.game.global.arrayWalls[numOfWalls].width = arrayWidth[i]
+                            numOfWalls++
+                            break 
+                        case 'SLOPE':
+                            this.game.global.arraySlopes[numOfSlopes] = new Object()
+                            this.game.global.arraySlopes[numOfSlopes].x = arrayPosX[i]
+                            this.game.global.arraySlopes[numOfSlopes].y = arrayPosY[i]
+                            this.game.global.arraySlopes[numOfSlopes].height = arrayHeight[i]
+                            this.game.global.arraySlopes[numOfSlopes].width = arrayWidth[i]
+                            numOfSlopes++
+                            break
+                        case 'POWERUP':
+                            //Por ahora no hace nada
+                            break;
+                        case 'OBSTACLEPOINT':
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
+                            numOfObstacleSpikes++
+                            break                
+
+                    }
+                }
+                /*
                 for (var j = 0; j< arrayPosX.length; j++){
                     this.game.global.mapObjects[j] = new Object()
                 }
                 for (var i = 0; i< arrayPosX.length; i++){
                     game.global.mapObjects[i].x = arrayPosX[i];
-                    game.global.mapObjects[i].y = /*worldHeight -*/ arrayPosY[i] 
+                    game.global.mapObjects[i].y =  arrayPosY[i] 
                     game.global.mapObjects[i].height = arrayHeight[i];
                     game.global.mapObjects[i].width = arrayWidth[i];
                     this.console.log('Objeto ' + i + ': ' + game.global.mapObjects[i].x + ' ' + game.global.mapObjects[i].y +' ' +game.global.mapObjects[i].height + ' ' + game.global.mapObjects[i].width )
-                }
+                }*/
                 game.state.start('singlePlayerState')
-                break;
-                
-                    
+                break;  
+
+            case 'SPIKEOBSTACLEUPDATE': 
+                var arrayPosX = JSON.parse(msg.posX)
+                var arrayPosY = JSON.parse(msg.posY)
+                var i = 0
+                for (var spike in arrayObstacleSpikes){
+                    spike.posX = arrayPosX[i]
+                    spike.posY = arrayPosY[i];
+                    i++
+                }
         }
     }
 
