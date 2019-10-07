@@ -51,7 +51,7 @@ window.onload = function () {
                 }
                 game.global.player.x = Math.floor(msg.posX)
                 game.global.player.y = game.world.height  - (Math.floor(msg.posY))
-                game.global.player.stamina = msg.stamina
+                game.global.player.stamina.setText(msg.stamina)
                 break
 
             case 'DRAWMAP':
