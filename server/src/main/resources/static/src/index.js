@@ -23,7 +23,7 @@ window.onload = function () {
         //Array de rampas. Tiene: x, y, width, height
         arraySlopes : [],
         //Array de obstaculos tipo pincho. Tiene: posX, posY
-        arrayObstacleSpikes: []  
+        arrayObstacleSpikes: [] 
     }
     console.log('Despues crear game global');
 
@@ -51,6 +51,7 @@ window.onload = function () {
                 }
                 game.global.player.x = Math.floor(msg.posX)
                 game.global.player.y = game.world.height  - (Math.floor(msg.posY))
+                game.global.player.stamina = msg.stamina
                 break
 
             case 'DRAWMAP':

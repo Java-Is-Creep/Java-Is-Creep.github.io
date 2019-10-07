@@ -1,5 +1,6 @@
 Slooow.singlePlayerState = function (game) {
 	var graphics
+	var stamina
 }
 
 Slooow.singlePlayerState.prototype = {
@@ -36,6 +37,9 @@ Slooow.singlePlayerState.prototype = {
 				b.scale.setTo (1.2,1.2)
 		*/
 		//Boton desconectar
+
+		stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style);
+
 		buttonBack = game.add.button(50,
 			40, 'button', actionOnClickBack, this,
 			0, 0, 0)
@@ -126,9 +130,14 @@ Slooow.singlePlayerState.prototype = {
 
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
 			console.log('pintar pichos')
+
 			this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
 		}
 
 		game.global.socket.send(JSON.stringify(msg))
+
+
+		//Actualizar stamina
+		stamina.setText(game.global.stamina)
 	}
 }
