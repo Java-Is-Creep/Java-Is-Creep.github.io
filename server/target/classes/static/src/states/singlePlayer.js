@@ -18,7 +18,7 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
 		game.global.player.anchor.setTo(0.5, 0.5);
 		game.global.player.scale.setTo(0.3, 0.3)
-		game.global.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style);
+		
 	},
 
 	create: function () {
@@ -31,6 +31,7 @@ Slooow.singlePlayerState.prototype = {
 			fill: "#000000",
 			align: "center"
 		};
+		game.global.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style);
 		/*
 				//Background
 				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
