@@ -3,14 +3,13 @@ var game;
 window.onload = function () {
     game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv');
     //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
-    console.log('Despues cargar juego');
 
     //Variables globales compartidas entre escenas
     game.global = {
         //Socket
         socket: null,
         FPS: 60,
-        DEBUG_MODE: true,
+        DEBUG_MODE: false,
         player : null,
         mapObjects: [],
         mapDrawn: false,
@@ -27,7 +26,6 @@ window.onload = function () {
         //Array de power ups
         arrayPowerUps: []
     }
-    console.log('Despues crear game global');
 
     game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     game.global.socket.onopen = () => {
@@ -57,13 +55,6 @@ window.onload = function () {
                 break
 
             case 'DRAWMAP':
-                /*
-                console.log (msg.posXArray)
-                console.log (msg.posYArray)
-                console.log (msg.heightArray)
-                console.log (msg.widthArray)
-                */
-
                 //Arrays con los parametros de todos los objetos del mapa. Dependiendo del tipo se guardaran
                 //En un array u otro
                 var arrayPosX =  JSON.parse(msg.posX)
@@ -108,11 +99,15 @@ window.onload = function () {
                             //Por ahora no hace nada
                             break;
                         case 'OBSTACLE':
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image:game.add.image(arrayPosX[i],arrayPosY[i], 'button')}
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
+
+                           // this.console.log(game.global.arrayObstacleSpikes[numOfObstacleSpikes].image)
+                           // this.console.log('Posicion imagen: ' + 'x ' +  this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.x +  'y: '+this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.y)
+                           // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
                             numOfObstacleSpikes++
                             break  
                         case 'GENERICPOWERUP':
@@ -145,11 +140,9 @@ window.onload = function () {
             case 'SPIKEOBSTACLEUPDATE': 
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
-                var i = 0
-                for (var spike in game.global.arrayObstacleSpikes){
-                    spike.posX = arrayPosX[i]
-                    spike.posY = arrayPosY[i];
-                    i++
+                for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++){
+                    this.game.global.arrayObstacleSpikes[i].x = arrayPosX[i]
+                    this.game.global.arrayObstacleSpikes[i].y = arrayPosY[i]                    
                 }
         }
     }
