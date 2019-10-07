@@ -7,7 +7,7 @@ public class MapObject { // clase principal de la que heredaran todos los objeto
 	int posY;
 	SquareCollider collider;
 	enum type {
-		GROUND,WALL,OBSTACLE,POWERUP,OBSTACLEPOINT,SLOPE
+		GROUND,WALL,OBSTACLE,POWERUP,OBSTACLEPOINT,SLOPE,GENERICPOWERUP
 	}
 	
 	type myTipe;

@@ -1,15 +1,16 @@
 package server;
 
-public  class GenericPowerUp{
+public  class GenericPowerUp extends MapObject{
 	
 	int duracionRestante;
 	final int DURACIONMAX = 200;
 	SnailInGame snailTarget;
 	
-	public GenericPowerUp(SnailInGame snail) {
-		snailTarget = snail;
-		duracionRestante = DURACIONMAX;
+	public GenericPowerUp(int width, int height, int posX, int posY, type myTipe) {
+		super(width, height, posX, posY, myTipe);
 	}
+	
+	
 	
 	
 	public void consumirPowerUp() {
@@ -20,7 +21,8 @@ public  class GenericPowerUp{
 		duracionRestante -= tiempo;
 		if(duracionRestante <= 0) {
 			snailTarget.restoreValues();
+			System.out.println("Se acabo el tiempo de powerUp");
 		}
 	}
-	
+
 }
