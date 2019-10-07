@@ -103,7 +103,7 @@ window.onload = function () {
                         case 'POWERUP':
                             //Por ahora no hace nada
                             break;
-                        case 'OBSTACLEPOINT':
+                        case 'OBSTACLE':
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
@@ -111,7 +111,9 @@ window.onload = function () {
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
                             numOfObstacleSpikes++
                             break                
-
+                        default:
+                            this.console.log('tipo sin reconocer ' + type[i])
+                            break
                     }
                 }
                 /*
