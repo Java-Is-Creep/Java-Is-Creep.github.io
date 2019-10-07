@@ -8,6 +8,6 @@ public class Post {
 	String playerName;
 	String roomName;
 	
-	boolean isStopping;
+	boolean isSprinting;
 	boolean useObject;
 }
