@@ -8,6 +8,7 @@
 /home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/Post.java
 /home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/WebsocketSnailHandler.java
 /home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/MapGround.java
+/home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/GreetingController.java
 /home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/MapWall.java
 /home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/SquareCollider.java
 /home/david/Proyecto/Java-Is-Creep.github.io/src/main/java/com/server/Sloow/MapObstacle.java
