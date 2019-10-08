@@ -221,20 +221,20 @@ ___
 o	Se vuelve a la sala de espera. Si se sale el creador de la sala, esta sala pasa a ser de otro jugador y queda +1 hueco libre. Si se sale todo el mundo, se cierra la sala
 -	Botón de salir
 
- ![Error al cargar la imagen](./ReadmeImages/finishGame.png)
+ ![Error al cargar la imagen](./ReadmeImages/finishGame.PNG)
 
 
 ### Menú Modo de Juego Solo / Modo Multijugador Local
 -	Elegir ambientación (Pradera, Cocina o Hielo inicialmente, son 3 botones) + botón random
 -	Aparecen botones para los distintos mapas disponibles, con el tiempo anterior conseguido
 
- ![Error al cargar la imagen](./ReadmeImages/localMode.png)
+ ![Error al cargar la imagen](./ReadmeImages/localMode.PNG)
 
 
 ### Menú Modo Maratón
 -	Elegir ambientación + tiempos conseguidos en cada uno
 
- ![Error al cargar la imagen](./ReadmeImages/maratonMode.png)
+ ![Error al cargar la imagen](./ReadmeImages/maratonMode.PNG)
 
 
 ### Menú Modo Multijugador Online
@@ -245,7 +245,7 @@ o	Se vuelve a la sala de espera. Si se sale el creador de la sala, esta sala pas
     - Buscar Sala saca un PopUp para escribir el nombre de la sala a buscar
 -	Desplegable con salas de esa ambientación
 
- ![Error al cargar la imagen](./ReadmeImages/multiMode.png)
+ ![Error al cargar la imagen](./ReadmeImages/multiMode.PNG)
 
 
 ### Sala de Espera:
@@ -258,7 +258,7 @@ o	Botón “Expulsar” para el creador de la sala
 -	Botón “Listo” para los jugadores que se unen a una Sala
 -	Botón “Empezar” para el creador de la sala
 
- ![Error al cargar la imagen](./ReadmeImages/waitRoom.png)
+ ![Error al cargar la imagen](./ReadmeImages/waitRoom.PNG)
 
 
 ### Cambiar Personaje
@@ -269,7 +269,7 @@ o	Remarcar el caracol en los círculos pequeños para saber cuál has elegido
 -	Selector de Skins
 -	Aceptar
 
- ![Error al cargar la imagen](./ReadmeImages/changeSnail.png)
+ ![Error al cargar la imagen](./ReadmeImages/changeSnail.PNG)
 
  ## Esquema Interfaces
   ![Error al cargar la imagen](./ReadmeImages/interfaces.png)
