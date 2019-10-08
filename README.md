@@ -3,8 +3,10 @@
 
 Somos una empresa dedicada al desarrollo de videojuegos con un potencial de diversion explosivo.
 
-[![Twitter](https://img.shields.io/twitter/follow/java_is_creep?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=java_is_creep)
+[![master](https://img.shields.io/badge/master-v0.1.0-green?style=for-the-badge&logo=appveyor)](https://slooow.herokuapp.com)
+![develop](https://img.shields.io/badge/develop-v0.1.0-blue?style=for-the-badge&logo=appveyor)
 
+[![Twitter](https://img.shields.io/twitter/follow/java_is_creep?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=java_is_creep)
 [![Instagram](https://img.shields.io/badge/Follow--green?style=social&logo=instagram)](https://www.instagram.com/java_is_creep/)
 
 [Trello](https://trello.com/b/mT8An0gk/java-is-creep)
@@ -18,7 +20,23 @@ ___
     - Implementación del juego: All
 -	Music: Axel – Fonti
 -	CM: Axel – Fonti
+-   Técnico: Fonti
 
+___
+
+## Descripción Workflow en Git
+
+La metodología que hemos seguido para nuestro proyecto es [Gitflow Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) diseñada por Atlassian.
+
+Tenemos una rama principal **master** en la cual únicamente publicamos versiones estables y numeradas.
+
+La rama de desarrollo general se denomina **develop** en ella se publican versiones de las cuales se puede llegar a realizar un release a **master**. Desde esta rama nacen ramas individuales para cada desarrollador denominadas **features** y que reciben un nombre descriptivo de la funcionalidad que desarrollan.
+
+Estas **features** a su vez pueden actuar como un segundo develop para una porción del equipo de desarrollo si fuera necesario. Por ejemplo la rama _desarrolloJuegoBuena_ es un develop secundario de la que nacen features en relación al servidor o al cliente, evitando así posibles conflictos en el merge. 
+
+En principio los commits de las **features** también deben ser descriptivos de lo que han desarrollado, si no se llega a la meta intentada en el commit se debe aplicar la etiqueta *WIP* al comienzo del mismo si es posible.
+
+Los **features** se cierran en **develop** y aunque se pueden reutilizar, es mejor práctica crear una rama nueva continuando la numeración del feature que se está desarrollando. Si un **feature** no va a continuar y por lo cual no se cerrará con **develop** se debe realizar un commit de *DISCONTINUED* para dar por terminada a la rama.
 ___
 
 ## Descripción del juego básica
