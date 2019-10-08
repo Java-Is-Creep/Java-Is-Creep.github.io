@@ -99,10 +99,11 @@ window.onload = function () {
                             //Por ahora no hace nada
                             break;
                         case 'OBSTACLE':
-                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image:game.add.image(arrayPosX[i],arrayPosY[i], 'button')}
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image:game.add.image(arrayPosX[i], game.world.height - arrayPosY[i], 'button')}
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
+                           // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
+                           // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
 
                            // this.console.log(game.global.arrayObstacleSpikes[numOfObstacleSpikes].image)
                            // this.console.log('Posicion imagen: ' + 'x ' +  this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.x +  'y: '+this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.y)
@@ -141,8 +142,10 @@ window.onload = function () {
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++){
-                    this.game.global.arrayObstacleSpikes[i].x = arrayPosX[i]
-                    this.game.global.arrayObstacleSpikes[i].y = arrayPosY[i]                    
+                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].image.x + ', ' + this.game.global.arrayObstacleSpikes[i].image.y)
+                    this.game.global.arrayObstacleSpikes[i].image.x = arrayPosX[i]
+                    this.game.global.arrayObstacleSpikes[i].image.y = arrayPosY[i]       
+                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].image.x + ', ' + this.game.global.arrayObstacleSpikes[i].image.y)             
                 }
         }
     }
