@@ -3,4 +3,5 @@
 .vscode/
 .project
 .classpath
-target/*
+target/
+.settings/
