@@ -19,7 +19,17 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player.anchor.setTo(0.5, 0.5);
 		game.global.player.scale.setTo(0.3, 0.3)
 
-
+		// Cargamos los objetos posibles del mapa
+		//game.global.arrayObstacleSpikes = new Array (5)
+		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
+			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
+			game.global.arrayObstacleSpikes[i].visible = true
+			game.global.arrayObstacleSpikes[i].anchor.setTo (0,1)
+			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
+		}
+		console.log ("Array Cargado")
+		console.dir (game.global.arrayObstacleSpikes)
+		
 		//game.global.arrayObstacleSpikes = game.add.image(game.world.centerX, game.world.centerY, 'button')
 		//var spike = game.add.image(game.world.centerX, game.world.centerY, 'button')
 		//spike.anchor.setTo(0.5, 0.5)
@@ -53,16 +63,14 @@ Slooow.singlePlayerState.prototype = {
 				b.anchor.set (0.5, 0.5)
 				b.scale.setTo (1.2,1.2)
 		*/
-		//Boton desconectar
-
-
+		//Boton back
 		buttonBack = game.add.button(50,
 			40, 'button', actionOnClickBack, this,
 			0, 0, 0)
 		buttonBack.anchor.set(0.5)
 		buttonBack.scale.setTo(0.2, 0.3)
 
-		//Texto desconectar
+		//Texto back
 		textButtonBack = game.add.text(50,
 			40, 'Back', style)
 		textButtonBack.anchor.set(0.5)
@@ -114,8 +122,8 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-			console.log(game.global.arrayObstacleSpikes[i].image.x)
-			console.log(game.global.arrayObstacleSpikes[i].image.y)
+			//console.log(game.global.arrayObstacleSpikes[i].image.x)
+			//console.log(game.global.arrayObstacleSpikes[i].image.y)
 			//console.log(game.global.arrayObstacleSpikes[i].height)
 			//console.log(game.global.arrayObstacleSpikes[i].width)
 			//console.log('screen height' + game.world.height)

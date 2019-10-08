@@ -231,7 +231,7 @@ Slooow.mainMenuState.prototype = {
                 roomName: 'sala1'
             }
             game.global.socket.send(JSON.stringify(msg))
-            game.state.start('singlePlayerState')
+            //game.state.start('singlePlayerState')
         }
 
         function actionOnClickStartMarathon() {

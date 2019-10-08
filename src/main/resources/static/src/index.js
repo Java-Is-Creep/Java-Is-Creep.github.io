@@ -22,12 +22,13 @@ window.onload = function () {
         //Array de rampas. Tiene: x, y, width, height
         arraySlopes : [],
         //Array de obstaculos tipo pincho. Tiene: posX, posY
-        arrayObstacleSpikes: [] ,
+        arrayObstacleSpikes: [],
         //Array de power ups
         arrayPowerUps: []
     }
 
-    game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
+    //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -100,7 +101,15 @@ window.onload = function () {
                             break;
                         case 'OBSTACLE':
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image:game.add.image(arrayPosX[i], game.world.height - arrayPosY[i], 'button')}
+                            
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image:game.add.image(arrayPosX[i], game.world.height - arrayPosY[i], 'button')}
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = this.game.add.image(arrayPosX[i], game.world.height - arrayPosY[i], 'button')
+                            /*console.log ("Primero")
+                            console.log (game.global.arrayObstacleSpikes)
+                            game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image : game.add.sprite(arrayPosX[i], game.world.height - arrayPosY[i], 'button')}
+                            console.log ("Segundo")
+                            console.log (game.global.arrayObstacleSpikes)*/
+
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
                            // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
                            // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
@@ -109,6 +118,14 @@ window.onload = function () {
                            // this.console.log('Posicion imagen: ' + 'x ' +  this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.x +  'y: '+this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.y)
                            // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
+                            console.log ("Patata")
+                            console.dir (this.game.global.arrayObstacleSpikes[numOfObstacleSpikes])
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
+                            //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = game.add.image(arrayPosX[i],game.world.height - arrayPosY[i], 'button')
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
+                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
+                            console.log ("Patata777")
+                            console.dir (this.game.global.arrayObstacleSpikes)
                             numOfObstacleSpikes++
                             break  
                         case 'GENERICPOWERUP':
@@ -142,10 +159,10 @@ window.onload = function () {
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++){
-                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].image.x + ', ' + this.game.global.arrayObstacleSpikes[i].image.y)
-                    this.game.global.arrayObstacleSpikes[i].image.x = arrayPosX[i]
-                    this.game.global.arrayObstacleSpikes[i].image.y = arrayPosY[i]       
-                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].image.x + ', ' + this.game.global.arrayObstacleSpikes[i].image.y)             
+                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)
+                    this.game.global.arrayObstacleSpikes[i].x = arrayPosX[i]
+                    this.game.global.arrayObstacleSpikes[i].y = game.world.height - arrayPosY[i]       
+                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)             
                 }
         }
     }
