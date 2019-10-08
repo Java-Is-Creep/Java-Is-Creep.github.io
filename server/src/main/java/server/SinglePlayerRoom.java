@@ -110,40 +110,39 @@ public class SinglePlayerRoom {
 
 	public void createMap() {
 		// MAPA 1
-		
-		  map.addMapObject(new MapGround(300,20,0,0,type.GROUND)); 
-		  map.addMapObject(new MapGround(200,20,300,0,type.GROUND)); 
-		  map.addMapObject(new MapWall(20,200,500,200,type.WALL));
-		  DoorMap doorAux = new DoorMap(20,200,500,0,type.DOOR,30000,3000,TICKTIME,500,500);
-		  map.addMapObject(doorAux); 
-		  doorArray.add(doorAux);
-		  map.addMapObject(new MapGround(100,20,500,400,type.GROUND)); 
-		  map.addMapObject(new MapGround(500,20,500,0,type.GROUND));
-		  map.addMapObject(new MapGround(300,20,800,400,type.GROUND)); 
-		  map.addMapObject(new MapGround(300,20,600,200,type.GROUND)); 
-		  map.addMapObject(new MapWall(20,200,800,200,type.WALL));
-		 
 
-		 /*
-		// Mapa2
-		map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
-		map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL));
-		// tiene que haber debajo un suelo
-		// minimo tiene que estar mas tiempopreparandose qu elo que tarda en recargar el
-		// caracol.
-		// 4000 serian 4.04 seg de preparacion y estaria activo cerca de 1 seg
-		SpikesObstacle spike1 = new SpikesObstacle(100, 100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
-		map.addMapObject(spike1);
-		spikesArray.add(spike1);
-		map.addMapObject(new MapGround(100, 20, 100, 400, type.GROUND));
-		// 30º con 300u de width = 173u de height
-		map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400, type.SLOPE));
-		map.addMapObject(new MapGround(300, 20, 480, 220, type.GROUND));
-		map.addMapObject(new MapPowerUp(40, 40, 550, 220, type.POWERUP));
-		map.addMapObject(new MapGround(300, 20, 780, 220, type.GROUND));
-		// map.addMapObject(new MapWall(20,200,900,193,type.WALL));
-		*/
-		
+		map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
+		TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 4000, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		doorArray.add(trap);
+		map.addMapObject(new MapGround(50, 20, 450, 0, type.GROUND));
+
+		map.addMapObject(new MapWall(20, 200, 500, 200, type.WALL));
+		DoorMap doorAux = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
+		map.addMapObject(doorAux);
+		doorArray.add(doorAux);
+		map.addMapObject(new MapGround(100, 20, 500, 400, type.GROUND));
+		map.addMapObject(new MapGround(500, 20, 500, 0, type.GROUND));
+		map.addMapObject(new MapGround(300, 20, 800, 400, type.GROUND));
+		map.addMapObject(new MapGround(300, 20, 600, 200, type.GROUND));
+		map.addMapObject(new MapWall(20, 200, 800, 200, type.WALL));
+
+		/*
+		 * // Mapa2 map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
+		 * map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber
+		 * debajo un suelo // minimo tiene que estar mas tiempopreparandose qu elo que
+		 * tarda en recargar el // caracol. // 4000 serian 4.04 seg de preparacion y
+		 * estaria activo cerca de 1 seg SpikesObstacle spike1 = new SpikesObstacle(100,
+		 * 100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
+		 * map.addMapObject(spike1); spikesArray.add(spike1); map.addMapObject(new
+		 * MapGround(100, 20, 100, 400, type.GROUND)); // 30º con 300u de width = 173u
+		 * de height map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400,
+		 * type.SLOPE)); map.addMapObject(new MapGround(300, 20, 480, 220,
+		 * type.GROUND)); map.addMapObject(new MapPowerUp(40, 40, 550, 220,
+		 * type.POWERUP)); map.addMapObject(new MapGround(300, 20, 780, 220,
+		 * type.GROUND)); // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
+		 */
+
 	}
 
 	public void checkCollisions() {
@@ -155,12 +154,12 @@ public class SinglePlayerRoom {
 		double slopeRadians = 0;
 
 		for (MapObject object : map.map) {
-			switch(object.myType){
-				case OBSTACLE:
-					SpikesObstacle auxSpikes = (SpikesObstacle) object;
-					auxSpikes.update();
+			switch (object.myType) {
+			case OBSTACLE:
+				SpikesObstacle auxSpikes = (SpikesObstacle) object;
+				auxSpikes.update();
 				break;
-					default:
+			default:
 			}
 
 			if (object.collider.hayColision(player)) {
@@ -192,7 +191,10 @@ public class SinglePlayerRoom {
 					powerAux.playerCrash(player.mySnail);
 					break;
 				case DOOR:
-					System.err.println("Colision puerta");
+					//System.err.println("Colision puerta");
+					break;
+				case TRAPDOOR:
+					System.out.println("colision trampilla");
 					break;
 				default:
 					System.out.println("COLISION RARA");
@@ -215,11 +217,12 @@ public class SinglePlayerRoom {
 
 	}
 
-	public void updateDoors(){
-		for(DoorMap door : doorArray){
+	public void updateDoors() {
+		for (DoorMap door : doorArray) {
 			door.update();
 		}
 	}
+
 
 	public void tick() {
 		Runnable task = () -> {
