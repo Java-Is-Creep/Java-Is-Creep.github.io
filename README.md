@@ -54,25 +54,25 @@ ___
 -	Gatocol: Un mini salto, permite no caer en trampillas, saltar para alcanzar antes el final de un tramo de pared, etc.
 
 
-![Error al cargar la imagen](./snailSprites/catSnail.png)
+![Error al cargar la imagen](./snailSprites/catsnail.png)
 
 
 -	Caracol Normal: Convertirse en rueda (sin moverse) y ser inmune durante unos segundos. Puede servirte para no perder vida/estamina por culpa de un fuego, puerta, objeto enemigo, etc. 
 
 
-![Error al cargar la imagen](.\snailSprites\normalSnail.png)
+![Error al cargar la imagen](./snailSprites/normalSnail.png)
 
 
 -   SnailDona: Su habilidad le permite subir paredes más rápido
 
 
-![Error al cargar la imagen](.\snailSprites\slug.png)
+![Error al cargar la imagen](./snailSprites/slug.png)
 
 
 -	Caracol Francés: Lanza tinta a todos sus rivales, de tal forma que dejan de ver la pantalla menos un círculo a su alrededor durante unos instantes.
 
 
-![Error al cargar la imagen](.\snailSprites\frenchSnail.png)
+![Error al cargar la imagen](./snailSprites/frenchSnail.png)
 
 -	Caracol Tanque: Puede hacer un temblor a 1 personaje aleatorio, si este está en una pared, se cae.
 
@@ -151,7 +151,7 @@ ___
 -	Pop up si hay algún error en usuario o contraseña
 
 
- ![Error al cargar la imagen](.\ReadmeImages\initSesion.png)
+ ![Error al cargar la imagen](./ReadmeImages/initSesion.png)
 
 
 ### Crear cuenta
@@ -160,7 +160,7 @@ ___
 -	Botón de crear cuenta
 -	Pop up si ya está creada esa cuenta o si el Nick no está disponible
  
- ![Error al cargar la imagen](.\ReadmeImages\createAccount.png)
+ ![Error al cargar la imagen](./ReadmeImages/createAccount.png)
 
 ### Menú
 -	Modos de juego (Solo, Aguante y multijugador online y local)
@@ -172,7 +172,7 @@ ___
 -	Botón de Trofeos y Logros
  
 
- ![Error al cargar la imagen](.\ReadmeImages\menu.png)
+ ![Error al cargar la imagen](./ReadmeImages/menu.png)
 
 ### Opciones (desplegable)
 -	Cambiar Idioma
@@ -181,7 +181,7 @@ ___
 -	Quitar/poner pantalla completa en PC
 -	Donación y contacto
 
- ![Error al cargar la imagen](.\ReadmeImages\options.png)
+ ![Error al cargar la imagen](./ReadmeImages/options.png)
 
 
 ### Juego
@@ -189,7 +189,7 @@ ___
 -	Objeto que tengas equipado en un momento dado
 -	Botón que permita salir de la partida (ventana pop up)
 
- ![Error al cargar la imagen](.\ReadmeImages\gameInterface.png)
+ ![Error al cargar la imagen](./ReadmeImages/gameInterface.png)
  
 ### Salir desde pantalla juego
 -	Botón de confirmación o atrás
@@ -199,19 +199,19 @@ ___
 -	Botón para añadir monedas al juego
 -	Selección de un personaje (te lleva tanto al personaje como a sus skins posibles para comprar). Aquí podríamos ver de qué personajes disponemos, así como las skins.
  
- ![Error al cargar la imagen](.\ReadmeImages\shop.png)
+ ![Error al cargar la imagen](./ReadmeImages/shop.png)
 
 ### Añadir monedas (pop up)
 -	Diferentes precios en función de la cantidad de monedas (falta por decidir la cuantía de estas mismas)
 
- ![Error al cargar la imagen](.\ReadmeImages\addCoins.png)
+ ![Error al cargar la imagen](./ReadmeImages/addCoins.png)
  
 ### Personaje de la tienda
 -	Personaje básico en el centro de la pantalla + descripción de su habilidad especial.
 -	Botón para comprar personaje
 -	Skins en un desplazable en un lateral (vertical u horizontal)
 
- ![Error al cargar la imagen](.\ReadmeImages\snailShop.png)
+ ![Error al cargar la imagen](./ReadmeImages/snailShop.png)
  
 ### Confirmación de compra
 -	Botón tanto de aceptar como de denegar la compra, con un antes y después en las monedas del juego
@@ -221,20 +221,20 @@ ___
 o	Se vuelve a la sala de espera. Si se sale el creador de la sala, esta sala pasa a ser de otro jugador y queda +1 hueco libre. Si se sale todo el mundo, se cierra la sala
 -	Botón de salir
 
- ![Error al cargar la imagen](.\ReadmeImages\finishGame.png)
+ ![Error al cargar la imagen](./ReadmeImages/finishGame.png)
 
 
 ### Menú Modo de Juego Solo / Modo Multijugador Local
 -	Elegir ambientación (Pradera, Cocina o Hielo inicialmente, son 3 botones) + botón random
 -	Aparecen botones para los distintos mapas disponibles, con el tiempo anterior conseguido
 
- ![Error al cargar la imagen](.\ReadmeImages\localMode.png)
+ ![Error al cargar la imagen](./ReadmeImages/localMode.png)
 
 
 ### Menú Modo Maratón
 -	Elegir ambientación + tiempos conseguidos en cada uno
 
- ![Error al cargar la imagen](.\ReadmeImages\maratonMode.png)
+ ![Error al cargar la imagen](./ReadmeImages/maratonMode.png)
 
 
 ### Menú Modo Multijugador Online
@@ -245,7 +245,7 @@ o	Se vuelve a la sala de espera. Si se sale el creador de la sala, esta sala pas
     - Buscar Sala saca un PopUp para escribir el nombre de la sala a buscar
 -	Desplegable con salas de esa ambientación
 
- ![Error al cargar la imagen](.\ReadmeImages\multiMode.png)
+ ![Error al cargar la imagen](./ReadmeImages/multiMode.png)
 
 
 ### Sala de Espera:
@@ -258,7 +258,7 @@ o	Botón “Expulsar” para el creador de la sala
 -	Botón “Listo” para los jugadores que se unen a una Sala
 -	Botón “Empezar” para el creador de la sala
 
- ![Error al cargar la imagen](.\ReadmeImages\waitRoom.png)
+ ![Error al cargar la imagen](./ReadmeImages/waitRoom.png)
 
 
 ### Cambiar Personaje
@@ -269,10 +269,10 @@ o	Remarcar el caracol en los círculos pequeños para saber cuál has elegido
 -	Selector de Skins
 -	Aceptar
 
- ![Error al cargar la imagen](.\ReadmeImages\changeSnail.png)
+ ![Error al cargar la imagen](./ReadmeImages/changeSnail.png)
 
  ## Esquema Interfaces
-  ![Error al cargar la imagen](.\ReadmeImages\interfaces.png)
+  ![Error al cargar la imagen](./ReadmeImages/interfaces.png)
 ___
 
 ## Modelo de Negocio
