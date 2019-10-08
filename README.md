@@ -16,8 +16,7 @@ ___
 - Artist: Leo
 - Programmers:
     - Servidor: Dani – Sergio
-    - Phaser (parte visual): Axel – Fonti
-    - Implementación del juego: All
+    - Phaser: Axel – Fonti – Sergio
 -	Music: Axel – Fonti
 -	CM: Axel – Fonti
 -   Técnico: Fonti
