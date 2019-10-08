@@ -1,6 +1,5 @@
 package server;
 
-import server.MapObject.type;
 
 public class ObstaclePoint extends MapObject {
 	MapObstacle obstacle;
@@ -9,16 +8,13 @@ public class ObstaclePoint extends MapObject {
 	int actualProbability;
 	
 	public ObstaclePoint(MapObstacle obstacle, int width, int height, int posX, int posY, type myTipe,int colliderOfsetX,int colliderOfsetY) {
-		super(width,height,posX,posY,myTipe,colliderOfsetX,colliderOfsetY);
+		super(width,height,posX,posY,myTipe);
 		this.obstacle = obstacle;
 		actualProbability = (int) (Math.random() *100);
 		if(actualProbability > probabilityNeed) {
 			exits = true;
 		}
 	}
-	
-	
-	
 	
 	
 }

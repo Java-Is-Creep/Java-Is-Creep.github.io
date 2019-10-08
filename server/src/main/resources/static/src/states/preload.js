@@ -16,6 +16,7 @@ Slooow.preloadState.prototype = {
 	preload : function() {
 		game.load.image('background', './assets/img/background.jpg');
 		game.load.image('seaSnail', './assets/img/seaSnail.png');
+		game.load.image('button', './assets/img/button.png');
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario
@@ -25,7 +26,7 @@ Slooow.preloadState.prototype = {
 
 	update : function() {
 		//if (typeof game.global.myPlayer.id !== 'undefined') {
-			game.state.start('initSesionState')
+			game.state.start('initGameState')
 		//}
 	}
 }

@@ -1,10 +1,10 @@
 package server;
 
 public class LastMovement {
-boolean isStopping;
-boolean useObject;
-public LastMovement(boolean isStopping, boolean useObject) {
-	this.isStopping = isStopping;
+public boolean isAcelerating = false;
+public boolean useObject = false;
+public LastMovement(boolean isAcelerating, boolean useObject) {
+	this.isAcelerating = isAcelerating;
 	this.useObject = useObject;
 }
 

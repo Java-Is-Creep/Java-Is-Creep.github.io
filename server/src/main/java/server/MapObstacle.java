@@ -2,9 +2,29 @@ package server;
 
 public class MapObstacle  extends MapObject{
 
-	public MapObstacle(int width, int height, int posX, int posY, type myTipe, int colliderOfsetX, int colliderOfsetY) {
-		super(width, height, posX, posY, myTipe, colliderOfsetX, colliderOfsetY);
-		// TODO Auto-generated constructor stub
+	protected float MAXTIMEACTIVE;
+	protected float timeActive;
+	protected float tickTime;
+	protected float timeToActive;
+    protected float MAXTIMETOACTIVE;
+	
+
+
+	public MapObstacle(int width, int height, int posX, int posY, type myType,int timeToActive, int timeActive, int tickTime) {
+		super(width, height, posX, posY, myType);
+		MAXTIMEACTIVE = timeActive;
+		this.timeActive = timeActive;
+		this.tickTime = tickTime;
+		MAXTIMETOACTIVE = timeToActive;
+		this.timeToActive = timeToActive;
+		
+	}
+
+	public void update(){
+
+	}
+
+	public void restActiveTime(){
 	}
 
 }

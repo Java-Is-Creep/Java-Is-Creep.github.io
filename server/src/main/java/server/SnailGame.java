@@ -7,7 +7,8 @@ import org.springframework.web.socket.WebSocketSession;
 public class SnailGame {
 	SinglePlayerRoom room1;
 	MultiplayerRoom room2 = new MultiplayerRoom("sala2");
-	//hay que hacer un mapa 
+	//TODO HashMap de salas del juego
+	
 	ConcurrentHashMap<WebSocketSession,PlayerConected> jugadoresConectados = new ConcurrentHashMap<WebSocketSession, PlayerConected>();
 	
 	public void conectarJugador(PlayerConected jugador) {
