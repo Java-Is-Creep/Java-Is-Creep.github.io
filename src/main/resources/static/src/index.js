@@ -19,7 +19,7 @@ window.onload = function () {
     }
     console.log('Despues crear game global');
 
-    game.global.socket = new SockJS('https://no-puedo-mas.herokuapp.com/snail');
+    game.global.socket = new WebSocket('ws://no-puedo-mas.herokuapp.com/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
