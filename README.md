@@ -46,10 +46,14 @@ Lateral: diseños sin profundidad. Los personajes se superponen (lo cual obliga 
 ___
 ## Personajes + Habilidades
 -	Caracol marino: Soltar baba en todos los carriles, disminuyendo la velocidad en ese tramo.
+
+
 ![Error al cargar la imagen](./snailSprites/seaSnail.png)
 
 
 -	Gatocol: Un mini salto, permite no caer en trampillas, saltar para alcanzar antes el final de un tramo de pared, etc.
+
+
 ![Error al cargar la imagen](./snailSprites/catSnail.png)
 
 
