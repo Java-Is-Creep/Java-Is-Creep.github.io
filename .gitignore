@@ -2,3 +2,5 @@
 /.metadata/
 .vscode/
 .project
+.classpath
+target/*
