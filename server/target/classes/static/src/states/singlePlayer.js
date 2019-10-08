@@ -114,8 +114,8 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-			console.log(game.global.arrayObstacleSpikes[i].x)
-			console.log(game.global.arrayObstacleSpikes[i].y)
+			console.log(game.global.arrayObstacleSpikes[i].image.x)
+			console.log(game.global.arrayObstacleSpikes[i].image.y)
 			//console.log(game.global.arrayObstacleSpikes[i].height)
 			//console.log(game.global.arrayObstacleSpikes[i].width)
 			//console.log('screen height' + game.world.height)
@@ -142,9 +142,9 @@ Slooow.singlePlayerState.prototype = {
 
 		if (game.global.arrayObstacleSpikes.length > 0) {
 			for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-				var spike = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
-				spike.anchor.setTo(0,1)
-				spike.scale.setTo(0.25, 0.3)
+				//var spike = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
+				//spike.anchor.setTo(0,1)
+				//spike.scale.setTo(0.25, 0.3)
 			}
 		}
 
