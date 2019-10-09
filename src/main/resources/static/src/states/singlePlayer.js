@@ -15,9 +15,14 @@ Slooow.singlePlayerState.prototype = {
 	},
 
 	preload: function () {
+
+		var b = game.add.image (0, game.world.height, 'cocina_back')
+		b.anchor.set (0, 1)
+		b.scale.set (0.35, 0.35)
+
 		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
 		game.global.player.anchor.setTo(0.5, 0.5);
-		game.global.player.scale.setTo(0.3, 0.3)
+		game.global.player.scale.setTo(0.2, 0.2)
 
 		// Cargamos los objetos posibles del mapa
 		//game.global.arrayObstacleSpikes = new Array (5)
