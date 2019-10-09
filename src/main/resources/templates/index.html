@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <p th:text="'Hello, ' + ${name} + '!'"></p>
@@ -18,8 +19,12 @@
     <script src = "src/states/shop.js"></script>
     <script src = "src/states/singlePlayer.js"></script>
     <script src = "src/states/marathon.js"></script>
+    <script src = "src/states/lobby.js"></script>
+    <script src = "src/states/chooseCharacter.js"></script>
+    <script src = "src/states/menuSoloAndMultiLocal.js"></script>
     <script src = "src/index.js"></script>
 
     <div id="gameDiv"></div>
+
 </body>
 </html>

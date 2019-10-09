@@ -1,7 +1,8 @@
 var game;
 
 window.onload = function () {
-    game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv');
+    //game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv');
+    game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, 'gameArea');
     //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
 
     //Variables globales compartidas entre escenas
@@ -175,6 +176,9 @@ window.onload = function () {
     this.game.state.add('mainMenuState', Slooow.mainMenuState);
     this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
     this.game.state.add('marathonState', Slooow.marathonState);
+    this.game.state.add('lobbyState', Slooow.lobbyState);
+    this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
+    this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
     this.game.state.add('shopState', Slooow.shopState);
 
     this.game.state.start('bootState');

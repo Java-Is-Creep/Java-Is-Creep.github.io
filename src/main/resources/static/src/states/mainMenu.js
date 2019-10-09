@@ -225,13 +225,13 @@ Slooow.mainMenuState.prototype = {
         textButtonContact.alpha = 0
 
         function actionOnClickStartSolo() {
-            let msg = {
+            /*let msg = {
                 event: 'SINGLEPLAYER',
                 playerName: game.global.username,
                 roomName: 'sala1'
             }
-            game.global.socket.send(JSON.stringify(msg))
-            //game.state.start('singlePlayerState')
+            game.global.socket.send(JSON.stringify(msg))*/
+            game.state.start('menuSoloAndMultiLocalState')
         }
 
         function actionOnClickStartMarathon() {
@@ -246,7 +246,7 @@ Slooow.mainMenuState.prototype = {
 
         function actionOnClickStartOnline() {
             console.log('pulsado online')
-            //game.state.start('shopState')
+            game.state.start('lobbyState')
         }
 
         function actionOnClickStartLocal() {

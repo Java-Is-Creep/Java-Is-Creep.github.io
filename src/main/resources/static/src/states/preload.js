@@ -17,6 +17,7 @@ Slooow.preloadState.prototype = {
 		game.load.image('background', './assets/img/background.jpg');
 		game.load.image('cocina_back', './assets/img/fondo cocina.png');
 		game.load.image('seaSnail', './assets/img/seaSnail.png');
+		game.load.image('thiefSnail', './assets/img/thiefSnail.png');
 		game.load.image('button', './assets/img/button.png');
 	},
 
