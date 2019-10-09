@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import com.server.Slooow.MapObject.type;
+import com.server.Slooow.Trampoline.trampolineEstate;
 
 public class SinglePlayerRoom {
 	String name;
@@ -25,8 +26,16 @@ public class SinglePlayerRoom {
 	final int MAPSIZE = 5;
 	final int TICKTIME = 33;
 
+	//sirve para comprobar el tipo de clase con la que chocas, puerta o suelo
+	TrapDoor trapAux = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
+
+	DoorMap doorAux = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
+	
+	
+
 	ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
 	ArrayList<DoorMap> doorArray = new ArrayList<>();
+	ArrayList<Trampoline> trampolineArray = new ArrayList<>();
 
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
@@ -110,38 +119,65 @@ public class SinglePlayerRoom {
 
 	public void createMap() {
 		// MAPA 1
+		/*
 
 		map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
-		TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 4000, TICKTIME, 500, 500);
+		/*TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		doorArray.add(trap);
-		map.addMapObject(new MapGround(50, 20, 450, 0, type.GROUND));
+		*/
+		/*
+		Trampoline trampoline = new Trampoline(100, 20, 300, 0, type.TRAMPOLINE, 99, 99, TICKTIME, 10, 30);
 
+		map.addMapObject(trampoline);
+		trampolineArray.add(trampoline);
+		map.addMapObject(new MapGround(100, 20, 400, 0, type.GROUND));
 		map.addMapObject(new MapWall(20, 200, 500, 200, type.WALL));
-		DoorMap doorAux = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
-		map.addMapObject(doorAux);
-		doorArray.add(doorAux);
+		DoorMap door = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
+		map.addMapObject(door);
+		doorArray.add(door);
 		map.addMapObject(new MapGround(100, 20, 500, 400, type.GROUND));
 		map.addMapObject(new MapGround(500, 20, 500, 0, type.GROUND));
 		map.addMapObject(new MapGround(300, 20, 800, 400, type.GROUND));
 		map.addMapObject(new MapGround(300, 20, 600, 200, type.GROUND));
 		map.addMapObject(new MapWall(20, 200, 800, 200, type.WALL));
+		*/
 
+		/////////////////////////////////////////////////////////////////////////////////////
+		
 		/*
-		 * // Mapa2 map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
-		 * map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber
-		 * debajo un suelo // minimo tiene que estar mas tiempopreparandose qu elo que
-		 * tarda en recargar el // caracol. // 4000 serian 4.04 seg de preparacion y
-		 * estaria activo cerca de 1 seg SpikesObstacle spike1 = new SpikesObstacle(100,
-		 * 100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
-		 * map.addMapObject(spike1); spikesArray.add(spike1); map.addMapObject(new
-		 * MapGround(100, 20, 100, 400, type.GROUND)); // 30º con 300u de width = 173u
-		 * de height map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400,
-		 * type.SLOPE)); map.addMapObject(new MapGround(300, 20, 480, 220,
-		 * type.GROUND)); map.addMapObject(new MapPowerUp(40, 40, 550, 220,
-		 * type.POWERUP)); map.addMapObject(new MapGround(300, 20, 780, 220,
-		 * type.GROUND)); // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
-		 */
+			map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
+		  // Mapa2 map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
+		  map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber debajo un suelo 
+		  // minimo tiene que estar mas tiempopreparandose qu elo que tarda en recargar el // caracol. 
+		  // 4000 serian 4.04 seg de preparacion y estaria activo cerca de 1 seg 
+		  SpikesObstacle spike1 = new SpikesObstacle(100,100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
+		  map.addMapObject(spike1); 
+		  spikesArray.add(spike1); 
+		  map.addMapObject(new MapGround(100, 20, 100, 400, type.GROUND)); 
+		  // 30º con 300u de width = 173u de height 
+		  map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400,type.SLOPE));
+		   //map.addMapObject(new MapGround(300, 20, 480, 220,type.GROUND));
+		   //map.addMapObject(new MapPowerUp(40, 40, 550, 220,type.POWERUP));
+		   map.addMapObject(new MapGround(200, 20, 480, 220,type.GROUND)); 
+		   map.addMapObject(new MapSlope(300, Math.toRadians(30), 680, 220,type.SLOPE));
+		   //map.addMapObject(new MapGround(300, 20, 780, 400,type.GROUND)); 
+		   // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
+		   */
+
+		  map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
+		  map.addMapObject(new MapGround(300, 20, 300, 0, type.GROUND));
+		  map.addMapObject(new MapPowerUp(40,40,300,10,type.POWERUP));
+
+		  SpikesObstacle spike1 = new SpikesObstacle(100,100, 600, 0, type.OBSTACLE, 30000, 40000, TICKTIME);
+		  map.addMapObject(spike1); 
+		  spikesArray.add(spike1); 
+		  map.addMapObject(new MapGround(300, 20, 600, 0, type.GROUND));
+		  map.addMapObject(new MapGround(100, 20, 900, 0, type.GROUND));
+		  spike1 = new SpikesObstacle(100,100, 900, 0, type.OBSTACLE, 30000, 40000, TICKTIME);
+		  map.addMapObject(spike1); 
+		  spikesArray.add(spike1);
+		 
 
 	}
 
@@ -165,24 +201,45 @@ public class SinglePlayerRoom {
 			if (object.collider.hayColision(player)) {
 				switch (object.myType) {
 				case GROUND:
-					groundCollision = true;
+					if(player.mySnail.hasFallenTrap){
+						if(object.getClass() == trapAux.getClass()){
+						} else {
+							groundCollision = true;
+							player.mySnail.isJumping = false;
+						}
+					} else {
+						groundCollision = true;
+						player.mySnail.hasFallenTrap = false;
+						player.mySnail.isJumping = false;
+					}
 					break;
 				case WALL:
-					wallCollision = true;
+					if(player.mySnail.hasPassedDoor){
+						if(object.getClass() == trapAux.getClass()){
+
+						} else {
+							wallCollision = true;
+						}
+					} else {
+						wallCollision = true;
+						player.mySnail.hasPassedDoor = false;
+						player.mySnail.isJumping = false;
+						
+					}
+					
 					break;
 				case SLOPE:
 					// Casteamos el obj con el que choca a cuesta para poder recoger su inclinación
 					MapSlope auxSlope = (MapSlope) object;
 					slopeCollision = true;
 					slopeRadians = auxSlope.radians;
+					player.mySnail.isJumping = false;
 					break;
 				case OBSTACLE:
 					SpikesObstacle auxSpikes = (SpikesObstacle) object;
 					if ((auxSpikes.estate) == ACTIVE) {
-						player.mySnail.obstacle = auxSpikes;
+						player.mySnail.spikes = auxSpikes;
 						obstacleCollision = true;
-						System.out.println(auxSpikes.toString());
-						System.out.println("ColisionPinchos");
 					}
 
 					break;
@@ -191,10 +248,25 @@ public class SinglePlayerRoom {
 					powerAux.playerCrash(player.mySnail);
 					break;
 				case DOOR:
+					player.mySnail.hasPassedDoor = true;
 					//System.err.println("Colision puerta");
 					break;
 				case TRAPDOOR:
-					System.out.println("colision trampilla");
+					player.mySnail.hasFallenTrap = true;
+					//System.out.println("colision trampilla");
+					break;
+					case TRAMPOLINE:
+					
+					Trampoline auxTrampoline = (Trampoline) object;
+					if(auxTrampoline.trampoEstate == trampolineEstate.ACTIVE){
+						player.mySnail.isJumping = true;
+						auxTrampoline.throwSnail(player.mySnail);
+					} else {
+						groundCollision = true;
+						player.mySnail.hasFallenTrap = false;
+						player.mySnail.isJumping = false;
+					}
+					
 					break;
 				default:
 					System.out.println("COLISION RARA");
@@ -223,11 +295,18 @@ public class SinglePlayerRoom {
 		}
 	}
 
+	public void updateTrampoline(){
+		for(Trampoline trampoline : trampolineArray){
+			trampoline.update();
+		}
+	}
+
 
 	public void tick() {
 		Runnable task = () -> {
 
 			updateDoors();
+			updateTrampoline();
 			checkCollisions();
 			sendObstacleUpdate();
 

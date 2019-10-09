@@ -30,7 +30,7 @@ public class DoorMap extends MapObstacle  {
         if(timeActive < 0){
             estate = generalEstate.CLOSSING;
             timeActive = MAXTIMEACTIVE;
-            System.out.println("PUERTA CERRANDO");
+            //System.out.println("PUERTA CERRANDO");
             
         }
     }

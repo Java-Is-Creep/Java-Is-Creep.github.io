@@ -69,8 +69,11 @@ public class SnailInGame {
 	public boolean isOnWall = false;
 	public boolean isOnSlope = false;
 	public boolean isOnObstacle = false;
+	public boolean hasPassedDoor = false;
+	public boolean hasFallenTrap = false;
+	public boolean isJumping = false;
 	public double slopeRadians = 0;
-	public SpikesObstacle obstacle = null;
+	public SpikesObstacle spikes = null; 
 
 	public float speedX;
 	public float speedY;
@@ -79,8 +82,11 @@ public class SnailInGame {
 	public float posY = 20;
 	//Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
+
+	//Variables relacionadas con powerUps
 	GenericPowerUp powerUp = null;
-	private boolean usingPowerUp = false;
+	protected boolean usingPowerUp = false;
+	protected boolean hasShield = false;
 
 	//Interacción con el escenario
 
@@ -113,7 +119,7 @@ public class SnailInGame {
 
 	public void usePowerUp() {
 		if (powerUp != null) {
-			powerUp.consumirPowerUp();
+			powerUp.usePowerUp();
 			powerUp = null;
 			usingPowerUp = true;
 		}
@@ -131,7 +137,7 @@ public class SnailInGame {
 		if(useObject){
 			if(!usingPowerUp){
 				if(powerUp != null){
-					powerUp.consumirPowerUp();
+					powerUp.usePowerUp();
 				}
 			}
 		}
@@ -141,14 +147,20 @@ public class SnailInGame {
 		}
 
 		if(isOnObstacle){
-			if(obstacle != null) {
+			if(spikes != null) {
 				if(!isOnWall && !isOnSlope){
-					obstacle.playerCrash();
-					crashObstacle();
-					isOnObstacle = false;
-					System.out.println("////////////////////");
-					obstacle.toString();
-					System.out.println("////////////////////");
+					// si tienes escudo, lo pierdes y reseteas los pinchos
+					if(hasShield){ 
+						hasShield = false;
+						spikes.playerCrash();
+						isOnObstacle = false;
+						System.out.println("se pincho pero se protegio con escudo");
+					} else {
+						spikes.playerCrash();
+						crashObstacle();
+						isOnObstacle = false;
+						System.out.println("se pincho ");
+					}
 				}
 			}
 			
@@ -173,11 +185,13 @@ public class SnailInGame {
 					runOutStamina = true;
 				}
 				
-				//volvemos a la velocidad original , esto no vale si tengo power ups
+				if(!usingPowerUp){
 				maxSpeedX = MAXNORMALVELOCITYX;
 				maxSpeedY = MAXNORMALVELOCITYY;
 				acelerationX = NORMALACELERATIONX;
 				acelerationY = NORMALACELERATIONY;
+				}
+
 
 			} else {
 				stamina -= STAMINALOSE;
@@ -275,8 +289,19 @@ public class SnailInGame {
 			posY += speedY;
 		} else if (isOnSlope){
 			adjustSpeed(maxSpeedInSlopeX,maxSpeedInSlopeY);
-				posX += speedX *Math.cos(slopeRadians);
-				posY += speedX *Math.sin(slopeRadians);
+				float speedXSlope = 0;
+				// diferenciamos si estamos bajado o subiedo para aumentar o disminuir velocidad
+				if(slopeRadians > 0) {
+					speedXSlope = (-1 * MASS) +speedX;
+				} else {
+					speedXSlope = (+1 * MASS) +speedX;
+				}
+				posX += speedXSlope *Math.cos(slopeRadians);
+				posY += speedXSlope *Math.sin(slopeRadians);
+		} else if (isJumping){
+				//adjustSpeed(maxSpeedInSlopeX,maxSpeedInSlopeY);
+				posX += speedX ;
+				posY += speedY ;
 		} else {
 			adjustSpeed(maxSpeedX,maxSpeedY);
 			posX += speedX;
@@ -284,6 +309,12 @@ public class SnailInGame {
 		}
 		//Avisas al collider de que recalcule la posición
 		collider.recalculatePosition(posX, posY);
+	}
+
+	public void trampoThrow(int forceX, int forceY){
+		isJumping = true;
+		speedX = forceX;
+		speedY = forceY;
 	}
 
 
@@ -321,6 +352,10 @@ public class SnailInGame {
 
 	public void setUsingPowerUp(boolean usingPowerUp) {
 		this.usingPowerUp = usingPowerUp;
+	}
+
+	public void activateShield(){
+		hasShield = true;
 	}
 
 }

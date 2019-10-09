@@ -14,7 +14,7 @@ public  class GenericPowerUp {
 		timeRemaining = TIMEMAX;
 	}
 	
-	public void consumirPowerUp() {
+	public void usePowerUp() {
 		System.out.println("ACTIVACION POWER UP SIN IMPLEMENTAR");
 		snailTarget.setUsingPowerUp(true);
 	}
