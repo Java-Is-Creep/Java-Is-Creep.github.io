@@ -14,8 +14,7 @@ Slooow.initSesionState.prototype = {
     },
 
     preload: function () {
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        game.scale.forceOrientation(false, true);
+
     },
 
     // Escribimos nombre y contraseña para el jugador y mandamos mensaje al
