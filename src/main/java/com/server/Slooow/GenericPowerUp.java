@@ -5,13 +5,14 @@ public  class GenericPowerUp {
 	
 	int timeRemaining;
 	//se restarian 30 por seg
-	final int TIMEMAX = 200; 
+	 protected int TIMEMAX; 
 	final int timeRest = 1;
 	SnailInGame snailTarget;
 	
-	public GenericPowerUp(SnailInGame snailTarget) {
+	public GenericPowerUp(SnailInGame snailTarget,int timeMax) {
 		this.snailTarget = snailTarget;
-		timeRemaining = TIMEMAX;
+		TIMEMAX = timeMax;
+		timeRemaining = timeMax;
 	}
 	
 	public void usePowerUp() {
@@ -19,13 +20,12 @@ public  class GenericPowerUp {
 		snailTarget.setUsingPowerUp(true);
 	}
 	
-	public void decrementarTiempo() { // se le debe pasar el tiempo por refresco
+	public void decrementTime() { // se le debe pasar el tiempo por refresco
 		timeRemaining -= timeRest;
 		System.out.println(timeRemaining);
 		if(timeRemaining == 0) {
 			snailTarget.restoreValues();
 			snailTarget.setUsingPowerUp(false);
-			snailTarget.powerUp = null;
 			System.out.println("Se acabo el tiempo de powerUp");
 		}
 	}

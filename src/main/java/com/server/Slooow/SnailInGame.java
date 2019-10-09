@@ -87,6 +87,7 @@ public class SnailInGame {
 	GenericPowerUp powerUp = null;
 	protected boolean usingPowerUp = false;
 	protected boolean hasShield = false;
+	protected boolean hasBoostStamina = false;
 
 	//Interacción con el escenario
 
@@ -115,6 +116,8 @@ public class SnailInGame {
 		acelerationX = NORMALACELERATIONX;
 		acelerationY = NORMALACELERATIONY;
 		maxSpeedY = MAXNORMALVELOCITYY;
+		hasBoostStamina = false;
+		powerUp = null;
 	}
 
 	public void usePowerUp() {
@@ -143,7 +146,7 @@ public class SnailInGame {
 		}
 
 		if(usingPowerUp){
-			powerUp.decrementarTiempo();
+			powerUp.decrementTime();
 		}
 
 		if(isOnObstacle){
@@ -177,7 +180,10 @@ public class SnailInGame {
 					}
 					
 				} else {
-					stamina -= STAMINAWALLLOSE;
+					if(!hasBoostStamina){
+						stamina -= STAMINAWALLLOSE;
+					}
+
 				}
 				
 
@@ -194,9 +200,11 @@ public class SnailInGame {
 
 
 			} else {
-				stamina -= STAMINALOSE;
-				if(isOnWall){
-					stamina -= STAMINAWALLLOSE;
+				if(!hasBoostStamina){
+					stamina -= STAMINALOSE;
+					if(isOnWall){
+						stamina -= STAMINAWALLLOSE;
+					}
 				}
 				if (stamina <= 0) {
 					runOutStamina = true;

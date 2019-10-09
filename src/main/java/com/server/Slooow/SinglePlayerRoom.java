@@ -167,14 +167,17 @@ public class SinglePlayerRoom {
 
 		  map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
 		  map.addMapObject(new MapGround(300, 20, 300, 0, type.GROUND));
-		  map.addMapObject(new MapPowerUp(40,40,300,10,type.POWERUP));
+		  map.addMapObject(new MapPowerUp(40,40,50,10,type.POWERUP));
 
-		  SpikesObstacle spike1 = new SpikesObstacle(100,100, 600, 0, type.OBSTACLE, 30000, 40000, TICKTIME);
+		  SpikesObstacle spike1 = new SpikesObstacle(100,100, 600, 0, type.OBSTACLE, 3000, 3000, TICKTIME);
 		  map.addMapObject(spike1); 
 		  spikesArray.add(spike1); 
 		  map.addMapObject(new MapGround(300, 20, 600, 0, type.GROUND));
 		  map.addMapObject(new MapGround(100, 20, 900, 0, type.GROUND));
-		  spike1 = new SpikesObstacle(100,100, 900, 0, type.OBSTACLE, 30000, 40000, TICKTIME);
+		  spike1 = new SpikesObstacle(100,100, 900, 0, type.OBSTACLE, 3000, 3000, TICKTIME);
+		  map.addMapObject(spike1); 
+		  spikesArray.add(spike1);
+		  spike1 = new SpikesObstacle(100,100, 500, 500, type.OBSTACLE, 3000, 3000, TICKTIME);
 		  map.addMapObject(spike1); 
 		  spikesArray.add(spike1);
 		 
