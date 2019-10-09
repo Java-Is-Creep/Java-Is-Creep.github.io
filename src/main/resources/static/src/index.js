@@ -2,8 +2,17 @@ var game;
 
 window.onload = function () {
     //game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv');
-    game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, 'gameArea');
+    //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS, 'gameArea');
     //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
+
+    // Con esto conseguimos a que la imagen renderizada a 1280x720
+    // Falta hacerlo responsive
+    var config = {
+        width: '100',
+        height: '100',
+        renderer: Phaser.AUTO
+    }
+    game = new Phaser.Game (config)
 
     //Variables globales compartidas entre escenas
     game.global = {
