@@ -19,10 +19,10 @@ public class MapPowerUp extends MapObject {
         if (playerIndex == -1) {
             snailTargets.add(snail);
 
-            GenericPowerUp aux = new GenericPowerUp(snail,200);
+            GenericPowerUp aux = new GenericPowerUp(snail, 200);
 
             // int index = (int) (Math.random() * NUMPOWERS);
-            int index = 1;
+            int index = 4;
 
             // dependiendo del valor se generaria un power up u otro
             switch (index) {
@@ -31,9 +31,20 @@ public class MapPowerUp extends MapObject {
                 System.out.println("Se ha creado un power up de escudo");
                 break;
             case 1:
-                aux = new BoostStaminaPowerUp(snail,60);
+                aux = new BoostStaminaPowerUp(snail, 60);
                 System.out.println("Se ha creado un power de stamina");
                 break;
+            case 2:
+                aux = new LigthWeigthPowerUp(snail, 60, 0.1f);
+                System.out.println("Se ha creado power up de ligth weigth");
+                break;
+            case 3:
+                aux = new LetuccePowerUp(snail, 0, 300);
+                System.out.println("Se ha creado un power up de Lechuga");
+                break;
+            case 4:
+                aux = new SpeedPowerUp(snail, 60, 4f, 4f, 4f, 4f);
+                System.out.println("Aumento velocidades");
             default:
             }
 
