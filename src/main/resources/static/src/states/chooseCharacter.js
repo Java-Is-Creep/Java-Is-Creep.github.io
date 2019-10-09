@@ -44,6 +44,19 @@ Slooow.chooseCharacterState.prototype = {
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
+        //Boton aceptar
+		buttonAccept = game.add.button(50,
+            40, 'button', actionOnClickBack, this,
+            0, 0, 0)
+            buttonAccept.anchor.set(0.5)
+            buttonAccept.scale.setTo(0.2, 0.3)
+
+        //Texto aceptar
+		textButtonBack = game.add.text(50,
+            40, 'Back', style)
+        textButtonBack.anchor.set(0.5)
+        textButtonBack.scale.setTo(0.5,0.5)
+
         //Texto estadisticas seleccionado
 		textStats = game.add.text(game.world.centerX-400,
             game.world.centerY -50, 'Stats:', style2)

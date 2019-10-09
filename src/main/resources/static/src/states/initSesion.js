@@ -14,7 +14,6 @@ Slooow.initSesionState.prototype = {
     },
 
     preload: function () {
-
     },
 
     // Escribimos nombre y contraseña para el jugador y mandamos mensaje al
