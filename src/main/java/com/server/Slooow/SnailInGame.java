@@ -69,6 +69,9 @@ public class SnailInGame {
 	public boolean isOnWall = false;
 	public boolean isOnSlope = false;
 	public boolean isOnObstacle = false;
+	public boolean hasPassedDoor = false;
+	public boolean hasFallenTrap = false;
+	public boolean isJumping = false;
 	public double slopeRadians = 0;
 	public SpikesObstacle obstacle = null;
 
@@ -277,6 +280,10 @@ public class SnailInGame {
 			adjustSpeed(maxSpeedInSlopeX,maxSpeedInSlopeY);
 				posX += speedX *Math.cos(slopeRadians);
 				posY += speedX *Math.sin(slopeRadians);
+		} else if (isJumping){
+				//adjustSpeed(maxSpeedInSlopeX,maxSpeedInSlopeY);
+				posX += speedX ;
+				posY += speedY ;
 		} else {
 			adjustSpeed(maxSpeedX,maxSpeedY);
 			posX += speedX;
@@ -284,6 +291,12 @@ public class SnailInGame {
 		}
 		//Avisas al collider de que recalcule la posición
 		collider.recalculatePosition(posX, posY);
+	}
+
+	public void trampoThrow(int forceX, int forceY){
+		isJumping = true;
+		speedX = forceX;
+		speedY = forceY;
 	}
 
 

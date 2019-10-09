@@ -25,6 +25,13 @@ public class SinglePlayerRoom {
 	final int MAPSIZE = 5;
 	final int TICKTIME = 33;
 
+	//sirve para comprobar el tipo de clase con la que chocas, puerta o suelo
+	TrapDoor trapAux = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
+
+	DoorMap doorAux = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
+	
+	
+
 	ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
 	ArrayList<DoorMap> doorArray = new ArrayList<>();
 
@@ -112,15 +119,15 @@ public class SinglePlayerRoom {
 		// MAPA 1
 
 		map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
-		TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 4000, TICKTIME, 500, 500);
+		TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		doorArray.add(trap);
 		map.addMapObject(new MapGround(50, 20, 450, 0, type.GROUND));
 
 		map.addMapObject(new MapWall(20, 200, 500, 200, type.WALL));
-		DoorMap doorAux = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
-		map.addMapObject(doorAux);
-		doorArray.add(doorAux);
+		DoorMap door = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
+		map.addMapObject(door);
+		doorArray.add(door);
 		map.addMapObject(new MapGround(100, 20, 500, 400, type.GROUND));
 		map.addMapObject(new MapGround(500, 20, 500, 0, type.GROUND));
 		map.addMapObject(new MapGround(300, 20, 800, 400, type.GROUND));
@@ -165,10 +172,33 @@ public class SinglePlayerRoom {
 			if (object.collider.hayColision(player)) {
 				switch (object.myType) {
 				case GROUND:
-					groundCollision = true;
+					if(player.mySnail.hasFallenTrap){
+						if(object.getClass() == trapAux.getClass()){
+							System.out.println("La clase es la misma");	
+						} else {
+							System.out.println("La clase es distinta");
+							groundCollision = true;
+							player.mySnail.isJumping = false;
+						}
+					} else {
+						groundCollision = true;
+						player.mySnail.hasFallenTrap = false;
+						player.mySnail.isJumping = false;
+					}
 					break;
 				case WALL:
-					wallCollision = true;
+					if(player.mySnail.hasPassedDoor){
+						if(object.getClass() == trapAux.getClass()){
+
+						} else {
+							wallCollision = true;
+						}
+					} else {
+						wallCollision = true;
+						player.mySnail.hasPassedDoor = false;
+						
+					}
+					
 					break;
 				case SLOPE:
 					// Casteamos el obj con el que choca a cuesta para poder recoger su inclinación
@@ -181,8 +211,6 @@ public class SinglePlayerRoom {
 					if ((auxSpikes.estate) == ACTIVE) {
 						player.mySnail.obstacle = auxSpikes;
 						obstacleCollision = true;
-						System.out.println(auxSpikes.toString());
-						System.out.println("ColisionPinchos");
 					}
 
 					break;
@@ -191,10 +219,12 @@ public class SinglePlayerRoom {
 					powerAux.playerCrash(player.mySnail);
 					break;
 				case DOOR:
+					player.mySnail.hasPassedDoor = true;
 					//System.err.println("Colision puerta");
 					break;
 				case TRAPDOOR:
-					System.out.println("colision trampilla");
+					player.mySnail.hasFallenTrap = true;
+					//System.out.println("colision trampilla");
 					break;
 				default:
 					System.out.println("COLISION RARA");
