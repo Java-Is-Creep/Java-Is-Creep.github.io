@@ -34,6 +34,7 @@ public class SinglePlayerRoom {
 
 	ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
 	ArrayList<DoorMap> doorArray = new ArrayList<>();
+	ArrayList<Trampoline> trampolineArray = new ArrayList<>();
 
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
@@ -119,10 +120,17 @@ public class SinglePlayerRoom {
 		// MAPA 1
 
 		map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
-		TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
+		/*TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		doorArray.add(trap);
-		map.addMapObject(new MapGround(50, 20, 450, 0, type.GROUND));
+		*/
+		map.addMapObject(new MapGround(200, 20, 300, 0, type.GROUND));
+
+		Trampoline trampoline = new Trampoline(100, 20, 300, 0, type.TRAMPOLINE, 99, 50000, TICKTIME, 5, 30);
+
+		map.addMapObject(trampoline);
+		trampolineArray.add(trampoline);
+		
 
 		map.addMapObject(new MapWall(20, 200, 500, 200, type.WALL));
 		DoorMap door = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
@@ -196,6 +204,7 @@ public class SinglePlayerRoom {
 					} else {
 						wallCollision = true;
 						player.mySnail.hasPassedDoor = false;
+						player.mySnail.isJumping = false;
 						
 					}
 					
@@ -205,6 +214,7 @@ public class SinglePlayerRoom {
 					MapSlope auxSlope = (MapSlope) object;
 					slopeCollision = true;
 					slopeRadians = auxSlope.radians;
+					player.mySnail.isJumping = false;
 					break;
 				case OBSTACLE:
 					SpikesObstacle auxSpikes = (SpikesObstacle) object;
@@ -225,6 +235,11 @@ public class SinglePlayerRoom {
 				case TRAPDOOR:
 					player.mySnail.hasFallenTrap = true;
 					//System.out.println("colision trampilla");
+					break;
+					case TRAMPOLINE:
+					player.mySnail.isJumping = true;
+					Trampoline auxTrampoline = (Trampoline) object;
+					auxTrampoline.throwSnail(player.mySnail);
 					break;
 				default:
 					System.out.println("COLISION RARA");
@@ -253,11 +268,18 @@ public class SinglePlayerRoom {
 		}
 	}
 
+	public void updateTrampoline(){
+		for(Trampoline trampoline : trampolineArray){
+			trampoline.update();
+		}
+	}
+
 
 	public void tick() {
 		Runnable task = () -> {
 
 			updateDoors();
+			updateTrampoline();
 			checkCollisions();
 			sendObstacleUpdate();
 
