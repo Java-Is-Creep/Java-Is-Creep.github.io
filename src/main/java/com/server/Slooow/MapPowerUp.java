@@ -19,13 +19,16 @@ public class MapPowerUp extends MapObject {
         if (playerIndex == -1) {
             snailTargets.add(snail);
 
-            GenericPowerUp aux = new GenericPowerUp(snail);
+            GenericPowerUp aux = new GenericPowerUp(snail); 
 
-            int index = (int) (Math.random() * NUMPOWERS);
+            //int index = (int) (Math.random() * NUMPOWERS);
+            int index = 0;
 
             // dependiendo del valor se generaria un power up u otro
             switch (index) {
             case 0:
+                aux = new ShieldPowerUp(snail);
+                System.out.println("Se ha creado un power up de escudo");
                 break;
             case 1:
                 break;
