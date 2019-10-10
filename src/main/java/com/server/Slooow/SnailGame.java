@@ -22,6 +22,8 @@ public class SnailGame {
 	ReentrantLock conectedPlayersLock = new ReentrantLock();
 	
 	ConcurrentHashMap<WebSocketSession,PlayerConected> jugadoresConectados = new ConcurrentHashMap<WebSocketSession, PlayerConected>();
+
+	ConcurrentHashMap<String,SinglePlayerRoom> singlePlayerRoomMaps = new ConcurrentHashMap<String,SinglePlayerRoom>();
 	
 
 	public SnailGame() {
@@ -47,7 +49,6 @@ public class SnailGame {
 			for(PlayerConected player : jugadoresConectados.values()){
 				if(player.getLifes() < player.MAXNUMLIFES){
 					player.incrementWaitingTime();
-					System.out.println("dando tiempo");
 				}
 
 			}

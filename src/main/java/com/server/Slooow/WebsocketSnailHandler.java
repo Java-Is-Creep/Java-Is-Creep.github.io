@@ -51,8 +51,9 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "SINGLEPLAYER":
 			jug = new PlayerConected(newSession, post.playerName,lockSession);
 			game.jugadoresConectados.putIfAbsent(jug.getSession(), jug); 
+			SinglePlayerRoom roomAux = new SinglePlayerRoom(post.roomName, jug);
 			if(jug.getLifes()==0){
-				game.room1 = new SinglePlayerRoom(post.roomName,jug);
+				game.singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
 			}
 
 			break;
