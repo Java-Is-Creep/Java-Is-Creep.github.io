@@ -260,7 +260,7 @@ Slooow.mainMenuState.prototype = {
 
         function actionOnClickStartOnline() {
             console.log('pulsado online')
-            game.state.start('lobbyState')
+            game.state.start('menuMultiOnlineState')
         }
 
         function actionOnClickStartLocal() {

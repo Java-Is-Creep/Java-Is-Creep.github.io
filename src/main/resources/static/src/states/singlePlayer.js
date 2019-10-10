@@ -58,6 +58,9 @@ Slooow.singlePlayerState.prototype = {
 		this.eKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.E]);
 
+		this.rKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
+		game.input.keyboard.addKeyCapture([Phaser.Keyboard.R]);
+
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
 		var style = {
 			font: "40px Arial",
@@ -183,6 +186,10 @@ Slooow.singlePlayerState.prototype = {
 			msg.useObject = true
 		}
 		game.global.socket.send(JSON.stringify(msg))
+
+		if (this.rKey.isDown){
+			game.state.start('gameOverState')
+		}
 
 	}
 }

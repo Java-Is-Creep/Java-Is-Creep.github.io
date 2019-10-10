@@ -1,8 +1,21 @@
 var Slooow = {}
 
-Slooow.bootState = function (game) {
+Slooow.Params = {
+	baseWidth: 1920,
+	baseHeight: 1080,
+	minPadding: 50,
+	horizontalMargin: 0,
+	verticalMargin: 0,
+	landscapeRatio: 1.2,
+	currentDevicePixelRatio: 1,
+	iconSize: 364,
+	    fieldSize: {
+        rows: 6,
+        cols: 6
+    }
+};
 
-}
+Slooow.bootState = function (game) {}
 
 Slooow.bootState.prototype = {
 
@@ -13,6 +26,7 @@ Slooow.bootState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **BOOT** state");
 		}
+		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	},
 
 	preload: function () {

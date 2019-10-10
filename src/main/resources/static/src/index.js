@@ -7,11 +7,18 @@ window.onload = function () {
     
     // Con esto conseguimos a que la imagen renderizada a 1280x720
     // Falta hacerlo responsive
-    var config = {
+    /*var config = {
         width: '100',
         height: '100',
         renderer: Phaser.AUTO
+    }*/
+
+    var config = {
+        width: 1920,
+        height: 1080,
+        renderer: Phaser.AUTO
     }
+
     game = new Phaser.Game (config)
 
     //Variables globales compartidas entre escenas
@@ -187,7 +194,9 @@ window.onload = function () {
     this.game.state.add('marathonState', Slooow.marathonState);
     this.game.state.add('lobbyState', Slooow.lobbyState);
     this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
+    this.game.state.add('gameOverState', Slooow.gameOverState);
     this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
+    this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
     this.game.state.add('shopState', Slooow.shopState);
 
     this.game.state.start('bootState');
