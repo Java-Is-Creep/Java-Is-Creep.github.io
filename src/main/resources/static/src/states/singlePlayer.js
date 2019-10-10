@@ -20,9 +20,7 @@ Slooow.singlePlayerState.prototype = {
 		b.anchor.set (0, 1)
 		b.scale.set (0.35, 0.35)
 
-		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
-		game.global.player.anchor.setTo(0.5, 0.5);
-		game.global.player.scale.setTo(0.2, 0.2)
+		
 
 		// Cargamos los objetos posibles del mapa
 		console.dir(game.global.arrayGrounds)
@@ -40,7 +38,10 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
 		}
 
-
+		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
+		game.global.player.anchor.setTo(0.5, 0.5);
+		game.global.player.scale.setTo(0.2, 0.2)
+		
 		console.log ("Array Cargado")
 		console.dir (game.global.arrayObstacleSpikes)
 		

@@ -163,10 +163,12 @@ Slooow.initSesionState.prototype = {
             console.log('Pulsado crear cuenta')
             game.state.start('createAccountState')
             console.log('despues crear cuenta')
-        }
+        }   
+
     },
 
     update: function () {
+        
         if (game.global.input2.value !== undefined) {
             if (this.escKey.justDown
                 && game.global.input2.value.length !== 0) {

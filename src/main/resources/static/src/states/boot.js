@@ -1,18 +1,11 @@
 var Slooow = {}
 
 Slooow.Params = {
-	baseWidth: 1920,
-	baseHeight: 1080,
-	minPadding: 50,
+	baseWidth: 1280,
+	baseHeight: 720,
+	minPadding: 0,
 	horizontalMargin: 0,
-	verticalMargin: 0,
-	landscapeRatio: 1.2,
-	currentDevicePixelRatio: 1,
-	iconSize: 364,
-	    fieldSize: {
-        rows: 6,
-        cols: 6
-    }
+	verticalMargin: 0
 };
 
 Slooow.bootState = function (game) {}
@@ -27,6 +20,7 @@ Slooow.bootState.prototype = {
 			console.log("[DEBUG] Entering **BOOT** state");
 		}
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		//this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 	},
 
 	preload: function () {
