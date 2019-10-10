@@ -1,6 +1,7 @@
 Slooow.singlePlayerState = function (game) {
 	var graphics
 	var stamina
+	var camerados
 }
 
 Slooow.singlePlayerState.prototype = {
@@ -12,6 +13,8 @@ Slooow.singlePlayerState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **SINGLEPLAYER** state");
 		}
+
+		game.world.setBounds(0, 0, 1920, 1920);
 	},
 
 	preload: function () {
@@ -38,10 +41,10 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
 		}
 
-		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
-		game.global.player.anchor.setTo(0.5, 0.5);
-		game.global.player.scale.setTo(0.2, 0.2)
-		
+		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaSnail')
+		game.global.player.sprite.anchor.setTo(0.5, 0.5);
+		game.global.player.sprite.scale.setTo(0.2, 0.2)
+
 		console.log ("Array Cargado")
 		console.dir (game.global.arrayObstacleSpikes)
 		
@@ -53,6 +56,8 @@ Slooow.singlePlayerState.prototype = {
 	},
 
 	create: function () {
+		
+
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
@@ -71,10 +76,11 @@ Slooow.singlePlayerState.prototype = {
 
 		var style2 = {
 			font: "40px Arial",
-			fill: "#ffffff",
+			fill: "#CB0017",
 			align: "center"
 		}
-		game.global.player.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style2);
+		game.global.player.stamina = game.add.text(0, 0, "0", style2);
+		game.global.player.stamina.fixedToCamera = true;
 		/*
 				//Background
 				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
@@ -161,6 +167,9 @@ Slooow.singlePlayerState.prototype = {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
 		}
+		game.camera.follow(game.global.player.sprite,Phaser.Camera.FOLLOW_PLATFORMER,0.5, 0.5, 0, 0);
+		// camera.follow(target, style, lerpX, lerpY, offsetX, offsetY)
+		//game.camera.follow(game.global.player.sprite);
 	},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)

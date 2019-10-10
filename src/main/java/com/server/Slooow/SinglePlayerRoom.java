@@ -110,7 +110,7 @@ public class SinglePlayerRoom {
 
 	public void createMap() {
 		// MAPA 1
-
+		/*
 		map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
 		TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 4000, TICKTIME, 500, 500);
 		map.addMapObject(trap);
@@ -126,22 +126,22 @@ public class SinglePlayerRoom {
 		map.addMapObject(new MapGround(300, 20, 800, 400, type.GROUND));
 		map.addMapObject(new MapGround(300, 20, 600, 200, type.GROUND));
 		map.addMapObject(new MapWall(20, 200, 800, 200, type.WALL));
-
-		/*
-		 * // Mapa2 map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
-		 * map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber
-		 * debajo un suelo // minimo tiene que estar mas tiempopreparandose qu elo que
-		 * tarda en recargar el // caracol. // 4000 serian 4.04 seg de preparacion y
-		 * estaria activo cerca de 1 seg SpikesObstacle spike1 = new SpikesObstacle(100,
-		 * 100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
-		 * map.addMapObject(spike1); spikesArray.add(spike1); map.addMapObject(new
-		 * MapGround(100, 20, 100, 400, type.GROUND)); // 30º con 300u de width = 173u
-		 * de height map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400,
-		 * type.SLOPE)); map.addMapObject(new MapGround(300, 20, 480, 220,
-		 * type.GROUND)); map.addMapObject(new MapPowerUp(40, 40, 550, 220,
-		 * type.POWERUP)); map.addMapObject(new MapGround(300, 20, 780, 220,
-		 * type.GROUND)); // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
-		 */
+		*/
+		
+		//Mapa2 
+		map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
+		map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber debajo un suelo 
+		// minimo tiene que estar mas tiempopreparandose qu elo quetarda en recargar el // caracol. 
+		// 4000 serian 4.04 seg de preparacion y estaria activo cerca de 1 seg 
+		SpikesObstacle spike1 = new SpikesObstacle(100, 100, 100, 400, type.OBSTACLE, 15000, 4000, TICKTIME);
+		 map.addMapObject(spike1); spikesArray.add(spike1); map.addMapObject(new
+		  MapGround(100, 20, 100, 400, type.GROUND)); // 30º con 300u de width = 173u de height 
+		  map.addMapObject(new MapSlope(300, Math.toRadians(-30), 200, 400, type.SLOPE));
+		   map.addMapObject(new MapGround(300, 20, 480, 220, type.GROUND));
+		   map.addMapObject(new MapPowerUp(40, 40, 550, 220, type.POWERUP)); 
+		  map.addMapObject(new MapGround(300, 20, 780, 220, type.GROUND)); // 
+		  map.addMapObject(new MapWall(20,200,900,193,type.WALL));
+		 
 
 	}
 
