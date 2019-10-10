@@ -16,7 +16,6 @@ public class SpikesObstacle extends MapObstacle {
         activePosY = posY;
         posYnotActive = posY - (height + 5);
         estate = Estate.ACTIVE;
-        System.out.println("pos y active: " + activePosY + " pos y no active: " +posYnotActive);
 
     }
 

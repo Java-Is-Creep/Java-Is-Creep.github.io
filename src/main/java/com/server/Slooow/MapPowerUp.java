@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MapPowerUp extends MapObject {
 
-    private final int NUMPOWERS = 10;
+    private final int NUMPOWERS = 6;
     ArrayList<SnailInGame> snailTargets = new ArrayList<>();
 
     public MapPowerUp(int width, int height, int posX, int posY, type myTipe) {
@@ -21,8 +21,8 @@ public class MapPowerUp extends MapObject {
 
             GenericPowerUp aux = new GenericPowerUp(snail, 200);
 
-            // int index = (int) (Math.random() * NUMPOWERS);
-            int index = 4;
+             int index = (int) (Math.random() * NUMPOWERS);
+            
 
             // dependiendo del valor se generaria un power up u otro
             switch (index) {
@@ -45,6 +45,10 @@ public class MapPowerUp extends MapObject {
             case 4:
                 aux = new SpeedPowerUp(snail, 60, 4f, 4f, 4f, 4f);
                 System.out.println("Aumento velocidades");
+            case 5:
+                aux = new InkPowerUp(snail, 200);
+                System.out.println("Se ha creado un power de tinta");
+                break;
             default:
             }
 

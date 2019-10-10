@@ -99,6 +99,7 @@ public class SnailInGame {
 	protected boolean usingPowerUp = false;
 	protected boolean hasShield = false;
 	protected boolean hasBoostStamina = false;
+	protected boolean hasInk = false;
 
 	// Interacción con el escenario
 
@@ -160,6 +161,7 @@ public class SnailInGame {
 	// se para hasta que la recupere.
 	// Actualizacion del movimiento y variables del caracol
 	public void updateSnail() {
+		/*
 
 		System.out.println(" MAX NORMAL SPEEDX: " + maxNormalSpeedX);
 		System.out.println(" MAX NORMAL SPEEDY: " + maxNormalSpeedY);
@@ -169,6 +171,7 @@ public class SnailInGame {
 		System.out.println(" Acelerating aceleration: " + maxAcelerationAceleratingX);
 		System.out.println(" speedX: " + speedX);
 		System.out.println(" acelerationX: " + acelerationX);
+		*/
 
 		lastMovementLock.lock();
 		boolean isAcelerating = lastMovement.isAcelerating;

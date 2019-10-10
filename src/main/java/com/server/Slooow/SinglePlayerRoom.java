@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.web.socket.TextMessage;
 
@@ -25,6 +24,10 @@ public class SinglePlayerRoom {
 	Map map = new Map(2000);
 	final int MAPSIZE = 5;
 	final int TICKTIME = 33;
+	final int NUMSECONS = 16;
+	final int TIMETOSUCESS = NUMSECONS*1000; // se multiplica por mil porque TICKTIME esta en milisegundos
+
+	int acummulativeTime = 0;
 
 	//sirve para comprobar el tipo de clase con la que chocas, puerta o suelo
 	TrapDoor trapAux = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
@@ -105,7 +108,6 @@ public class SinglePlayerRoom {
 		msgMap.addProperty("height", heightArray);
 		msgMap.addProperty("width", widthArray);
 		msgMap.addProperty("myType", myTypeArray);
-		System.out.println(msgMap.toString());
 		try {
 			player.sessionLock.lock();
 			player.getSession().sendMessage(new TextMessage(msgMap.toString()));
@@ -170,7 +172,9 @@ public class SinglePlayerRoom {
 		  map.addMapObject(new MapGround(300, 20, 300, 0, type.GROUND));
 		  map.addMapObject(new MapWall(20,400,600,0,type.WALL));
 		  map.addMapObject(new MapGround(300, 20, 600, 400, type.GROUND));
-		  map.addMapObject(new MapWall(20,400,900,400,type.WALL));
+		  map.addMapObject(new MapGround(100, 20, 900, 400, type.GROUND));
+		  map.addMapObject(new FinishMap(50,50,950,420,type.FINISH,this));
+		  
 
 		  SpikesObstacle spike1 = new SpikesObstacle(100,100, 600, 0, type.OBSTACLE, 3000, 3000, TICKTIME);
 		  map.addMapObject(spike1); 
@@ -259,7 +263,7 @@ public class SinglePlayerRoom {
 					player.mySnail.hasFallenTrap = true;
 					//System.out.println("colision trampilla");
 					break;
-					case TRAMPOLINE:
+				case TRAMPOLINE:
 					
 					Trampoline auxTrampoline = (Trampoline) object;
 					if(auxTrampoline.trampoEstate == trampolineEstate.ACTIVE){
@@ -271,6 +275,9 @@ public class SinglePlayerRoom {
 						player.mySnail.isJumping = false;
 					}
 					
+					break;
+				case FINISH:
+						finishRace();
 					break;
 				default:
 					System.out.println("COLISION RARA");
@@ -305,9 +312,20 @@ public class SinglePlayerRoom {
 		}
 	}
 
+	public void finishRace(){
+		//acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
+		if(acummulativeTime > TIMETOSUCESS){
+			System.out.println("Has perdido, tu tiempo ha sido: "+ acummulativeTime);
+			player.decrementLifes();
+		} else {
+			System.out.println("Has ganado, tu timepo ha sido: "+ acummulativeTime);
+		}
+		executor.shutdown();
+	}
 
 	public void tick() {
 		Runnable task = () -> {
+			acummulativeTime+= TICKTIME;
 
 			updateDoors();
 			updateTrampoline();

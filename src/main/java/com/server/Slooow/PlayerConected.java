@@ -9,6 +9,11 @@ public class PlayerConected {
 	private WebSocketSession session;
 	private String nombre;
 	public SnailInGame mySnail;
+	private int lifes;
+	public final int MAXNUMLIFES= 5;
+	// actualmente 1 hora
+	public final int SECONDSTOGETALIFE = 30;
+	public int secondsWaitingForLife = 0;
 	ReentrantLock sessionLock;
 
 	//Se guarda su sesion, su nombre y una instancia del caracol generico (Cambiara cuando haya mas de uno)
@@ -16,6 +21,7 @@ public class PlayerConected {
 		this.session = session;
 		this.nombre = nombre;
 		this.sessionLock = sessionLock;
+		lifes = MAXNUMLIFES;
 		mySnail = new SnailInGame();
 	}
 	public WebSocketSession getSession() {
@@ -29,6 +35,36 @@ public class PlayerConected {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public int getLifes() {
+		return lifes;
+	}
+
+	public void incrementLifes(){
+		lifes++;
+		if(lifes > MAXNUMLIFES){
+			lifes = MAXNUMLIFES;
+		}
+	}
+
+	public void decrementLifes(){
+		lifes--;
+		System.out.println("Vida restada");
+		if(lifes < 0){
+			lifes = 0;
+		}
+
+	}
+
+	public void incrementWaitingTime(){
+		secondsWaitingForLife++;
+
+		if(secondsWaitingForLife >= SECONDSTOGETALIFE){
+			lifes++;
+			secondsWaitingForLife = 0;
+			System.out.println("VIDA AUMENTADA");
+		}
 	}
 	
 }

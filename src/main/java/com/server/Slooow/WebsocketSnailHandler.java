@@ -51,7 +51,10 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "SINGLEPLAYER":
 			jug = new PlayerConected(newSession, post.playerName,lockSession);
 			game.jugadoresConectados.putIfAbsent(jug.getSession(), jug); 
-			game.room1 = new SinglePlayerRoom(post.roomName,jug);
+			if(jug.getLifes()==0){
+				game.room1 = new SinglePlayerRoom(post.roomName,jug);
+			}
+
 			break;
 
 		/*
@@ -88,10 +91,12 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		//TODO inicio de sesión
 		lockSession.lock();
+		WebSocketSession sessionAux = session;
+		lockSession.unlock();
 		JsonObject msg = new JsonObject();
 		msg.addProperty("conectionStatus", true);
-		session.sendMessage(new TextMessage(msg.toString()));
-		lockSession.unlock();
+		sessionAux.sendMessage(new TextMessage(msg.toString()));
+		
 	}
 
 	//Mensaje que confirma la de desconexión del jugador
