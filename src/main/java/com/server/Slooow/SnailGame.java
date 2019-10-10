@@ -9,8 +9,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.springframework.web.socket.WebSocketSession;
 
 public class SnailGame {
-	SinglePlayerRoom room1;
-	MultiplayerRoom room2 = new MultiplayerRoom("sala2");
 	//TODO HashMap de salas del juego
 
 
@@ -24,6 +22,8 @@ public class SnailGame {
 	ConcurrentHashMap<WebSocketSession,PlayerConected> jugadoresConectados = new ConcurrentHashMap<WebSocketSession, PlayerConected>();
 
 	ConcurrentHashMap<String,SinglePlayerRoom> singlePlayerRoomMaps = new ConcurrentHashMap<String,SinglePlayerRoom>();
+
+	ConcurrentHashMap<String,MultiplayerRoom> multiPlayerRoomMap = new ConcurrentHashMap<String,MultiplayerRoom>();
 	
 
 	public SnailGame() {
@@ -57,7 +57,19 @@ public class SnailGame {
 		executor.scheduleAtFixedRate(task, 1, 1, TimeUnit.SECONDS);
 	}
 	
-	public void createSingleRoom() {
+	public void createSingleRoom(String roomName, PlayerConected jug){
+		
+		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug,this);
+		
+		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
+	}
+
+	public void deleteRoom(Room room){
+		if(room.getClass() == SinglePlayerRoom.class){
+			singlePlayerRoomMaps.remove(room.name);
+		} else {
+			multiPlayerRoomMap.remove(room.name);
+		}
 		
 	}
 
