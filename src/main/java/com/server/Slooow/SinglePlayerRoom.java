@@ -253,7 +253,7 @@ public class SinglePlayerRoom {
 					break;
 				case POWERUP:
 					MapPowerUp powerAux = (MapPowerUp) object;
-					powerAux.playerCrash(player.mySnail);
+					powerAux.playerCrash(player);
 					break;
 				case DOOR:
 					player.mySnail.hasPassedDoor = true;
