@@ -25,6 +25,13 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player.scale.setTo(0.2, 0.2)
 
 		// Cargamos los objetos posibles del mapa
+		console.dir(game.global.arrayGrounds)
+		for (var i = 0; i< game.global.arrayGrounds.length; i++){
+			game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, 'groundTile')
+			game.global.arrayGrounds[i].visible = true
+			game.global.arrayGrounds[i].anchor.setTo(0,1)
+			game.global.arrayGrounds[i].scale.setTo(0.5, 0.5)
+		}
 		//game.global.arrayObstacleSpikes = new Array (5)
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
 			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
@@ -32,6 +39,8 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayObstacleSpikes[i].anchor.setTo (0,1)
 			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
 		}
+
+
 		console.log ("Array Cargado")
 		console.dir (game.global.arrayObstacleSpikes)
 		

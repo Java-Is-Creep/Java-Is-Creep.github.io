@@ -25,6 +25,7 @@ Slooow.preloadState.prototype = {
 		game.load.image('slugSnail', './assets/img/slug.png');
 		game.load.image('tankSnail', './assets/img/tanquecol.png');
 		game.load.image('button', './assets/img/button.png');
+		game.load.image('groundTile', './assets/img/suelo_C_pequenio.png')
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario
