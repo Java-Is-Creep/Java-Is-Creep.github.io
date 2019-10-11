@@ -4,8 +4,6 @@ import static com.server.Slooow.SpikesObstacle.Estate.ACTIVE;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.web.socket.TextMessage;
@@ -16,38 +14,28 @@ import com.google.gson.JsonObject;
 import com.server.Slooow.MapObject.type;
 import com.server.Slooow.Trampoline.trampolineEstate;
 
-public class SinglePlayerRoom {
-	String name;
-	PlayerConected player;
-	ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+public class SinglePlayerRoom extends Room{
+	//String name;
+	//ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 	// TODO width del mapa de momento no es responsive
-	Map map = new Map(2000);
+	
 	final int MAPSIZE = 5;
-	final int TICKTIME = 33;
 	final int NUMSECONS = 16;
 	final int TIMETOSUCESS = NUMSECONS*1000; // se multiplica por mil porque TICKTIME esta en milisegundos
 
-	int acummulativeTime = 0;
+
 
 	//sirve para comprobar el tipo de clase con la que chocas, puerta o suelo
-	TrapDoor trapAux = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
-
-	DoorMap doorAux = new DoorMap(20, 200, 500, 0, type.DOOR, 3000, 3000, TICKTIME, 500, 500);
 	
 	
 
-	ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
-	ArrayList<DoorMap> doorArray = new ArrayList<>();
-	ArrayList<Trampoline> trampolineArray = new ArrayList<>();
 
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
-	public SinglePlayerRoom(String name, PlayerConected player) {
-		this.name = name;
-		this.player = player;
-		createMap();
-		sendMap();
-		tick();
+	public SinglePlayerRoom(String name, PlayerConected player,SnailGame game) {
+		super(name,player,game);
+
+		
 	}
 
 	public void sendObstacleUpdate() {
@@ -65,13 +53,13 @@ public class SinglePlayerRoom {
 		msgMap.addProperty("posX", posXArray);
 		msgMap.addProperty("posY", posYArray);
 		try {
-			player.sessionLock.lock();
-			player.getSession().sendMessage(new TextMessage(msgMap.toString()));
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msgMap.toString()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			player.sessionLock.unlock();
+			owner.sessionLock.unlock();
 		}
 
 	}
@@ -109,22 +97,23 @@ public class SinglePlayerRoom {
 		msgMap.addProperty("width", widthArray);
 		msgMap.addProperty("myType", myTypeArray);
 		try {
-			player.sessionLock.lock();
-			player.getSession().sendMessage(new TextMessage(msgMap.toString()));
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msgMap.toString()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			player.sessionLock.unlock();
+			owner.sessionLock.unlock();
 		}
 	}
+
 
 	public void createMap() {
 		// MAPA 1
 		/*
 <<<<<<< HEAD
 
-=======
+
 >>>>>>> client1
 		map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
 		/*TrapDoor trap = new TrapDoor(150, 20, 300, 0, type.TRAPDOOR, 3000, 3000, TICKTIME, 500, 500);
@@ -147,7 +136,7 @@ public class SinglePlayerRoom {
 		map.addMapObject(new MapGround(300, 20, 600, 200, type.GROUND));
 		map.addMapObject(new MapWall(20, 200, 800, 200, type.WALL));
 		*/
-<<<<<<< HEAD
+
 
 		/////////////////////////////////////////////////////////////////////////////////////
 		
@@ -170,7 +159,7 @@ public class SinglePlayerRoom {
 		   //map.addMapObject(new MapGround(300, 20, 780, 400,type.GROUND)); 
 		   // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
 		   */
-
+			/*
 		  map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
 		  map.addMapObject(new MapPowerUp(40,40,50,10,type.POWERUP));
 		  map.addMapObject(new MapGround(300, 20, 300, 0, type.GROUND));
@@ -188,8 +177,8 @@ public class SinglePlayerRoom {
 		  spike1 = new SpikesObstacle(100,100, 900, 0, type.OBSTACLE, 3000, 3000, TICKTIME);
 		  map.addMapObject(spike1); 
 		  spikesArray.add(spike1);
+			*/
 
-=======
 		
 		//Mapa2 
 		map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
@@ -204,10 +193,13 @@ public class SinglePlayerRoom {
 		   map.addMapObject(new MapPowerUp(40, 40, 550, 220, type.POWERUP)); 
 		  map.addMapObject(new MapGround(300, 20, 780, 220, type.GROUND)); // 
 		  map.addMapObject(new MapWall(20,200,900,193,type.WALL));
->>>>>>> client1
+
 		 
 
 	}
+
+	
+
 
 	public void checkCollisions() {
 
@@ -226,32 +218,32 @@ public class SinglePlayerRoom {
 			default:
 			}
 
-			if (object.collider.hayColision(player)) {
+			if (object.collider.hayColision(owner)) {
 				switch (object.myType) {
 				case GROUND:
-					if(player.mySnail.hasFallenTrap){
-						if(object.getClass() == trapAux.getClass()){
+					if(owner.mySnail.hasFallenTrap){
+						if(object.getClass() == TrapDoor.class){
 						} else {
 							groundCollision = true;
-							player.mySnail.isJumping = false;
+							owner.mySnail.isJumping = false;
 						}
 					} else {
 						groundCollision = true;
-						player.mySnail.hasFallenTrap = false;
-						player.mySnail.isJumping = false;
+						owner.mySnail.hasFallenTrap = false;
+						owner.mySnail.isJumping = false;
 					}
 					break;
 				case WALL:
-					if(player.mySnail.hasPassedDoor){
-						if(object.getClass() == trapAux.getClass()){
+					if(owner.mySnail.hasPassedDoor){
+						if(object.getClass() == DoorMap.class){
 
 						} else {
 							wallCollision = true;
 						}
 					} else {
 						wallCollision = true;
-						player.mySnail.hasPassedDoor = false;
-						player.mySnail.isJumping = false;
+						owner.mySnail.hasPassedDoor = false;
+						owner.mySnail.isJumping = false;
 						
 					}
 					
@@ -261,38 +253,38 @@ public class SinglePlayerRoom {
 					MapSlope auxSlope = (MapSlope) object;
 					slopeCollision = true;
 					slopeRadians = auxSlope.radians;
-					player.mySnail.isJumping = false;
+					owner.mySnail.isJumping = false;
 					break;
 				case OBSTACLE:
 					SpikesObstacle auxSpikes = (SpikesObstacle) object;
 					if ((auxSpikes.estate) == ACTIVE) {
-						player.mySnail.spikes = auxSpikes;
+						owner.mySnail.spikes = auxSpikes;
 						obstacleCollision = true;
 					}
 
 					break;
 				case POWERUP:
 					MapPowerUp powerAux = (MapPowerUp) object;
-					powerAux.playerCrash(player);
+					powerAux.playerCrash(owner);
 					break;
 				case DOOR:
-					player.mySnail.hasPassedDoor = true;
+					owner.mySnail.hasPassedDoor = true;
 					//System.err.println("Colision puerta");
 					break;
 				case TRAPDOOR:
-					player.mySnail.hasFallenTrap = true;
+					owner.mySnail.hasFallenTrap = true;
 					//System.out.println("colision trampilla");
 					break;
 				case TRAMPOLINE:
 					
 					Trampoline auxTrampoline = (Trampoline) object;
 					if(auxTrampoline.trampoEstate == trampolineEstate.ACTIVE){
-						player.mySnail.isJumping = true;
-						auxTrampoline.throwSnail(player.mySnail);
+						owner.mySnail.isJumping = true;
+						auxTrampoline.throwSnail(owner.mySnail);
 					} else {
 						groundCollision = true;
-						player.mySnail.hasFallenTrap = false;
-						player.mySnail.isJumping = false;
+						owner.mySnail.hasFallenTrap = false;
+						owner.mySnail.isJumping = false;
 					}
 					
 					break;
@@ -306,11 +298,11 @@ public class SinglePlayerRoom {
 			}
 		}
 		// Envia los datos al caracol el cual calcula sus fisicas
-		player.mySnail.isOnFloor = groundCollision;
-		player.mySnail.isOnWall = wallCollision;
-		player.mySnail.isOnSlope = slopeCollision;
-		player.mySnail.slopeRadians = slopeRadians;
-		player.mySnail.isOnObstacle = obstacleCollision;
+		owner.mySnail.isOnFloor = groundCollision;
+		owner.mySnail.isOnWall = wallCollision;
+		owner.mySnail.isOnSlope = slopeCollision;
+		owner.mySnail.slopeRadians = slopeRadians;
+		owner.mySnail.isOnObstacle = obstacleCollision;
 
 		/*
 		 * System.out.println(" collision con suelo es: " + groundCollision);
@@ -336,11 +328,12 @@ public class SinglePlayerRoom {
 		//acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if(acummulativeTime > TIMETOSUCESS){
 			System.out.println("Has perdido, tu tiempo ha sido: "+ acummulativeTime);
-			player.decrementLifes();
+			owner.decrementLifes();
 		} else {
 			System.out.println("Has ganado, tu timepo ha sido: "+ acummulativeTime);
 		}
 		executor.shutdown();
+		destroyRoom();
 	}
 
 	public void tick() {
@@ -352,21 +345,21 @@ public class SinglePlayerRoom {
 			checkCollisions();
 			sendObstacleUpdate();
 
-			player.mySnail.updateSnail();
+			owner.mySnail.updateSnail();
 			JsonObject msg = new JsonObject();
 			msg.addProperty("event", "TICK");
-			msg.addProperty("posX", player.mySnail.posX);
-			msg.addProperty("posY", player.mySnail.posY);
-			msg.addProperty("stamina", player.mySnail.stamina);
+			msg.addProperty("posX", owner.mySnail.posX);
+			msg.addProperty("posY", owner.mySnail.posY);
+			msg.addProperty("stamina", owner.mySnail.stamina);
 
 			try {
-				player.sessionLock.lock();
-				player.getSession().sendMessage(new TextMessage(msg.toString()));
+				owner.sessionLock.lock();
+				owner.getSession().sendMessage(new TextMessage(msg.toString()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				player.sessionLock.unlock();
+				owner.sessionLock.unlock();
 			}
 		};
 

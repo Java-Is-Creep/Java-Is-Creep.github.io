@@ -13,18 +13,16 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.JsonObject;
 
-public class MultiplayerRoom {
-	String nombre;
+public class MultiplayerRoom extends Room{
 	public final int MAXNUMPLAYERS = 4;
 	int numPlayers = 0;
 	boolean hasStart = false;
 	ReentrantLock lock = new ReentrantLock();
 	HashMap<WebSocketSession, PlayerConected> jugadoresEnSala = new HashMap<WebSocketSession, PlayerConected>();
 
-	ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
-	public MultiplayerRoom(String nombre) {
-		this.nombre = nombre;
+	public MultiplayerRoom(String nombre,PlayerConected owner, SnailGame game) {
+		super(nombre,owner,game);
 	}
 
 	/*
