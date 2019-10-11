@@ -27,7 +27,7 @@ Slooow.preloadState.prototype = {
 		game.load.image('button', './assets/img/button.png');
 		game.load.image('groundTile', './assets/img/suelo_C_pequenio.png')
 		game.load.image('wallTile', './assets/img/pared02.png')
-		game.load.image('slopeDown', './assets/img/tenedor horizontal.png')
+		game.load.image('slopeDown', './assets/img/tenedor_horizontal.png')
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario

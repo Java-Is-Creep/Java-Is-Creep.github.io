@@ -54,14 +54,18 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i< game.global.arraySlopes.length; i++){
-			game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x , game.world.height- game.global.arraySlopes[i].y , 'slopeDown' )
+			game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x , game.world.height - game.global.arraySlopes[i].y -25  , 'slopeDown' )
 			//game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x -20, game.world.height- game.global.arraySlopes[i].y - 30, 'slopeDown' )
-			game.global.arraySlopes[i].angle -= 30
+			game.global.arraySlopes[i].anchor.setTo (0.0,0.0)
+			if (game.global.arraySlopes[i].height < 0) {
+				game.global.arraySlopes[i].angle += 30
+			} else{
+				game.global.arraySlopes[i].angle -= 30
+			}
 			game.global.arraySlopes[i].visible = true
-			game.global.arraySlopes[i].anchor.setTo (0,0)
+			//game.global.arraySlopes[i].anchor.setTo (0.5,0.5)
 			game.global.arraySlopes[i].scale.setTo (0.5,0.5)
 		}
-
 		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaSnail')
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
 		game.global.player.sprite.scale.setTo(0.2, 0.2)
