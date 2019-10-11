@@ -16,24 +16,26 @@ public class Trampoline extends MapObstacle{
         this.forceY = forceY;
     }
 
-    public void update(){
+    public boolean update(){
         switch(trampoEstate){
             case ACTIVE:
                 restActiveTime();
-            break;
+            return false;
             case NOTACTIVE:
                 restNotActiveTime();
-            break;
+                return false;
             default:
+            return false;
         }
     }
 
-    public void restActiveTime(){
+    public boolean restActiveTime(){
         timeActive -= tickTime;
         if(timeActive < 0){
             trampoEstate = trampolineEstate.NOTACTIVE;
             timeActive = MAXTIMEACTIVE;
         }
+        return false;
     }
 
     public void restNotActiveTime(){

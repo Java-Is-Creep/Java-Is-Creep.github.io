@@ -9,25 +9,29 @@ public class TrapDoor extends DoorMap{
     }
 
     @Override
-    public void clossing(){
+    public boolean clossing(){
         timeClossing -= tickTime;
         if(timeClossing <0){
             estate = generalEstate.CLOSE;
             timeClossing = MAXTIMECLOSSING;
             myType = type.GROUND;
+            return true;
             //System.out.println("Trampilla CERRADA");
         }
+        return false;
     }
 
     @Override
-    public void openning(){
+    public boolean openning(){
         timeOpenning -= tickTime;
         if(timeOpenning <0){
             estate = generalEstate.OPEN;
             timeOpenning = MAXTIMEOPPENING;
             myType = type.TRAPDOOR;
+            return true;
             //System.out.println("Trampilla ABIERTA");
         }
+        return false;
     }
 
 

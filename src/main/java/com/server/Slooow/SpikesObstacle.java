@@ -19,13 +19,14 @@ public class SpikesObstacle extends MapObstacle {
 
     }
 
-    public void restActiveTime(){
+    public boolean restActiveTime(){
         timeActive -= tickTime;
         if(timeActive <= 0){
             estate = Estate.GOINGDOWN;
             timeActive = MAXTIMEACTIVE;
 
         }
+        return false;
     }
 
     public void goingDown(){
@@ -52,22 +53,25 @@ public class SpikesObstacle extends MapObstacle {
         }
     }
 
+    // el devolver un boolean es necesario para las animaciones d elas puerta
     @Override
-    public void update() {
+    public boolean update() {
         switch(estate){
             case ACTIVE:
                 restActiveTime();
-            break;
+                return false;
+           
             case NOTACTIVE:
                 restNotActiveTime();
-            break;
+                return false;
             case GOINGUP:
                 goingUp();
-            break;
+                return false;
             case GOINGDOWN:
                 goingDown();
-            break;
+                return false;
             default:
+            return false;
 
         }
         /*
