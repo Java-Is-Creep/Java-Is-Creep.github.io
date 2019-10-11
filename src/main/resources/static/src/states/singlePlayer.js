@@ -14,7 +14,7 @@ Slooow.singlePlayerState.prototype = {
 			console.log("[DEBUG] Entering **SINGLEPLAYER** state");
 		}
 
-		game.world.setBounds(0, 0, 1920, 1920);
+		game.world.setBounds(0, 0, 10000, 10000);
 	},
 
 	preload: function () {
@@ -28,14 +28,15 @@ Slooow.singlePlayerState.prototype = {
 		// Cargamos los objetos posibles del mapa
 		console.dir(game.global.arrayGrounds)
 		for (var i = 0; i< game.global.arrayGrounds.length; i++){
-			game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, 'groundTile')
+			game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
 			game.global.arrayGrounds[i].visible = true
 			game.global.arrayGrounds[i].anchor.setTo(0,1)
 			game.global.arrayGrounds[i].scale.setTo(0.5, 0.5)
+			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y )
 		}
 		//game.global.arrayObstacleSpikes = new Array (5)
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
-			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
+			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayObstacleSpikes[i].y, 'button')
 			game.global.arrayObstacleSpikes[i].visible = true
 			game.global.arrayObstacleSpikes[i].anchor.setTo (0,1)
 			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
@@ -167,9 +168,11 @@ Slooow.singlePlayerState.prototype = {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
 		}
-		game.camera.follow(game.global.player.sprite,Phaser.Camera.FOLLOW_PLATFORMER,0.5, 0.5, 0, 0);
+		
 		// camera.follow(target, style, lerpX, lerpY, offsetX, offsetY)
 		//game.camera.follow(game.global.player.sprite);
+		//game.camera.focusOnXY(game.global.player.sprite.x,game.global.player.sprite.x);
+		//game.camera.followOffset.set(-300, 0);
 	},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
@@ -200,6 +203,8 @@ Slooow.singlePlayerState.prototype = {
 		if (this.rKey.isDown){
 			game.state.start('gameOverState')
 		}
+
+		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100 );
 
 	}
 }
