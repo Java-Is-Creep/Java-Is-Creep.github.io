@@ -14,7 +14,7 @@ public class SnailInGame {
 	// TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;
 	final int colliderOfsetX = 50;
-	final int colliderOfsetY = 50;
+	final int colliderOfsetY = 30;
 
 	/*
 	 * VALORES INICIALES DEBERÍAN CAMBIAR SEGÚN CADA CARACOL
@@ -83,19 +83,21 @@ public class SnailInGame {
 	public boolean hasPassedDoor = false;
 	public boolean hasFallenTrap = false;
 	public boolean isJumping = false;
+	public boolean isInWind = false;
 	public double slopeRadians = 0;
 	public SpikesObstacle spikes = null;
 
 	public float speedX;
 	public float speedY;
 	public float stamina;
-	public float posX = 20;
-	public float posY = 20;
+	public float posX = 100;
+	public float posY = 460;
 	// Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
 
 	// Variables relacionadas con powerUps
 	GenericPowerUp powerUp = null;
+	Wind wind = null;
 	protected boolean usingPowerUp = false;
 	protected boolean hasShield = false;
 	protected boolean hasBoostStamina = false;
@@ -162,16 +164,16 @@ public class SnailInGame {
 	// Actualizacion del movimiento y variables del caracol
 	public void updateSnail() {
 		/*
-
-		System.out.println(" MAX NORMAL SPEEDX: " + maxNormalSpeedX);
-		System.out.println(" MAX NORMAL SPEEDY: " + maxNormalSpeedY);
-		System.out.println(" MAX ACELERATING SPEEDX: " + maxAceleratingSpeedX);
-		System.out.println(" MAX ACELERATING SPEEDY: " + maxAceleratingSpeedY);
-		System.out.println("Normal aceleration: " + normalAcelerationX);
-		System.out.println(" Acelerating aceleration: " + maxAcelerationAceleratingX);
-		System.out.println(" speedX: " + speedX);
-		System.out.println(" acelerationX: " + acelerationX);
-		*/
+		 * 
+		 * System.out.println(" MAX NORMAL SPEEDX: " + maxNormalSpeedX);
+		 * System.out.println(" MAX NORMAL SPEEDY: " + maxNormalSpeedY);
+		 * System.out.println(" MAX ACELERATING SPEEDX: " + maxAceleratingSpeedX);
+		 * System.out.println(" MAX ACELERATING SPEEDY: " + maxAceleratingSpeedY);
+		 * System.out.println("Normal aceleration: " + normalAcelerationX);
+		 * System.out.println(" Acelerating aceleration: " +
+		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
+		 * System.out.println(" acelerationX: " + acelerationX);
+		 */
 
 		lastMovementLock.lock();
 		boolean isAcelerating = lastMovement.isAcelerating;
@@ -252,6 +254,24 @@ public class SnailInGame {
 				acelerationY = maxAcelerationAceleratingY;
 			}
 
+			if (isInWind) {
+				if (wind != null) {
+					if (wind.goingRigth) {
+						maxSpeedX *= wind.windForce;
+						maxSpeedY *= wind.windForce;
+						acelerationX *= wind.windForce;
+						acelerationY *= wind.windForce;
+					} else {
+						maxSpeedX /= wind.windForce;
+						maxSpeedY /= wind.windForce;
+						acelerationX /= wind.windForce;
+						acelerationY /= wind.windForce;
+					}
+
+				}
+
+			}
+
 			// Comprobamos si esta en el suelo para que avance
 			if (isOnFloor) {
 				if (speedX < maxSpeedX) {
@@ -273,8 +293,30 @@ public class SnailInGame {
 
 			// TODO contemplar que una rampa llege a una escalera
 			if (isOnSlope) {
-				maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians));
-				maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians));
+				if (isInWind) {
+					if (wind != null) {
+						if (wind.goingRigth) {
+							maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians)) * wind.windForce;
+							maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians)) * wind.windForce;
+						} else {
+							maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians)) / wind.windForce;
+							maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians)) / wind.windForce;
+						}
+						/*
+						System.out.println("EN CUESTA");
+						System.out.println("IS IN WIND: " + isInWind);
+						System.out.println(" direccion der?: " + wind.goingRigth);
+						System.out.println(" maxSpeedX: " + maxSpeedInSlopeX);
+						System.out.println(" maxSpeedY: " + maxSpeedInSlopeY);
+						System.out.println(" acelerationX: " + acelerationX);
+						System.out.println(" acelerationY: " + acelerationY);
+						*/
+					}
+
+				} else {
+					maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians));
+					maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians));
+				}
 
 				if (speedX < maxSpeedInSlopeX) {
 					speedX += acelerationX;
@@ -352,6 +394,22 @@ public class SnailInGame {
 			posX += speedX;
 			posY += speedY;
 		}
+		/*
+		if (isInWind) {
+			System.out.println("IS IN WIND: " + isInWind);
+			System.out.println(" direccion der?: " + wind.goingRigth);
+			System.out.println(" maxSpeedX: " + maxSpeedX);
+			System.out.println(" maxSpeedY: " + maxSpeedY);
+			System.out.println(" acelerationX: " + acelerationX);
+			System.out.println(" acelerationY: " + acelerationY);
+
+		}
+		*/
+
+		// reseteamos lo del viiento
+		isInWind = false;
+		wind = null;
+
 		// Avisas al collider de que recalcule la posición
 		collider.recalculatePosition(posX, posY);
 	}

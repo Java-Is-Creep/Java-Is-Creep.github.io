@@ -18,7 +18,8 @@ public class Room {
 
     protected ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
     protected ArrayList<DoorMap> doorArray = new ArrayList<>();
-    protected ArrayList<Trampoline> trampolineArray = new ArrayList<>();
+	protected ArrayList<Trampoline> trampolineArray = new ArrayList<>();
+	protected ArrayList<Wind> windArray = new ArrayList<>();
 
     public Room(String name,PlayerConected owner, SnailGame game) {
         this.owner = owner;

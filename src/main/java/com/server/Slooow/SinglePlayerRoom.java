@@ -76,7 +76,12 @@ public class SinglePlayerRoom extends Room{
 		for (MapObject obj : map.map) {
 			posX.add(obj.posX);
 			posY.add(obj.posY);
-			height.add(obj.height);
+			if(obj.myType == type.SLOPE){
+				MapSlope aux = (MapSlope) obj;
+				height.add((int) aux.degrees);
+			}else {
+				height.add(obj.height);
+			}
 			width.add(obj.width);
 			myType.add(obj.myType);
 		}
@@ -179,7 +184,7 @@ public class SinglePlayerRoom extends Room{
 		  spikesArray.add(spike1);
 			*/
 
-		
+		/*
 		//Mapa2 
 		map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
 		map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber debajo un suelo 
@@ -193,6 +198,20 @@ public class SinglePlayerRoom extends Room{
 		   map.addMapObject(new MapPowerUp(40, 40, 550, 220, type.POWERUP)); 
 		  map.addMapObject(new MapGround(300, 20, 780, 220, type.GROUND)); // 
 		  map.addMapObject(new MapWall(20,200,900,193,type.WALL));
+		  */
+
+		  //PRUEBA VIENTO
+		  map.addMapObject(new MapGround(300, 20, 0, 400, type.GROUND));
+		  map.addMapObject(new MapSlope(300, Math.toRadians(-30), 300, 400, type.SLOPE));
+		  Wind windAux = new Wind(150,200,450,220,type.WIND,false,4,false,1000,TICKTIME);
+		  map.addMapObject(windAux);
+		  windArray.add(windAux);
+		  map.addMapObject(new MapGround(300, 20, 600, 220, type.GROUND));
+		  map.addMapObject(new MapSlope(300, Math.toRadians(30), 900, 220, type.SLOPE));
+		  windAux = new Wind(150,200,1050,260,type.WIND,true,4,true,1000,TICKTIME);
+		  map.addMapObject(windAux);
+		  windArray.add(windAux);
+		  map.addMapObject(new MapGround(300, 20, 1200, 400, type.GROUND));
 
 		 
 
@@ -291,6 +310,10 @@ public class SinglePlayerRoom extends Room{
 				case FINISH:
 						finishRace();
 					break;
+				case WIND:
+						owner.mySnail.isInWind = true;
+						owner.mySnail.wind = (Wind) object;
+					break;
 				default:
 					System.out.println("COLISION RARA");
 				}
@@ -324,6 +347,12 @@ public class SinglePlayerRoom extends Room{
 		}
 	}
 
+	public void updateWind(){
+		for (Wind wind : windArray){
+			wind.update();
+		}
+	}
+
 	public void finishRace(){
 		//acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if(acummulativeTime > TIMETOSUCESS){
@@ -342,6 +371,7 @@ public class SinglePlayerRoom extends Room{
 
 			updateDoors();
 			updateTrampoline();
+			updateWind();
 			checkCollisions();
 			sendObstacleUpdate();
 
