@@ -9,8 +9,6 @@ public class MapSlope  extends MapObject{
 		super(width, (int)((Math.tan(radians))*width), posX, posY, myTipe);
 		this.radians = radians;
 		degrees = Math.toDegrees(radians);
-		System.out.println("los radianes son: " + radians);
-		System.out.println(collider.toString());
 		// TODO Auto-generated constructor stub
 	}
 

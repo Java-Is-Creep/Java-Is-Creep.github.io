@@ -165,11 +165,9 @@ public class SinglePlayerRoom extends Room{
 		   // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
 		   */
 			/*
-		  map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
-		  map.addMapObject(new MapPowerUp(40,40,50,10,type.POWERUP));
-		  map.addMapObject(new MapGround(300, 20, 300, 0, type.GROUND));
-		  map.addMapObject(new MapWall(20,400,600,0,type.WALL));
-		  map.addMapObject(new MapGround(300, 20, 600, 400, type.GROUND));
+		  map.addMapObject(new MapGround(600, 20, 0, 400, type.GROUND));
+		  map.addMapObject(new MapWall(20,400,600,400,type.WALL));
+		  map.addMapObject(new MapGround(300, 20, 600, 810, type.GROUND));
 		  map.addMapObject(new MapGround(100, 20, 900, 400, type.GROUND));
 		  map.addMapObject(new FinishMap(50,50,950,420,type.FINISH,this));
 		  
@@ -185,7 +183,7 @@ public class SinglePlayerRoom extends Room{
 			*/
 
 		/*
-		//Mapa2 
+		/*
 		map.addMapObject(new MapGround(100, 20, 0, 0, type.GROUND));
 		map.addMapObject(new MapWall(20, 400, 100, 0, type.WALL)); // tiene que haber debajo un suelo 
 		// minimo tiene que estar mas tiempopreparandose qu elo quetarda en recargar el // caracol. 
@@ -200,20 +198,80 @@ public class SinglePlayerRoom extends Room{
 		  map.addMapObject(new MapWall(20,200,900,193,type.WALL));
 		  */
 
+		  /*
 		  //PRUEBA VIENTO
-		  map.addMapObject(new MapGround(300, 20, 0, 400, type.GROUND));
+		  map.addMapObject(new MapGround(300, 10, 0, 400, type.GROUND));
 		  map.addMapObject(new MapSlope(300, Math.toRadians(-30), 300, 400, type.SLOPE));
 		  Wind windAux = new Wind(150,200,450,220,type.WIND,false,4,false,1000,TICKTIME);
 		  map.addMapObject(windAux);
 		  windArray.add(windAux);
-		  map.addMapObject(new MapGround(300, 20, 600, 220, type.GROUND));
-		  map.addMapObject(new MapSlope(300, Math.toRadians(30), 900, 220, type.SLOPE));
+		  map.addMapObject(new MapGround(360, 10, 540, 240, type.GROUND));
+		  map.addMapObject(new MapSlope(300, Math.toRadians(30), 900, 240, type.SLOPE));
 		  windAux = new Wind(150,200,1050,260,type.WIND,true,4,true,1000,TICKTIME);
 		  map.addMapObject(windAux);
 		  windArray.add(windAux);
-		  map.addMapObject(new MapGround(300, 20, 1200, 400, type.GROUND));
+		  map.addMapObject(new MapGround(300, 10, 1140, 400, type.GROUND));
+		*/
+		 createLevel1();
 
-		 
+	}
+
+	public void createLevel1(){
+		int unit = owner.mySnail.colliderOfsetX;
+		int acumulativePosX = 100;
+		int acumulativePosY = 400;
+		map.addMapObject(new MapGround(140*unit, 10, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX+= 4*unit;
+		map.addMapObject(new MapWall(20,5*unit -10,acumulativePosX,acumulativePosY,type.WALL));
+		acumulativePosY+= 5*unit;
+		map.addMapObject(new MapGround(4*unit, 10, acumulativePosX,acumulativePosY, type.GROUND));
+		acumulativePosX+= 4*unit;
+		map.addMapObject(new MapWall(20,5*unit -10,acumulativePosX,acumulativePosY,type.WALL));
+		acumulativePosY+= 5*unit;
+
+		// el power up no cuenta para el aumento d elo sacumulatives
+		map.addMapObject(new MapPowerUp(unit, unit, acumulativePosX+3*unit, acumulativePosY + unit/2, type.POWERUP));
+		
+		map.addMapObject(new MapGround(6*unit, 10, acumulativePosX,acumulativePosY, type.GROUND));
+		acumulativePosX+=6*unit;
+		TrapDoor trap = new TrapDoor(2*unit, 10, acumulativePosX, acumulativePosY, type.TRAPDOOR, 300000, 3000, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		doorArray.add(trap);
+		acumulativePosX+=2*unit;
+		//DESVIO PRIMER CAMINO
+		int acumulativePosXRedPath = acumulativePosX + 2*unit;
+		int acumulativePosYRedPath = 400;
+		map.addMapObject(new MapWall(20,4*unit -10,acumulativePosXRedPath,acumulativePosYRedPath,type.WALL));
+		acumulativePosYRedPath += 4*unit;
+		map.addMapObject(new MapGround(4*unit, 10, acumulativePosXRedPath,acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath+= 4*unit;
+		// son 5 hacia abajo pero el tamaño real que queremos conseguir es 4, el extra es para que el 
+		//tenedor quede bien
+		map.addMapObject(new MapSlope(5*unit, Math.toRadians(-45), acumulativePosXRedPath, acumulativePosYRedPath, type.SLOPE));
+		//FIN DESVIO1
+		map.addMapObject(new MapGround(4*unit, 10, acumulativePosX,acumulativePosY, type.GROUND));
+		acumulativePosX+=4*unit;
+		map.addMapObject(new MapSlope(4*unit, Math.toRadians(30), acumulativePosX, acumulativePosY, type.SLOPE));
+		acumulativePosX+= 4*unit;
+		//el alto de la cuesta; 91
+		acumulativePosY+= 3*unit; 
+		/*
+		Trampoline trampoline = new Trampoline(4*unit, 20, acumulativePosX, acumulativePosY, type.TRAMPOLINE, 40000, 99, TICKTIME, 6, 20);
+
+		map.addMapObject(trampoline);
+		trampolineArray.add(trampoline);
+		*/
+		map.addMapObject(new MapGround(4*unit, 20, acumulativePosX,acumulativePosY, type.GROUND));
+		
+		acumulativePosX += 4*unit;
+
+		map.addMapObject(new MapGround(4*unit, 10, acumulativePosX,acumulativePosY - 2*unit, type.GROUND));
+		acumulativePosX += 4*unit;
+		acumulativePosY -= 2*unit;
+
+		
+		
+
 
 	}
 
