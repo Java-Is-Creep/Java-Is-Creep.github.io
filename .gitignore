@@ -2,7 +2,5 @@
 /.metadata/
 .vscode/
 .project
-.classpath
-target/
 .settings/
 
