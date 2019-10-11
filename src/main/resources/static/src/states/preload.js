@@ -30,6 +30,8 @@ Slooow.preloadState.prototype = {
 		game.load.image('slopeDown', './assets/img/tenedor_horizontal.png')
 		game.load.spritesheet('trapdoor', './assets/img/trampilla_sheet.png', 600, 300, 2)
 		
+		// game.load.spritesheet ('player', 'catSnail_Sheet.png', 500, 300, 8)
+
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario
