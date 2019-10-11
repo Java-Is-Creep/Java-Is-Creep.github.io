@@ -234,7 +234,7 @@ public class SinglePlayerRoom extends Room{
 		
 		map.addMapObject(new MapGround(6*unit, 10, acumulativePosX,acumulativePosY, type.GROUND));
 		acumulativePosX+=6*unit;
-		TrapDoor trap = new TrapDoor(2*unit, 10, acumulativePosX, acumulativePosY, type.TRAPDOOR, 300000, 3000, TICKTIME, 500, 500);
+		TrapDoor trap = new TrapDoor(2*unit, 10, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000000, 300, TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		doorArray.add(trap);
 		acumulativePosX+=2*unit;
@@ -251,10 +251,10 @@ public class SinglePlayerRoom extends Room{
 		//FIN DESVIO1
 		map.addMapObject(new MapGround(4*unit, 10, acumulativePosX,acumulativePosY, type.GROUND));
 		acumulativePosX+=4*unit;
-		map.addMapObject(new MapSlope(4*unit, Math.toRadians(30), acumulativePosX, acumulativePosY, type.SLOPE));
-		acumulativePosX+= 4*unit;
+		map.addMapObject(new MapSlope(6*unit, Math.toRadians(45), acumulativePosX, acumulativePosY, type.SLOPE));
+		acumulativePosX+= 6*unit+2*unit;
 		//el alto de la cuesta; 91
-		acumulativePosY+= 3*unit; 
+		acumulativePosY+= 6*unit; 
 		/*
 		Trampoline trampoline = new Trampoline(4*unit, 20, acumulativePosX, acumulativePosY, type.TRAMPOLINE, 40000, 99, TICKTIME, 6, 20);
 
