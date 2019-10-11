@@ -1,19 +1,16 @@
 var game;
 
-
-
-function fullscreen(){
+function fullscreen() {
     console.log(game);
-        document.body.requestFullscreen();
-        
-        screen.orientation.lock('landscape');
-    }
+    document.body.requestFullscreen();
+    screen.orientation.lock('landscape');
+}
 
 window.onload = function () {
-    game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
+    game = new Phaser.Game(1280, 720, Phaser.AUTO);
     //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'gameDiv');
     //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
-    
+
     // Con esto conseguimos a que la imagen renderizada a 1280x720
     // Falta hacerlo responsive
     /*var config = {
@@ -29,17 +26,47 @@ window.onload = function () {
     }
     
     game = new Phaser.Game (config)*/
-    
-   
-        
-    
+
+    /*var offFullScreen = false;
+
+    addEventListener("click", function () {
+        if (offFullScreen === false) {
+            var
+                el = document.documentElement
+                , rfs =
+                    el.requestFullScreen
+                    || el.webkitRequestFullScreen
+                    || el.mozRequestFullScreen
+                ;
+            rfs.call(el);
+            offFullScreen = true;
+        }
+    });*/
+
+    // Find the right method, call on correct element
+    /*function launchFullScreen(element) {
+        if(element.requestFullScreen) {
+            element.requestFullScreen();
+        } else if(element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if(element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+        }
+    }*/
+    // Launch fullscreen for browsers that support it!
+    //launchFullScreen(document.documentElement); // the whole page
+
+
+
+
+
     //Variables globales compartidas entre escenas
     game.global = {
         //Socket
         socket: null,
         FPS: 60,
         DEBUG_MODE: false,
-        player : null,
+        player: null,
         mapObjects: [],
         mapDrawn: false,
         username: '',
@@ -49,11 +76,12 @@ window.onload = function () {
         //Array de paredes. Tiene: x, y, width, height
         arrayWalls: [],
         //Array de rampas. Tiene: x, y, width, height
-        arraySlopes : [],
+        arraySlopes: [],
         //Array de obstaculos tipo pincho. Tiene: posX, posY
         arrayObstacleSpikes: [],
         //Array de power ups
         arrayPowerUps: [],
+        arrayTrapdoors: [],
         player: new this.Object()
     }
 
@@ -74,34 +102,35 @@ window.onload = function () {
         //console.log(msg);
 
         switch (msg.event) {
-            
+
             case 'TICK':
                 if (game.global.DEBUG_MODE) {
                     console.log('[DEBUG] TICK message recieved')
                     console.dir(msg)
                 }
                 game.global.player.sprite.x = Math.floor(msg.posX)
-                game.global.player.sprite.y = game.world.height  - (Math.floor(msg.posY))
+                game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY))
                 game.global.player.stamina.setText(msg.stamina)
                 break
 
             case 'DRAWMAP':
                 //Arrays con los parametros de todos los objetos del mapa. Dependiendo del tipo se guardaran
                 //En un array u otro
-                var arrayPosX =  JSON.parse(msg.posX)
+                var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 var arrayHeight = JSON.parse(msg.height)
                 var arrayWidth = JSON.parse(msg.width)
-                var type = JSON.parse(msg.myType) 
+                var type = JSON.parse(msg.myType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
                 var numOfSlopes = 0;
                 var numOfObstacleSpikes = 0;
                 var numOfPowerUps = 0;
+                var numOfTrapdoors = 0;
 
-                for (var i = 0; i<type.length; i++){
-                    switch (type[i]){
+                for (var i = 0; i < type.length; i++) {
+                    switch (type[i]) {
                         case 'GROUND':
                             this.game.global.arrayGrounds[numOfGrounds] = new Object()
                             this.game.global.arrayGrounds[numOfGrounds].x = arrayPosX[i]
@@ -117,12 +146,13 @@ window.onload = function () {
                             this.game.global.arrayWalls[numOfWalls].height = arrayHeight[i]
                             this.game.global.arrayWalls[numOfWalls].width = arrayWidth[i]
                             numOfWalls++
-                            break 
+                            break
                         case 'SLOPE':
                             this.game.global.arraySlopes[numOfSlopes] = new Object()
                             this.game.global.arraySlopes[numOfSlopes].x = arrayPosX[i]
                             this.game.global.arraySlopes[numOfSlopes].y = arrayPosY[i]
                             this.game.global.arraySlopes[numOfSlopes].height = arrayHeight[i]
+                            console.log("Angulo en indexjs" + this.game.global.arraySlopes[numOfSlopes].height)
                             this.game.global.arraySlopes[numOfSlopes].width = arrayWidth[i]
                             numOfSlopes++
                             break
@@ -131,7 +161,7 @@ window.onload = function () {
                             break;
                         case 'OBSTACLE':
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
-                            
+
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = {image:game.add.image(arrayPosX[i], game.world.height - arrayPosY[i], 'button')}
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = this.game.add.image(arrayPosX[i], game.world.height - arrayPosY[i], 'button')
                             /*console.log ("Primero")
@@ -141,23 +171,23 @@ window.onload = function () {
                             console.log (game.global.arrayObstacleSpikes)*/
 
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
-                           // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
-                           // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
+                            // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
+                            // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
 
-                           // this.console.log(game.global.arrayObstacleSpikes[numOfObstacleSpikes].image)
-                           // this.console.log('Posicion imagen: ' + 'x ' +  this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.x +  'y: '+this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.y)
-                           // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
+                            // this.console.log(game.global.arrayObstacleSpikes[numOfObstacleSpikes].image)
+                            // this.console.log('Posicion imagen: ' + 'x ' +  this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.x +  'y: '+this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.y)
+                            // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
-                            console.log ("Patata")
-                            console.dir (this.game.global.arrayObstacleSpikes[numOfObstacleSpikes])
+                            console.log("Patata")
+                            console.dir(this.game.global.arrayObstacleSpikes[numOfObstacleSpikes])
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = game.add.image(arrayPosX[i],game.world.height - arrayPosY[i], 'button')
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
                             this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
-                            console.log ("Patata777")
-                            console.dir (this.game.global.arrayObstacleSpikes)
+                            console.log("Patata777")
+                            console.dir(this.game.global.arrayObstacleSpikes)
                             numOfObstacleSpikes++
-                            break  
+                            break
                         case 'GENERICPOWERUP':
                             this.game.global.arrayPowerUps[numOfPowerUps] = new Object()
                             this.game.global.arrayPowerUps[numOfPowerUps].x = arrayPosX[i]
@@ -165,7 +195,15 @@ window.onload = function () {
                             this.game.global.arrayPowerUps[numOfPowerUps].height = arrayHeight[i]
                             this.game.global.arrayPowerUps[numOfPowerUps].width = arrayWidth[i]
                             numOfPowerUps++
-                            break                  
+                            break
+                        case 'TRAPDOOR':
+                            this.game.global.arrayTrapdoors[numOfTrapdoors] = new this.Object()
+                            this.game.global.arrayTrapdoors[numOfTrapdoors].x = arrayPosX[i]
+                            this.game.global.arrayTrapdoors[numOfTrapdoors].y = arrayPosY[i]  
+                            this.game.global.arrayTrapdoors[numOfTrapdoors].height = arrayHeight[i]
+                            this.game.global.arrayTrapdoors[numOfTrapdoors].width = arrayWidth[i]
+                            numOfTrapdoors++
+                            break  
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break
@@ -183,16 +221,16 @@ window.onload = function () {
                     this.console.log('Objeto ' + i + ': ' + game.global.mapObjects[i].x + ' ' + game.global.mapObjects[i].y +' ' +game.global.mapObjects[i].height + ' ' + game.global.mapObjects[i].width )
                 }*/
                 game.state.start('singlePlayerState')
-                break;  
+                break;
 
-            case 'SPIKEOBSTACLEUPDATE': 
+            case 'SPIKEOBSTACLEUPDATE':
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
-                for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++){
-                   // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)
+                for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++) {
+                    // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)
                     this.game.global.arrayObstacleSpikes[i].x = arrayPosX[i]
-                    this.game.global.arrayObstacleSpikes[i].y = game.world.height - arrayPosY[i]       
-                   // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)             
+                    this.game.global.arrayObstacleSpikes[i].y = game.world.height - arrayPosY[i]
+                    // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)             
                 }
         }
     }

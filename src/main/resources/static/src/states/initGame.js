@@ -48,12 +48,6 @@ Slooow.initGameState.prototype = {
         function itemTouched (){
 			game.state.start('initSesionState')
 		}
-		
-		this.game.input.onDown.add(itemTouched, this);
-
-        function itemTouched (){
-			game.state.start('initSesionState')
-		}
 
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]); 
@@ -100,13 +94,5 @@ Slooow.initGameState.prototype = {
 
 	update : function() {
 
-	},
-
-	
-	resize: function(width, height) {
-		this.background.x = game.world.centerX;
-		this.background.y = game.world.centerY;
-		this.textButtonBack.x = game.world.centerX;
-		this.textButtonBack.y = game.world.centerY;
-		}
+	}
 }

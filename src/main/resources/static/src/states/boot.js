@@ -19,8 +19,11 @@ Slooow.bootState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **BOOT** state");
 		}
-		//this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		this.scale.pageAlignVertically = true;
+		this.scale.pageAlignHorizontally = true;
+
+		//this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 	},
 
 	preload: function () {

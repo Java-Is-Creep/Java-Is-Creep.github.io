@@ -30,7 +30,7 @@ Slooow.singlePlayerState.prototype = {
 		console.dir(game.global.arrayGrounds)
 		for (var i = 0; i< game.global.arrayGrounds.length; i++){
 			//game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
-			game.global.arrayGrounds[i] = game.add.tileSprite(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, game.global.arrayGrounds[i].height, 'groundTile')
+			game.global.arrayGrounds[i] = game.add.tileSprite(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y+25, game.global.arrayGrounds[i].width, 25, 'groundTile')
 			game.global.arrayGrounds[i].visible = true
 			game.global.arrayGrounds[i].anchor.setTo(0,1)
 			game.global.arrayGrounds[i].tileScale.setTo(0.5, 0.5)
@@ -54,13 +54,18 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i< game.global.arraySlopes.length; i++){
+			console.log('angulo en singleplayer 1: '+ game.global.arraySlopes[i].height)
+			var angulo = game.global.arraySlopes[i].height
 			game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x , game.world.height - game.global.arraySlopes[i].y -25  , 'slopeDown' )
 			//game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x -20, game.world.height- game.global.arraySlopes[i].y - 30, 'slopeDown' )
+			console.log('angulo en singleplayer 2: '+ game.global.arraySlopes[i].height)
 			game.global.arraySlopes[i].anchor.setTo (0.0,0.0)
-			if (game.global.arraySlopes[i].height < 0) {
-				game.global.arraySlopes[i].angle += 30
+			
+			console.log("Angulo en singleplayer 3"+ this.game.global.arraySlopes[i].height)
+			if (angulo < 0) {
+				game.global.arraySlopes[i].angle += - angulo
 			} else{
-				game.global.arraySlopes[i].angle -= 30
+				game.global.arraySlopes[i].angle -= angulo
 			}
 			game.global.arraySlopes[i].visible = true
 			//game.global.arraySlopes[i].anchor.setTo (0.5,0.5)
