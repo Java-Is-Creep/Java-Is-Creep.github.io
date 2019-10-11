@@ -22,17 +22,20 @@ Slooow.singlePlayerState.prototype = {
 		var b = game.add.image (0, game.world.height, 'cocina_back')
 		b.anchor.set (0, 1)
 		b.scale.set (0.35, 0.35)
-
+		this.graphics = game.add.graphics(0, 0);
+		this.graphics.lineStyle(2, 0x0000FF, 1);
 		
 
 		// Cargamos los objetos posibles del mapa
 		console.dir(game.global.arrayGrounds)
 		for (var i = 0; i< game.global.arrayGrounds.length; i++){
-			game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
+			//game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
+			game.global.arrayGrounds[i] = game.add.tileSprite(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, game.global.arrayGrounds[i].height, 'groundTile')
 			game.global.arrayGrounds[i].visible = true
 			game.global.arrayGrounds[i].anchor.setTo(0,1)
-			game.global.arrayGrounds[i].scale.setTo(0.5, 0.5)
-			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y )
+			game.global.arrayGrounds[i].tileScale.setTo(0.5, 0.5)
+			//this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, 1400, 25)
+			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y)
 		}
 		//game.global.arrayObstacleSpikes = new Array (5)
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
@@ -102,8 +105,7 @@ Slooow.singlePlayerState.prototype = {
 		textButtonBack.scale.setTo(0.5, 0.5)
 
 
-		this.graphics = game.add.graphics(0, 0);
-		this.graphics.lineStyle(2, 0x0000FF, 1);
+		
 		//this.graphics.drawRect(50, 250, 500, 100);
 		/*
 		var i = 0;
@@ -169,6 +171,8 @@ Slooow.singlePlayerState.prototype = {
 			game.state.start('mainMenuState')
 		}
 		
+		game.camera.scale.x += 0.1;
+		game.camera.scale.y += 0.1;
 		// camera.follow(target, style, lerpX, lerpY, offsetX, offsetY)
 		//game.camera.follow(game.global.player.sprite);
 		//game.camera.focusOnXY(game.global.player.sprite.x,game.global.player.sprite.x);
@@ -204,7 +208,7 @@ Slooow.singlePlayerState.prototype = {
 			game.state.start('gameOverState')
 		}
 
-		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100 );
+		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100);
 
 	}
 }
