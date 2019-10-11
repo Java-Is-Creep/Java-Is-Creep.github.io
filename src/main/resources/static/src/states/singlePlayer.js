@@ -87,13 +87,13 @@ Slooow.singlePlayerState.prototype = {
 
 	create: function () {
 		
-
+		console.log("entro en create");
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
-
+		console.log("entro en create");
 		this.eKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.E]);
-
+		console.log("entro en create");
 		this.rKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.R]);
 
@@ -118,12 +118,13 @@ Slooow.singlePlayerState.prototype = {
 				b.scale.setTo (1.2,1.2)
 		*/
 		//Boton back
+		console.log("entro en create");
 		buttonBack = game.add.button(50,
 			40, 'button', actionOnClickBack, this,
 			0, 0, 0)
 		buttonBack.anchor.set(0.5)
 		buttonBack.scale.setTo(0.2, 0.3)
-
+		console.log("entro en create");
 		//Texto back
 		textButtonBack = game.add.text(50,
 			40, 'Back', style)
@@ -145,7 +146,7 @@ Slooow.singlePlayerState.prototype = {
 			this.graphics.drawRect(game.global.mapObjects[i].x, game.world.height -  game.global.mapObjects[i].y, game.global.mapObjects[i].width, -game.global.mapObjects[i].height)
 			i++;
 		}
-*/
+*/console.log("entro en create");
 		//Pintamos los suelos
 		for (var i = 0; i < game.global.arrayGrounds.length; i++) {
 			//console.log(game.global.arrayGrounds[i].x)
@@ -155,7 +156,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log('screen height' + game.world.height)
 			//this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, -game.global.arrayGrounds[i].height)
 		}
-
+		console.log("entro en create");
 		for (var i = 0; i < game.global.arrayWalls.length; i++) {
 			//console.log(game.global.arrayWalls[i].x)
 			//console.log(game.global.arrayWalls[i].y)
@@ -164,7 +165,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log('screen height' + game.world.height)
 			this.graphics.drawRect(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, -game.global.arrayWalls[i].height)
 		}
-
+		console.log("entro en create");
 		for (var i = 0; i < game.global.arraySlopes.length; i++) {
 			//console.log(game.global.arraySlopes[i].x)
 			//console.log(game.global.arraySlopes[i].y)
@@ -173,7 +174,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log('screen height' + game.world.height)
 			this.graphics.drawRect(game.global.arraySlopes[i].x, game.world.height - game.global.arraySlopes[i].y, game.global.arraySlopes[i].width, -game.global.arraySlopes[i].height)
 		}
-
+		console.log("entro en create");
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
 			//console.log(game.global.arrayObstacleSpikes[i].image.x)
 			//console.log(game.global.arrayObstacleSpikes[i].image.y)
@@ -182,7 +183,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log('screen height' + game.world.height)
 			//this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
 		}
-
+		console.log("entro en create");
 		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
 			console.log(game.global.arrayPowerUps[i].x)
 			console.log(game.global.arrayPowerUps[i].y)
@@ -191,7 +192,7 @@ Slooow.singlePlayerState.prototype = {
 			console.log('screen height' + game.world.height)
 			this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
 		}
-
+		console.log("entro en create");
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
