@@ -28,6 +28,7 @@ Slooow.preloadState.prototype = {
 		game.load.image('groundTile', './assets/img/suelo_C_pequenio.png')
 		game.load.image('wallTile', './assets/img/pared02.png')
 		game.load.image('slopeDown', './assets/img/tenedor_horizontal.png')
+		game.load.spritesheet('trapdoor', './assets/img/trampilla_sheet.png', 600, 300, 2)
 		
 	},
 
