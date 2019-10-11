@@ -175,10 +175,12 @@ public class SnailInGame {
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
 		System.out.println("empezando  updat esnail");
+		boolean isAcelerating = false;
+		boolean useObject = false;
 		if(lastMovement != null){
 			lastMovementLock.lock();
-			boolean isAcelerating = lastMovement.isAcelerating;
-			boolean useObject = lastMovement.useObject;
+			isAcelerating = lastMovement.isAcelerating;
+			useObject = lastMovement.useObject;
 			lastMovementLock.unlock();
 		} else {
 			System.out.println("no habia last movement");
@@ -376,7 +378,7 @@ public class SnailInGame {
 			}
 		}
 		// Ajustamos las velocidades
-		System.out.println("antes actualizar posiciciones");
+		System.out.println("antes actualizar posicicione");
 		// actualizamos posiciones
 		if (isOnFloor || isOnWall) {
 			adjustSpeed(maxSpeedX, maxSpeedY);

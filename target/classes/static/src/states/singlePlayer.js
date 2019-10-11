@@ -192,7 +192,7 @@ Slooow.singlePlayerState.prototype = {
 			console.log('screen height' + game.world.height)
 			this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
 		}
-
+		console.log("entro en create");
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
