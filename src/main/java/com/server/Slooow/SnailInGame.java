@@ -13,8 +13,8 @@ public class SnailInGame {
 
 	// TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;
-	final int colliderOfsetX = 50;
-	final int colliderOfsetY = 30;
+	final int colliderOfsetX = 40;
+	final int colliderOfsetY = 20;
 
 	/*
 	 * VALORES INICIALES DEBERÍAN CAMBIAR SEGÚN CADA CARACOL
@@ -47,7 +47,7 @@ public class SnailInGame {
 	public final float STAMINANORMALRECOVER = 1.5f;
 	// Tarda 3.33 segundos en recargar la stamina
 	public final float STAMINARUNOUTRECOVER = 2.5f;
-	public final float MAXGRAVITYSPEED = -20;
+	public final float MAXGRAVITYSPEED = -10;
 	public final float MASS = 1;
 	public final float SPEEDXLOSE = 1.02f;
 
@@ -91,7 +91,7 @@ public class SnailInGame {
 	public float speedY;
 	public float stamina;
 	public float posX = 100;
-	public float posY = 460;
+	public float posY = 500;
 	// Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
 

@@ -50,9 +50,10 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 */
 		case "SINGLEPLAYER":
 			jug = new PlayerConected(newSession, post.playerName,lockSession);
-			System.out.println("Cosas locas");
+			System.out.println("Jugador Conectado");
 			game.jugadoresConectados.putIfAbsent(jug.getSession(), jug); 
 			if(jug.getLifes()!=0){
+				System.out.println("Creando sala");
 				game.createSingleRoom(post.roomName, jug);
 			} 
 

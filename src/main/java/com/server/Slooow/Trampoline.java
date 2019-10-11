@@ -33,7 +33,6 @@ public class Trampoline extends MapObstacle{
         if(timeActive < 0){
             trampoEstate = trampolineEstate.NOTACTIVE;
             timeActive = MAXTIMEACTIVE;
-            System.out.println("trampolin inactivo");
         }
     }
 
@@ -42,7 +41,6 @@ public class Trampoline extends MapObstacle{
         if(timeToActive < 0){
             trampoEstate = trampolineEstate.ACTIVE;
             timeToActive = MAXTIMETOACTIVE;
-            System.out.println("trampolin activo");
         }
     }
 
