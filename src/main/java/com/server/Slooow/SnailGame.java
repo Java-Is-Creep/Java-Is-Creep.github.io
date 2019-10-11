@@ -60,6 +60,8 @@ public class SnailGame {
 	public void createSingleRoom(String roomName, PlayerConected jug){
 		
 		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug,this);
+
+
 		
 		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
 	}

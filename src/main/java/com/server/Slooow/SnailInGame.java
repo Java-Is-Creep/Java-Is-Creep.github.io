@@ -174,11 +174,15 @@ public class SnailInGame {
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
+		boolean isAcelerating = false;
+		boolean useObject = false;
+		if(lastMovement != null){
+			lastMovementLock.lock();
+			isAcelerating = lastMovement.isAcelerating;
+			useObject = lastMovement.useObject;
+			lastMovementLock.unlock();
+		}
 
-		lastMovementLock.lock();
-		boolean isAcelerating = lastMovement.isAcelerating;
-		boolean useObject = lastMovement.useObject;
-		lastMovementLock.unlock();
 
 		if (useObject) {
 			if (!usingPowerUp) {

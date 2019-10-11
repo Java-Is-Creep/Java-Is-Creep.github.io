@@ -34,11 +34,12 @@ public class Room {
 
     }
 
-	public void tick(){};
+	public void tick(){
+	};
 	
 	public void destroyRoom(){
 		game.deleteRoom(this);
-		System.out.println("dani");
+		System.out.println("Sala Destruida");
 	}
     
     public void createMap() {
@@ -88,7 +89,7 @@ public class Room {
 		   //map.addMapObject(new MapGround(300, 20, 780, 400,type.GROUND)); 
 		   // map.addMapObject(new MapWall(20,200,900,193,type.WALL));
 		   */
-
+			/*
 		  map.addMapObject(new MapGround(300, 20, 0, 0, type.GROUND));
 		  map.addMapObject(new MapPowerUp(40,40,50,10,type.POWERUP));
 		  map.addMapObject(new MapGround(300, 20, 300, 0, type.GROUND));
@@ -106,6 +107,7 @@ public class Room {
 		  spike1 = new SpikesObstacle(100,100, 900, 0, type.OBSTACLE, 3000, 3000, TICKTIME);
 		  map.addMapObject(spike1); 
 		  spikesArray.add(spike1);
+		  */
 
 		 
 
