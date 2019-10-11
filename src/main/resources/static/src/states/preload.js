@@ -17,7 +17,15 @@ Slooow.preloadState.prototype = {
 		game.load.image('background', './assets/img/background.jpg');
 		game.load.image('cocina_back', './assets/img/fondo cocina.png');
 		game.load.image('seaSnail', './assets/img/seaSnail.png');
+		game.load.image('thiefSnail', './assets/img/thiefSnail.png');
+		game.load.image('rainbowSnail', './assets/img/cararcoiris.png');
+		game.load.image('catSnail', './assets/img/catsnail.png');
+		game.load.image('frenchSnail', './assets/img/frenchSnail.png');
+		game.load.image('normalSnail', './assets/img/normalSnail.png');
+		game.load.image('slugSnail', './assets/img/slug.png');
+		game.load.image('tankSnail', './assets/img/tanquecol.png');
 		game.load.image('button', './assets/img/button.png');
+		game.load.image('groundTile', './assets/img/suelo_C_pequenio.png')
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario

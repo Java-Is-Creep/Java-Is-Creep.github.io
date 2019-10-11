@@ -1,9 +1,36 @@
 var game;
 
-window.onload = function () {
-    game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv');
-    //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
+ function fullscreen(){
+     console.log(game);
+        document.body.requestFullscreen();
+        
+        screen.orientation.lock('landscape');
+    }
 
+window.onload = function () {
+    //game = new Phaser.Game("100%","100%", Phaser.AUTO, 'gameDiv');
+    //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'gameDiv');
+    //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
+    
+    // Con esto conseguimos a que la imagen renderizada a 1280x720
+    // Falta hacerlo responsive
+    var config = {
+        width: "100%",
+        height: "100%",
+        renderer: Phaser.AUTO
+    }
+
+    /*var config = {
+        width: 1920,
+        height: 1080,
+        renderer: Phaser.AUTO
+    }
+    */
+    game = new Phaser.Game (config)
+    
+   
+        
+    
     //Variables globales compartidas entre escenas
     game.global = {
         //Socket
@@ -24,7 +51,8 @@ window.onload = function () {
         //Array de obstaculos tipo pincho. Tiene: posX, posY
         arrayObstacleSpikes: [],
         //Array de power ups
-        arrayPowerUps: []
+        arrayPowerUps: [],
+        player: new this.Object()
     }
 
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
@@ -41,7 +69,7 @@ window.onload = function () {
 
     game.global.socket.onmessage = (message) => {
         var msg = JSON.parse(message.data)
-        console.log(msg);
+        //console.log(msg);
 
         switch (msg.event) {
             
@@ -50,8 +78,8 @@ window.onload = function () {
                     console.log('[DEBUG] TICK message recieved')
                     console.dir(msg)
                 }
-                game.global.player.x = Math.floor(msg.posX)
-                game.global.player.y = game.world.height  - (Math.floor(msg.posY))
+                game.global.player.sprite.x = Math.floor(msg.posX)
+                game.global.player.sprite.y = game.world.height  - (Math.floor(msg.posY))
                 game.global.player.stamina.setText(msg.stamina)
                 break
 
@@ -159,10 +187,10 @@ window.onload = function () {
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++){
-                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)
+                   // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)
                     this.game.global.arrayObstacleSpikes[i].x = arrayPosX[i]
                     this.game.global.arrayObstacleSpikes[i].y = game.world.height - arrayPosY[i]       
-                    this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)             
+                   // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)             
                 }
         }
     }
@@ -175,6 +203,11 @@ window.onload = function () {
     this.game.state.add('mainMenuState', Slooow.mainMenuState);
     this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
     this.game.state.add('marathonState', Slooow.marathonState);
+    this.game.state.add('lobbyState', Slooow.lobbyState);
+    this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
+    this.game.state.add('gameOverState', Slooow.gameOverState);
+    this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
+    this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
     this.game.state.add('shopState', Slooow.shopState);
 
     this.game.state.start('bootState');

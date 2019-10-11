@@ -1,6 +1,7 @@
 Slooow.singlePlayerState = function (game) {
 	var graphics
 	var stamina
+	var camerados
 }
 
 Slooow.singlePlayerState.prototype = {
@@ -12,6 +13,8 @@ Slooow.singlePlayerState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **SINGLEPLAYER** state");
 		}
+
+		game.world.setBounds(0, 0, 10000, 10000);
 	},
 
 	preload: function () {
@@ -20,18 +23,29 @@ Slooow.singlePlayerState.prototype = {
 		b.anchor.set (0, 1)
 		b.scale.set (0.35, 0.35)
 
-		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
-		game.global.player.anchor.setTo(0.5, 0.5);
-		game.global.player.scale.setTo(0.2, 0.2)
+		
 
 		// Cargamos los objetos posibles del mapa
+		console.dir(game.global.arrayGrounds)
+		for (var i = 0; i< game.global.arrayGrounds.length; i++){
+			game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
+			game.global.arrayGrounds[i].visible = true
+			game.global.arrayGrounds[i].anchor.setTo(0,1)
+			game.global.arrayGrounds[i].scale.setTo(0.5, 0.5)
+			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y )
+		}
 		//game.global.arrayObstacleSpikes = new Array (5)
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
-			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
+			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayObstacleSpikes[i].y, 'button')
 			game.global.arrayObstacleSpikes[i].visible = true
 			game.global.arrayObstacleSpikes[i].anchor.setTo (0,1)
 			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
 		}
+
+		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaSnail')
+		game.global.player.sprite.anchor.setTo(0.5, 0.5);
+		game.global.player.sprite.scale.setTo(0.2, 0.2)
+
 		console.log ("Array Cargado")
 		console.dir (game.global.arrayObstacleSpikes)
 		
@@ -43,11 +57,16 @@ Slooow.singlePlayerState.prototype = {
 	},
 
 	create: function () {
+		
+
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
 		this.eKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.E]);
+
+		this.rKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
+		game.input.keyboard.addKeyCapture([Phaser.Keyboard.R]);
 
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
 		var style = {
@@ -58,10 +77,11 @@ Slooow.singlePlayerState.prototype = {
 
 		var style2 = {
 			font: "40px Arial",
-			fill: "#ffffff",
+			fill: "#CB0017",
 			align: "center"
 		}
-		game.global.player.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style2);
+		game.global.player.stamina = game.add.text(0, 0, "0", style2);
+		game.global.player.stamina.fixedToCamera = true;
 		/*
 				//Background
 				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
@@ -148,6 +168,11 @@ Slooow.singlePlayerState.prototype = {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
 		}
+		
+		// camera.follow(target, style, lerpX, lerpY, offsetX, offsetY)
+		//game.camera.follow(game.global.player.sprite);
+		//game.camera.focusOnXY(game.global.player.sprite.x,game.global.player.sprite.x);
+		//game.camera.followOffset.set(-300, 0);
 	},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
@@ -174,6 +199,12 @@ Slooow.singlePlayerState.prototype = {
 			msg.useObject = true
 		}
 		game.global.socket.send(JSON.stringify(msg))
+
+		if (this.rKey.isDown){
+			game.state.start('gameOverState')
+		}
+
+		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100 );
 
 	}
 }

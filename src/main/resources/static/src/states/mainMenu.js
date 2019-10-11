@@ -28,19 +28,27 @@ Slooow.mainMenuState.prototype = {
             align: "center"
         };
 
-        var styleTitle = {
+        var style2 = {
             font: "bold 200px Impact",
             fill: "#ffffff",
             align: "center"
         };
+
+        var style3 = {
+            font: "40px Arial",
+            fill: "#ffffff",
+            boundsAlignH: "left"
+        };
         //Background
-        b = game.add.image(game.world.centerX, game.world.centerY, 'background')
-        b.anchor.set(0.5, 0.5)
-        b.scale.setTo(1.2, 1.2)
+        this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
+        this.background.height = this.game.height;
+	    this.background.width = this.game.width;
+        this.background.anchor.set(0.5, 0.5)
+        
 
         //Texto titulo
         textTitle = game.add.text(game.world.centerX,
-            50, 'SLOOOW', styleTitle)
+            50, 'SLOOOW', style2)
         textTitle.anchor.set(0.5)
         textTitle.scale.setTo(0.5, 0.5)
 
@@ -163,6 +171,12 @@ Slooow.mainMenuState.prototype = {
         textButtonDisconnect.anchor.set(0.5)
         textButtonDisconnect.scale.setTo(0.5, 0.5)
 
+        //Texto usuario
+        textUsername = game.add.text(160,
+            40, game.global.username, style3)
+        textUsername.anchor.set(0.5)
+        textUsername.scale.setTo(0.5, 0.5)
+
         //Boton opciones
         buttonOptions = game.add.button(game.world.width - 60,
             40, 'button', actionOnClickOptions, this,
@@ -225,13 +239,13 @@ Slooow.mainMenuState.prototype = {
         textButtonContact.alpha = 0
 
         function actionOnClickStartSolo() {
-            let msg = {
+            /*let msg = {
                 event: 'SINGLEPLAYER',
                 playerName: game.global.username,
                 roomName: 'sala1'
             }
-            game.global.socket.send(JSON.stringify(msg))
-            //game.state.start('singlePlayerState')
+            game.global.socket.send(JSON.stringify(msg))*/
+            game.state.start('menuSoloAndMultiLocalState')
         }
 
         function actionOnClickStartMarathon() {
@@ -246,7 +260,7 @@ Slooow.mainMenuState.prototype = {
 
         function actionOnClickStartOnline() {
             console.log('pulsado online')
-            //game.state.start('shopState')
+            game.state.start('menuMultiOnlineState')
         }
 
         function actionOnClickStartLocal() {
