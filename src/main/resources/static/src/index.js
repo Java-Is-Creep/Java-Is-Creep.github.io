@@ -65,7 +65,7 @@ window.onload = function () {
         //Socket
         socket: null,
         FPS: 60,
-        DEBUG_MODE: false,
+        DEBUG_MODE: true,
         player: null,
         mapObjects: [],
         mapDrawn: false,
@@ -99,7 +99,7 @@ window.onload = function () {
 
     game.global.socket.onmessage = (message) => {
         var msg = JSON.parse(message.data)
-        //console.log(msg);
+        console.log(msg);
 
         switch (msg.event) {
 
@@ -197,12 +197,14 @@ window.onload = function () {
                             numOfPowerUps++
                             break
                         case 'TRAPDOOR':
-                            this.game.global.arrayTrapdoors[numOfTrapdoors] = new this.Object()
+                            this.game.global.arrayTrapdoors[numOfTrapdoors] = new Object()
                             this.game.global.arrayTrapdoors[numOfTrapdoors].x = arrayPosX[i]
                             this.game.global.arrayTrapdoors[numOfTrapdoors].y = arrayPosY[i]  
                             this.game.global.arrayTrapdoors[numOfTrapdoors].height = arrayHeight[i]
                             this.game.global.arrayTrapdoors[numOfTrapdoors].width = arrayWidth[i]
                             numOfTrapdoors++
+                            this.console.log('trapdoor')
+                            this.console.dir(game.global.arrayTrapdoors)
                             break  
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
@@ -232,6 +234,21 @@ window.onload = function () {
                     this.game.global.arrayObstacleSpikes[i].y = game.world.height - arrayPosY[i]
                     // this.console.log('pos antes: ' + this.game.global.arrayObstacleSpikes[i].x + ', ' + this.game.global.arrayObstacleSpikes[i].y)             
                 }
+                break
+            case 'UPDATETRAPDOOR':
+                var posX = JSON.parse(msg.posX)
+                var posY = game.world.height - (JSON.parse(msg.posY))
+                for (var i = 0; i< game.global.arrayTrapdoors; i++){
+                    if (game.global.arrayTrapdoors[i].x == posX && game.global.arrayTrapdoors[i].y == posY){
+                        if (game.global.arrayTrapdoors[i].frame == 0){
+                            game.global.arrayTrapdoors[i].frame = 1
+                        } else{
+                            game.global.arrayTrapdoors[i].frame = 0
+                        }
+                    }
+                }
+
+                break    
         }
     }
 

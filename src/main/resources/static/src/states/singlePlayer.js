@@ -25,7 +25,8 @@ Slooow.singlePlayerState.prototype = {
 		this.graphics = game.add.graphics(0, 0);
 		this.graphics.lineStyle(2, 0x0000FF, 1);
 		
-
+		console.log('trapdoor')
+        console.dir(game.global.arrayTrapdoors)
 		// Cargamos los objetos posibles del mapa
 		console.dir(game.global.arrayGrounds)
 		for (var i = 0; i< game.global.arrayGrounds.length; i++){
@@ -71,6 +72,19 @@ Slooow.singlePlayerState.prototype = {
 			//game.global.arraySlopes[i].anchor.setTo (0.5,0.5)
 			game.global.arraySlopes[i].scale.setTo (0.5,0.5)
 		}
+		console.log('trapdoor')
+        console.dir(game.global.arrayTrapdoors)
+		//Pintamos las trampillas
+		console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
+		for (var i = 0; i< game.global.arrayTrapdoors.length; i++){
+			console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
+			game.global.arrayTrapdoors[i] = game.add.image(game.global.arrayTrapdoors[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayTrapdoors[i].y, 'trapdoor')
+			game.global.arrayTrapdoors[i].frame = 0
+			game.global.arrayTrapdoors[i].visible = true
+			game.global.arrayTrapdoors[i].anchor.setTo (0,0)
+			game.global.arrayTrapdoors[i].scale.setTo (0.14,0.3)
+		}
+
 		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaSnail')
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
 		game.global.player.sprite.scale.setTo(0.2, 0.2)
@@ -118,15 +132,15 @@ Slooow.singlePlayerState.prototype = {
 				b.scale.setTo (1.2,1.2)
 		*/
 		//Boton back
-		buttonBack = game.add.button(50,
-			40, 'button', actionOnClickBack, this,
+		buttonBack = game.add.button(200,
+			200, 'button', actionOnClickBack, this,
 			0, 0, 0)
 		buttonBack.anchor.set(0.5)
 		buttonBack.scale.setTo(0.2, 0.3)
 
 		//Texto back
-		textButtonBack = game.add.text(50,
-			40, 'Back', style)
+		textButtonBack = game.add.text(200,
+			200, 'Back', style)
 		textButtonBack.anchor.set(0.5)
 		textButtonBack.scale.setTo(0.5, 0.5)
 
