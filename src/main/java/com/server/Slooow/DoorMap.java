@@ -25,7 +25,7 @@ public class DoorMap extends MapObstacle  {
     } 
 
     @Override
-    public void restActiveTime(){
+    public boolean restActiveTime(){
         timeActive -= tickTime;
         if(timeActive < 0){
             estate = generalEstate.CLOSSING;
@@ -33,57 +33,65 @@ public class DoorMap extends MapObstacle  {
             //System.out.println("PUERTA CERRANDO");
             
         }
+        return false;
     }
 
-    public void clossing(){
+    public boolean clossing(){
         timeClossing -= tickTime;
         if(timeClossing <0){
             estate = generalEstate.CLOSE;
             timeClossing = MAXTIMECLOSSING;
             myType = type.WALL;
+            return true;
             //System.out.println("PUERTA CERRADA");
         }
+        return false;
     }
 
-    public void openning(){
+    public boolean openning(){
         timeOpenning -= tickTime;
         if(timeOpenning <0){
             estate = generalEstate.OPEN;
             timeOpenning = MAXTIMEOPPENING;
             myType = type.DOOR;
+            return true;
             //System.out.println("PUERTA ABIERTA");
         }
+        return false;
     }
 
-    public void restNotActiveTime(){
+    public boolean restNotActiveTime(){
         timeToActive -= tickTime;
         if(timeToActive < 0){
             estate = generalEstate.OPENNING;
             timeToActive = MAXTIMETOACTIVE;
+            
             //System.out.println("PUERTA ABRIENDO");
         }
+        return false;
     }
 
 
 
     @Override
-    public void update() {
+    public boolean update() {
         switch (estate) {
             case OPEN:
-                restActiveTime();
-                break;
+                return restActiveTime();
+                
             case CLOSE:
-                restNotActiveTime();
-                break;
+                return restNotActiveTime();
+               
             case OPENNING:
-                openning();
-                break;
+                return openning();
+                
             case CLOSSING:
-                clossing();
-                break;
+                return clossing();
+                
         
             default:
-                break;
+            return false;
+                
         }
     }
 }

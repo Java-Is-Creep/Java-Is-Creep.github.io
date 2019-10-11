@@ -20,11 +20,12 @@ public class MapObstacle  extends MapObject{
 		
 	}
 
-	public void update(){
-
+	public boolean update(){
+		return false;
 	}
 
-	public void restActiveTime(){
+	public boolean restActiveTime(){
+		return false;
 	}
 
 }
