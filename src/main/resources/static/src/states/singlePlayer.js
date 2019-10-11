@@ -14,14 +14,17 @@ Slooow.singlePlayerState.prototype = {
 			console.log("[DEBUG] Entering **SINGLEPLAYER** state");
 		}
 
-		game.world.setBounds(0, 0, 10000, 10000);
+		game.world.setBounds(0, 0, 8000, 1600);
 	},
 
 	preload: function () {
 
-		var b = game.add.image (0, game.world.height, 'cocina_back')
+		var b = game.add.tileSprite (0, game.world.height, 8000, 1600, 'cocina_back')
 		b.anchor.set (0, 1)
-		b.scale.set (0.35, 0.35)
+		//b.scale.set (0.35, 0.35)
+		b.tileScale.setTo (0.99,1)
+		
+		
 		this.graphics = game.add.graphics(0, 0);
 		this.graphics.lineStyle(2, 0x0000FF, 1);
 		

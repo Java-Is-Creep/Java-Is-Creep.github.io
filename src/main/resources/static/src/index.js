@@ -65,7 +65,7 @@ window.onload = function () {
         //Socket
         socket: null,
         FPS: 60,
-        DEBUG_MODE: true,
+        DEBUG_MODE: false,
         player: null,
         mapObjects: [],
         mapDrawn: false,
@@ -197,15 +197,15 @@ window.onload = function () {
                             numOfPowerUps++
                             break
                         case 'TRAPDOOR':
-                            this.game.global.arrayTrapdoors[numOfTrapdoors] = new Object()
-                            this.game.global.arrayTrapdoors[numOfTrapdoors].x = arrayPosX[i]
-                            this.game.global.arrayTrapdoors[numOfTrapdoors].y = arrayPosY[i]  
-                            this.game.global.arrayTrapdoors[numOfTrapdoors].height = arrayHeight[i]
-                            this.game.global.arrayTrapdoors[numOfTrapdoors].width = arrayWidth[i]
+                            game.global.arrayTrapdoors[numOfTrapdoors] = new Object()
+                            game.global.arrayTrapdoors[numOfTrapdoors].x = arrayPosX[i]
+                            game.global.arrayTrapdoors[numOfTrapdoors].y = arrayPosY[i]
+                            game.global.arrayTrapdoors[numOfTrapdoors].height = arrayHeight[i]
+                            game.global.arrayTrapdoors[numOfTrapdoors].width = arrayWidth[i]
                             numOfTrapdoors++
-                            this.console.log('trapdoor')
-                            this.console.dir(game.global.arrayTrapdoors)
-                            break  
+                            console.log('trapdoor')
+                            console.dir(game.global.arrayTrapdoors)
+                            break
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break
@@ -236,36 +236,36 @@ window.onload = function () {
                 }
                 break
             case 'UPDATETRAPDOOR':
-                var posX = JSON.parse(msg.posX)
-                var posY = game.world.height - (JSON.parse(msg.posY))
-                for (var i = 0; i< game.global.arrayTrapdoors; i++){
-                    if (game.global.arrayTrapdoors[i].x == posX && game.global.arrayTrapdoors[i].y == posY){
-                        if (game.global.arrayTrapdoors[i].frame == 0){
-                            game.global.arrayTrapdoors[i].frame = 1
-                        } else{
-                            game.global.arrayTrapdoors[i].frame = 0
-                        }
+                console.log('EVENTO UPDATE TRAPDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR')
+                var id = JSON.parse(msg.id)
+                if (this.game.global.arrayTrapdoors[id] !== undefined) {
+                    if (game.global.arrayTrapdoors[id].frame == 0) {
+                        game.global.arrayTrapdoors[id].frame = 1
+                    } else {
+                        game.global.arrayTrapdoors[id].frame = 0
                     }
                 }
-
-                break    
+                break
         }
+
+       
     }
 
-    this.game.state.add('bootState', Slooow.bootState);
-    this.game.state.add('preloadState', Slooow.preloadState);
-    this.game.state.add('initGameState', Slooow.initGameState);
-    this.game.state.add('initSesionState', Slooow.initSesionState);
-    this.game.state.add('createAccountState', Slooow.createAccountState);
-    this.game.state.add('mainMenuState', Slooow.mainMenuState);
-    this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
-    this.game.state.add('marathonState', Slooow.marathonState);
-    this.game.state.add('lobbyState', Slooow.lobbyState);
-    this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
-    this.game.state.add('gameOverState', Slooow.gameOverState);
-    this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
-    this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
-    this.game.state.add('shopState', Slooow.shopState);
 
-    this.game.state.start('bootState');
+this.game.state.add('bootState', Slooow.bootState);
+this.game.state.add('preloadState', Slooow.preloadState);
+this.game.state.add('initGameState', Slooow.initGameState);
+this.game.state.add('initSesionState', Slooow.initSesionState);
+this.game.state.add('createAccountState', Slooow.createAccountState);
+this.game.state.add('mainMenuState', Slooow.mainMenuState);
+this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
+this.game.state.add('marathonState', Slooow.marathonState);
+this.game.state.add('lobbyState', Slooow.lobbyState);
+this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
+this.game.state.add('gameOverState', Slooow.gameOverState);
+this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
+this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
+this.game.state.add('shopState', Slooow.shopState);
+
+this.game.state.start('bootState');
 }
