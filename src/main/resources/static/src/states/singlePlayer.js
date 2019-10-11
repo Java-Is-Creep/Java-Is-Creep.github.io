@@ -37,6 +37,14 @@ Slooow.singlePlayerState.prototype = {
 			//this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, 1400, 25)
 			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y)
 		}
+
+		//Pintamos las paredes
+		for (var i = 0; i< game.global.arrayWalls.length; i++){
+			game.global.arrayWalls[i] = game.add.tileSprite(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, game.global.arrayWalls[i].height, 'wallTile')
+			game.global.arrayWalls[i].visible = true
+			game.global.arrayWalls[i].anchor.setTo(0,1)
+			game.global.arrayWalls[i].tileScale.setTo(0.5, 0.5)
+		}
 		//game.global.arrayObstacleSpikes = new Array (5)
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
 			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayObstacleSpikes[i].y, 'button')
@@ -45,6 +53,19 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
 		}
 
+		for (var i = 0; i< game.global.arraySlopes.length; i++){
+			game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x , game.world.height - game.global.arraySlopes[i].y -25  , 'slopeDown' )
+			//game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x -20, game.world.height- game.global.arraySlopes[i].y - 30, 'slopeDown' )
+			game.global.arraySlopes[i].anchor.setTo (0.0,0.0)
+			if (game.global.arraySlopes[i].height < 0) {
+				game.global.arraySlopes[i].angle += 30
+			} else{
+				game.global.arraySlopes[i].angle -= 30
+			}
+			game.global.arraySlopes[i].visible = true
+			//game.global.arraySlopes[i].anchor.setTo (0.5,0.5)
+			game.global.arraySlopes[i].scale.setTo (0.5,0.5)
+		}
 		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaSnail')
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
 		game.global.player.sprite.scale.setTo(0.2, 0.2)
@@ -127,7 +148,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log(game.global.arrayGrounds[i].height)
 			//console.log(game.global.arrayGrounds[i].width)
 			//console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, -game.global.arrayGrounds[i].height)
+			//this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, -game.global.arrayGrounds[i].height)
 		}
 
 		for (var i = 0; i < game.global.arrayWalls.length; i++) {
@@ -171,8 +192,8 @@ Slooow.singlePlayerState.prototype = {
 			game.state.start('mainMenuState')
 		}
 		
-		game.camera.scale.x += 0.1;
-		game.camera.scale.y += 0.1;
+		//game.camera.scale.x += 0.1;
+		//game.camera.scale.y += 0.1;
 		// camera.follow(target, style, lerpX, lerpY, offsetX, offsetY)
 		//game.camera.follow(game.global.player.sprite);
 		//game.camera.focusOnXY(game.global.player.sprite.x,game.global.player.sprite.x);

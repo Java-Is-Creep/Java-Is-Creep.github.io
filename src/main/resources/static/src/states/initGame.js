@@ -15,9 +15,9 @@ Slooow.initGameState.prototype = {
 
 	create : function() {
         //Background
-		this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
-        this.background.height = this.game.height;
-	    this.background.width = this.game.width;
+		this.background = game.add.sprite(game.world.centerX, game.world.centerY, 'background')
+        //this.background.height = this.game.height;
+	    //this.background.width = this.game.width;
         this.background.anchor.set(0.5, 0.5)
 
 		/*this.background = this.add.image(0, 0, "background");
@@ -28,7 +28,7 @@ Slooow.initGameState.prototype = {
         this.title.anchor.setTo(0.5);
 		this.scaleSprite(this.title, this.game.width, this.game.height / 3, 50, 1);*/
 		
-        /*var style = {
+        var style = {
 			font : "100px Arial",
 			fill : "#ffffff",
 			align : "center"
@@ -38,16 +38,16 @@ Slooow.initGameState.prototype = {
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);        
 		
         //Texto desconectar
-		textButtonBack = game.add.text(game.world.centerX,
+		this.textButtonBack = game.add.text(game.world.centerX,
             game.world.centerY, 'Click anywhere to start', style)
-        textButtonBack.anchor.set(0.5)
-        textButtonBack.scale.setTo(0.5,0.5)
+		this.textButtonBack.anchor.set(0.5)
+		this.textButtonBack.scale.setTo(0.5,0.5)
 		
         this.game.input.onDown.add(itemTouched, this);
 
         function itemTouched (){
 			game.state.start('initSesionState')
-		}*/
+		}
 		
 		this.game.input.onDown.add(itemTouched, this);
 
@@ -59,7 +59,7 @@ Slooow.initGameState.prototype = {
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]); 
 	},
 
-	scaleSprite: function (sprite, availableSpaceWidth, availableSpaceHeight, padding, scaleMultiplier) {
+	/*scaleSprite: function (sprite, availableSpaceWidth, availableSpaceHeight, padding, scaleMultiplier) {
 		console.dir (sprite)
 		var scale = this.getSpriteScale(sprite._frame.width, sprite._frame.height, availableSpaceWidth, availableSpaceHeight, padding);
 		sprite.scale.x = scale * scaleMultiplier;
@@ -84,7 +84,7 @@ Slooow.initGameState.prototype = {
 		this.title.x = this.world.centerX;
 		this.title.y = this.world.centerY - height / 3;
  
-		/*this.scaleSprite(this.playButton, width, height / 3, 50, 1);
+		this.scaleSprite(this.playButton, width, height / 3, 50, 1);
 		this.playButton.x = this.world.centerX;
 		this.playButton.y = this.world.centerY ;
  
@@ -94,11 +94,19 @@ Slooow.initGameState.prototype = {
  
 		this.scaleSprite(this.audioButton, width, height / 3, 50, 0.5);
 		this.audioButton.x = this.world.centerX + this.audioButton.width / 2;
-		this.audioButton.y = this.world.centerY + height / 3;*/
+		this.audioButton.y = this.world.centerY + height / 3;
  
-	},
+	},*/
 
 	update : function() {
 
-	}
+	},
+
+	
+	resize: function(width, height) {
+		this.background.x = game.world.centerX;
+		this.background.y = game.world.centerY;
+		this.textButtonBack.x = game.world.centerX;
+		this.textButtonBack.y = game.world.centerY;
+		}
 }

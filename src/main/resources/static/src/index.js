@@ -1,32 +1,34 @@
 var game;
 
- function fullscreen(){
-     console.log(game);
+
+
+function fullscreen(){
+    console.log(game);
         document.body.requestFullscreen();
         
         screen.orientation.lock('landscape');
     }
 
 window.onload = function () {
-    //game = new Phaser.Game("100%","100%", Phaser.AUTO, 'gameDiv');
+    game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
     //game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'gameDiv');
     //game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'gameDiv');
     
     // Con esto conseguimos a que la imagen renderizada a 1280x720
     // Falta hacerlo responsive
-    var config = {
+    /*var config = {
         width: "100%",
         height: "100%",
         renderer: Phaser.AUTO
-    }
+    }*/
 
     /*var config = {
-        width: 1920,
-        height: 1080,
+        width: 1280,
+        height: 720,
         renderer: Phaser.AUTO
     }
-    */
-    game = new Phaser.Game (config)
+    
+    game = new Phaser.Game (config)*/
     
    
         
