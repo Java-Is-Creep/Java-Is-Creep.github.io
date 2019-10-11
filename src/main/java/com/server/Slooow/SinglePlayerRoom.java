@@ -442,6 +442,7 @@ public class SinglePlayerRoom extends Room{
 			System.out.println("SendobstacleUpdate");
 
 			owner.mySnail.updateSnail();
+			System.out.println("despues del primer update");
 			JsonObject msg = new JsonObject();
 			msg.addProperty("event", "TICK");
 			msg.addProperty("posX", owner.mySnail.posX);

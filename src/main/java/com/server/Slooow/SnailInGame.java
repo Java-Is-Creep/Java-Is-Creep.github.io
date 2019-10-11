@@ -174,12 +174,17 @@ public class SnailInGame {
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
-
-		lastMovementLock.lock();
-		boolean isAcelerating = lastMovement.isAcelerating;
-		boolean useObject = lastMovement.useObject;
-		lastMovementLock.unlock();
-
+		System.out.println("empezando  updat esnail");
+		if(lastMovement != null){
+			lastMovementLock.lock();
+			boolean isAcelerating = lastMovement.isAcelerating;
+			boolean useObject = lastMovement.useObject;
+			lastMovementLock.unlock();
+		} else {
+			System.out.println("no habia last movement");
+		}
+		
+		System.out.println("antes use object");
 		if (useObject) {
 			if (!usingPowerUp) {
 				if (powerUp != null) {
@@ -187,11 +192,11 @@ public class SnailInGame {
 				}
 			}
 		}
-
+		System.out.println("despues de use object");
 		if (usingPowerUp) {
 			powerUp.decrementTime();
 		}
-
+		System.out.println("antes de isOnObstacle");
 		if (isOnObstacle) {
 			if (spikes != null) {
 				if (!isOnWall && !isOnSlope) {
@@ -211,8 +216,10 @@ public class SnailInGame {
 			}
 
 		}
+		System.out.println("despues de is in obstacle");
 
 		// Si tienes stamina haces funcionamiento normal
+		System.out.println("Antes de runoutstamina");
 		if (!runOutStamina) {
 			// Comprobamos si aceleramos o no para perder o quitar stamina
 			if (!isAcelerating) {
@@ -352,6 +359,7 @@ public class SnailInGame {
 			}
 		} // Si te quedas sin estamina te quedas parado hasta que te recuperes,
 		else {
+			System.out.println("sin stamina");
 			stamina += STAMINARUNOUTRECOVER;
 			if ((!isOnFloor) && (!isOnWall) && (!isOnSlope)) {
 				speedX = speedX / SPEEDXLOSE;
@@ -368,7 +376,7 @@ public class SnailInGame {
 			}
 		}
 		// Ajustamos las velocidades
-
+		System.out.println("antes actualizar posiciciones");
 		// actualizamos posiciones
 		if (isOnFloor || isOnWall) {
 			adjustSpeed(maxSpeedX, maxSpeedY);
