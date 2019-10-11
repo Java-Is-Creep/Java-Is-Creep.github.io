@@ -17,7 +17,8 @@ public class Room {
 	SnailGame game;
 
     protected ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
-    protected ArrayList<DoorMap> doorArray = new ArrayList<>();
+	protected ArrayList<DoorMap> doorArray = new ArrayList<>();
+	protected ArrayList<TrapDoor> trapDoorArray = new ArrayList<>();
 	protected ArrayList<Trampoline> trampolineArray = new ArrayList<>();
 	protected ArrayList<Wind> windArray = new ArrayList<>();
 
