@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.springframework.util.SocketUtils;
 import org.springframework.web.socket.WebSocketSession;
 
 public class SnailGame {
@@ -58,10 +59,11 @@ public class SnailGame {
 	}
 	
 	public void createSingleRoom(String roomName, PlayerConected jug){
-		
+		System.out.println("Estoy en createSingleRoom");
 		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug,this);
 		
 		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
+		System.out.println("Esto saliendo de createSingleRoom");
 	}
 
 	public void deleteRoom(Room room){

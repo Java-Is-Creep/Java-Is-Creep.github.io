@@ -25,9 +25,13 @@ public class Room {
         this.owner = owner;
 		this.name = name;
 		this.game = game;
+		System.out.println("antes de create map");
 		createMap();
+		System.out.println("antes de send map");
 		sendMap();
+		System.out.println("antes del tick");
 		tick();
+		System.out.println("despues del tick");
     }
 
     public void sendMap(){

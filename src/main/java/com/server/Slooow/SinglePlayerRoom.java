@@ -423,15 +423,23 @@ public class SinglePlayerRoom extends Room{
 		destroyRoom();
 	}
 
+	@Override
 	public void tick() {
+		System.out.println("Primera vez del Tick");
 		Runnable task = () -> {
+			System.out.println(" Dentro del task");
 			acummulativeTime+= TICKTIME;
 
 			updateDoors();
+			System.out.println("Despues de update doors");
 			updateTrampoline();
+			System.out.println("Despues de update trampolines");
 			updateWind();
+			System.out.println("updateWind");
 			checkCollisions();
+			System.out.println("CheckCollisions");
 			sendObstacleUpdate();
+			System.out.println("SendobstacleUpdate");
 
 			owner.mySnail.updateSnail();
 			JsonObject msg = new JsonObject();
@@ -449,11 +457,14 @@ public class SinglePlayerRoom extends Room{
 			} finally {
 				owner.sessionLock.unlock();
 			}
+			System.out.println("tras enviar todo");
 		};
 
 		// Delay inicial de la sala, empieza un segundo y continua ejecutando el tick
 		// cada 33 milisegundos
+		System.out.println("Antes de iniciar el executor");
 		executor.scheduleAtFixedRate(task, TICKTIME, TICKTIME, TimeUnit.MILLISECONDS);
+		System.out.println("Despues de iniciar el executor");
 	}
 
 }
