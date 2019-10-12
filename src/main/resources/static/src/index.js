@@ -81,7 +81,10 @@ window.onload = function () {
         arrayObstacleSpikes: [],
         //Array de power ups
         arrayPowerUps: [],
+        //ArrayTrapdoors
         arrayTrapdoors: [],
+        //Array de trampolines
+        arrayTrampolines: [],
         player: new this.Object()
     }
 
@@ -103,7 +106,6 @@ window.onload = function () {
             console.log(msg);
         }
         
-
         switch (msg.event) {
 
             case 'TICK':
@@ -131,6 +133,7 @@ window.onload = function () {
                 var numOfObstacleSpikes = 0;
                 var numOfPowerUps = 0;
                 var numOfTrapdoors = 0;
+                var numOfTrampolines = 0;
 
                 for (var i = 0; i < type.length; i++) {
                     switch (type[i]) {
@@ -209,6 +212,14 @@ window.onload = function () {
                             console.log('trapdoor')
                             console.dir(game.global.arrayTrapdoors)
                             break
+                        case 'TRAMPOLINE':
+                            this.game.global.arrayTrampolines[numOfTrampolines] = new Object()
+                            game.global.arrayTrampolines[numOfTrampolines].x = arrayPosX[i]
+                            game.global.arrayTrampolines[numOfTrampolines].y = arrayPosY[i]
+                            game.global.arrayTrampolines[numOfTrampolines].height = arrayHeight[i]
+                            game.global.arrayTrampolines[numOfTrampolines].width = arrayWidth[i]
+                            numOfTrampolines++;
+                            break    
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break
@@ -253,6 +264,9 @@ window.onload = function () {
                 }
                 console.log(this.game.global.arrayTrapdoors[id])
                 break
+            case 'UPDATETRAMPOLINE':
+                
+                break    
         }
 
        

@@ -13,13 +13,12 @@ Slooow.singlePlayerState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **SINGLEPLAYER** state");
 		}
-
-		game.world.setBounds(0, 0, 8000, 1600);
+		game.world.setBounds(0, 0, 8640, 1600);
 	},
 
 	preload: function () {
 
-		var b = game.add.tileSprite (0, game.world.height, 8000, 1600, 'cocina_back')
+		var b = game.add.tileSprite (0, game.world.height, 8640, 1600, 'cocina_back')
 		b.anchor.set (0, 1)
 		//b.scale.set (0.35, 0.35)
 		b.tileScale.setTo (0.99,1)
@@ -79,17 +78,25 @@ Slooow.singlePlayerState.prototype = {
 		//Pintamos las trampillas
 		//console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
 		for (var i = 0; i< game.global.arrayTrapdoors.length; i++){
-			console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
+			//console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
 			game.global.arrayTrapdoors[i] = game.add.image(game.global.arrayTrapdoors[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayTrapdoors[i].y, 'trapdoor')
 			game.global.arrayTrapdoors[i].frame = 0
 			game.global.arrayTrapdoors[i].visible = true
 			game.global.arrayTrapdoors[i].anchor.setTo (0,0)
-			game.global.arrayTrapdoors[i].scale.setTo (0.14,0.3)
+			game.global.arrayTrapdoors[i].scale.setTo (0.21,0.3)
+		}
+
+		for (var i = 0; i< game.global.arrayTrampolines.length; i++){
+			game.global.arrayTrampolines[i] = game.add.image(game.global.arrayTrampolines[i].x, game.world.height - game.global.arrayTrampolines[i].y-150, 'sartenSpritesheet')
+			game.global.arrayTrampolines[i].frame = 0
+			game.global.arrayTrampolines[i].animations.add('activate')
+			//game.global.arrayTrampolines[i].animations.play('activate', 8, true)
+			game.global.arrayTrampolines[i].visible = true
+			game.global.arrayTrampolines[i].anchor.setTo(0,0)
+			game.global.arrayTrampolines[i].scale.setTo(0.5, 0.5)
 		}
 
 		//game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'catSnail')
-		
-
 		
 			game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'SnailWalk')
 			game.global.player.sprite.animations.add ('walk')
@@ -185,7 +192,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log(game.global.arrayWalls[i].height)
 			//console.log(game.global.arrayWalls[i].width)
 			//console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, -game.global.arrayWalls[i].height)
+			//this.graphics.drawRect(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, -game.global.arrayWalls[i].height)
 		}
 
 		for (var i = 0; i < game.global.arraySlopes.length; i++) {
@@ -194,7 +201,7 @@ Slooow.singlePlayerState.prototype = {
 			//console.log(game.global.arraySlopes[i].height)
 			//console.log(game.global.arraySlopes[i].width)
 			//console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arraySlopes[i].x, game.world.height - game.global.arraySlopes[i].y, game.global.arraySlopes[i].width, -game.global.arraySlopes[i].height)
+			//this.graphics.drawRect(game.global.arraySlopes[i].x, game.world.height - game.global.arraySlopes[i].y, game.global.arraySlopes[i].width, -game.global.arraySlopes[i].height)
 		}
 
 		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
@@ -212,7 +219,7 @@ Slooow.singlePlayerState.prototype = {
 			console.log(game.global.arrayPowerUps[i].height)
 			console.log(game.global.arrayPowerUps[i].width)
 			console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
+			//this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
 		}
 
 		function actionOnClickBack() {
