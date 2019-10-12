@@ -129,12 +129,11 @@ Slooow.singlePlayerState.prototype = {
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
-		this.eKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
-		game.input.keyboard.addKeyCapture([Phaser.Keyboard.E]);
-
 		this.rKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.R]);
 
+		this.tapping = game.input.pointer1;
+		//this.tapTap = game.input.addPointer();
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
 		var style = {
 			font: "40px Arial",
@@ -168,58 +167,6 @@ Slooow.singlePlayerState.prototype = {
 		textButtonBack.anchor.set(0.5)
 		textButtonBack.scale.setTo(0.5, 0.5)
 
-
-		
-		//this.graphics.drawRect(50, 250, 500, 100);
-		/*
-		var i = 0;
-		for (var mapObject in game.global.mapObjects) {
-				console.log(game.global.mapObjects[i].x)	
-				console.log(game.global.mapObjects[i].y)
-				console.log(game.global.mapObjects[i].height)	
-				console.log(game.global.mapObjects[i].width)
-				console.log('screen height' + game.world.height )
-			//this.graphics.drawRect(50, 250, 500, 100);
-			this.graphics.drawRect(game.global.mapObjects[i].x, game.world.height -  game.global.mapObjects[i].y, game.global.mapObjects[i].width, -game.global.mapObjects[i].height)
-			i++;
-		}
-*/
-		//Pintamos los suelos
-		for (var i = 0; i < game.global.arrayGrounds.length; i++) {
-			//console.log(game.global.arrayGrounds[i].x)
-			//console.log(game.global.arrayGrounds[i].y)
-			//console.log(game.global.arrayGrounds[i].height)
-			//console.log(game.global.arrayGrounds[i].width)
-			//console.log('screen height' + game.world.height)
-			//this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, -game.global.arrayGrounds[i].height)
-		}
-
-		for (var i = 0; i < game.global.arrayWalls.length; i++) {
-			//console.log(game.global.arrayWalls[i].x)
-			//console.log(game.global.arrayWalls[i].y)
-			//console.log(game.global.arrayWalls[i].height)
-			//console.log(game.global.arrayWalls[i].width)
-			//console.log('screen height' + game.world.height)
-			//this.graphics.drawRect(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, -game.global.arrayWalls[i].height)
-		}
-
-		for (var i = 0; i < game.global.arraySlopes.length; i++) {
-			//console.log(game.global.arraySlopes[i].x)
-			//console.log(game.global.arraySlopes[i].y)
-			//console.log(game.global.arraySlopes[i].height)
-			//console.log(game.global.arraySlopes[i].width)
-			//console.log('screen height' + game.world.height)
-			//this.graphics.drawRect(game.global.arraySlopes[i].x, game.world.height - game.global.arraySlopes[i].y, game.global.arraySlopes[i].width, -game.global.arraySlopes[i].height)
-		}
-
-		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-			//console.log(game.global.arrayObstacleSpikes[i].image.x)
-			//console.log(game.global.arrayObstacleSpikes[i].image.y)
-			//console.log(game.global.arrayObstacleSpikes[i].height)
-			//console.log(game.global.arrayObstacleSpikes[i].width)
-			//console.log('screen height' + game.world.height)
-			//this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
-		}
 
 		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
 			console.log(game.global.arrayPowerUps[i].x)
@@ -259,20 +206,29 @@ Slooow.singlePlayerState.prototype = {
 			isSprinting: false,
 			useObject: false
 		}
-
-		if (this.wKey.isDown) {
+		if (this.wKey.isDown && this.wKey.duration <= 150) {
 			msg.isSprinting = true;
 		}
-		if (this.eKey.isDown) {
-			msg.useObject = true
+		
+		if (this.wKey.isDown && this.wKey.duration > 150) {
+			msg.useObject = true;
+		}
+		
+		if (game.input.pointer1.isDown && game.input.pointer1.duration <= 150){
+			msg.isSprinting = true;
+		}
+
+		if (game.input.pointer1.isDown && game.input.pointer1.duration > 150){
+			msg.useObject = true;
 		}
 		game.global.socket.send(JSON.stringify(msg))
 
 		if (this.rKey.isDown){
 			game.state.start('gameOverState')
 		}
-
+    
 		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100);
 
 	}
+
 }
