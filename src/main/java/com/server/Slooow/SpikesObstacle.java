@@ -2,56 +2,60 @@
 package com.server.Slooow;
 
 public class SpikesObstacle extends MapObstacle {
-    private int posYnotActive;
-    private int activePosY;
+    public boolean turnOff = false;
+    public boolean turnOn = true;
     private int increment = 1;
+    public int sparkDelay;
+    int timeToDelay;
 
-    enum Estate { ACTIVE, NOTACTIVE, GOINGUP,GOINGDOWN}
+    enum Estate { ACTIVE, NOTACTIVE, SPARKDELAY}
     Estate estate = Estate.NOTACTIVE;
 
-    public SpikesObstacle(int width, int height, int posX, int posY, type myType, int timeToActive,int timeActive, int tickTime) {
+    public SpikesObstacle(int width, int height, int posX, int posY, type myType, int timeToActive,int timeActive, int sparkDelay,int tickTime) {
         super(width, height, posX, posY, myType,timeToActive,timeActive,tickTime);
         this.timeToActive = timeToActive ;
         MAXTIMETOACTIVE = timeToActive ;
-        activePosY = posY;
-        posYnotActive = posY - (height + 5);
+        this.sparkDelay = sparkDelay;
+        timeToDelay = sparkDelay;
+
         estate = Estate.ACTIVE;
 
     }
+    
 
     public boolean restActiveTime(){
         timeActive -= tickTime;
         if(timeActive <= 0){
-            estate = Estate.GOINGDOWN;
+            estate = Estate.NOTACTIVE;
             timeActive = MAXTIMEACTIVE;
+            turnOff = true;
 
         }
         return false;
     }
 
-    public void goingDown(){
-        posY -= increment;
-        if(posY <= posYnotActive){
-            posY = posYnotActive;
-            estate = Estate.NOTACTIVE;
-        }
-    }
+
 
     public void restNotActiveTime(){
+        turnOff = false;
         timeToActive -= tickTime;
         if(timeToActive <= 0){
-            estate = Estate.GOINGUP;
+            estate = Estate.SPARKDELAY;
             timeToActive = MAXTIMETOACTIVE;
+            turnOn = true;
         }
     }
 
-    public void goingUp(){
-        posY += increment;
-        if(posY >= activePosY){
-            posY = activePosY;
+    public void sparkDelay(){
+        turnOn= false;
+        timeToDelay -= tickTime;
+        if(timeToDelay <= 0){
             estate = Estate.ACTIVE;
+            timeToDelay = sparkDelay;
         }
+
     }
+
 
     // el devolver un boolean es necesario para las animaciones d elas puerta
     @Override
@@ -64,11 +68,9 @@ public class SpikesObstacle extends MapObstacle {
             case NOTACTIVE:
                 restNotActiveTime();
                 return false;
-            case GOINGUP:
-                goingUp();
-                return false;
-            case GOINGDOWN:
-                goingDown();
+            case SPARKDELAY:
+                sparkDelay();
+
                 return false;
             default:
             return false;
@@ -82,7 +84,7 @@ public class SpikesObstacle extends MapObstacle {
     }
 
     public void playerCrash(){
-        estate = Estate.GOINGDOWN;
+        estate = Estate.NOTACTIVE;
         timeToActive = MAXTIMETOACTIVE;
     } 
 
@@ -101,22 +103,6 @@ public class SpikesObstacle extends MapObstacle {
 
     public void setTickTime(float tickTime) {
         this.tickTime = tickTime;
-    }
-
-    public int getPosYnotActive() {
-        return posYnotActive;
-    }
-
-    public void setPosYnotActive(int posYnotActive) {
-        this.posYnotActive = posYnotActive;
-    }
-
-    public int getActivePosY() {
-        return activePosY;
-    }
-
-    public void setActivePosY(int activePosY) {
-        this.activePosY = activePosY;
     }
 
     public int getIncrement() {

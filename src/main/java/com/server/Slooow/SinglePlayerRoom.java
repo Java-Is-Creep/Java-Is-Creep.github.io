@@ -253,7 +253,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 1 * unit;
 
 		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - unit,
-				type.TRAMPOLINE, 3000, 250, TICKTIME, 10, 22);
+				type.TRAMPOLINE, 4000, 250, TICKTIME, 10, 22);
 
 		map.addMapObject(trampoline);
 		trampolineArray.add(trampoline);
@@ -348,7 +348,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosY += 6 * unit;
 
 		SpikesObstacle spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosX + 10 * unit, acumulativePosY,
-				type.OBSTACLE, 1500, 4000, TICKTIME);
+				type.OBSTACLE, 1500, 4000, 500,TICKTIME);
 		map.addMapObject(spike1);
 		spikesArray.add(spike1);
 
@@ -380,6 +380,7 @@ public class SinglePlayerRoom extends Room {
 		boolean slopeCollision = false;
 		boolean obstacleCollision = false;
 		double slopeRadians = 0;
+		int degrees = 0;
 
 		// mandan mensajes para actualizar visualmente al cliente
 		boolean sendGroundCollision = false;
@@ -387,13 +388,6 @@ public class SinglePlayerRoom extends Room {
 		boolean sendSlopeCollision = false;
 
 		for (MapObject object : map.map) {
-			switch (object.myType) {
-			case OBSTACLE:
-				SpikesObstacle auxSpikes = (SpikesObstacle) object;
-				auxSpikes.update();
-				break;
-			default:
-			}
 
 			if (object.collider.hayColision(owner)) {
 				switch (object.myType) {
@@ -442,9 +436,11 @@ public class SinglePlayerRoom extends Room {
 					MapSlope auxSlope = (MapSlope) object;
 					slopeCollision = true;
 					slopeRadians = auxSlope.radians;
+					degrees = (int) auxSlope.degrees;
+
 					owner.mySnail.isJumping = false;
 					if (!lastFrameWallSlopeCollision) {
-						sendWallCollision = true;
+						sendSlopeCollision = true;
 					}
 					break;
 				case OBSTACLE:
@@ -502,12 +498,12 @@ public class SinglePlayerRoom extends Room {
 			sendGroundCollision();
 		}
 
-		if(sendWallCollision){
+		if (sendWallCollision) {
 			sendWallCollision();
 		}
 
-		if(sendSlopeCollision){
-			sendSlopeCollision();
+		if (sendSlopeCollision) {
+			sendSlopeCollision(degrees);
 		}
 
 		// Envia los datos al caracol el cual calcula sus fisicas
@@ -525,9 +521,10 @@ public class SinglePlayerRoom extends Room {
 
 	}
 
-	public void sendSlopeCollision(){
+	public void sendSlopeCollision(int degrees) {
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", "SLOPECOLLISION");
+		msg.addProperty("degrees", degrees);
 
 		try {
 			owner.sessionLock.lock();
@@ -540,7 +537,7 @@ public class SinglePlayerRoom extends Room {
 		}
 	}
 
-	public void sendWallCollision(){
+	public void sendWallCollision() {
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", "WALLCOLLISION");
 
@@ -569,8 +566,6 @@ public class SinglePlayerRoom extends Room {
 			owner.sessionLock.unlock();
 		}
 	}
-
-
 
 	public void updateTrapDoor() {
 		int i = 0;
@@ -626,7 +621,6 @@ public class SinglePlayerRoom extends Room {
 		int i = 0;
 		for (Trampoline trampoline : trampolineArray) {
 			if (trampoline.update()) {
-				System.out.println("TRAMPOLIN CAMBIA FORMA");
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATETRAMPOLINE");
 				msg.addProperty("id", i);
@@ -652,16 +646,68 @@ public class SinglePlayerRoom extends Room {
 		}
 	}
 
+	public void updateObstacles() {
+		int i = 0;
+		for (SpikesObstacle obstacle : spikesArray) {
+			obstacle.update();
+
+			if (obstacle.turnOff| obstacle.turnOn) {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "OBSTACLEUPDATE");
+				msg.addProperty("id", i);
+				msg.addProperty("turnDown", obstacle.turnOff);
+				msg.addProperty("turnOn", obstacle.turnOn);
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+			}
+			i++;
+		}
+
+	}
+
 	public void finishRace() {
 		// acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if (acummulativeTime > TIMETOSUCESS) {
 			System.out.println("Has perdido, tu tiempo ha sido: " + acummulativeTime);
 			owner.decrementLifes();
 		} else {
-			System.out.println("Has ganado, tu timepo ha sido: " + acummulativeTime);
+			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
 		}
 		executor.shutdown();
 		destroyRoom();
+	}
+
+	public void checkSnailState() {
+		boolean mandar = false;
+
+		if (owner.mySnail.sendRunOutStamina || owner.mySnail.sendRecoverStamina) {
+			mandar = true;
+		}
+
+		if (mandar) {
+			JsonObject msg = new JsonObject();
+			msg.addProperty("event", "SNAILUPDATE");
+			msg.addProperty("runOutStamina", owner.mySnail.sendRunOutStamina);
+			msg.addProperty("recoverStamina", owner.mySnail.sendRecoverStamina);
+			try {
+				owner.sessionLock.lock();
+				owner.getSession().sendMessage(new TextMessage(msg.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				owner.sessionLock.unlock();
+			}
+
+		}
+
 	}
 
 	public void tick() {
@@ -676,6 +722,7 @@ public class SinglePlayerRoom extends Room {
 			sendObstacleUpdate();
 
 			owner.mySnail.updateSnail();
+			checkSnailState();
 			JsonObject msg = new JsonObject();
 			msg.addProperty("event", "TICK");
 			msg.addProperty("posX", owner.mySnail.posX);

@@ -95,6 +95,11 @@ public class SnailInGame {
 	// Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
 
+	//booleans para mandar mensajes de animaciones
+	protected boolean sendRunOutStamina = false;
+	protected boolean sendRecoverStamina = false;
+
+
 	// Variables relacionadas con powerUps
 	GenericPowerUp powerUp = null;
 	Wind wind = null;
@@ -174,6 +179,8 @@ public class SnailInGame {
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
+		sendRunOutStamina = false;
+		sendRecoverStamina = false;
 		boolean isAcelerating = false;
 		boolean useObject = false;
 		if(lastMovement != null){
@@ -236,6 +243,8 @@ public class SnailInGame {
 
 				if (stamina <= 0) {
 					runOutStamina = true;
+					sendRunOutStamina = true;
+
 				}
 
 				maxSpeedX = maxNormalSpeedX;
@@ -370,6 +379,7 @@ public class SnailInGame {
 			if (stamina >= maxStamina) {
 				runOutStamina = false;
 				stamina = maxStamina;
+				sendRecoverStamina = true;
 			}
 		}
 		// Ajustamos las velocidades
