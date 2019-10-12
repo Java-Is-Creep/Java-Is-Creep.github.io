@@ -32,7 +32,10 @@ Slooow.preloadState.prototype = {
 
 		game.load.spritesheet('trapdoor', './assets/img/trampilla_sheet.png', 600, 300, 2)
 		game.load.spritesheet ('SnailWalk', './assets/img/normalcol_spritesheet.png', 500, 300, 8)
-		game.load.spritesheet('sartenSpritesheet', './assets/img/sarten_spritesheet.png', 600, 600, 8)
+		game.load.spritesheet('sartenSpritesheet', './assets/img/sarten_spritesheet.png', 600, 600, 9)
+
+		/*game.load.image ('bar_Estamina1', './assets/img/.png')
+		game.load.image ('bar_Estamina2', './assets/img/.png')*/
 
 	},
 

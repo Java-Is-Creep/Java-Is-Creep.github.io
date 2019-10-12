@@ -90,7 +90,7 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayTrampolines[i] = game.add.image(game.global.arrayTrampolines[i].x, game.world.height - game.global.arrayTrampolines[i].y-150, 'sartenSpritesheet')
 			game.global.arrayTrampolines[i].frame = 0
 			game.global.arrayTrampolines[i].animations.add('activate')
-			//game.global.arrayTrampolines[i].animations.play('activate', 8, true)
+			//game.global.arrayTrampolines[i].animations.play('activate', 8, false)
 			game.global.arrayTrampolines[i].visible = true
 			game.global.arrayTrampolines[i].anchor.setTo(0,0)
 			game.global.arrayTrampolines[i].scale.setTo(0.5, 0.5)
@@ -98,13 +98,21 @@ Slooow.singlePlayerState.prototype = {
 
 		//game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'catSnail')
 		
-			game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'SnailWalk')
-			game.global.player.sprite.animations.add ('walk')
-			game.global.player.sprite.animations.play('walk', 5, true);
+		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'SnailWalk')
+		game.global.player.sprite.animations.add ('walk')
+		game.global.player.sprite.animations.play('walk', 5, true);
 		
 
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
 		game.global.player.sprite.scale.setTo(0.28, 0.28)
+
+		// Barra de Estamina
+		/*game.global.myPlayer.health2 = game.add.sprite(0, 0, 'health2')
+		game.global.myPlayer.health2.anchor.set(0,3.5);
+		game.global.myPlayer.health2.scale.setTo(1,1);
+		game.global.myPlayer.health1 = game.add.sprite(0, 0, 'health1')
+		game.global.myPlayer.health1.anchor.set(0,3.5);
+		game.global.myPlayer.health1.scale.setTo(1,1);*/
 
 		//console.log ("Array Cargado")
 		//console.dir (game.global.arrayObstacleSpikes)

@@ -265,7 +265,8 @@ window.onload = function () {
                 console.log(this.game.global.arrayTrapdoors[id])
                 break
             case 'UPDATETRAMPOLINE':
-                
+                var id = JSON.parse(msg.id)
+                game.global.arrayTrampolines[i].animations.play('activate', 8, true)
                 break    
         }
 
