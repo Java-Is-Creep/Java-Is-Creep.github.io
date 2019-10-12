@@ -88,8 +88,8 @@ window.onload = function () {
         player: new this.Object()
     }
 
-    game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -250,8 +250,8 @@ window.onload = function () {
                 }
                 break
             case 'UPDATETRAPDOOR':
-                console.log('EVENTO UPDATE TRAPDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR')
-                console.log(msg);
+                //console.log('EVENTO UPDATE TRAPDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR')
+                //console.log(msg);
                 
                 var id = JSON.parse(msg.id)
                 console.log(this.game.global.arrayTrapdoors[id])
@@ -265,6 +265,7 @@ window.onload = function () {
                 console.log(this.game.global.arrayTrapdoors[id])
                 break
             case 'UPDATETRAMPOLINE':
+                this.console.log('UPDATE TRAMPOLINEEEEEEEE')
                 var id = JSON.parse(msg.id)
                 game.global.arrayTrampolines[i].animations.play('activate', 8, true)
                 break    

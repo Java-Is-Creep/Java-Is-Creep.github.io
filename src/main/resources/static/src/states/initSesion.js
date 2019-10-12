@@ -59,7 +59,8 @@ Slooow.initSesionState.prototype = {
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Username'
+            placeHolder: 'Username',
+            zoom: true
         });
 
         // Boton PassWord
@@ -75,7 +76,8 @@ Slooow.initSesionState.prototype = {
             borderColor: '#000',
             borderRadius: 6,
             placeHolder: 'Password',
-            type: PhaserInput.InputType.password
+            type: PhaserInput.InputType.password,
+            zoom: true
         });
 
         // Init Session Button
