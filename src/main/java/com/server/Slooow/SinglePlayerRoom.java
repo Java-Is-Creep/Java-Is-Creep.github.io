@@ -253,7 +253,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 1 * unit;
 
 		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - unit,
-				type.TRAMPOLINE, 99, 99, TICKTIME, 10, 22);
+				type.TRAMPOLINE, 990000, 99, TICKTIME, 10, 22);
 
 		map.addMapObject(trampoline);
 		trampolineArray.add(trampoline);
@@ -280,7 +280,7 @@ public class SinglePlayerRoom extends Room {
 
 		// Las posiciones del power up no cuentan para le aumento global
 		map.addMapObject(
-				new MapPowerUp(unit, unit, acumulativePosX + 3 * unit, acumulativePosY + unit / 2, type.POWERUP));
+				new MapPowerUp(unit, unit, acumulativePosXNegro + 3 * unit, acumulativePosYNegro + unit / 2, type.POWERUP));
 
 		map.addMapObject(
 				new MapGround(8 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
@@ -292,17 +292,53 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosXNegro += 6 * unit;
 		acumulativePosYNegro -= unit;
 
-		map.addMapObject(
-				new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosXNegro, acumulativePosYNegro, type.SLOPE));
+		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosXNegro, acumulativePosYNegro, type.SLOPE));
 
 		acumulativePosXNegro += 6 * unit;
 		acumulativePosYNegro -=  unit;
 
-		// despues del trampolin sarten, volvemos caino azul
-		map.addMapObject(
-				new MapGround(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - 2 * unit, type.GROUND));
+		// despues del trampolin sarten, volvemos camino azul
+		map.addMapObject(new MapGround(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - 2 * unit, type.GROUND));
 		acumulativePosX += 4 * unit;
 		acumulativePosY -= 2 * unit;
+
+		map.addMapObject(new MapSlope(4 * unit, Math.toRadians(-60), acumulativePosX, acumulativePosY, type.SLOPE));
+		acumulativePosX += 4 * unit;
+		acumulativePosY -= 4 * unit;
+
+		// volvemos a llegar al suelo
+		acumulativePosX += 2*unit;
+		acumulativePosY = 400;
+		
+
+		Wind windAux = new Wind(12*unit,2*unit,acumulativePosX,acumulativePosY,type.WIND,false,4,true,5000,TICKTIME);
+		 map.addMapObject(windAux); 
+		 windArray.add(windAux);
+
+		 acumulativePosX += 12 * unit;
+		 
+
+		 map.addMapObject(new MapWall(20, 6 * unit - wallDisplacement, acumulativePosX+ 2*unit,acumulativePosY,
+				type.WALL));
+		
+		acumulativePosX += 2*unit;
+		acumulativePosY += 6*unit;
+
+		map.addMapObject(
+				new MapPowerUp(unit, unit, acumulativePosX + 2 * unit, acumulativePosY + unit / 2, type.POWERUP));
+
+
+		map.addMapObject(new MapGround(7 * unit, groundHeigth, acumulativePosX, acumulativePosY , type.GROUND));
+		
+		acumulativePosX += 7*unit;
+
+
+
+
+
+
+
+
 
 	}
 
