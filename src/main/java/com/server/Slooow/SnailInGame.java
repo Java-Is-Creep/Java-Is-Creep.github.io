@@ -275,8 +275,14 @@ public class SnailInGame {
 				}
 				maxSpeedX = maxAceleratingSpeedX;
 				maxSpeedY = maxAceleratingSpeedY;
-				acelerationX = maxAcelerationAceleratingX;
-				acelerationY = maxAcelerationAceleratingY;
+				//Probando aceleracion
+								
+				acelerationX = maxAceleratingSpeedX;
+				acelerationY = maxAceleratingSpeedY;
+
+				//SI QUEREMOS VOLVER a poner la aceleracion normal
+				//acelerationX = maxAcelerationAceleratingX;
+				//acelerationY = maxAcelerationAceleratingY;
 			}
 
 			if (isInWind) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import com.server.Slooow.MapObject.type;
 
 public class Room {
     protected Map map = new Map(2000);
