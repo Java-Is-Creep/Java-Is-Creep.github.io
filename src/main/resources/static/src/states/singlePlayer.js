@@ -87,9 +87,17 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayTrapdoors[i].scale.setTo (0.14,0.3)
 		}
 
-		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaSnail')
+		//game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'catSnail')
+		
+
+		
+			game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'SnailWalk')
+			game.global.player.sprite.animations.add ('walk')
+			game.global.player.sprite.animations.play('walk', 5, true);
+		
+
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
-		game.global.player.sprite.scale.setTo(0.2, 0.2)
+		game.global.player.sprite.scale.setTo(0.23, 0.23)
 
 		console.log ("Array Cargado")
 		console.dir (game.global.arrayObstacleSpikes)
@@ -103,7 +111,6 @@ Slooow.singlePlayerState.prototype = {
 
 	create: function () {
 		
-
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
