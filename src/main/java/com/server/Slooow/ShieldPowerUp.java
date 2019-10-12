@@ -3,13 +3,14 @@ package com.server.Slooow;
 import java.io.IOException;
 
 import com.google.gson.JsonObject;
+import com.server.Slooow.MapPowerUp.powerType;
 
 import org.springframework.web.socket.TextMessage;
 
 public class ShieldPowerUp extends GenericPowerUp {
 
-    public ShieldPowerUp(PlayerConected player) {
-        super(player,0);
+    public ShieldPowerUp(PlayerConected player,powerType myType) {
+        super(player,0,myType);
     }
 
     @Override
@@ -17,6 +18,7 @@ public class ShieldPowerUp extends GenericPowerUp {
         player.mySnail.activateShield();
         player.mySnail.setUsingPowerUp(false);
         player.mySnail.powerUp = null;
+        sendMessage();
         System.out.println("Caracol protegido");
     }
 

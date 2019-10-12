@@ -1,5 +1,7 @@
 package com.server.Slooow;
 
+import com.server.Slooow.MapPowerUp.powerType;
+
 public class SpeedPowerUp extends GenericPowerUp {
     float normalSpeedIncrease;
     float aceleratingSpeedIncrease;
@@ -7,8 +9,8 @@ public class SpeedPowerUp extends GenericPowerUp {
     float aceleratingAcelerationIncrease;
 
     public SpeedPowerUp(PlayerConected player, int timeMax, float normalSpeedIncrease, float aceleratingSpeedIncrease,
-            float normalAcelerationIncrease, float aceleratingAcelerationIncrease) {
-        super(player, timeMax);
+            float normalAcelerationIncrease, float aceleratingAcelerationIncrease,powerType myType) {
+        super(player, timeMax, myType);
         this.normalSpeedIncrease = normalSpeedIncrease;
         this.aceleratingSpeedIncrease = aceleratingSpeedIncrease;
         this.normalAcelerationIncrease = normalAcelerationIncrease;
@@ -25,6 +27,7 @@ public class SpeedPowerUp extends GenericPowerUp {
         player.mySnail.normalAcelerationY *= normalAcelerationIncrease;
         player.mySnail.maxAcelerationAceleratingX *= aceleratingAcelerationIncrease;
         player.mySnail.maxAcelerationAceleratingY *= aceleratingAcelerationIncrease;
+        sendMessage();
 
         System.out.println("Velocidades Incrementadas");
     }

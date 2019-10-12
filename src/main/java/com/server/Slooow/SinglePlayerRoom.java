@@ -253,7 +253,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 1 * unit;
 
 		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - unit,
-				type.TRAMPOLINE, 4000, 250, TICKTIME, 10, 22);
+				type.TRAMPOLINE, 4000, 250, 500, TICKTIME, 10, 22);
 
 		map.addMapObject(trampoline);
 		trampolineArray.add(trampoline);
@@ -348,7 +348,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosY += 6 * unit;
 
 		SpikesObstacle spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosX + 10 * unit, acumulativePosY,
-				type.OBSTACLE, 1500, 4000, 500,TICKTIME);
+				type.OBSTACLE, 1500, 4000, 500, TICKTIME);
 		map.addMapObject(spike1);
 		spikesArray.add(spike1);
 
@@ -624,6 +624,7 @@ public class SinglePlayerRoom extends Room {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATETRAMPOLINE");
 				msg.addProperty("id", i);
+				msg.addProperty("estate", trampoline.trampoEstate.toString());
 
 				try {
 					owner.sessionLock.lock();
@@ -649,14 +650,12 @@ public class SinglePlayerRoom extends Room {
 	public void updateObstacles() {
 		int i = 0;
 		for (SpikesObstacle obstacle : spikesArray) {
-			obstacle.update();
 
-			if (obstacle.turnOff| obstacle.turnOn) {
+			if (obstacle.update()) {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "OBSTACLEUPDATE");
 				msg.addProperty("id", i);
-				msg.addProperty("turnDown", obstacle.turnOff);
-				msg.addProperty("turnOn", obstacle.turnOn);
+				msg.addProperty("estate", obstacle.estate.toString());
 				try {
 					owner.sessionLock.lock();
 					owner.getSession().sendMessage(new TextMessage(msg.toString()));
@@ -673,13 +672,34 @@ public class SinglePlayerRoom extends Room {
 	}
 
 	public void finishRace() {
+		boolean success = false;
 		// acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if (acummulativeTime > TIMETOSUCESS) {
 			System.out.println("Has perdido, tu tiempo ha sido: " + acummulativeTime);
 			owner.decrementLifes();
+
 		} else {
+			success = true;
 			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
 		}
+
+		JsonObject msg = new JsonObject();
+			msg.addProperty("event", "FINISH");
+			msg.addProperty("winner", success);
+			msg.addProperty("time", acummulativeTime);
+			msg.addProperty("maxTime", TIMETOSUCESS);
+
+			try {
+				owner.sessionLock.lock();
+				owner.getSession().sendMessage(new TextMessage(msg.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				owner.sessionLock.unlock();
+			}
+
+		
 		executor.shutdown();
 		destroyRoom();
 	}

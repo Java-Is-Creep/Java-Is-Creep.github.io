@@ -1,18 +1,20 @@
 package com.server.Slooow;
 
+import com.server.Slooow.MapPowerUp.powerType;
 
-public class LigthWeigthPowerUp extends GenericPowerUp{
+public class LigthWeigthPowerUp extends GenericPowerUp {
 
     float massDecrease;
 
-    public LigthWeigthPowerUp(PlayerConected player, int timeMax, float massDecrease) {
-        super(player, timeMax);
+    public LigthWeigthPowerUp(PlayerConected player, int timeMax, float massDecrease,powerType myType) {
+        super(player, timeMax,myType);
         this.massDecrease = massDecrease;
     }
 
     public void usePowerUp(){
         player.mySnail.setUsingPowerUp(true);
         player.mySnail.mass *= massDecrease;
+        sendMessage();
         System.out.println("MASA INCREMENTADA, la nueva mas es: " + player.mySnail.mass);
     }
 

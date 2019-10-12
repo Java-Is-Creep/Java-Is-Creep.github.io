@@ -12,7 +12,9 @@ public class MapPowerUp extends MapObject {
     private final int NUMPOWERS = 6;
     ArrayList<PlayerConected> playerTargets = new ArrayList<>();
 
-    enum powerType {SHIELD,STAMINA,WEIGTH,LETUCCE,SPEED,INK,NULL}
+    enum powerType {
+        SHIELD, STAMINA, WEIGTH, LETUCCE, SPEED, INK, NULL
+    }
 
     powerType powerCreated = powerType.NULL;
 
@@ -28,40 +30,45 @@ public class MapPowerUp extends MapObject {
         if (playerIndex == -1) {
             playerTargets.add(player);
 
-            GenericPowerUp aux = new GenericPowerUp(player, 200);
+            GenericPowerUp aux = new GenericPowerUp(player, 200, powerCreated);
 
-             int index = (int) (Math.random() * NUMPOWERS);
-            
+            int index = (int) (Math.random() * NUMPOWERS);
 
             // dependiendo del valor se generaria un power up u otro
             switch (index) {
             case 0:
-                aux = new ShieldPowerUp(player);
                 powerCreated = powerType.SHIELD;
+                aux = new ShieldPowerUp(player, powerCreated);
+
                 System.out.println("Se ha creado un power up de escudo");
                 break;
             case 1:
-                aux = new BoostStaminaPowerUp(player, 60);
                 powerCreated = powerType.STAMINA;
+                aux = new BoostStaminaPowerUp(player, 60, powerCreated);
+
                 System.out.println("Se ha creado un power de stamina");
                 break;
             case 2:
-                aux = new LigthWeigthPowerUp(player, 60, 0.1f);
                 powerCreated = powerType.WEIGTH;
+                aux = new LigthWeigthPowerUp(player, 60, 0.1f, powerCreated);
+
                 System.out.println("Se ha creado power up de ligth weigth");
                 break;
             case 3:
-                aux = new LetuccePowerUp(player, 0, 300);
                 powerCreated = powerType.LETUCCE;
+                aux = new LetuccePowerUp(player, 0, 300, powerCreated);
+
                 System.out.println("Se ha creado un power up de Lechuga");
                 break;
             case 4:
-                aux = new SpeedPowerUp(player, 60, 4f, 4f, 4f, 4f);
                 powerCreated = powerType.SPEED;
+                aux = new SpeedPowerUp(player, 60, 4f, 4f, 4f, 4f, powerCreated);
+
                 System.out.println("Aumento velocidades");
             case 5:
-                aux = new InkPowerUp(player, 200);
                 powerCreated = powerType.INK;
+                aux = new InkPowerUp(player, 200, powerCreated);
+
                 System.out.println("Se ha creado un power de tinta");
                 break;
             default:
@@ -74,20 +81,20 @@ public class MapPowerUp extends MapObject {
 
     }
 
-    public void sendMessage(PlayerConected player){
+    public void sendMessage(PlayerConected player) {
         JsonObject msg = new JsonObject();
-			msg.addProperty("event", "TAKEPOWERUP");
-			msg.addProperty("type", powerCreated.toString());
+        msg.addProperty("event", "TAKEPOWERUP");
+        msg.addProperty("type", powerCreated.toString());
 
-			try {
-				player.sessionLock.lock();
-				player.getSession().sendMessage(new TextMessage(msg.toString()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				player.sessionLock.unlock();
-			}
+        try {
+            player.sessionLock.lock();
+            player.getSession().sendMessage(new TextMessage(msg.toString()));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            player.sessionLock.unlock();
+        }
     }
 
 }

@@ -2,18 +2,22 @@ package com.server.Slooow;
 
 public class Trampoline extends MapObstacle{
 
-    enum trampolineEstate { ACTIVE,NOTACTIVE}
+    enum trampolineEstate { ACTIVE,NOTACTIVE,PREACTIVATE}
 
     trampolineEstate trampoEstate = trampolineEstate.ACTIVE;
 
     private int forceX;
     private int forceY;
+    public int animationTime;
+    public int animationLeft;
 
-    public Trampoline(int width, int height, int posX, int posY, type myType, int timeToActive, int timeActive,
+    public Trampoline(int width, int height, int posX, int posY, type myType, int timeToActive, int timeActive,int animationTime,
             int tickTime, int forceX, int forceY) {
         super(width, height, posX, posY, myType, timeToActive, timeActive, tickTime);
         this.forceX = forceX;
         this.forceY = forceY;
+        this.animationTime = animationTime;
+        animationLeft = animationTime;
     }
 
     public boolean update(){
@@ -22,9 +26,24 @@ public class Trampoline extends MapObstacle{
                return restActiveTime();
             case NOTACTIVE:
                 return restNotActiveTime();
+                case PREACTIVATE:
+                return restAnimationTime();
+                
             default:
             return false;
         }
+    }
+
+    public boolean restAnimationTime(){
+        animationLeft -= tickTime;
+        if(animationLeft<0){
+            trampoEstate= trampolineEstate.ACTIVE;
+            animationLeft = animationTime;
+            return true;
+        }
+        return false;
+
+
     }
 
     public boolean restActiveTime(){
@@ -40,7 +59,7 @@ public class Trampoline extends MapObstacle{
     public boolean restNotActiveTime(){
         timeToActive -= tickTime;
         if(timeToActive < 0){
-            trampoEstate = trampolineEstate.ACTIVE;
+            trampoEstate = trampolineEstate.PREACTIVATE;
             timeToActive = MAXTIMETOACTIVE;
             return true;
         }

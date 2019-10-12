@@ -2,13 +2,11 @@
 package com.server.Slooow;
 
 public class SpikesObstacle extends MapObstacle {
-    public boolean turnOff = false;
-    public boolean turnOn = true;
     private int increment = 1;
     public int sparkDelay;
     int timeToDelay;
 
-    enum Estate { ACTIVE, NOTACTIVE, SPARKDELAY}
+    enum Estate { ACTIVE, NOTACTIVE, PREACTIVATE}
     Estate estate = Estate.NOTACTIVE;
 
     public SpikesObstacle(int width, int height, int posX, int posY, type myType, int timeToActive,int timeActive, int sparkDelay,int tickTime) {
@@ -28,7 +26,7 @@ public class SpikesObstacle extends MapObstacle {
         if(timeActive <= 0){
             estate = Estate.NOTACTIVE;
             timeActive = MAXTIMEACTIVE;
-            turnOff = true;
+            return true;
 
         }
         return false;
@@ -36,23 +34,25 @@ public class SpikesObstacle extends MapObstacle {
 
 
 
-    public void restNotActiveTime(){
-        turnOff = false;
+    public boolean restNotActiveTime(){
         timeToActive -= tickTime;
         if(timeToActive <= 0){
-            estate = Estate.SPARKDELAY;
+            estate = Estate.PREACTIVATE;
             timeToActive = MAXTIMETOACTIVE;
-            turnOn = true;
+            return true;
         }
+        return false;
     }
 
-    public void sparkDelay(){
-        turnOn= false;
+    public boolean sparkDelay(){
+        
         timeToDelay -= tickTime;
         if(timeToDelay <= 0){
             estate = Estate.ACTIVE;
             timeToDelay = sparkDelay;
+            return true;
         }
+        return false;
 
     }
 
@@ -68,7 +68,7 @@ public class SpikesObstacle extends MapObstacle {
             case NOTACTIVE:
                 restNotActiveTime();
                 return false;
-            case SPARKDELAY:
+            case PREACTIVATE:
                 sparkDelay();
 
                 return false;

@@ -1,6 +1,12 @@
 package com.server.Slooow;
 
+import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.google.gson.JsonObject;
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 /*
  * 
@@ -95,10 +101,9 @@ public class SnailInGame {
 	// Última acción que se ha realizado en el cliente
 	LastMovement lastMovement;
 
-	//booleans para mandar mensajes de animaciones
+	// booleans para mandar mensajes de animaciones
 	protected boolean sendRunOutStamina = false;
 	protected boolean sendRecoverStamina = false;
-
 
 	// Variables relacionadas con powerUps
 	GenericPowerUp powerUp = null;
@@ -108,13 +113,15 @@ public class SnailInGame {
 	protected boolean hasBoostStamina = false;
 	protected boolean hasInk = false;
 
-	// Interacción con el escenario
+	// COMUNICACION A Cliente
+	protected WebSocketSession mySession;
+	protected ReentrantLock sessionLock;
 
 	// Se accede a lastMovement tanto en esta clase como en el WebSocketSnailHandler
 	ReentrantLock lastMovementLock = new ReentrantLock();
 
 	// Inicialización según el caracol
-	public SnailInGame() {
+	public SnailInGame(WebSocketSession mySession, ReentrantLock sessionLock) {
 		speedX = 0;
 		speedY = 0;
 		runOutStamina = false;
@@ -122,6 +129,9 @@ public class SnailInGame {
 		breakForce = BREAKFORCE;
 		stamina = MAXSTAMINA;
 		mass = MASS;
+
+		this.mySession = mySession;
+		this.sessionLock = sessionLock;
 
 		// inicializamos los valores que varian con el power up
 		maxNormalSpeedX = MAXNORMALVELOCITYX;
@@ -183,13 +193,12 @@ public class SnailInGame {
 		sendRecoverStamina = false;
 		boolean isAcelerating = false;
 		boolean useObject = false;
-		if(lastMovement != null){
+		if (lastMovement != null) {
 			lastMovementLock.lock();
 			isAcelerating = lastMovement.isAcelerating;
 			useObject = lastMovement.useObject;
 			lastMovementLock.unlock();
 		}
-
 
 		if (useObject) {
 			if (!usingPowerUp) {
@@ -204,7 +213,7 @@ public class SnailInGame {
 		}
 
 		if (isOnObstacle) {
-			if(!runOutStamina){
+			if (!runOutStamina) {
 				if (spikes != null) {
 					if (!isOnWall && !isOnSlope) {
 						// si tienes escudo, lo pierdes y reseteas los pinchos
@@ -212,11 +221,13 @@ public class SnailInGame {
 							hasShield = false;
 							spikes.playerCrash();
 							isOnObstacle = false;
+							sendCrashMessage("LOSESHIELD");
 							System.out.println("se pincho pero se protegio con escudo");
 						} else {
 							spikes.playerCrash();
 							crashObstacle();
 							isOnObstacle = false;
+							sendCrashMessage("OBSTACLECOLLISION");
 							System.out.println("se pincho ");
 						}
 					}
@@ -317,14 +328,13 @@ public class SnailInGame {
 							maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians)) / wind.windForce;
 						}
 						/*
-						System.out.println("EN CUESTA");
-						System.out.println("IS IN WIND: " + isInWind);
-						System.out.println(" direccion der?: " + wind.goingRigth);
-						System.out.println(" maxSpeedX: " + maxSpeedInSlopeX);
-						System.out.println(" maxSpeedY: " + maxSpeedInSlopeY);
-						System.out.println(" acelerationX: " + acelerationX);
-						System.out.println(" acelerationY: " + acelerationY);
-						*/
+						 * System.out.println("EN CUESTA"); System.out.println("IS IN WIND: " +
+						 * isInWind); System.out.println(" direccion der?: " + wind.goingRigth);
+						 * System.out.println(" maxSpeedX: " + maxSpeedInSlopeX);
+						 * System.out.println(" maxSpeedY: " + maxSpeedInSlopeY);
+						 * System.out.println(" acelerationX: " + acelerationX);
+						 * System.out.println(" acelerationY: " + acelerationY);
+						 */
 					}
 
 				} else {
@@ -410,16 +420,15 @@ public class SnailInGame {
 			posY += speedY;
 		}
 		/*
-		if (isInWind) {
-			System.out.println("IS IN WIND: " + isInWind);
-			System.out.println(" direccion der?: " + wind.goingRigth);
-			System.out.println(" maxSpeedX: " + maxSpeedX);
-			System.out.println(" maxSpeedY: " + maxSpeedY);
-			System.out.println(" acelerationX: " + acelerationX);
-			System.out.println(" acelerationY: " + acelerationY);
-
-		}
-		*/
+		 * if (isInWind) { System.out.println("IS IN WIND: " + isInWind);
+		 * System.out.println(" direccion der?: " + wind.goingRigth);
+		 * System.out.println(" maxSpeedX: " + maxSpeedX);
+		 * System.out.println(" maxSpeedY: " + maxSpeedY);
+		 * System.out.println(" acelerationX: " + acelerationX);
+		 * System.out.println(" acelerationY: " + acelerationY);
+		 * 
+		 * }
+		 */
 
 		// reseteamos lo del viiento
 		isInWind = false;
@@ -473,6 +482,21 @@ public class SnailInGame {
 
 	public void activateShield() {
 		hasShield = true;
+	}
+
+	public void sendCrashMessage(String event) {
+		JsonObject msg = new JsonObject();
+		msg.addProperty("event", event);
+		try {
+			sessionLock.lock();
+			mySession.sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			sessionLock.unlock();
+		}
+
 	}
 
 }

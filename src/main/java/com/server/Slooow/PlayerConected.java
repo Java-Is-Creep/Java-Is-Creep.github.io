@@ -22,7 +22,7 @@ public class PlayerConected {
 		this.nombre = nombre;
 		this.sessionLock = sessionLock;
 		lifes = MAXNUMLIFES;
-		mySnail = new SnailInGame();
+		mySnail = new SnailInGame(session,sessionLock);
 	}
 	public WebSocketSession getSession() {
 		return session;
