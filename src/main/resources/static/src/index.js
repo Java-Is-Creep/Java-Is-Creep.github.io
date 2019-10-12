@@ -85,6 +85,7 @@ window.onload = function () {
         arrayTrapdoors: [],
         //Array de trampolines
         arrayTrampolines: [],
+        arrayObstacleFire: [],
         player: new this.Object()
     }
 
@@ -116,6 +117,12 @@ window.onload = function () {
                 }
                 game.global.player.sprite.x = Math.floor(msg.posX)
                 game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY))
+                if (game.global.player.maxStamina == 0){
+                    game.global.player.maxStamina = msg.stamina
+                }
+                var scale = msg.stamina * 3/game.global.maxStamina
+                game.global.player.stamina1.scale.setTo(scale, 3)
+                
                 game.global.player.stamina.setText(msg.stamina)
                 break
 
@@ -135,6 +142,7 @@ window.onload = function () {
                 var numOfPowerUps = 0;
                 var numOfTrapdoors = 0;
                 var numOfTrampolines = 0;
+                var numOfFires = 0;
 
                 for (var i = 0; i < type.length; i++) {
                     switch (type[i]) {
@@ -220,7 +228,15 @@ window.onload = function () {
                             game.global.arrayTrampolines[numOfTrampolines].height = arrayHeight[i]
                             game.global.arrayTrampolines[numOfTrampolines].width = arrayWidth[i]
                             numOfTrampolines++;
-                            break    
+                            break 
+                        case 'FIREOBSTACLE':
+                            this.game.global.arrayObstacleFire[numOfFires] = new Object()
+                            this.game.global.arrayObstacleFire[numOfFires].x = arrayPosX[i]
+                            this.game.global.arrayObstacleFire[numOfFires].y = arrayPosY[i]
+                            this.game.global.arrayObstacleFire[numOfFires].height = arrayHeight[i]
+                            this.game.global.arrayObstacleFire[numOfFires].width = arrayWidth[i]
+                            numOfFires++
+                            break       
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break
@@ -268,7 +284,7 @@ window.onload = function () {
             case 'UPDATETRAMPOLINE':
                 this.console.log('UPDATE TRAMPOLINEEEEEEEE')
                 var id = JSON.parse(msg.id)
-                game.global.arrayTrampolines[i].animations.play('activate', 8, true)
+                game.global.arrayTrampolines[id].animations.play('activate', 8, false)
                 break    
         }
 

@@ -14,19 +14,9 @@ Slooow.initGameState.prototype = {
 	},
 
 	create : function() {
-        //Background
+        //Background Global
 		this.background = game.add.sprite(game.world.centerX, game.world.centerY, 'background')
-        //this.background.height = this.game.height;
-	    //this.background.width = this.game.width;
         this.background.anchor.set(0.5, 0.5)
-
-		/*this.background = this.add.image(0, 0, "background");
-        this.background.height = this.game.height;
-        this.background.width = this.game.width;
-		
-        this.title = this.game.add.image(this.world.centerX, this.world.centerY - this.game.height / 3, "catSnail");
-        this.title.anchor.setTo(0.5);
-		this.scaleSprite(this.title, this.game.width, this.game.height / 3, 50, 1);*/
 		
         var style = {
 			font : "100px Arial",
