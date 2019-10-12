@@ -1,5 +1,4 @@
 Slooow.singlePlayerState = function (game) {
-	var graphics
 	var stamina
 	var camerados
 }
@@ -22,9 +21,6 @@ Slooow.singlePlayerState.prototype = {
 		b.anchor.set (0, 1)
 		//b.scale.set (0.35, 0.35)
 		b.tileScale.setTo (0.99,1)
-
-		this.graphics = game.add.graphics(0, 0);
-		this.graphics.lineStyle(2, 0x0000FF, 1);
 		
 		//console.log('trapdoor')
         //console.dir(game.global.arrayTrapdoors)
@@ -36,7 +32,6 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayGrounds[i].visible = true
 			game.global.arrayGrounds[i].anchor.setTo(0,1)
 			game.global.arrayGrounds[i].tileScale.setTo(0.5, 0.5)
-			//this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, 1400, 25)
 			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y)
 		}
 
@@ -148,12 +143,8 @@ Slooow.singlePlayerState.prototype = {
 		}
 		game.global.player.stamina = game.add.text(0, 0, "0", style2);
 		game.global.player.stamina.fixedToCamera = true;
-		/*
-				//Background
-				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
-				b.anchor.set (0.5, 0.5)
-				b.scale.setTo (1.2,1.2)
-		*/
+
+
 		//Boton back
 		buttonBack = game.add.button(200,
 			200, 'button', actionOnClickBack, this,
@@ -174,20 +165,12 @@ Slooow.singlePlayerState.prototype = {
 			console.log(game.global.arrayPowerUps[i].height)
 			console.log(game.global.arrayPowerUps[i].width)
 			console.log('screen height' + game.world.height)
-			//this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
 		}
 
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
 			game.state.start('mainMenuState')
 		}
-		
-		//game.camera.scale.x += 0.1;
-		//game.camera.scale.y += 0.1;
-		// camera.follow(target, style, lerpX, lerpY, offsetX, offsetY)
-		//game.camera.follow(game.global.player.sprite);
-		//game.camera.focusOnXY(game.global.player.sprite.x,game.global.player.sprite.x);
-		//game.camera.followOffset.set(-300, 0);
 	},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
