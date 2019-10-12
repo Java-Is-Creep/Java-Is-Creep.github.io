@@ -36,7 +36,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto unirse a sala
 		textButtonWorld1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY - 300, game.world.activeLanguage.JoinRoom, style)
+            game.world.centerY - 300, game.global.activeLanguage.JoinRoom, style)
         textButtonWorld1.anchor.set(0.5)
         textButtonWorld1.scale.setTo(0.8,0.8)
 
@@ -49,7 +49,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto crear sala
 		textButtonWorld2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 300, game.world.activeLanguage.CreateRoom, style)
+            game.world.centerY - 300, game.global.activeLanguage.CreateRoom, style)
         textButtonWorld2.anchor.set(0.5)
         textButtonWorld2.scale.setTo(0.8,0.8)
 
@@ -62,7 +62,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto buscar sala
 		textButtonWorld3 = game.add.text(game.world.centerX +400,
-            game.world.centerY - 300, game.world.activeLanguage.SearchRoom, style)
+            game.world.centerY - 300, game.global.activeLanguage.SearchRoom, style)
         textButtonWorld3.anchor.set(0.5)
         textButtonWorld3.scale.setTo(0.8,0.8)
 
@@ -76,7 +76,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto ambientacion1
 		textButtonWorld1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY , game.world.activeLanguage.Field, style)
+            game.world.centerY , game.global.activeLanguage.Field, style)
         textButtonWorld1.anchor.set(0.5)
         textButtonWorld1.scale.setTo(0.8,0.8)
 
@@ -89,7 +89,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto ambientacion2
 		textButtonWorld2 = game.add.text(game.world.centerX ,
-            game.world.centerY , game.world.activeLanguage.Kitchen, style)
+            game.world.centerY , game.global.activeLanguage.Kitchen, style)
         textButtonWorld2.anchor.set(0.5)
         textButtonWorld2.scale.setTo(0.8,0.8)
 
@@ -102,7 +102,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto ambientacion3
 		textButtonWorld3 = game.add.text(game.world.centerX +400,
-            game.world.centerY , game.world.activeLanguage.Ice, style)
+            game.world.centerY , game.global.activeLanguage.Ice, style)
         textButtonWorld3.anchor.set(0.5)
         textButtonWorld3.scale.setTo(0.8,0.8)
 
@@ -115,7 +115,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto mapa 1
 		textButtonMap1 = game.add.text(game.world.centerX ,
-            game.world.centerY +150, game.world.activeLanguage.Map1, style)
+            game.world.centerY +150, game.global.activeLanguage.Map1, style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
@@ -128,7 +128,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto mapa 2
 		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY +250 , game.world.activeLanguage.Map2, style)
+            game.world.centerY +250 , game.global.activeLanguage.Map2, style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
 
@@ -141,7 +141,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto mapa 3
 		textButtonMap3 = game.add.text(game.world.centerX ,
-            game.world.centerY +400 , game.world.activeLanguage.Map3, style)
+            game.world.centerY +400 , game.global.activeLanguage.Map3, style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
@@ -154,7 +154,7 @@ Slooow.menuMultiOnlineState.prototype = {
 
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, game.world.activeLanguage.Back, style)
+            40, game.global.activeLanguage.Back, style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 

@@ -1,5 +1,6 @@
 {
     "ESPAÑITA" : {
+        "Language" : "ESPAÑITA",
         "InputUser" : "Nombre de Usuario",
         "InputPass" : "Contraseña",
         "InputConfirm" : "Confirmar contraseña",
@@ -29,6 +30,7 @@
     },
     
     "eng" : {
+        "Language"  : "eng",
         "InputUser" : "Username",
         "InputPass" : "Password",
         "InputConfirm" : "Confirm Password",

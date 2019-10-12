@@ -33,7 +33,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonBack.scale.setTo(0.2, 0.3)
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, game.world.activeLanguage.Back, style)
+            40, game.global.activeLanguage.Back, style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
@@ -45,7 +45,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonWorld1.scale.setTo(0.8, 0.8)
         //Texto ambientacion1
 		textButtonWorld1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY - 200, game.world.activeLanguage.Field, style)
+            game.world.centerY - 200, game.global.activeLanguage.Field, style)
         textButtonWorld1.anchor.set(0.5)
         textButtonWorld1.scale.setTo(0.8,0.8)
 
@@ -57,7 +57,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonWorld2.scale.setTo(0.8, 0.8)
         //Texto ambientacion2
 		textButtonWorld2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 200, game.world.activeLanguage.Kitchen, style)
+            game.world.centerY - 200, game.global.activeLanguage.Kitchen, style)
         textButtonWorld2.anchor.set(0.5)
         textButtonWorld2.scale.setTo(0.8,0.8)
 
@@ -69,7 +69,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonWorld3.scale.setTo(0.8, 0.8)
         //Texto ambientacion3
 		textButtonWorld3 = game.add.text(game.world.centerX +400,
-            game.world.centerY - 200, game.world.activeLanguage.Ice, style)
+            game.world.centerY - 200, game.global.activeLanguage.Ice, style)
         textButtonWorld3.anchor.set(0.5)
         textButtonWorld3.scale.setTo(0.8,0.8)
 
@@ -81,7 +81,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonMap1.scale.setTo(2, 0.8)
         //Texto mapa 1
 		textButtonMap1 = game.add.text(game.world.centerX ,
-            game.world.centerY , game.world.activeLanguage.Map1, style)
+            game.world.centerY , game.global.activeLanguage.Map1, style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
@@ -93,7 +93,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonMap2.scale.setTo(2, 0.8)
         //Texto mapa 2
 		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY +150 , game.world.activeLanguage.Map2, style)
+            game.world.centerY +150 , game.global.activeLanguage.Map2, style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
 
@@ -105,7 +105,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         buttonMap3.scale.setTo(2, 0.8)
         //Texto mapa 3
 		textButtonMap3 = game.add.text(game.world.centerX ,
-            game.world.centerY +300 , game.world.activeLanguage.Map3, style)
+            game.world.centerY +300 , game.global.activeLanguage.Map3, style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
