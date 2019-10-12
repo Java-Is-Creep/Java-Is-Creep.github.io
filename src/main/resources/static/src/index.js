@@ -78,13 +78,14 @@ window.onload = function () {
         //Array de rampas. Tiene: x, y, width, height
         arraySlopes: [],
         //Array de obstaculos tipo pincho. Tiene: posX, posY
-        arrayObstacleSpikes: [],
+        arrayObstacles: [],
         //Array de power ups
         arrayPowerUps: [],
         //ArrayTrapdoors
         arrayTrapdoors: [],
         //Array de trampolines
         arrayTrampolines: [],
+        arrayObstacleFire: [],
         player: new this.Object()
     }
 
@@ -116,6 +117,12 @@ window.onload = function () {
                 }
                 game.global.player.sprite.x = Math.floor(msg.posX)
                 game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY))
+                if (game.global.player.maxStamina == 0){
+                    game.global.player.maxStamina = msg.stamina
+                }
+                var scale = msg.stamina * 3/1200
+                game.global.player.stamina1.scale.setTo(scale, 3)
+                
                 game.global.player.stamina.setText(msg.stamina)
                 break
 
@@ -131,7 +138,7 @@ window.onload = function () {
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
                 var numOfSlopes = 0;
-                var numOfObstacleSpikes = 0;
+                var numOfObstacles = 0;
                 var numOfPowerUps = 0;
                 var numOfTrapdoors = 0;
                 var numOfTrampolines = 0;
@@ -164,7 +171,12 @@ window.onload = function () {
                             numOfSlopes++
                             break
                         case 'POWERUP':
-                            //Por ahora no hace nada
+                                this.game.global.arrayPowerUps[numOfPowerUps] = new Object()
+                                this.game.global.arrayPowerUps[numOfPowerUps].x = arrayPosX[i]
+                                this.game.global.arrayPowerUps[numOfPowerUps].y = arrayPosY[i]
+                                this.game.global.arrayPowerUps[numOfPowerUps].height = arrayHeight[i]
+                                this.game.global.arrayPowerUps[numOfPowerUps].width = arrayWidth[i]
+                                numOfPowerUps++
                             break;
                         case 'OBSTACLE':
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new this.Object() 
@@ -186,14 +198,14 @@ window.onload = function () {
                             // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
                             console.log("Patata")
-                            console.dir(this.game.global.arrayObstacleSpikes[numOfObstacleSpikes])
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = new Object()
+                            console.dir(this.game.global.arrayObstacles[numOfObstacles])
+                            this.game.global.arrayObstacles[numOfObstacles] = new Object()
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = game.add.image(arrayPosX[i],game.world.height - arrayPosY[i], 'button')
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].x = arrayPosX[i]
-                            this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].y = arrayPosY[i]
+                            this.game.global.arrayObstacles[numOfObstacles].x = arrayPosX[i]
+                            this.game.global.arrayObstacles[numOfObstacles].y = arrayPosY[i]
                             console.log("Patata777")
-                            console.dir(this.game.global.arrayObstacleSpikes)
-                            numOfObstacleSpikes++
+                            console.dir(this.game.global.arrayObstacles)
+                            numOfObstacles++
                             break
                         case 'GENERICPOWERUP':
                             this.game.global.arrayPowerUps[numOfPowerUps] = new Object()
@@ -220,7 +232,8 @@ window.onload = function () {
                             game.global.arrayTrampolines[numOfTrampolines].height = arrayHeight[i]
                             game.global.arrayTrampolines[numOfTrampolines].width = arrayWidth[i]
                             numOfTrampolines++;
-                            break    
+                            break 
+                              
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break
@@ -240,7 +253,7 @@ window.onload = function () {
                 game.state.start('singlePlayerState')
                 break;
 
-            case 'SPIKEOBSTACLEUPDATE':
+            case 'OBSTACLEUPDATE':
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 for (var i = 0; i < this.game.global.arrayObstacleSpikes.length; i++) {
@@ -268,7 +281,9 @@ window.onload = function () {
             case 'UPDATETRAMPOLINE':
                 this.console.log('UPDATE TRAMPOLINEEEEEEEE')
                 var id = JSON.parse(msg.id)
-                game.global.arrayTrampolines[i].animations.play('activate', 8, true)
+                game.global.arrayTrampolines[id].animations.play('activate', 8, false)
+                break    
+            case 'GROUNDCOLLISION':
                 break    
         }
 

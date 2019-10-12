@@ -12,18 +12,15 @@ Slooow.bootState = function (game) {}
 
 Slooow.bootState.prototype = {
 
-	// Solo calculos de pantalla, pero se puede meter animacion para cargar los assets
-
-	// Solo se ejecuta una vez, se pasa a preload (funcion), las funciones se van a guardar en un mapa (global)
 	init: function () {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **BOOT** state");
 		}
+		// Modo de Re-escalado = SHOW ALL --> Se mantienen las proporciones para mostrar en pantalla
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		// Los bordes generados por la pantalla se dividen entre ambos lados
 		this.scale.pageAlignVertically = true;
 		this.scale.pageAlignHorizontally = true;
-
-		//this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 	},
 
 	preload: function () {
@@ -32,9 +29,7 @@ Slooow.bootState.prototype = {
 		this.time.desiredFps = game.global.FPS
 	},
 
-	create: function () {
-		
-	},
+	create: function () {},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
 	update : function() {

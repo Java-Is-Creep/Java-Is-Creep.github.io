@@ -14,11 +14,17 @@ Slooow.mainMenuState.prototype = {
     },
 
     preload: function () {
+        //Background
+        this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
+        this.background.height = this.game.height;
+        this.background.width = this.game.width;
+        this.background.anchor.set(0.5, 0.5)
     },
 
     create: function () {
-
+        // Control de la pestaña de opciones
         optionsClicked = false
+        // MinAlpha poner casi en invisible los botones no disponibles
         minAlpha = 0.1
         maxAlpha = 1
 
@@ -39,27 +45,26 @@ Slooow.mainMenuState.prototype = {
             fill: "#ffffff",
             boundsAlignH: "left"
         };
-        //Background
-        this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
-        this.background.height = this.game.height;
-	    this.background.width = this.game.width;
-        this.background.anchor.set(0.5, 0.5)
-        
 
-        //Texto titulo
+        // TITLE
         textTitle = game.add.text(game.world.centerX,
             50, 'SLOOOW', style2)
         textTitle.anchor.set(0.5)
         textTitle.scale.setTo(0.5, 0.5)
 
-        //Boton empezar juego solo
+        //Texto usuario
+        textUsername = game.add.text(160,
+            40, game.global.username, style3)
+        textUsername.anchor.set(0.5)
+        textUsername.scale.setTo(0.5, 0.5)
+
+        // Boton empezar juego solo
         buttonStartSolo = game.add.button(game.world.centerX + 100,
             game.world.centerY - 50, 'button', actionOnClickStartSolo, this,
             0, 0, 0)
         buttonStartSolo.anchor.set(0.5)
         buttonStartSolo.scale.setTo(0.3, 0.3)
-
-        //Texto empezar juego solo
+        // Texto empezar juego solo
         textButtonStartSolo = game.add.text(game.world.centerX + 100,
             game.world.centerY - 50, 'Solo', style)
         textButtonStartSolo.anchor.set(0.5)
@@ -71,7 +76,6 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonStartMarathon.anchor.set(0.5)
         buttonStartMarathon.scale.setTo(0.3, 0.3)
-
         //Texto empezar maraton
         textButtonStartMarathon = game.add.text(game.world.centerX + 300,
             game.world.centerY - 50, 'Maraton', style)
@@ -84,7 +88,6 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonStartMultiOnline.anchor.set(0.5)
         buttonStartMultiOnline.scale.setTo(0.3, 0.3)
-
         //Texto empezar multi online
         textButtonStartMultiOnline = game.add.text(game.world.centerX + 100,
             game.world.centerY + 100, 'Online', style)
@@ -97,13 +100,11 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonStartMultiLocal.anchor.set(0.5)
         buttonStartMultiLocal.scale.setTo(0.3, 0.3)
-
         //Texto empezar multi local
         textButtonStartMultiLocal = game.add.text(game.world.centerX + 300,
             game.world.centerY + 100, 'Local', style)
         textButtonStartMultiLocal.anchor.set(0.5)
         textButtonStartMultiLocal.scale.setTo(0.5, 0.5)
-
 
         //Boton tienda
         buttonShop = game.add.button(game.world.centerX - 300,
@@ -111,7 +112,6 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonShop.anchor.set(0.5)
         buttonShop.scale.setTo(0.3, 0.3)
-
         //Texto tienda
         textButtonShop = game.add.text(game.world.centerX - 300,
             game.world.centerY, 'Shop', style)
@@ -124,7 +124,6 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonInstagram.anchor.set(0.5)
         buttonInstagram.scale.setTo(0.3, 0.3)
-
         //Texto instagram
         textButtonInstagram = game.add.text(game.world.centerX - 150,
             game.world.centerY + 250, 'Instagram', style)
@@ -137,7 +136,6 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonWeb.anchor.set(0.5)
         buttonWeb.scale.setTo(0.3, 0.3)
-
         //Texto web
         textButtonWeb = game.add.text(game.world.centerX,
             game.world.centerY + 250, 'Web', style)
@@ -150,13 +148,11 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonTwitter.anchor.set(0.5)
         buttonTwitter.scale.setTo(0.3, 0.3)
-
         //Texto twitter
         textButtonTwitter = game.add.text(game.world.centerX + 150,
             game.world.centerY + 250, 'Twitter', style)
         textButtonTwitter.anchor.set(0.5)
         textButtonTwitter.scale.setTo(0.5, 0.5)
-
 
         //Boton desconectar
         buttonDisconnect = game.add.button(60,
@@ -164,18 +160,11 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonDisconnect.anchor.set(0.5)
         buttonDisconnect.scale.setTo(0.25, 0.3)
-
         //Texto desconectar
         textButtonDisconnect = game.add.text(60,
             40, 'Disconnect', style)
         textButtonDisconnect.anchor.set(0.5)
         textButtonDisconnect.scale.setTo(0.5, 0.5)
-
-        //Texto usuario
-        textUsername = game.add.text(160,
-            40, game.global.username, style3)
-        textUsername.anchor.set(0.5)
-        textUsername.scale.setTo(0.5, 0.5)
 
         //Boton opciones
         buttonOptions = game.add.button(game.world.width - 60,
@@ -183,7 +172,6 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonOptions.anchor.set(0.5)
         buttonOptions.scale.setTo(0.25, 0.3)
-
         //Texto opciones
         textButtonOptions = game.add.text(game.world.width - 60,
             40, 'Options', style)
@@ -198,7 +186,6 @@ Slooow.mainMenuState.prototype = {
         buttonSound.scale.setTo(0.25, 0.3)
         buttonSound.alpha = 0
         buttonSound.inputEnabled = false
-
         //Texto sonido
         textButtonSound = game.add.text(game.world.width - 200,
             100, 'Sound', style)
@@ -214,7 +201,6 @@ Slooow.mainMenuState.prototype = {
         buttonLanguage.scale.setTo(0.25, 0.3)
         buttonLanguage.alpha = 0
         buttonLanguage.inputEnabled = false
-
         //Texto sonido
         textButtonLanguage = game.add.text(game.world.width - 200,
             150, 'Language', style)
@@ -230,8 +216,7 @@ Slooow.mainMenuState.prototype = {
         buttonContact.scale.setTo(0.25, 0.3)
         buttonContact.alpha = 0
         buttonContact.inputEnabled = false
-
-        //Texto sonido
+        //Texto contacto
         textButtonContact = game.add.text(game.world.width - 200,
             200, 'Contact Us', style)
         textButtonContact.anchor.set(0.5)
@@ -239,33 +224,19 @@ Slooow.mainMenuState.prototype = {
         textButtonContact.alpha = 0
 
         function actionOnClickStartSolo() {
-            /*let msg = {
-                event: 'SINGLEPLAYER',
-                playerName: game.global.username,
-                roomName: 'sala1'
-            }
-            game.global.socket.send(JSON.stringify(msg))*/
             game.state.start('menuSoloAndMultiLocalState')
         }
 
         function actionOnClickStartMarathon() {
-            let msg = {
-                event: 'MARATHON',
-                playerName: game.global.username,
-                roomName: 'sala1'
-            }
-            game.global.socket.send(JSON.stringify(msg))
-            game.state.start('marathonState')
+            //game.state.start('marathonState')
         }
 
         function actionOnClickStartOnline() {
-            console.log('pulsado online')
             game.state.start('menuMultiOnlineState')
         }
 
         function actionOnClickStartLocal() {
-            console.log('Pulsado local')
-            //game.state.start('shopState')
+            //game.state.start('localState')
         }
 
         function actionOnClickStartShop() {
@@ -295,13 +266,11 @@ Slooow.mainMenuState.prototype = {
             game.state.start('initSesionState')
         }
 
-        function actionOnClickStartShop() {
-            game.state.start('shopState')
-        }
-
+        // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás
         function actionOnClickOptions() {
-            //console.log('pulsado')
             if (optionsClicked == false) {
+                optionsClicked = true
+
                 textTitle.alpha = minAlpha;
 
                 buttonStartSolo.alpha = minAlpha
@@ -340,8 +309,6 @@ Slooow.mainMenuState.prototype = {
                 buttonDisconnect.inputEnabled = false
                 textButtonDisconnect.alpha = minAlpha
 
-                optionsClicked = true
-
                 buttonSound.alpha = 1
                 buttonSound.inputEnabled = true
                 textButtonSound.alpha = 1
@@ -353,8 +320,9 @@ Slooow.mainMenuState.prototype = {
                 buttonContact.alpha = 1
                 buttonContact.inputEnabled = true
                 textButtonContact.alpha = 1
-
             } else{
+                optionsClicked = false
+
                 textTitle.alpha = maxAlpha;
 
                 buttonStartSolo.alpha = maxAlpha
@@ -393,8 +361,6 @@ Slooow.mainMenuState.prototype = {
                 buttonDisconnect.inputEnabled = true
                 textButtonDisconnect.alpha = maxAlpha
 
-                optionsClicked = false
-
                 buttonSound.alpha = 0
                 buttonSound.inputEnabled = false
                 textButtonSound.alpha = 0
@@ -407,19 +373,14 @@ Slooow.mainMenuState.prototype = {
                 buttonContact.inputEnabled = false
                 textButtonContact.alpha = 0
             }
-
         }
 
         function actionOnClickSound (){
-            console.log ('boton sonido pulsado')
         }
 
         function actionOnClickLanguage(){
-            console.log ('pulsado boton lenguaje')
         }
-
     },
 
-    update: function () {
-    }
+    update: function () {}
 }
