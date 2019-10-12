@@ -43,7 +43,7 @@ Slooow.preloadState.prototype = {
 		game.load.image('sartenSprite', './assets/img/sarten_normal.png')
 		game.load.spritesheet('trapdoor', './assets/img/trampilla_sheet.png', 600, 300, 2)
 		game.load.spritesheet('sartenSpritesheet', './assets/img/sarten_spritesheet.png', 600, 600, 9)
-		game.load.spritesheet('firSpritsheet', './assets/img/fuego_spritesheet.png', 500, 500, 6)
+		game.load.spritesheet('fireSpritesheet', './assets/img/fuego_spritesheet.png', 500, 500, 6)
 		// Tiles Hielo
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////

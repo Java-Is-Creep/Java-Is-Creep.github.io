@@ -10,14 +10,14 @@ Slooow.lobbyState.prototype = {
 	},
 
 	preload : function() {
-		
+		//Background
+        this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
+        this.background.height = this.game.height;
+        this.background.width = this.game.width;
+        this.background.anchor.set(0.5, 0.5)
 	},
 
 	create : function() {
-        //Background
-        var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
-		b.anchor.set (0.5, 0.5)
-        b.scale.setTo (1.2,1.2)
 
         var style = {
 			font : "40px Arial",
@@ -35,7 +35,6 @@ Slooow.lobbyState.prototype = {
             0, 0, 0)
         buttonBack.anchor.set(0.5)
         buttonBack.scale.setTo(0.2, 0.3)
-
         //Texto desconectar
 		textButtonBack = game.add.text(50,
             40, 'Back', style)
@@ -48,7 +47,6 @@ Slooow.lobbyState.prototype = {
             0, 0, 0)
         buttonReady.anchor.set(0.5)
         buttonReady.scale.setTo(0.2, 0.3)
-
         //Texto ready
 		textButtonReady = game.add.text(game.world.centerX + 400,
             game.world.centerY + 250, 'Ready', style)
@@ -59,7 +57,6 @@ Slooow.lobbyState.prototype = {
         var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaSnail')
 		chosen.anchor.setTo(0.5, 0.5);
         chosen.scale.setTo(0.4, 0.4)
-
         chosen.inputEnabled = true
         chosen.events.onInputDown.add(chooseCharacter, this)
         

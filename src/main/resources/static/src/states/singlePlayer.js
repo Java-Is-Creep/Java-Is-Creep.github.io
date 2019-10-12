@@ -45,13 +45,7 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayWalls[i].anchor.setTo(0,1)
 			game.global.arrayWalls[i].tileScale.setTo(0.5, 0.5)
 		}
-		//game.global.arrayObstacleSpikes = new Array (5)
-		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++){
-			game.global.arrayObstacleSpikes[i] = game.add.image(game.global.arrayObstacleSpikes[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayObstacleSpikes[i].y, 'button')
-			game.global.arrayObstacleSpikes[i].visible = true
-			game.global.arrayObstacleSpikes[i].anchor.setTo (0,1)
-			game.global.arrayObstacleSpikes[i].scale.setTo (0.22,0.3)
-		}
+		
 
 		for (var i = 0; i< game.global.arraySlopes.length; i++){
 			//console.log('angulo en singleplayer 1: '+ game.global.arraySlopes[i].height)
@@ -94,9 +88,23 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayTrampolines[i].scale.setTo(0.5, 0.5)
 		}
 
-		for (var i = 0; i< game.global.arrayObstacleFire.length; i++){
-			game.global.arrayObstacleFire[i] = game.add.image(game.global.arrayObstacleFire[i].x, game.world.height - game.global.arrayObstacleFire[i].y, 'fireSpritesheet')
+		for (var i = 0; i< game.global.arrayObstacles.length; i++){
+			game.global.arrayObstacles[i] = game.add.image(game.global.arrayObstacles[i].x, game.world.height - game.global.arrayObstacles[i].y, 'fireSpritesheet')
+			game.global.arrayObstacles[i].frame = 0;
+			game.global.arrayObstacles[i].animations.add('stopped', [0], 1, false)
+			game.global.arrayObstacles[i].animations.add('sparks', [1,2], 4, true)
+			game.global.arrayObstacles[i].animations.add('fire', [3,4,5], 6, true) 
+			game.global.arrayObstacles[i].visible = true
+			game.global.arrayObstacles[i].anchor.setTo (0, 0)
+			game.global.arrayObstacles[i].scale.setTo(0.1, 0.1)
 		}
+
+		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
+			game.global.arrayPowerUps[i] = game.add.image(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, 'button')
+			game.global.arrayPowerUps[i].visible = true
+			game.global.arrayPowerUps[i].anchor.setTo(0.5,0.5)
+			game.global.arrayPowerUps[i].scale.setTo(0.5, 0.5)
+		} 
 
 		//game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'catSnail')
 		
@@ -170,13 +178,7 @@ Slooow.singlePlayerState.prototype = {
 		textButtonBack.scale.setTo(0.5, 0.5)*/
 
 
-		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
-			console.log(game.global.arrayPowerUps[i].x)
-			console.log(game.global.arrayPowerUps[i].y)
-			console.log(game.global.arrayPowerUps[i].height)
-			console.log(game.global.arrayPowerUps[i].width)
-			console.log('screen height' + game.world.height)
-		}
+		
 
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
@@ -187,13 +189,7 @@ Slooow.singlePlayerState.prototype = {
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
 	update: function () {
 
-		if (game.global.arrayObstacleSpikes.length > 0) {
-			for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-				//var spike = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
-				//spike.anchor.setTo(0,1)
-				//spike.scale.setTo(0.25, 0.3)
-			}
-		}
+		
 
 		let msg = {
 			event: 'UPDATEINPUT',
