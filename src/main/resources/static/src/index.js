@@ -99,7 +99,10 @@ window.onload = function () {
 
     game.global.socket.onmessage = (message) => {
         var msg = JSON.parse(message.data)
-        console.log(msg);
+        if (game.global.DEBUG_MODE){
+            console.log(msg);
+        }
+        
 
         switch (msg.event) {
 
@@ -237,7 +240,10 @@ window.onload = function () {
                 break
             case 'UPDATETRAPDOOR':
                 console.log('EVENTO UPDATE TRAPDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR')
+                console.log(msg);
+                
                 var id = JSON.parse(msg.id)
+                console.log(this.game.global.arrayTrapdoors[id])
                 if (this.game.global.arrayTrapdoors[id] !== undefined) {
                     if (game.global.arrayTrapdoors[id].frame == 0) {
                         game.global.arrayTrapdoors[id].frame = 1
@@ -245,6 +251,7 @@ window.onload = function () {
                         game.global.arrayTrapdoors[id].frame = 0
                     }
                 }
+                console.log(this.game.global.arrayTrapdoors[id])
                 break
         }
 

@@ -27,10 +27,10 @@ Slooow.singlePlayerState.prototype = {
 		this.graphics = game.add.graphics(0, 0);
 		this.graphics.lineStyle(2, 0x0000FF, 1);
 		
-		console.log('trapdoor')
-        console.dir(game.global.arrayTrapdoors)
+		//console.log('trapdoor')
+        //console.dir(game.global.arrayTrapdoors)
 		// Cargamos los objetos posibles del mapa
-		console.dir(game.global.arrayGrounds)
+		//console.dir(game.global.arrayGrounds)
 		for (var i = 0; i< game.global.arrayGrounds.length; i++){
 			//game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
 			game.global.arrayGrounds[i] = game.add.tileSprite(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y+25, game.global.arrayGrounds[i].width, 25, 'groundTile')
@@ -57,14 +57,14 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i< game.global.arraySlopes.length; i++){
-			console.log('angulo en singleplayer 1: '+ game.global.arraySlopes[i].height)
+			//console.log('angulo en singleplayer 1: '+ game.global.arraySlopes[i].height)
 			var angulo = game.global.arraySlopes[i].height
 			game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x , game.world.height - game.global.arraySlopes[i].y -25  , 'slopeDown' )
 			//game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x -20, game.world.height- game.global.arraySlopes[i].y - 30, 'slopeDown' )
-			console.log('angulo en singleplayer 2: '+ game.global.arraySlopes[i].height)
+			//console.log('angulo en singleplayer 2: '+ game.global.arraySlopes[i].height)
 			game.global.arraySlopes[i].anchor.setTo (0.0,0.0)
 			
-			console.log("Angulo en singleplayer 3"+ this.game.global.arraySlopes[i].height)
+			//console.log("Angulo en singleplayer 3"+ this.game.global.arraySlopes[i].height)
 			if (angulo < 0) {
 				game.global.arraySlopes[i].angle += - angulo
 			} else{
@@ -74,10 +74,10 @@ Slooow.singlePlayerState.prototype = {
 			//game.global.arraySlopes[i].anchor.setTo (0.5,0.5)
 			game.global.arraySlopes[i].scale.setTo (0.5,0.5)
 		}
-		console.log('trapdoor')
-        console.dir(game.global.arrayTrapdoors)
+		//console.log('trapdoor')
+       // console.dir(game.global.arrayTrapdoors)
 		//Pintamos las trampillas
-		console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
+		//console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
 		for (var i = 0; i< game.global.arrayTrapdoors.length; i++){
 			console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
 			game.global.arrayTrapdoors[i] = game.add.image(game.global.arrayTrapdoors[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayTrapdoors[i].y, 'trapdoor')
@@ -97,10 +97,10 @@ Slooow.singlePlayerState.prototype = {
 		
 
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
-		game.global.player.sprite.scale.setTo(0.23, 0.23)
+		game.global.player.sprite.scale.setTo(0.28, 0.28)
 
-		console.log ("Array Cargado")
-		console.dir (game.global.arrayObstacleSpikes)
+		//console.log ("Array Cargado")
+		//console.dir (game.global.arrayObstacleSpikes)
 		
 		//game.global.arrayObstacleSpikes = game.add.image(game.world.centerX, game.world.centerY, 'button')
 		//var spike = game.add.image(game.world.centerX, game.world.centerY, 'button')
