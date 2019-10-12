@@ -197,23 +197,24 @@ public class SnailInGame {
 		}
 
 		if (isOnObstacle) {
-			if (spikes != null) {
-				if (!isOnWall && !isOnSlope) {
-					// si tienes escudo, lo pierdes y reseteas los pinchos
-					if (hasShield) {
-						hasShield = false;
-						spikes.playerCrash();
-						isOnObstacle = false;
-						System.out.println("se pincho pero se protegio con escudo");
-					} else {
-						spikes.playerCrash();
-						crashObstacle();
-						isOnObstacle = false;
-						System.out.println("se pincho ");
+			if(!runOutStamina){
+				if (spikes != null) {
+					if (!isOnWall && !isOnSlope) {
+						// si tienes escudo, lo pierdes y reseteas los pinchos
+						if (hasShield) {
+							hasShield = false;
+							spikes.playerCrash();
+							isOnObstacle = false;
+							System.out.println("se pincho pero se protegio con escudo");
+						} else {
+							spikes.playerCrash();
+							crashObstacle();
+							isOnObstacle = false;
+							System.out.println("se pincho ");
+						}
 					}
 				}
 			}
-
 		}
 
 		// Si tienes stamina haces funcionamiento normal
