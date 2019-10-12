@@ -81,7 +81,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartSolo.scale.setTo(0.3, 0.3)
         // Texto empezar juego solo
         textButtonStartSolo = game.add.text(game.world.centerX + 100,
-            game.world.centerY - 50, 'Solo', style)
+            game.world.centerY - 50, game.global.activeLanguage.SoloMode, style)
         textButtonStartSolo.anchor.set(0.5)
         textButtonStartSolo.scale.setTo(0.5, 0.5)
 
@@ -93,7 +93,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMarathon.scale.setTo(0.3, 0.3)
         //Texto empezar maraton
         textButtonStartMarathon = game.add.text(game.world.centerX + 300,
-            game.world.centerY - 50, 'Maraton', style)
+            game.world.centerY - 50, game.global.activeLanguage.Marathon, style)
         textButtonStartMarathon.anchor.set(0.5)
         textButtonStartMarathon.scale.setTo(0.5, 0.5)
 
@@ -105,7 +105,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMultiOnline.scale.setTo(0.3, 0.3)
         //Texto empezar multi online
         textButtonStartMultiOnline = game.add.text(game.world.centerX + 100,
-            game.world.centerY + 100, 'Online', style)
+            game.world.centerY + 100, game.global.activeLanguage.Online, style)
         textButtonStartMultiOnline.anchor.set(0.5)
         textButtonStartMultiOnline.scale.setTo(0.5, 0.5)
 
@@ -117,7 +117,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMultiLocal.scale.setTo(0.3, 0.3)
         //Texto empezar multi local
         textButtonStartMultiLocal = game.add.text(game.world.centerX + 300,
-            game.world.centerY + 100, 'Local', style)
+            game.world.centerY + 100, game.global.activeLanguage.Local, style)
         textButtonStartMultiLocal.anchor.set(0.5)
         textButtonStartMultiLocal.scale.setTo(0.5, 0.5)
 
@@ -182,6 +182,11 @@ Slooow.mainMenuState.prototype = {
         buttonSoundOff.inputEnabled = false
 
         //Boton ESPAÑITA AE
+        if(game.global.activeLanguage.Language == 'eng'){
+            this.language = 'eng'
+        } else {
+            this.language = 'ESPAÑITA'
+        }
         buttonAE = game.add.button(game.world.width - 60,
             200, 'ESPAÑITABtn', actionOnClickLanguage, this,
             0, 0, 0)
@@ -197,7 +202,6 @@ Slooow.mainMenuState.prototype = {
         buttonEng.scale.setTo(0.3, 0.3)
         buttonEng.alpha = 0
         buttonEng.inputEnabled = false 
-        this.language = 'eng';
 
         //Boton contacto
         buttonContact = game.add.button(game.world.width - 60,
@@ -296,8 +300,14 @@ Slooow.mainMenuState.prototype = {
                 buttonSoundOn.alpha = 1
                 buttonSoundOn.inputEnabled = true
 
-                buttonEng.alpha = 1
-                buttonEng.inputEnabled = true
+                if(this.language == 'eng'){
+                    buttonEng.alpha = 1
+                    buttonEng.inputEnabled = true
+                } else {
+                    buttonAE.alpha = 1
+                    buttonAE.inputEnabled = true
+                }
+                
 
                 buttonContact.alpha = 1
                 buttonContact.inputEnabled = true
@@ -338,21 +348,19 @@ Slooow.mainMenuState.prototype = {
                 buttonDisconnect.alpha = maxAlpha
                 buttonDisconnect.inputEnabled = true
 
-                if(this.activeSound){
-                    buttonSoundOn.alpha = 0
-                    buttonSoundOn.inputEnabled = false
-                } else {
-                    buttonSoundOff.alpha = 0
-                    buttonSoundOff.inputEnabled = false
-                }
+            
+                buttonSoundOn.alpha = 0
+                buttonSoundOn.inputEnabled = false
+            
+                buttonSoundOff.alpha = 0
+                buttonSoundOff.inputEnabled = false
                 
-                if(this.language == 'eng'){
-                    buttonEng.alpha = 0
-                    buttonEng.inputEnabled = false
-                } else {
-                    buttonAE.alpha = 0
-                    buttonAE.inputEnabled = false
-                }
+            
+                buttonEng.alpha = 0
+                buttonEng.inputEnabled = false
+            
+                buttonAE.alpha = 0
+                buttonAE.inputEnabled = false
                 
 
                 buttonContact.alpha = 0
@@ -386,13 +394,16 @@ Slooow.mainMenuState.prototype = {
                 buttonAE.alpha = maxAlpha
                 buttonAE.inputEnabled = true
                 this.language = 'ESPAÑITA'
+                game.global.activeLanguage = game.global.languageData.ESPAÑITA
             } else {
                 buttonAE.alpha = 0
                 buttonAE.inputEnabled = false
                 buttonEng.alpha = maxAlpha
                 buttonEng.inputEnabled = true
                 this.language = 'eng'
+                game.global.activeLanguage = game.global.languageData.eng
             }
+            textButtonStartMarathon.setText(game.global.activeLanguage.Marathon);
         }
     },
 

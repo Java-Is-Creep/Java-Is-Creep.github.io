@@ -45,6 +45,10 @@ Slooow.preloadState.prototype = {
 		game.load.spritesheet ('slugColWalk', './assets/img/snails/anim/slugColWalk.png', 500, 300, 8)
 		game.load.spritesheet ('thiefWalk', './assets/img/snails/anim/thiefColWalk.png', 500, 300, 8)
 
+		game.load.spritesheet ('pruebaCol', './assets/img/snails/anim/pruebaCol_spritesheet.png', 500, 300, 16)
+		
+		game.load.atlas('normalColAnimation', './assets/img/snails/anim/normalColSpritesheet.png', './assets/img/snails/anim/normalColSpritesheet.json');
+		
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		// TILES Y ANIMACIONES POR AMBIENTACION															//																			//
 		//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +69,8 @@ Slooow.preloadState.prototype = {
 		// Interfaz de Juego
 		game.load.image ('bar_Estamina1', './assets/img/UI/hpBar1.png')
 		game.load.image ('bar_Estamina2', './assets/img/UI/hpBar2.png')
+		game.load.image('finishObject', './assets/img/props/sprites/banderin.png')
+		game.load.image('finishGround', './assets/img/props/sprites/linea_meta.png')
 
 		// Interfaz Global
 		game.load.image('button', './assets/img/btn/defaultBtn.png');
@@ -87,9 +93,11 @@ Slooow.preloadState.prototype = {
 		game.load.image('achiveBtn', './assets/img/btn/achiveBtn.png');
 		game.load.image('soundOnBtn', './assets/img/btn/soundOnBtn.png');
 		game.load.image('soundOffBtn', './assets/img/btn/soundOffBtn.png');
+		game.load.image('replayBtn', './assets/img/btn/replayBtn.png');
 
 		$.getJSON("./assets/language.json", function (data) {
 			game.global.languageData = (data);
+			game.global.activeLanguage = data.eng;
 		});
 	},
 

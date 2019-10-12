@@ -33,16 +33,10 @@ Slooow.gameOverState.prototype = {
 
         //Boton volver a jugar
 		buttonReplay = game.add.button(game.world.centerX - 200,
-            game.world.centerY + 250, 'button', actionOnClickReplay, this,
+            game.world.centerY + 250, 'replayBtn', actionOnClickReplay, this,
             0, 0, 0)
         buttonReplay.anchor.set(0.5)
         buttonReplay.scale.setTo(0.2, 0.3)
-
-        //Texto volver a jugar
-		textButtonReplay = game.add.text(game.world.centerX - 200,
-            game.world.centerY + 250, 'Replay', style)
-        textButtonReplay.anchor.set(0.5)
-        textButtonReplay.scale.setTo(0.5,0.5)
 
         //Boton menu
 		buttonMenu = game.add.button(game.world.centerX + 200,
@@ -57,15 +51,15 @@ Slooow.gameOverState.prototype = {
         textButtonMenu.anchor.set(0.5)
         textButtonMenu.scale.setTo(0.5,0.5)
 
-        //Texto puesto
+        //Texto puntos
 		textScore = game.add.text(game.world.centerX - 200,
-            game.world.centerY -300, 'Score: ', style2)
+            game.world.centerY -300, game.global.activeLanguage.Score, style2)
         textScore.anchor.set(0.5)
         textScore.scale.setTo(0.5,0.5)
 
         //Texto premio
 		textReward = game.add.text(game.world.centerX + 200,
-            game.world.centerY -300, 'Reward: ', style2)
+            game.world.centerY -300, game.global.activeLanguage.Reward, style2)
         textReward.anchor.set(0.5)
         textReward.scale.setTo(0.5,0.5)
 

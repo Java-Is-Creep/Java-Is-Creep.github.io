@@ -36,7 +36,7 @@ Slooow.initSesionState.prototype = {
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Username',
+            placeHolder: game.global.activeLanguage.InputUser,
             zoom: true
         });
 
@@ -52,7 +52,7 @@ Slooow.initSesionState.prototype = {
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Password',
+            placeHolder: game.global.activeLanguage.InputPass,
             type: PhaserInput.InputType.password,
             zoom: true
         });

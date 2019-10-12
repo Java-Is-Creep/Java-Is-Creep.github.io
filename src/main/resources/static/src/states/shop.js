@@ -36,7 +36,7 @@ Slooow.shopState.prototype = {
 
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, 'Back', style)
+            40, game.global.activeLanguage.Back, style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
