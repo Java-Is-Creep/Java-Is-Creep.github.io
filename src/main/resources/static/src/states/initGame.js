@@ -19,18 +19,12 @@ Slooow.initGameState.prototype = {
 
 	create : function() {
 		// Texto inicial en el centro de la pantalla
-        var style = {
-			font : "100px Arial",
-			fill : "#ffffff",
-			align : "center"
-		};     
+		continueBtn = game.add.button(game.world.centerX,
+            game.world.centerY, 'playBtn', itemTouched, this,
+            0, 0, 0)
+		continueBtn.anchor.set(0.5)
+		continueBtn.scale.setTo(1,1)
 		
-		this.textButtonBack = game.add.text(game.world.centerX,
-            game.world.centerY, 'Click anywhere to start', style)
-		this.textButtonBack.anchor.set(0.5)
-		this.textButtonBack.scale.setTo(0.5,0.5)
-		
-        this.game.input.onDown.add(itemTouched, this);
 
 		// Pasa al state initSesion
         function itemTouched (){

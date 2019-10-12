@@ -21,7 +21,7 @@ Slooow.lobbyState.prototype = {
 
         var style = {
 			font : "40px Arial",
-			fill : "#000000",
+			fill : "#ffffff",
 			align : "center"
 		};
         var style2 = {
@@ -54,7 +54,7 @@ Slooow.lobbyState.prototype = {
         textButtonReady.scale.setTo(0.5,0.5)
 
         //Print image
-        var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaSnail')
+        var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
 		chosen.anchor.setTo(0.5, 0.5);
         chosen.scale.setTo(0.4, 0.4)
         chosen.inputEnabled = true

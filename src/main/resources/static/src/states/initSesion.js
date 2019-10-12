@@ -60,7 +60,7 @@ Slooow.initSesionState.prototype = {
         // Init Session Button
         var style = {
             font: "40px Arial",
-            fill: "#000000",
+            fill: "#ffffff",
             align: "center"
         };
 
@@ -71,7 +71,7 @@ Slooow.initSesionState.prototype = {
 
         // Init Sesion Text
         textButtonInit = game.add.text(game.world.centerX + 100,
-            game.world.centerY + 100, 'Iniciar Sesion', style)
+            game.world.centerY + 100, 'Log in', style)
         textButtonInit.anchor.set(0.5)
         textButtonInit.alpha = 0.5
         buttonInitSesion.alpha = 0.5
@@ -86,7 +86,7 @@ Slooow.initSesionState.prototype = {
 
         // Text Create Account
         textButtonCreate = game.add.text(game.world.centerX - 100,
-            game.world.centerY + 100, 'Crear cuenta', style)
+            game.world.centerY + 100, 'Sing in', style)
         textButtonCreate.anchor.set(0.5)
         textButtonCreate.scale.setTo(0.5, 0.5)
         buttonCreateAccount.scale.setTo(0.3, 0.3)
