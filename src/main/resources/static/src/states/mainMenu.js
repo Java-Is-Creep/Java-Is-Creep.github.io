@@ -81,7 +81,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartSolo.scale.setTo(0.3, 0.3)
         // Texto empezar juego solo
         textButtonStartSolo = game.add.text(game.world.centerX + 100,
-            game.world.centerY - 50, 'Solo', style)
+            game.world.centerY - 50, game.global.activeLanguage.SoloMode, style)
         textButtonStartSolo.anchor.set(0.5)
         textButtonStartSolo.scale.setTo(0.5, 0.5)
 
@@ -93,7 +93,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMarathon.scale.setTo(0.3, 0.3)
         //Texto empezar maraton
         textButtonStartMarathon = game.add.text(game.world.centerX + 300,
-            game.world.centerY - 50, 'Maraton', style)
+            game.world.centerY - 50, game.global.activeLanguage.Marathon, style)
         textButtonStartMarathon.anchor.set(0.5)
         textButtonStartMarathon.scale.setTo(0.5, 0.5)
 
@@ -105,7 +105,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMultiOnline.scale.setTo(0.3, 0.3)
         //Texto empezar multi online
         textButtonStartMultiOnline = game.add.text(game.world.centerX + 100,
-            game.world.centerY + 100, 'Online', style)
+            game.world.centerY + 100, game.global.activeLanguage.Online, style)
         textButtonStartMultiOnline.anchor.set(0.5)
         textButtonStartMultiOnline.scale.setTo(0.5, 0.5)
 
@@ -117,7 +117,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMultiLocal.scale.setTo(0.3, 0.3)
         //Texto empezar multi local
         textButtonStartMultiLocal = game.add.text(game.world.centerX + 300,
-            game.world.centerY + 100, 'Local', style)
+            game.world.centerY + 100, game.global.activeLanguage.Local, style)
         textButtonStartMultiLocal.anchor.set(0.5)
         textButtonStartMultiLocal.scale.setTo(0.5, 0.5)
 
@@ -386,12 +386,14 @@ Slooow.mainMenuState.prototype = {
                 buttonAE.alpha = maxAlpha
                 buttonAE.inputEnabled = true
                 this.language = 'ESPAÑITA'
+                game.global.activeLanguage = game.global.activeLanguage.ESPAÑITA
             } else {
                 buttonAE.alpha = 0
                 buttonAE.inputEnabled = false
                 buttonEng.alpha = maxAlpha
                 buttonEng.inputEnabled = true
                 this.language = 'eng'
+                game.global.activeLanguage = game.global.activeLanguage.eng
             }
         }
     },

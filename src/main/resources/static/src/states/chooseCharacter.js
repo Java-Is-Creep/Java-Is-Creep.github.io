@@ -31,16 +31,16 @@ Slooow.chooseCharacterState.prototype = {
 		b.anchor.set (0.5, 0.5)
         b.scale.setTo (1.2,1.2)
 
-        //Boton desconectar
+        //Boton back
 		buttonBack = game.add.button(50,
             40, 'button', actionOnClickBack, this,
             0, 0, 0)
         buttonBack.anchor.set(0.5)
         buttonBack.scale.setTo(0.2, 0.3)
 
-        //Texto desconectar
+        //Texto back
 		textButtonBack = game.add.text(50,
-            40, 'Back', style)
+            40, game.global.activeLanguage.Back , style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
@@ -52,14 +52,14 @@ Slooow.chooseCharacterState.prototype = {
             buttonAccept.scale.setTo(0.2, 0.3)
 
         //Texto aceptar
-		textButtonBack = game.add.text(50,
-            40, 'Back', style)
+		textButtonBack = game.add.text(game.world.centerX,
+            game.world.centerY+300, game.global.activeLanguage.Accept, style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
         //Texto estadisticas seleccionado
 		textStats = game.add.text(game.world.centerX-400,
-            game.world.centerY -50, 'Stats:', style2)
+            game.world.centerY -50, game.global.activeLanguage.Stats, style2)
             textStats.anchor.set(0.5)
             textStats.scale.setTo(0.5,0.5)
 

@@ -89,14 +89,14 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i< game.global.arrayObstacles.length; i++){
-			game.global.arrayObstacles[i] = game.add.image(game.global.arrayObstacles[i].x, game.world.height - game.global.arrayObstacles[i].y, 'fireSpritesheet')
+			game.global.arrayObstacles[i] = game.add.image(game.global.arrayObstacles[i].x, game.world.height - game.global.arrayObstacles[i].y-20, 'fireSpritesheet')
 			game.global.arrayObstacles[i].frame = 0;
 			game.global.arrayObstacles[i].animations.add('stopped', [0], 1, false)
 			game.global.arrayObstacles[i].animations.add('sparks', [1,2], 4, true)
 			game.global.arrayObstacles[i].animations.add('fire', [3,4,5], 6, true) 
 			game.global.arrayObstacles[i].visible = true
-			game.global.arrayObstacles[i].anchor.setTo (0, 0)
-			game.global.arrayObstacles[i].scale.setTo(0.1, 0.1)
+			game.global.arrayObstacles[i].anchor.setTo (0, 0.5)
+			game.global.arrayObstacles[i].scale.setTo(0.3, 0.3)
 		}
 
 		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
@@ -106,12 +106,25 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayPowerUps[i].scale.setTo(0.5, 0.5)
 		} 
 
-		//game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'catSnail')
+		if (game.global.finishObject != undefined){
+			game.global.finishObject = game.add.image(game.global.finishObject.x, game.global.finishObject.y, 'finishObject')
+			game.global.finishObject.visible = true
+			game.global.finishObject.anchor.setTo(0,1)
+			game.global.finishObject.scale.setTo(0.5, 0.5)
+			var finishGround =  game.add.image(game.global.finishObject.x, game.global.finishObject.y, 'finishGround')
+			finishGround.visible = true
+			finishGround.anchor.setTo(0,0)
+			finishGround.scale.setTo(0.5, 0.5)
+		}
 		
-		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'irisColWalk')
-		game.global.player.sprite.animations.add('walk')
-		game.global.player.sprite.animations.play('walk', 5, true);
-		
+		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'normalColAnimation')
+
+		game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+		game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+		game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 5), 5, true);
+		game.global.player.sprite.animations.add('turn', Phaser.Animation.generateFrameNames('turn', 0, 3), 5, true);
+
+		game.global.player.sprite.animations.play('walk');
 
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
 		game.global.player.sprite.scale.setTo(0.28, 0.28)
@@ -135,7 +148,6 @@ Slooow.singlePlayerState.prototype = {
 		//var spike = game.add.image(game.world.centerX, game.world.centerY, 'button')
 		//spike.anchor.setTo(0.5, 0.5)
 		//spike.scale.setTo(0.3, 0.3)
-
 	},
 
 	create: function () {

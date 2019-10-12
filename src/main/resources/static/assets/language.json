@@ -2,8 +2,9 @@
     "ESPAÑITA" : {
         "InputUser" : "Nombre de Usuario",
         "InputPass" : "Contraseña",
+        "InputConfirm" : "Confirmar contraseña",
         "LogIn" : "Iniciar sesión",
-        "Sing in" : "Registrarse",
+        "SingIn" : "Registrarse",
         "SoloMode" : "Solo",
         "Marathon" : "Maratón",
         "Online" : "Online",
@@ -15,15 +16,24 @@
         "Map2" : "Mapa 2",
         "Map3" : "Mapa 3",
         "Back" : "Atrás",
+        "Accept" : "Aceptar",
         "LobbyData" : "Datos de Sala",
-        "Ready" : "Listo"
+        "Ready" : "Listo",
+        "Stats" : "Estadísticas:",
+        "Score" : "Puntuación: ",
+        "Reward" : "Recompensa: ",
+        "MainMenu": "Menu principal",
+        "JoinRoom" : "Unirse a Sala",
+        "CreateRoom" : "Crear una Sala",
+        "SearchRoom" : "Buscar sala"
     },
     
     "eng" : {
         "InputUser" : "Username",
         "InputPass" : "Password",
+        "InputConfirm" : "Confirm Password",
         "LogIn" : "Log In",
-        "Sing in" : "Sing In",
+        "SingIn" : "Sing In",
         "SoloMode" : "Solo",
         "Marathon" : "Marathon",
         "Online" : "Online",
@@ -35,8 +45,16 @@
         "Map2" : "Map 2",
         "Map3" : "Map 3",
         "Back" : "Back",
+        "Accept" : "OK",
         "LobbyData" : "Lobby Data",
-        "Ready" : "Ready"
+        "Ready" : "Ready",
+        "Stats" : "Stats:",
+        "Score" : "Score: ",
+        "Reward" : "Recompensa: ",
+        "MainMenu" : "Main menu",
+        "JoinRoom" : "Join Room",
+        "CreateRoom" : "Create Room",
+        "SearchRoom" : "Search Room"
         }
     
 }

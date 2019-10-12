@@ -37,7 +37,7 @@ Slooow.lobbyState.prototype = {
         buttonBack.scale.setTo(0.2, 0.3)
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, 'Back', style)
+            40, game.global.activeLanguage.Back, style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
@@ -49,7 +49,7 @@ Slooow.lobbyState.prototype = {
         buttonReady.scale.setTo(0.2, 0.3)
         //Texto ready
 		textButtonReady = game.add.text(game.world.centerX + 400,
-            game.world.centerY + 250, 'Ready', style)
+            game.world.centerY + 250, game.global.activeLanguage.Ready, style)
         textButtonReady.anchor.set(0.5)
         textButtonReady.scale.setTo(0.5,0.5)
 
@@ -62,7 +62,7 @@ Slooow.lobbyState.prototype = {
         
         //Texto datos sala
 		textLobbyData = game.add.text(game.world.centerX -400,
-            game.world.centerY -50, 'Lobby Data', style2)
+            game.world.centerY -50, game.global.activeLanguage.LobbyData, style2)
         textLobbyData.anchor.set(0.5)
         textLobbyData.scale.setTo(0.5,0.5)
 

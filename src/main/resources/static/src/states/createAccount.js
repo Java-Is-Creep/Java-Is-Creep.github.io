@@ -30,7 +30,7 @@ Slooow.createAccountState.prototype = {
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Username'
+            placeHolder: game.global.activeLanguage.InputUser
         });
 
         // Campo PassWord
@@ -45,7 +45,7 @@ Slooow.createAccountState.prototype = {
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Password',
+            placeHolder: game.global.activeLanguage.InputPass,
             type: PhaserInput.InputType.password
         });
 
@@ -61,7 +61,7 @@ Slooow.createAccountState.prototype = {
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Confirm Password',
+            placeHolder: game.global.activeLanguage.InputConfirm,
             type: PhaserInput.InputType.password
         });
 
@@ -79,7 +79,7 @@ Slooow.createAccountState.prototype = {
         buttonCreateAccount.scale.setTo(0.4, 0.3)
         //Texto boton crear cuenta
         textButtonInit = game.add.text(game.world.centerX ,
-            game.world.centerY + 140, 'Create Account', style)
+            game.world.centerY + 140, game.global.activeLanguage.SingIn, style)
         textButtonInit.anchor.set(0.5)
         textButtonInit.scale.setTo(0.5, 0.5)
 
@@ -91,7 +91,7 @@ Slooow.createAccountState.prototype = {
         buttonBack.scale.setTo(0.2, 0.3)
         //Texto atras
         textButtonBack = game.add.text(50 ,
-            40, 'Back', style)
+            40, game.global.activeLanguage.Back, style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5, 0.5)
 
