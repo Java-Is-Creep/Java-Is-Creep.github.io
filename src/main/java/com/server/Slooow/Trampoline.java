@@ -38,12 +38,14 @@ public class Trampoline extends MapObstacle{
         return false;
     }
 
-    public void restNotActiveTime(){
+    public boolean restNotActiveTime(){
         timeToActive -= tickTime;
         if(timeToActive < 0){
             trampoEstate = trampolineEstate.ACTIVE;
             timeToActive = MAXTIMETOACTIVE;
+            return true;
         }
+        return false;
     }
 
     public void throwSnail(SnailInGame snail){

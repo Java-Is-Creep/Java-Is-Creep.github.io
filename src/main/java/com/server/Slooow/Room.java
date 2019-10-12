@@ -16,6 +16,10 @@ public class Room {
 	
 	SnailGame game;
 
+	protected boolean lastFrameGroundCollision = false;
+	protected boolean lastFrameWallCollision = false;
+	protected boolean lastFrameWallSlopeCollision = false;
+
     protected ArrayList<SpikesObstacle> spikesArray = new ArrayList<>();
 	protected ArrayList<DoorMap> doorArray = new ArrayList<>();
 	protected ArrayList<TrapDoor> trapDoorArray = new ArrayList<>();

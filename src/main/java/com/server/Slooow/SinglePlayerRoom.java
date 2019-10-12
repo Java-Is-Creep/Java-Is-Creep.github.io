@@ -222,11 +222,11 @@ public class SinglePlayerRoom extends Room {
 
 		map.addMapObject(new MapGround(6 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 6 * unit;
-		TrapDoor trap = new TrapDoor(2 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000000,
+		TrapDoor trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000,
 				3000, TICKTIME, 500, 500);
 		map.addMapObject(trap);
-		doorArray.add(trap);
-		acumulativePosX += 2 * unit;
+		trapDoorArray.add(trap);
+		acumulativePosX += 3 * unit;
 		// DESVIO Rojo1
 		int acumulativePosXRedPath = acumulativePosX + 2 * unit;
 		int acumulativePosYRedPath = 400;
@@ -242,8 +242,8 @@ public class SinglePlayerRoom extends Room {
 		map.addMapObject(new MapSlope(5 * unit, Math.toRadians(-45), acumulativePosXRedPath, acumulativePosYRedPath,
 				type.SLOPE));
 		// FIN DESVIO1
-		map.addMapObject(new MapGround(4 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
-		acumulativePosX += 4 * unit;
+		map.addMapObject(new MapGround(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 3 * unit;
 		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(45), acumulativePosX, acumulativePosY, type.SLOPE));
 		acumulativePosX += 6 * unit;
 		// el alto de la cuesta; 91
@@ -253,7 +253,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 1 * unit;
 
 		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - unit,
-				type.TRAMPOLINE, 990000, 99, TICKTIME, 10, 22);
+				type.TRAMPOLINE, 99, 99, TICKTIME, 10, 22);
 
 		map.addMapObject(trampoline);
 		trampolineArray.add(trampoline);
@@ -279,8 +279,8 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosYNegro -= 5 * unit;
 
 		// Las posiciones del power up no cuentan para le aumento global
-		map.addMapObject(
-				new MapPowerUp(unit, unit, acumulativePosXNegro + 3 * unit, acumulativePosYNegro + unit / 2, type.POWERUP));
+		map.addMapObject(new MapPowerUp(unit, unit, acumulativePosXNegro + 3 * unit, acumulativePosYNegro + unit / 2,
+				type.POWERUP));
 
 		map.addMapObject(
 				new MapGround(8 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
@@ -292,13 +292,15 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosXNegro += 6 * unit;
 		acumulativePosYNegro -= unit;
 
-		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosXNegro, acumulativePosYNegro, type.SLOPE));
+		map.addMapObject(
+				new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosXNegro, acumulativePosYNegro, type.SLOPE));
 
 		acumulativePosXNegro += 6 * unit;
-		acumulativePosYNegro -=  unit;
+		acumulativePosYNegro -= unit;
 
 		// despues del trampolin sarten, volvemos camino azul
-		map.addMapObject(new MapGround(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - 2 * unit, type.GROUND));
+		map.addMapObject(
+				new MapGround(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - 2 * unit, type.GROUND));
 		acumulativePosX += 4 * unit;
 		acumulativePosY -= 2 * unit;
 
@@ -307,38 +309,67 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosY -= 4 * unit;
 
 		// volvemos a llegar al suelo
-		acumulativePosX += 2*unit;
+		acumulativePosX += 2 * unit;
 		acumulativePosY = 400;
-		
 
-		Wind windAux = new Wind(12*unit,2*unit,acumulativePosX,acumulativePosY,type.WIND,false,4,true,5000,TICKTIME);
-		 map.addMapObject(windAux); 
-		 windArray.add(windAux);
+		Wind windAux = new Wind(12 * unit, 2 * unit, acumulativePosX, acumulativePosY, type.WIND, false, 4, true, 5000,
+				TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
 
-		 acumulativePosX += 12 * unit;
-		 
+		acumulativePosX += 12 * unit;
 
-		 map.addMapObject(new MapWall(20, 6 * unit - wallDisplacement, acumulativePosX+ 2*unit,acumulativePosY,
-				type.WALL));
-		
-		acumulativePosX += 2*unit;
-		acumulativePosY += 6*unit;
+		map.addMapObject(
+				new MapWall(20, 6 * unit - wallDisplacement, acumulativePosX + 4 * unit, acumulativePosY, type.WALL));
+
+		acumulativePosX += 4 * unit;
+		acumulativePosY += 6 * unit;
 
 		map.addMapObject(
 				new MapPowerUp(unit, unit, acumulativePosX + 2 * unit, acumulativePosY + unit / 2, type.POWERUP));
 
+		map.addMapObject(new MapGround(7 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 
-		map.addMapObject(new MapGround(7 * unit, groundHeigth, acumulativePosX, acumulativePosY , type.GROUND));
-		
-		acumulativePosX += 7*unit;
+		acumulativePosX += 7 * unit;
 
+		// devio Rojo 1ª puerta
+		acumulativePosXRedPath = acumulativePosX;
+		acumulativePosYRedPath = acumulativePosY;
 
+		DoorMap doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
+				400000, 99, TICKTIME, 66, 66);
+		map.addMapObject(doorAux);
+		doorArray.add(doorAux);
 
+		acumulativePosY += 2 * unit;
 
+		map.addMapObject(new MapWall(20, 6 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
 
+		acumulativePosY += 6 * unit;
 
+		SpikesObstacle spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosX + 10 * unit, acumulativePosY,
+				type.OBSTACLE, 1500, 4000, TICKTIME);
+		map.addMapObject(spike1);
+		spikesArray.add(spike1);
 
+		map.addMapObject(new MapGround(17 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 
+		acumulativePosX += 17 * unit;
+
+		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 400000, 99,
+				TICKTIME, 66, 66);
+		map.addMapObject(doorAux);
+		doorArray.add(doorAux);
+
+		acumulativePosY += 2 * unit;
+
+		map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+
+		acumulativePosY += 5 * unit;
+
+		map.addMapObject(new MapGround(8 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+
+		acumulativePosX += 8 * unit;
 
 	}
 
@@ -349,6 +380,11 @@ public class SinglePlayerRoom extends Room {
 		boolean slopeCollision = false;
 		boolean obstacleCollision = false;
 		double slopeRadians = 0;
+
+		// mandan mensajes para actualizar visualmente al cliente
+		boolean sendGroundCollision = false;
+		boolean sendWallCollision = false;
+		boolean sendSlopeCollision = false;
 
 		for (MapObject object : map.map) {
 			switch (object.myType) {
@@ -367,11 +403,17 @@ public class SinglePlayerRoom extends Room {
 						} else {
 							groundCollision = true;
 							owner.mySnail.isJumping = false;
+							if (!lastFrameGroundCollision) {
+								sendGroundCollision = true;
+							}
 						}
 					} else {
 						groundCollision = true;
 						owner.mySnail.hasFallenTrap = false;
 						owner.mySnail.isJumping = false;
+						if (!lastFrameGroundCollision) {
+							sendGroundCollision = true;
+						}
 					}
 					break;
 				case WALL:
@@ -380,9 +422,15 @@ public class SinglePlayerRoom extends Room {
 
 						} else {
 							wallCollision = true;
+							if (!lastFrameWallCollision) {
+								sendWallCollision = true;
+							}
 						}
 					} else {
 						wallCollision = true;
+						if (!lastFrameWallCollision) {
+							sendWallCollision = true;
+						}
 						owner.mySnail.hasPassedDoor = false;
 						owner.mySnail.isJumping = false;
 
@@ -395,6 +443,9 @@ public class SinglePlayerRoom extends Room {
 					slopeCollision = true;
 					slopeRadians = auxSlope.radians;
 					owner.mySnail.isJumping = false;
+					if (!lastFrameWallSlopeCollision) {
+						sendWallCollision = true;
+					}
 					break;
 				case OBSTACLE:
 					SpikesObstacle auxSpikes = (SpikesObstacle) object;
@@ -442,6 +493,23 @@ public class SinglePlayerRoom extends Room {
 
 			}
 		}
+
+		lastFrameGroundCollision = groundCollision;
+		lastFrameWallCollision = wallCollision;
+		lastFrameWallSlopeCollision = slopeCollision;
+
+		if (sendGroundCollision) {
+			sendGroundCollision();
+		}
+
+		if(sendWallCollision){
+			sendWallCollision();
+		}
+
+		if(sendSlopeCollision){
+			sendSlopeCollision();
+		}
+
 		// Envia los datos al caracol el cual calcula sus fisicas
 		owner.mySnail.isOnFloor = groundCollision;
 		owner.mySnail.isOnWall = wallCollision;
@@ -457,10 +525,60 @@ public class SinglePlayerRoom extends Room {
 
 	}
 
+	public void sendSlopeCollision(){
+		JsonObject msg = new JsonObject();
+		msg.addProperty("event", "SLOPECOLLISION");
+
+		try {
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			owner.sessionLock.unlock();
+		}
+	}
+
+	public void sendWallCollision(){
+		JsonObject msg = new JsonObject();
+		msg.addProperty("event", "WALLCOLLISION");
+
+		try {
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			owner.sessionLock.unlock();
+		}
+	}
+
+	public void sendGroundCollision() {
+		JsonObject msg = new JsonObject();
+		msg.addProperty("event", "GROUNDCOLLISION");
+
+		try {
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			owner.sessionLock.unlock();
+		}
+	}
+
+
+
 	public void updateTrapDoor() {
 		int i = 0;
 		for (TrapDoor trap : trapDoorArray) {
-			if (trap.update()) {
+			boolean cambio = trap.update();
+
+			if (cambio) {
+
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATETRAPDOOR");
 				msg.addProperty("id", i);
@@ -505,8 +623,25 @@ public class SinglePlayerRoom extends Room {
 	}
 
 	public void updateTrampoline() {
+		int i = 0;
 		for (Trampoline trampoline : trampolineArray) {
-			trampoline.update();
+			if (trampoline.update()) {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "UPDATETRAMPOLINE");
+				msg.addProperty("id", i);
+
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+
+			}
+			i++;
 		}
 	}
 
