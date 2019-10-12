@@ -19,11 +19,9 @@ public class Trampoline extends MapObstacle{
     public boolean update(){
         switch(trampoEstate){
             case ACTIVE:
-                restActiveTime();
-            return false;
+               return restActiveTime();
             case NOTACTIVE:
-                restNotActiveTime();
-                return false;
+                return restNotActiveTime();
             default:
             return false;
         }
@@ -34,6 +32,7 @@ public class Trampoline extends MapObstacle{
         if(timeActive < 0){
             trampoEstate = trampolineEstate.NOTACTIVE;
             timeActive = MAXTIMEACTIVE;
+            return true;
         }
         return false;
     }

@@ -253,7 +253,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 1 * unit;
 
 		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - unit,
-				type.TRAMPOLINE, 99, 99, TICKTIME, 10, 22);
+				type.TRAMPOLINE, 3000, 250, TICKTIME, 10, 22);
 
 		map.addMapObject(trampoline);
 		trampolineArray.add(trampoline);
@@ -626,6 +626,7 @@ public class SinglePlayerRoom extends Room {
 		int i = 0;
 		for (Trampoline trampoline : trampolineArray) {
 			if (trampoline.update()) {
+				System.out.println("TRAMPOLIN CAMBIA FORMA");
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATETRAMPOLINE");
 				msg.addProperty("id", i);
