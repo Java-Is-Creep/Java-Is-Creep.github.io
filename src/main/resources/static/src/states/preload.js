@@ -29,8 +29,7 @@ Slooow.preloadState.prototype = {
 		game.load.image('wallTile', './assets/img/pared02.png')
 		game.load.image('slopeDown', './assets/img/tenedor_horizontal.png')
 		game.load.spritesheet('trapdoor', './assets/img/trampilla_sheet.png', 600, 300, 2)
-		
-		game.load.spritesheet ('SnailWalk', './assets/img/normalcol_spritesheet.png', 500, 300, 8)
+		game.load.spritesheet ('SnailWalk', './assets/img/normalCol_spritesheet.png', 500, 300, 8)
 
 	},
 

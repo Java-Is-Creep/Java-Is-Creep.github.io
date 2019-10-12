@@ -86,7 +86,7 @@ window.onload = function () {
     }
 
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    game.global.socket = new WebSocket('ws://192.168.1.39:8080/snail');
+    game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
