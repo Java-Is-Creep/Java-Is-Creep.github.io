@@ -32,31 +32,7 @@ public class SinglePlayerRoom extends Room {
 
 	}
 
-	public void sendObstacleUpdate() {
-		ArrayList<Integer> posX = new ArrayList<>();
-		ArrayList<Integer> posY = new ArrayList<>();
-		for (SpikesObstacle spike : spikesArray) {
-			posX.add(spike.posX);
-			posY.add(spike.posY);
-		}
-		Gson gson = new Gson();
-		String posXArray = gson.toJson(posX);
-		String posYArray = gson.toJson(posY);
-		JsonObject msgMap = new JsonObject();
-		msgMap.addProperty("event", "SPIKEOBSTACLEUPDATE");
-		msgMap.addProperty("posX", posXArray);
-		msgMap.addProperty("posY", posYArray);
-		try {
-			owner.sessionLock.lock();
-			owner.getSession().sendMessage(new TextMessage(msgMap.toString()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			owner.sessionLock.unlock();
-		}
-
-	}
+	
 
 	public void sendMap() {
 
@@ -306,7 +282,6 @@ public class SinglePlayerRoom extends Room {
 
 		map.addMapObject(new MapSlope(4 * unit, Math.toRadians(-60), acumulativePosX, acumulativePosY, type.SLOPE));
 		acumulativePosX += 4 * unit;
-		acumulativePosY -= 4 * unit;
 
 		// volvemos a llegar al suelo
 		acumulativePosX += 2 * unit;
@@ -348,13 +323,13 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosY += 6 * unit;
 
 		SpikesObstacle spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosX + 10 * unit, acumulativePosY,
-				type.OBSTACLE, 1500, 4000, 500, TICKTIME);
+				type.OBSTACLE, 150000, 99, 500, TICKTIME);
 		map.addMapObject(spike1);
 		spikesArray.add(spike1);
 
-		map.addMapObject(new MapGround(17 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		map.addMapObject(new MapGround(19 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 
-		acumulativePosX += 17 * unit;
+		acumulativePosX += 19 * unit;
 
 		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 400000, 99,
 				TICKTIME, 66, 66);
@@ -363,13 +338,76 @@ public class SinglePlayerRoom extends Room {
 
 		acumulativePosY += 2 * unit;
 
-		map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		//Empieza el camino gris
+		int acumulativePosXGris = acumulativePosX;
+		int acumulativePosYGris = acumulativePosY-2*unit;
 
-		acumulativePosY += 5 * unit;
+		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosXGris, acumulativePosYGris, type.SLOPE));
+		acumulativePosXGris += 4 * unit;
+		acumulativePosYGris -= 4*unit;
 
-		map.addMapObject(new MapGround(8 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		map.addMapObject(new MapGround(3 * unit, groundHeigth, acumulativePosXGris, acumulativePosYGris, type.GROUND));
 
-		acumulativePosX += 8 * unit;
+		// FIN DESVIOGRIS
+
+
+
+
+		map.addMapObject(new MapWall(20, 10 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+
+		acumulativePosY += 10 * unit;
+
+		map.addMapObject(new MapGround(5 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+
+		acumulativePosX += 5 * unit;
+
+		//DesvioCaminoNegro2
+		acumulativePosXNegro = acumulativePosX-6*unit;
+		acumulativePosYNegro = acumulativePosY-7*unit;
+
+		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosX, acumulativePosY, type.SLOPE));
+		acumulativePosX += 4 * unit;
+		acumulativePosY -= 4 *unit;
+
+		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 1 * unit;
+
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000,
+				3000, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		trapDoorArray.add(trap);
+		acumulativePosX += 3 * unit;
+
+		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 1 * unit;
+
+		map.addMapObject(
+				new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosX, acumulativePosY, type.SLOPE));
+
+		acumulativePosXNegro += 6 * unit;
+		acumulativePosYNegro -= unit;
+
+		//camino azul se junta con el negro.
+
+		map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosXNegro, acumulativePosYNegro -5*unit, type.WALL));
+
+		acumulativePosY -= 5 * unit;
+
+		// DEBERIA IR PARTE DEL SUELO MOJADO
+		map.addMapObject(new MapGround(20 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosX += 20 * unit;
+
+		/////FIN CAMINO NGERO 2 SE JUNTA CON EL AZUL
+
+
+
+
+
+
+
+
+
+		
 
 	}
 
@@ -739,7 +777,7 @@ public class SinglePlayerRoom extends Room {
 			updateTrampoline();
 			updateWind();
 			checkCollisions();
-			sendObstacleUpdate();
+			updateObstacles();
 
 			owner.mySnail.updateSnail();
 			checkSnailState();

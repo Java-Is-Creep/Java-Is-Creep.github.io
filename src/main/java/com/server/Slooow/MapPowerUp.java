@@ -13,7 +13,7 @@ public class MapPowerUp extends MapObject {
     ArrayList<PlayerConected> playerTargets = new ArrayList<>();
 
     enum powerType {
-        SHIELD, STAMINA, WEIGTH, LETUCCE, SPEED, INK, NULL
+        SHIELD, STAMINA, WEIGHT, LETUCCE, SPEED, INK, NULL
     }
 
     powerType powerCreated = powerType.NULL;
@@ -49,7 +49,7 @@ public class MapPowerUp extends MapObject {
                 System.out.println("Se ha creado un power de stamina");
                 break;
             case 2:
-                powerCreated = powerType.WEIGTH;
+                powerCreated = powerType.WEIGHT;
                 aux = new LigthWeigthPowerUp(player, 60, 0.1f, powerCreated);
 
                 System.out.println("Se ha creado power up de ligth weigth");
