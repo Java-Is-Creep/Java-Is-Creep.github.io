@@ -18,7 +18,7 @@ Slooow.singlePlayerState.prototype = {
 	preload: function () {
 
 		// Cargamos el background
-		var b = game.add.tileSprite (0, game.world.height, 8640, 1600, 'cocina_back')
+		var b = game.add.tileSprite (0, game.world.height, 8640, 1600, 'cocinaBg')
 		b.anchor.set (0, 1)
 		//b.scale.set (0.35, 0.35)
 		b.tileScale.setTo (0.99,1)
@@ -100,7 +100,7 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
-			game.global.arrayPowerUps[i] = game.add.image(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, 'button')
+			game.global.arrayPowerUps[i] = game.add.image(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, 'roundBtn')
 			game.global.arrayPowerUps[i].visible = true
 			game.global.arrayPowerUps[i].anchor.setTo(0.5,0.5)
 			game.global.arrayPowerUps[i].scale.setTo(0.5, 0.5)
@@ -108,8 +108,8 @@ Slooow.singlePlayerState.prototype = {
 
 		//game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'catSnail')
 		
-		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'SnailWalk')
-		game.global.player.sprite.animations.add ('walk')
+		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'irisColWalk')
+		game.global.player.sprite.animations.add('walk')
 		game.global.player.sprite.animations.play('walk', 5, true);
 		
 

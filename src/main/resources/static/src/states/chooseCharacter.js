@@ -16,7 +16,7 @@ Slooow.chooseCharacterState.prototype = {
      
         var style = {
 			font : "40px Arial",
-			fill : "#000000",
+			fill : "#ffffff",
 			align : "center"
         };
 
@@ -64,13 +64,13 @@ Slooow.chooseCharacterState.prototype = {
             textStats.scale.setTo(0.5,0.5)
 
         //Print image chosen
-        var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaSnail')
+        var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
 		chosen.anchor.setTo(0.5, 0.5);
         chosen.scale.setTo(0.4, 0.4)
 
 
         //Print image thief
-        var thiefSnail = game.add.image(game.world.centerX, game.world.centerY-150, 'thiefSnail')
+        var thiefSnail = game.add.image(game.world.centerX, game.world.centerY-150, 'thiefCol')
 		thiefSnail.anchor.setTo(0.5, 0.5);
         thiefSnail.scale.setTo(0.3, 0.3)
 
@@ -78,7 +78,7 @@ Slooow.chooseCharacterState.prototype = {
         thiefSnail.events.onInputDown.add(chooseCharacterThief, this)
 
         //Print image seaSnail
-        var seaSnail = game.add.image(game.world.centerX +150, game.world.centerY-150, 'seaSnail')
+        var seaSnail = game.add.image(game.world.centerX +150, game.world.centerY-150, 'seaCol')
 		seaSnail.anchor.setTo(0.5, 0.5);
         seaSnail.scale.setTo(0.3, 0.3)
 
@@ -86,7 +86,7 @@ Slooow.chooseCharacterState.prototype = {
         seaSnail.events.onInputDown.add(chooseCharacterSea, this)
 
         //Print image arcoiris
-        var rainbowSnail = game.add.image(game.world.centerX+300, game.world.centerY-150, 'rainbowSnail')
+        var rainbowSnail = game.add.image(game.world.centerX+300, game.world.centerY-150, 'irisCol')
 		rainbowSnail.anchor.setTo(0.5, 0.5);
         rainbowSnail.scale.setTo(0.3, 0.3)
 
@@ -94,7 +94,7 @@ Slooow.chooseCharacterState.prototype = {
         rainbowSnail.events.onInputDown.add(chooseCharacterRainbow, this)
 
         //Print image gatocol
-        var catSnail = game.add.image(game.world.centerX+300, game.world.centerY-50, 'catSnail')
+        var catSnail = game.add.image(game.world.centerX+300, game.world.centerY-50, 'catCol')
 		catSnail.anchor.setTo(0.5, 0.5);
         catSnail.scale.setTo(0.3, 0.3)
 
@@ -102,7 +102,7 @@ Slooow.chooseCharacterState.prototype = {
         catSnail.events.onInputDown.add(chooseCharacterCat, this)
 
         //Print image frenchSnail
-        var frenchSnail = game.add.image(game.world.centerX +150, game.world.centerY-50, 'frenchSnail')
+        var frenchSnail = game.add.image(game.world.centerX +150, game.world.centerY-50, 'frenchCol')
 		frenchSnail.anchor.setTo(0.5, 0.5);
         frenchSnail.scale.setTo(0.3, 0.3)
 
@@ -110,7 +110,7 @@ Slooow.chooseCharacterState.prototype = {
         frenchSnail.events.onInputDown.add(chooseCharacterFrench, this)
 
         //Print image normal
-        var normalSnail = game.add.image(game.world.centerX, game.world.centerY-50, 'normalSnail')
+        var normalSnail = game.add.image(game.world.centerX, game.world.centerY-50, 'normalCol')
 		normalSnail.anchor.setTo(0.5, 0.5);
         normalSnail.scale.setTo(0.3, 0.3)
 
@@ -118,7 +118,7 @@ Slooow.chooseCharacterState.prototype = {
         normalSnail.events.onInputDown.add(chooseCharacterNormal, this)
 
         //Print image tank
-        var tankSnail = game.add.image(game.world.centerX, game.world.centerY+50, 'tankSnail')
+        var tankSnail = game.add.image(game.world.centerX, game.world.centerY+50, 'tanqueCol')
 		tankSnail.anchor.setTo(0.5, 0.5);
         tankSnail.scale.setTo(0.3, 0.3)
 
@@ -126,7 +126,7 @@ Slooow.chooseCharacterState.prototype = {
         tankSnail.events.onInputDown.add(chooseCharacterTank, this)
 
         //Print image slugSnail
-        var slugSnail = game.add.image(game.world.centerX +150, game.world.centerY+50, 'slugSnail')
+        var slugSnail = game.add.image(game.world.centerX +150, game.world.centerY+50, 'slugCol')
 		slugSnail.anchor.setTo(0.5, 0.5);
         slugSnail.scale.setTo(0.3, 0.3)
 
@@ -135,56 +135,56 @@ Slooow.chooseCharacterState.prototype = {
 
         function chooseCharacterSea (){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterThief(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterRainbow(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'rainbowSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterCat(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'catSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'catCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterFrench(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'frenchSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'frenchCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterNormal(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'normalSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'normalCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterTank(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tankSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
 
         function chooseCharacterSlug(){
             chosen.destroy()
-            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'slugSnail')
+            chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'slugCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }

@@ -18,7 +18,7 @@ Slooow.shopState.prototype = {
 
         var style = {
 			font : "40px Arial",
-			fill : "#000000",
+			fill : "#ffffff",
 			align : "center"
         };
         

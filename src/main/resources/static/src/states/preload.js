@@ -14,47 +14,83 @@ Slooow.preloadState.prototype = {
 
 	// Hasta que este preload no acabe, no se pasa al siguiente estado
 	preload : function() {
-		// BACKGROUNDS
-		game.load.image('background', './assets/img/background.jpg');				// Fondo global
-																					// Fondo pradera
-		game.load.image('cocina_back', './assets/img/fondo_cocina_color.png');		// Fondo cocina
-																					// Fondo Hielo
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		// BACKGROUNDS																					//
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		// Fondo global
+		game.load.image('background', './assets/img/bg/bg.png');				
+		// TODO Fondo pradera												
+		// Fondo cocina							
+		game.load.image('cocinaBg', './assets/img/bg/fondoCocinaColor.png');
+		// TODO Fondo Hielo																			
 				
 		//////////////////////////////////////////////////////////////////////////////////////////////////
-		// SNAILS
-		game.load.image('seaSnail', './assets/img/seaSnail.png');
-		game.load.image('thiefSnail', './assets/img/thiefSnail.png');
-		game.load.image('rainbowSnail', './assets/img/cararcoiris.png');
-		game.load.image('catSnail', './assets/img/catsnail.png');
-		game.load.image('frenchSnail', './assets/img/frenchSnail.png');
-		game.load.image('normalSnail', './assets/img/normalSnail.png');
-		game.load.image('slugSnail', './assets/img/slug.png');
-		game.load.image('tankSnail', './assets/img/tanquecol.png');
+		// SNAILS																						//
+		//////////////////////////////////////////////////////////////////////////////////////////////////			
+		game.load.image('seaCol', './assets/img/snails/sprites/seaCol.png');
+		game.load.image('thiefCol', './assets/img/snails/sprites/thiefCol.png');
+		game.load.image('irisCol', './assets/img/snails/sprites/irisCol.png');
+		game.load.image('catCol', './assets/img/snails/sprites/catCol.png');
+		game.load.image('frenchCol', './assets/img/snails/sprites/frenchCol.png');
+		game.load.image('normalCol', './assets/img/snails/sprites/normalCol.png');
+		game.load.image('slugCol', './assets/img/snails/sprites/slugCol.png');
+		game.load.image('tanqueCol', './assets/img/snails/sprites/tanqueCol.png');
 		// Snails SpriteSheet (los anteriores no valen, se cambiaran por estos)
-		game.load.spritesheet ('SnailWalk', './assets/img/normalCol_spritesheet.png', 500, 300, 8)
+		game.load.spritesheet ('normalColWalk', './assets/img/snails/anim/normalColWalk.png', 360, 216, 8)
+		game.load.spritesheet ('seaColWalk', './assets/img/snails/anim/seaColWalk.png', 500, 300, 4)
+		game.load.spritesheet ('catColWalk', './assets/img/snails/anim/catColWalk.png', 500, 300, 8)
+		game.load.spritesheet ('irisColWalk', './assets/img/snails/anim/irisColWalk.png', 500, 300, 8)
+		game.load.spritesheet ('tanqueColWalk', './assets/img/snails/anim/tanqueColWalk.png', 500, 300, 8)
+		game.load.spritesheet ('frenchColWalk', './assets/img/snails/anim/frenchColWalk.png', 500, 300, 8)
+		game.load.spritesheet ('slugColWalk', './assets/img/snails/anim/slugColWalk.png', 500, 300, 8)
+		game.load.spritesheet ('thiefWalk', './assets/img/snails/anim/thiefColWalk.png', 500, 300, 8)
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////
-		// TILES Y ANIMACIONES POR AMBIENTACION
-		// Tiles Pradera
-		// Tiles Cocina
-		game.load.image('groundTile', './assets/img/suelo_C_Pequenio.png')
-		game.load.image('wallTile', './assets/img/pared.png')
-		game.load.image('slopeDown', './assets/img/tenedor_horizontal.png')
-		game.load.image('sartenSprite', './assets/img/sarten_normal.png')
-		game.load.spritesheet('trapdoor', './assets/img/trampilla_sheet.png', 600, 300, 2)
-		game.load.spritesheet('sartenSpritesheet', './assets/img/sarten_spritesheet.png', 600, 600, 9)
-		game.load.spritesheet('fireSpritesheet', './assets/img/fuego_spritesheet.png', 500, 500, 6)
-		// Tiles Hielo
+		// TILES Y ANIMACIONES POR AMBIENTACION															//																			//
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		// TODO Tiles Pradera																			
+		// Tiles Cocina		
+		game.load.image('groundTile', './assets/img/props/sprites/sueloCocinaPeq.png')
+		game.load.image('wallTile', './assets/img/props/sprites/paredCocina.png')
+		game.load.image('slopeDown', './assets/img/props/sprites/tenedorHor.png')
+		game.load.image('sartenSprite', './assets/img/props/sprites/sarten.png')
+		game.load.spritesheet('trapdoor', './assets/img/props/anim/trampillaSpriteSheet.png', 600, 300, 2)
+		game.load.spritesheet('sartenSpritesheet', './assets/img/props/anim/sartenSpriteSheet.png', 600, 600, 9)
+		game.load.spritesheet('fireSpritesheet', './assets/img/props/anim/fuegoSpriteSheet.png', 500, 500, 6)
+		// TODO Tiles Hielo
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////
-		// INTERFAZ
+		// INTERFAZ																						//
+		//////////////////////////////////////////////////////////////////////////////////////////////////
 		// Interfaz de Juego
-		game.load.image ('bar_Estamina1', './assets/img/hp_bar_1.png')
-		game.load.image ('bar_Estamina2', './assets/img/hp_bar_2.png')
+		game.load.image ('bar_Estamina1', './assets/img/UI/hpBar1.png')
+		game.load.image ('bar_Estamina2', './assets/img/UI/hpBar2.png')
 
 		// Interfaz Global
-		game.load.image('button', './assets/img/button.png');
+		game.load.image('button', './assets/img/btn/defaultBtn.png');
+		game.load.image('roundBtn', './assets/img/btn/roundBtn.png');
 
+		// Social-btn
+		game.load.image('twitterBtn', './assets/img/btn/twitterBtn.png');
+		game.load.image('instaBtn', './assets/img/btn/instaBtn.png');
+		game.load.image('facebookBtn', './assets/img/btn/facebookBtn.png');
+		game.load.image('youTubeBtn', './assets/img/btn/roundBtn.png');
+		game.load.image('jTeamBtn', './assets/img/btn/javaIsCreepBtn.png');
+
+		//Menu-btn
+		game.load.image('settingsBtn', './assets/img/btn/settingsBtn.png');
+		game.load.image('storeBtn', './assets/img/btn/shopBtn.png');
+		game.load.image('logOffBtn', './assets/img/btn/logoffBtn.png');
+		game.load.image('ESPAÑITABtn', './assets/img/btn/spnBtn.png');
+		game.load.image('engBtn', './assets/img/btn/engBtn.png');
+		game.load.image('playBtn', './assets/img/btn/playBtn.png');
+		game.load.image('achiveBtn', './assets/img/btn/achiveBtn.png');
+		game.load.image('soundOnBtn', './assets/img/btn/soundOnBtn.png');
+		game.load.image('soundOffBtn', './assets/img/btn/soundOffBtn.png');
+
+		$.getJSON("./assets/language.json", function (data) {
+			game.global.languageData = (data);
+		});
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario

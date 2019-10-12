@@ -1,0 +1,42 @@
+{
+    "ESPAÑITA" : {
+        "InputUser" : "Nombre de Usuario",
+        "InputPass" : "Contraseña",
+        "LogIn" : "Iniciar sesión",
+        "Sing in" : "Registrarse",
+        "SoloMode" : "Solo",
+        "Marathon" : "Maratón",
+        "Online" : "Online",
+        "Local" : "Local",
+        "Field" : "Pradera",
+        "Kitchen" : "Cocina",
+        "Ice" : "Glacial",
+        "Map1" : "Mapa 1",
+        "Map2" : "Mapa 2",
+        "Map3" : "Mapa 3",
+        "Back" : "Atrás",
+        "LobbyData" : "Datos de Sala",
+        "Ready" : "Listo"
+    },
+    
+    "eng" : {
+        "InputUser" : "Username",
+        "InputPass" : "Password",
+        "LogIn" : "Log In",
+        "Sing in" : "Sing In",
+        "SoloMode" : "Solo",
+        "Marathon" : "Marathon",
+        "Online" : "Online",
+        "Local" : "Local",
+        "Field" : "Field",
+        "Kitchen" : "Kitchen",
+        "Ice" : "Iceland",
+        "Map1" : "Map 1",
+        "Map2" : "Map 2",
+        "Map3" : "Map 3",
+        "Back" : "Back",
+        "LobbyData" : "Lobby Data",
+        "Ready" : "Ready"
+        }
+    
+}
