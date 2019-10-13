@@ -381,7 +381,7 @@ window.onload = function () {
                 break    
             case 'FINISH':
                 game.global.winner = JSON.parse(msg.winner)
-                game.global.time = JSON.parse(msg.time)
+                game.global.myTime = JSON.parse(msg.time)
                 game.global.maxTime = JSON.parse(msg.maxTime)
                 game.state.start('gameOverState')
                 break
