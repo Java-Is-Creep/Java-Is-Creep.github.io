@@ -20,7 +20,6 @@ Slooow.singlePlayerState.prototype = {
 		// Cargamos el background
 		var b = game.add.tileSprite (0, game.world.height, 8640, 1600, 'cocinaBg')
 		b.anchor.set (0, 1)
-		//b.scale.set (0.35, 0.35)
 		b.tileScale.setTo (0.99,1)
 
 		game.global.player.maxStamina = 0
@@ -35,7 +34,7 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayGrounds[i].visible = true
 			game.global.arrayGrounds[i].anchor.setTo(0,1)
 			game.global.arrayGrounds[i].tileScale.setTo(0.5, 0.5)
-			console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y)
+			//console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y)
 		}
 
 		//Pintamos las paredes
@@ -93,7 +92,7 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayObstacles[i].frame = 0;
 			game.global.arrayObstacles[i].animations.add('stopped', [0], 1, false)
 			game.global.arrayObstacles[i].animations.add('sparks', [1,2], 4, true)
-			game.global.arrayObstacles[i].animations.add('fire', [3,4,5], 6, true) 
+			game.global.arrayObstacles[i].animations.add('fire', [3,4,5], 6, true)
 			game.global.arrayObstacles[i].visible = true
 			game.global.arrayObstacles[i].anchor.setTo (0, 0.5)
 			game.global.arrayObstacles[i].scale.setTo(0.3, 0.3)
@@ -109,11 +108,24 @@ Slooow.singlePlayerState.prototype = {
 		} 
 
 		for (var i = 0; i< game.global.arrayDoors.length; i++){
-			game.global.arrayDoors[i] = game.add.image(game.global.arrayDoors[i].x-18, game.world.height - game.global.arrayDoors[i].y, 'doorSpritesheet')
-			game.global.arrayDoors[i].frame = 0
+			game.global.arrayDoors[i] = game.add.image(game.global.arrayDoors[i].x-14, game.world.height - game.global.arrayDoors[i].y+25, 'doorSpritesheet')
+			game.global.arrayDoors[i].frame = 1
 			game.global.arrayDoors[i].visible = true
 			game.global.arrayDoors[i].anchor.setTo(0,1)
-			game.global.arrayDoors[i].scale.setTo(0.5, 0.3)
+			game.global.arrayDoors[i].scale.setTo(0.35, 0.35)
+		}
+
+		for (var i = 0; i< game.global.arrayWinds.length; i++){
+			game.global.arrayWinds[i] = game.add.image(game.global.arrayWinds[i].x, game.world.height - game.global.arrayDoors[i].y, 'windSpritesheet')
+			game.global.arrayWinds[i].animations.add('wind', 4, true)
+			if (game.global.arrayWinds[i].direction == true){
+				game.global.arrayWinds[i].animations.play('wind')
+			} else{
+				game.global.arrayWinds[i].animations.playReverse('wind')
+			}
+			game.global.arrayWinds[i].visible = true
+			game.global.arrayWinds[i].anchor.setTo(0,1)
+			game.global.arrayWinds[i].scale.setTo(0.3, 0.3)
 		}
 
 		if (game.global.finishObject != undefined){
@@ -140,14 +152,19 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player.sprite.scale.setTo(0.28, 0.28)
 
 		// Creacion Barra de Estamina
-		game.global.player.stamina2 = game.add.sprite(0, 0, 'bar_Estamina2')
+		game.global.player.stamina3 = game.add.sprite(0, 0, 'barStaminaInterior')
+		game.global.player.stamina3.anchor.set(0,0);
+		game.global.player.stamina3.scale.setTo(0.5,0.5);
+		
+		game.global.player.stamina2 = game.add.sprite(0, 0, 'barStamina')
 		game.global.player.stamina2.anchor.set(0,0);
-		game.global.player.stamina2.scale.setTo(3,3);
+		game.global.player.stamina2.scale.setTo(0.5,0.5);
 
-		game.global.player.stamina1 = game.add.sprite(0, 0, 'bar_Estamina1')
+		game.global.player.stamina1 = game.add.sprite(0, 0, 'barStaminaFuera')
 		game.global.player.stamina1.anchor.set(0,0);
-		game.global.player.stamina1.scale.setTo(3,3);
+		game.global.player.stamina1.scale.setTo(0.5,0.5);
 
+		game.global.player.stamina3.fixedToCamera = true;
 		game.global.player.stamina2.fixedToCamera = true;
 		game.global.player.stamina1.fixedToCamera = true;
 
@@ -241,6 +258,50 @@ Slooow.singlePlayerState.prototype = {
     
 		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100);
 
-	}
+		if (this.game.global.haveToRotateToWall == true){
+			if (game.global.player.sprite.angle > -90){
+				game.global.player.sprite.angle-=2
+			} else{
+				game.global.haveToRotateToWall = false
+				game.global.player.sprite.angle = -90
+			}
+		}
+		if (game.global.haveToRotateToGround == true){
+			if (game.global.player.sprite.angle < -2){
+				game.global.player.sprite.angle+=2
+			} else if (game.global.player.sprite.angle > 2){
+				game.global.player.sprite.angle-=2
+			}else{
+				game.global.haveToRotateToGround = false
+				game.global.player.sprite.angle = 0
+			}
+		}
+		if(game.global.haveToRotateToSlope == true){
+			// El angulo que me pasa va desde -90 a 90
+			// Cuando me llega un 45, realmente tengo que girarlo hasta -45
 
+			//Cuesta hacia arriba
+			if (game.global.degreesToRotateSlope > 0){
+				if (game.global.player.sprite.angle > -game.global.degreesToRotateSlope){
+					game.global.player.sprite.angle-=3
+					game.global.player.sprite.angle = Math.round(game.global.player.sprite.angle)
+				}else{
+					game.global.player.sprite.angle = -game.global.degreesToRotateSlope
+					game.global.haveToRotateToSlope = false
+					game.global.degreesToRotateSlope = 0
+				}
+			}
+			// Cuesta hacia abajo
+			else{
+				if (game.global.player.sprite.angle < -game.global.degreesToRotateSlope){
+					game.global.player.sprite.angle+=3
+					game.global.player.sprite.angle = Math.round(game.global.player.sprite.angle)
+				}else{
+					game.global.player.sprite.angle = -game.global.degreesToRotateSlope
+					game.global.haveToRotateToSlope = false
+					game.global.degreesToRotateSlope = 0
+				}
+			}
+		}
+	}
 }
