@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.server.Slooow.MapPowerUp.powerType;
+
 
 public class Room {
     protected Map map = new Map(2000);
@@ -24,6 +26,7 @@ public class Room {
 	protected ArrayList<TrapDoor> trapDoorArray = new ArrayList<>();
 	protected ArrayList<Trampoline> trampolineArray = new ArrayList<>();
 	protected ArrayList<Wind> windArray = new ArrayList<>();
+	protected ArrayList<MapPowerUp> powerArray = new ArrayList<>();
 
     public Room(String name,PlayerConected owner, SnailGame game) {
         this.owner = owner;

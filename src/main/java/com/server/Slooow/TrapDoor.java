@@ -15,7 +15,6 @@ public class TrapDoor extends DoorMap{
             estate = generalEstate.CLOSE;
             timeClossing = MAXTIMECLOSSING;
             myType = type.GROUND;
-            System.out.println("Trampilla CERRADA");
             return true;
             
         }
@@ -29,7 +28,6 @@ public class TrapDoor extends DoorMap{
             estate = generalEstate.OPEN;
             timeOpenning = MAXTIMEOPPENING;
             myType = type.TRAPDOOR;
-            System.out.println("Trampilla ABIERTA");
             return true;
            
         }

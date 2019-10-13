@@ -23,7 +23,7 @@ public class MapPowerUp extends MapObject {
     }
 
     // Asigna al caracol el power up.
-    public void playerCrash(PlayerConected player) {
+    public void playerCrash(PlayerConected player,int id) {
 
         // comprobamos si ha cogido el power up
         int playerIndex = playerTargets.indexOf(player);
@@ -75,16 +75,17 @@ public class MapPowerUp extends MapObject {
             }
 
             player.mySnail.powerUp = aux;
-            sendMessage(player);
+            sendMessage(player,id);
             System.out.println("POWER GENERADO CON EXITO");
         }
 
     }
 
-    public void sendMessage(PlayerConected player) {
+    public void sendMessage(PlayerConected player,int id) {
         JsonObject msg = new JsonObject();
         msg.addProperty("event", "TAKEPOWERUP");
         msg.addProperty("type", powerCreated.toString());
+        msg.addProperty("id", id);
 
         try {
             player.sessionLock.lock();

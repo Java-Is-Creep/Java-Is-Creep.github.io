@@ -93,6 +93,9 @@ public class SnailInGame {
 	public double slopeRadians = 0;
 	public SpikesObstacle spikes = null;
 
+	//guardamos la posicion de la trampilla para que no choque con el suelo siguiente
+	int trapDoorPosY = 0;
+
 	public float speedX;
 	public float speedY;
 	public float stamina;
