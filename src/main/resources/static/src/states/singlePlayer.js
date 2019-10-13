@@ -84,7 +84,7 @@ Slooow.singlePlayerState.prototype = {
 			//game.global.arrayTrampolines[i].animations.play('activate', 8, false)
 			game.global.arrayTrampolines[i].visible = true
 			game.global.arrayTrampolines[i].anchor.setTo(0,0)
-			game.global.arrayTrampolines[i].scale.setTo(0.5, 0.5)
+			game.global.arrayTrampolines[i].scale.setTo(1, 1)
 		}
 
 		for (var i = 0; i< game.global.arrayObstacles.length; i++){
