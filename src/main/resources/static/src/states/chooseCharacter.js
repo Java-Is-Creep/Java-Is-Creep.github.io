@@ -45,8 +45,8 @@ Slooow.chooseCharacterState.prototype = {
         textButtonBack.scale.setTo(0.5,0.5)
 
         //Boton aceptar
-		buttonAccept = game.add.button(50,
-            40, 'button', actionOnClickBack, this,
+		buttonAccept = game.add.button(game.world.centerX,
+            game.world.centerY+30, 'button', actionOnClickBack, this,
             0, 0, 0)
             buttonAccept.anchor.set(0.5)
             buttonAccept.scale.setTo(0.2, 0.3)
@@ -139,7 +139,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
         }
-
+        
         function chooseCharacterThief(){
             chosen.destroy()
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefCol')
