@@ -33,12 +33,12 @@ public class SnailInGame {
 	public final float MAXSTAMINA = 1200;
 	public final float MAXVELOCITYX = 6;
 	public final float MAXVELOCITYY = 6;
-	public final float MAXNORMALVELOCITYX = 3;
-	public final float MAXNORMALVELOCITYY = 3;
+	public final float MAXNORMALVELOCITYX = 5;
+	public final float MAXNORMALVELOCITYY = 5; // era 3
 
 	// aceleracion base, es decir sin acelerar
-	public final float NORMALACELERATIONX = 0.05f;
-	public final float NORMALACELERATIONY = 0.05f;
+	public final float NORMALACELERATIONX = 5f;
+	public final float NORMALACELERATIONY = 5f; // era 0.05
 
 	// aceleracion cuando aceleras
 	public final float ACELERATIONX = 0.2f;
@@ -95,6 +95,10 @@ public class SnailInGame {
 
 	//guardamos la posicion de la trampilla para que no choque con el suelo siguiente
 	int trapDoorPosY = 0;
+
+	//para evitar que se bugee con varias puertas
+	final int timeToPassDoor = 2000;
+	int doorTime = 2000;
 
 	public float speedX;
 	public float speedY;
@@ -192,6 +196,13 @@ public class SnailInGame {
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
+		if(hasPassedDoor){
+			doorTime -= 33;
+			if(doorTime<0){
+				hasPassedDoor = false;
+				doorTime = timeToPassDoor;
+			}
+		}
 		sendRunOutStamina = false;
 		sendRecoverStamina = false;
 		boolean isAcelerating = false;
@@ -258,6 +269,7 @@ public class SnailInGame {
 				if (stamina <= 0) {
 					runOutStamina = true;
 					sendRunOutStamina = true;
+					System.out.println("Me quede sin stamina");
 
 				}
 
@@ -275,6 +287,9 @@ public class SnailInGame {
 				}
 				if (stamina <= 0) {
 					runOutStamina = true;
+					sendRunOutStamina = true;
+					System.out.println("Me quede sin stamina");
+
 				}
 				maxSpeedX = maxAceleratingSpeedX;
 				maxSpeedY = maxAceleratingSpeedY;

@@ -6,6 +6,8 @@ public class SpikesObstacle extends MapObstacle {
     public int sparkDelay;
     int timeToDelay;
 
+    boolean playerCrash = false;
+
     enum Estate { ACTIVE, NOTACTIVE, PREACTIVATE}
     Estate estate = Estate.NOTACTIVE;
 
@@ -66,7 +68,6 @@ public class SpikesObstacle extends MapObstacle {
                 return restActiveTime();
            
             case NOTACTIVE:
-                
                 return restNotActiveTime();
             case PREACTIVATE:
                 return sparkDelay();
@@ -86,6 +87,8 @@ public class SpikesObstacle extends MapObstacle {
     public void playerCrash(){
         estate = Estate.NOTACTIVE;
         timeToActive = MAXTIMETOACTIVE;
+        playerCrash = true;
+
     } 
 
     public float getTimeToActive() {
