@@ -409,7 +409,7 @@ window.onload = function () {
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha.setTo(0)
-                switch (JSON.parse((msg.type)) {
+                switch (JSON.parse(msg.type)) {
                     case 'SHIELD':
                         //Crear sprite shield
                         break
