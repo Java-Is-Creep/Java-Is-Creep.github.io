@@ -325,7 +325,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosYRedPath = acumulativePosY;
 
 		DoorMap doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
-				99, 400000000, TICKTIME, 66, 66);
+				3000, 3000, TICKTIME, 66, 66);
 		map.addMapObject(doorAux);
 		doorArray.add(doorAux);
 
@@ -336,7 +336,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosY += 6 * unit;
 
 		SpikesObstacle spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosX + 10 * unit, acumulativePosY,
-				type.OBSTACLE, 150000, 99, 500, TICKTIME);
+				type.OBSTACLE, 3000, 3000, 500, TICKTIME);
 		map.addMapObject(spike1);
 		spikesArray.add(spike1);
 
@@ -344,7 +344,7 @@ public class SinglePlayerRoom extends Room {
 
 		acumulativePosX += 19 * unit;
 
-		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 400000, 99,
+		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 3000, 3000,
 				TICKTIME, 66, 66);
 		map.addMapObject(doorAux);
 		doorArray.add(doorAux);

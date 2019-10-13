@@ -118,10 +118,11 @@ Slooow.singlePlayerState.prototype = {
 		for (var i = 0; i< game.global.arrayWinds.length; i++){
 			game.global.arrayWinds[i] = game.add.image(game.global.arrayWinds[i].x, game.world.height - game.global.arrayDoors[i].y, 'windSpritesheet')
 			game.global.arrayWinds[i].animations.add('wind', 4, true)
+			game.global.arrayWinds[i].animations.add('windReverse', [1,0], true)
 			if (game.global.arrayWinds[i].direction == true){
 				game.global.arrayWinds[i].animations.play('wind')
 			} else{
-				game.global.arrayWinds[i].animations.playReverse('wind')
+				game.global.arrayWinds[i].animations.play('windReverse')
 			}
 			game.global.arrayWinds[i].visible = true
 			game.global.arrayWinds[i].anchor.setTo(0,1)
@@ -200,24 +201,7 @@ Slooow.singlePlayerState.prototype = {
 			align: "center"
 		}
 		game.global.player.stamina = game.add.text(0, 0, "0", style2);
-		game.global.player.stamina.fixedToCamera = true;
-
-
-		//Boton back
-		/*buttonBack = game.add.button(200,
-			200, 'button', actionOnClickBack, this,
-			0, 0, 0)
-		buttonBack.anchor.set(0.5)
-		buttonBack.scale.setTo(0.2, 0.3)
-
-		//Texto back
-		textButtonBack = game.add.text(200,
-			200, 'Back', style)
-		textButtonBack.anchor.set(0.5)
-		textButtonBack.scale.setTo(0.5, 0.5)*/
-
-
-		
+		game.global.player.stamina.fixedToCamera = true;	
 
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');

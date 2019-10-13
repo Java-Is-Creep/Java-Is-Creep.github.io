@@ -290,8 +290,10 @@ window.onload = function () {
 
             case 'OBSTACLEUPDATE':
                 this.console.log('OPBSTACLE UPDATEEEEEEEEEEEEEEE')
+                console.log(msg)
                 var id = JSON.parse(msg.id)
-                switch (JSON.parse(msg.estate)) {
+                var state = JSON.stringify(msg.estate)
+                switch (state) {
                     case 'ACTIVE':
                         //Empezar animacion de fuego
                         this.game.global.arrayObstacles[id].animations.play('fire')
@@ -341,9 +343,9 @@ window.onload = function () {
                 var direction = JSON.parse(msg.direction)
                 var id = JSON.parse(msg.id)
                 if (direction == true){
-                    game.global.arrayWinds[i].animations.play('wind')
+                    //game.global.arrayWinds[id].animations.play('wind')
                 } else{
-                    game.global.arrayWinds[i].animations.playReverse('wind')
+                    //game.global.arrayWinds[id].animations.play('windReverse')
                 }
                 break    
             case 'FINISH':
@@ -360,7 +362,7 @@ window.onload = function () {
                 this.game.global.haveToRotateToWall = false
                 break
             case 'OBJECTUSED':
-                switch (JSON.parse(msg.type)) {
+                switch (JSON.stringify(msg.type)) {
                     case 'SHIELD':
                         break
                     case 'STAMINA':
@@ -409,8 +411,8 @@ window.onload = function () {
                 //DECIR DANI QUE ME MANDE ID
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
-                this.game.global.arrayPowerUps[id].alpha.setTo(0)
-                switch (JSON.parse(msg.type)) {
+                this.game.global.arrayPowerUps[id].alpha = 0
+                switch (JSON.stringify(msg.type)) {
                     case 'SHIELD':
                         //Crear sprite shield
                         break
