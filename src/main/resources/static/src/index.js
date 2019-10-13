@@ -96,7 +96,16 @@ window.onload = function () {
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
-        degreesToRotateSlope: 0
+        degreesToRotateSlope: 0,
+        wingPowerUp: null,
+        shieldPowerUp: null,
+        staminaPowerUp: null,
+        lettucePowerUp: null,
+        onPowerUp: null,
+        downPowerUp: null,
+        clockPowerUp: null,
+        inkPowerUp: null,
+        speedPowerUp: null,
     }
 
     // Conexiones
@@ -356,21 +365,23 @@ window.onload = function () {
                 game.global.arrayTrampolines[id].animations.play('activate', 8, false)
                 break
             case 'WINDUPDATE':
-                this.console.log('WIND UPDATEEEEEEEEEEE')
-                this.console.dir(msg)
+                //this.console.log('WIND UPDATEEEEEEEEEEE')
+                //this.console.dir(msg)
                 var direction = JSON.parse(msg.direction)
                 var id = JSON.parse(msg.id)
                 if (direction == true){
-                    this.console.log('a favor')
+                   // this.console.log('a favor')
+                    game.global.arrayWinds[id].angle = 180
                     game.global.arrayWinds[id].animations.play('wind')
                 } else{
-                    this.console.log('en contra')
-                    game.global.arrayWinds[id].animations.play('windReverse')
+                   // this.console.log('en contra')
+                    game.global.arrayWinds[id].angle = 0
+                    game.global.arrayWinds[id].animations.play('wind')
                 }
                 break    
             case 'FINISH':
                 game.global.winner = JSON.parse(msg.winner)
-                game.global.time = JSON.parse(msg.time)
+                game.global.myTime = JSON.parse(msg.time)
                 game.global.maxTime = JSON.parse(msg.maxTime)
                 game.state.start('gameOverState')
                 break
@@ -432,29 +443,36 @@ window.onload = function () {
                 break
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
+                this.console.log('take power up')
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha = 0
                 switch (JSON.stringify(msg.type)) {
-                    case 'SHIELD':
+                    case '"SHIELD"':
                         //Crear sprite shield
+                        game.global.player.shieldPowerUp.visible = true
                         break
-                    case 'STAMINA':
+                    case '"STAMINA"':
                         //Crear sprite estamina
+                        game.global.player.staminaPowerUp.visible = true
                         break
-                    case 'WEIGHT':
+                    case '"WEIGHT"':
                         //Crear sprite peso
+                        game.global.player.wingPowerUp.visible = true
                         break
-                    case 'LETUCCE':
+                    case '"LETUCCE"':
                         //Crear sprite lechuga
+                        game.global.player.lettucePowerUp.visible = true
                         break
-                    case 'SPEED':
+                    case '"SPEED"':
                         //Crear sprite velocidad
+                        game.global.player.speedPowerUp.visible = true
                         break
-                    case 'INK':
+                    case '"INK"':
                         //Crear sprite tinta
+                        game.global.player.inkPowerUp.visible = true
                         break
-                    case 'NULL':
+                    case '"NULL"':
                         this.console.log('MAL')
                         break
                     default:

@@ -59,10 +59,10 @@ Slooow.preloadState.prototype = {
 		game.load.image('slopeDown', './assets/img/props/sprites/tenedorHor.png')
 		game.load.image('sartenSprite', './assets/img/props/sprites/sarten.png')
 		game.load.spritesheet('trapdoor', './assets/img/props/anim/trampillaSpriteSheet.png', 600, 300, 2)
-		game.load.spritesheet('sartenSpritesheet', './assets/img/props/anim/sartenSpriteSheet.png', 600, 600, 9)
-		game.load.spritesheet('fireSpritesheet', './assets/img/props/anim/fuegoSpriteSheet.png', 500, 500, 6)
+		game.load.spritesheet('sartenSpritesheet', './assets/img/props/anim/sartenSpriteSheet.png', 300, 300, 9)
+		game.load.spritesheet('fireSpritesheet', './assets/img/props/anim/fuegoSpriteSheet.png', 240, 243, 6)
 		game.load.spritesheet('doorSpritesheet', './assets/img/props/anim/puerta_sheet3.png', 400, 600, 2 )
-		game.load.spritesheet('windSpritesheet', './assets/img/props/anim/sheetViento.png', 3000, 2000, 2)
+		game.load.spritesheet('windSpritesheet', './assets/img/props/anim/sheetViento.png', 450, 600, 6)
 		// TODO Tiles Hielo
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,16 @@ Slooow.preloadState.prototype = {
 		game.load.image ('barProgressInteriorNegra', './assets/img/UI/barraprogreso_interiorNegra.png')
 		game.load.image ('barProgressInteriorColor', './assets/img/UI/barraprogreso_interiorColor.png')
 		game.load.image ('powerUpsContainer', './assets/img/UI/contenedorPowerups.png')
-
+		// Power Ups
+		game.load.image('wingsPowerUp', './assets/img/powerUps/sprites/alas.png')
+		game.load.image('shieldPowerUp', './assets/img/powerUps/sprites/escudo.png')
+		game.load.image('staminaPowerUp', './assets/img/powerUps/sprites/estamina.png')
+		game.load.image('lettucePowerUp', './assets/img/powerUps/sprites/lechuga.png')
+		game.load.image('onPowerUp', './assets/img/powerUps/sprites/on.png')
+		game.load.image('downUp', './assets/img/powerUps/sprites/ondown.png')
+		game.load.image('clockPowerUp', './assets/img/powerUps/sprites/reloj.png')
+		game.load.image('inkPowerUp', './assets/img/powerUps/sprites/tintero.png')
+		game.load.image('speedPowerUp', './assets/img/powerUps/sprites/velocidad.png')
 		//Objectos generales del mapa
 		game.load.image('finishObject', './assets/img/props/sprites/banderin.png')
 		game.load.image('finishGround', './assets/img/props/sprites/linea_meta.png')
