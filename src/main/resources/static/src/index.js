@@ -443,29 +443,36 @@ window.onload = function () {
                 break
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
+                this.console.log('take power up')
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha = 0
                 switch (JSON.stringify(msg.type)) {
-                    case 'SHIELD':
+                    case '"SHIELD"':
                         //Crear sprite shield
+                        game.global.player.shieldPowerUp.visible = true
                         break
-                    case 'STAMINA':
+                    case '"STAMINA"':
                         //Crear sprite estamina
+                        game.global.player.staminaPowerUp.visible = true
                         break
-                    case 'WEIGHT':
+                    case '"WEIGHT"':
                         //Crear sprite peso
+                        game.global.player.wingPowerUp.visible = true
                         break
-                    case 'LETUCCE':
+                    case '"LETUCCE"':
                         //Crear sprite lechuga
+                        game.global.player.lettucePowerUp.visible = true
                         break
-                    case 'SPEED':
+                    case '"SPEED"':
                         //Crear sprite velocidad
+                        game.global.player.speedPowerUp.visible = true
                         break
-                    case 'INK':
+                    case '"INK"':
                         //Crear sprite tinta
+                        game.global.player.inkPowerUp.visible = true
                         break
-                    case 'NULL':
+                    case '"NULL"':
                         this.console.log('MAL')
                         break
                     default:
