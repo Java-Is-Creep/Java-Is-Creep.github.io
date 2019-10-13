@@ -19,8 +19,8 @@ Slooow.singlePlayerState.prototype = {
 
 		// Cargamos el background
 		var b = game.add.tileSprite (0, game.world.height, 8640, 1600, 'cocinaBg')
-		b.anchor.set (0, 1)
-		b.tileScale.setTo (0.99,1)
+		b.anchor.set(0, 1)
+		b.tileScale.setTo(1.99,2)
 
 		game.global.player.maxStamina = 0
 		
