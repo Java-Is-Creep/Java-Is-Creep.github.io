@@ -188,9 +188,50 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player.progressBar2.fixedToCamera = true;
 		game.global.player.progressBar3.fixedToCamera = true;
 
+
+		//Power Ups en pantalla
 		game.global.player.powerUpsContainer = game.add.sprite(game.width -150, 50, 'powerUpsContainer')
 		game.global.player.powerUpsContainer.scale.setTo(0.5, 0.5)
+		//game.global.player.powerUpsContainer.anchor.setTo(0.5, 0.5)
 		game.global.player.powerUpsContainer.fixedToCamera = true
+
+		game.global.player.wingPowerUp = game.add.sprite(game.width -140, 60, 'wingsPowerUp')
+		game.global.player.wingPowerUp.visible = false
+		game.global.player.wingPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.wingPowerUp.fixedToCamera = true
+
+		game.global.player.shieldPowerUp = game.add.sprite(game.width -140, 60, 'shieldPowerUp')
+		game.global.player.shieldPowerUp.visible = false
+		game.global.player.shieldPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.shieldPowerUp.fixedToCamera = true
+		game.global.player.staminaPowerUp = game.add.sprite(game.width -130, 60, 'staminaPowerUp')
+		game.global.player.staminaPowerUp.visible = false
+		game.global.player.staminaPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.staminaPowerUp.fixedToCamera = true
+		game.global.player.lettucePowerUp = game.add.sprite(game.width -140, 60, 'lettucePowerUp')
+		game.global.player.lettucePowerUp.visible = false
+		game.global.player.lettucePowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.lettucePowerUp.fixedToCamera = true
+		game.global.player.onPowerUp = game.add.sprite(game.width -140, 50, 'onPowerUp')
+		game.global.player.onPowerUp.visible = false
+		game.global.player.onPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.onPowerUp.fixedToCamera = true
+		game.global.player.downPowerUp = game.add.sprite(game.width -140, 45, 'downUp')
+		game.global.player.downPowerUp.visible = false
+		game.global.player.downPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.downPowerUp.fixedToCamera = true
+		game.global.player.clockPowerUp = game.add.sprite(game.width -135, 65, 'clockPowerUp')
+		game.global.player.clockPowerUp.visible = false
+		game.global.player.clockPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.clockPowerUp.fixedToCamera = true
+		game.global.player.inkPowerUp = game.add.sprite(game.width -140, 60, 'inkPowerUp')
+		game.global.player.inkPowerUp.visible = false
+		game.global.player.inkPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.inkPowerUp.fixedToCamera = true
+		game.global.player.speedPowerUp = game.add.sprite(game.width -140, 60, 'speedPowerUp')
+		game.global.player.speedPowerUp.visible = false
+		game.global.player.speedPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.speedPowerUp.fixedToCamera = true
 
 		//console.log ("Array Cargado")
 		//console.dir (game.global.arrayObstacleSpikes)

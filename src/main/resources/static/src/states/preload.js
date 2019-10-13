@@ -78,7 +78,16 @@ Slooow.preloadState.prototype = {
 		game.load.image ('barProgressInteriorNegra', './assets/img/UI/barraprogreso_interiorNegra.png')
 		game.load.image ('barProgressInteriorColor', './assets/img/UI/barraprogreso_interiorColor.png')
 		game.load.image ('powerUpsContainer', './assets/img/UI/contenedorPowerups.png')
-
+		// Power Ups
+		game.load.image('wingsPowerUp', './assets/img/powerUps/sprites/alas.png')
+		game.load.image('shieldPowerUp', './assets/img/powerUps/sprites/escudo.png')
+		game.load.image('staminaPowerUp', './assets/img/powerUps/sprites/estamina.png')
+		game.load.image('lettucePowerUp', './assets/img/powerUps/sprites/lechuga.png')
+		game.load.image('onPowerUp', './assets/img/powerUps/sprites/on.png')
+		game.load.image('downUp', './assets/img/powerUps/sprites/ondown.png')
+		game.load.image('clockPowerUp', './assets/img/powerUps/sprites/reloj.png')
+		game.load.image('inkPowerUp', './assets/img/powerUps/sprites/tintero.png')
+		game.load.image('speedPowerUp', './assets/img/powerUps/sprites/velocidad.png')
 		//Objectos generales del mapa
 		game.load.image('finishObject', './assets/img/props/sprites/banderin.png')
 		game.load.image('finishGround', './assets/img/props/sprites/linea_meta.png')

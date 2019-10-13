@@ -96,7 +96,16 @@ window.onload = function () {
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
-        degreesToRotateSlope: 0
+        degreesToRotateSlope: 0,
+        wingPowerUp: null,
+        shieldPowerUp: null,
+        staminaPowerUp: null,
+        lettucePowerUp: null,
+        onPowerUp: null,
+        downPowerUp: null,
+        clockPowerUp: null,
+        inkPowerUp: null,
+        speedPowerUp: null,
     }
 
     // Conexiones
@@ -356,16 +365,16 @@ window.onload = function () {
                 game.global.arrayTrampolines[id].animations.play('activate', 8, false)
                 break
             case 'WINDUPDATE':
-                this.console.log('WIND UPDATEEEEEEEEEEE')
-                this.console.dir(msg)
+                //this.console.log('WIND UPDATEEEEEEEEEEE')
+                //this.console.dir(msg)
                 var direction = JSON.parse(msg.direction)
                 var id = JSON.parse(msg.id)
                 if (direction == true){
-                    this.console.log('a favor')
+                   // this.console.log('a favor')
                     game.global.arrayWinds[id].angle = 180
                     game.global.arrayWinds[id].animations.play('wind')
                 } else{
-                    this.console.log('en contra')
+                   // this.console.log('en contra')
                     game.global.arrayWinds[id].angle = 0
                     game.global.arrayWinds[id].animations.play('wind')
                 }
