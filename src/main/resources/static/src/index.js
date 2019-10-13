@@ -94,8 +94,8 @@ window.onload = function () {
     }
 
     // Conexiones
-    game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
     game.global.socket.onopen = () => {
 
