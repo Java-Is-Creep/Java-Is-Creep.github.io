@@ -62,7 +62,7 @@ Slooow.preloadState.prototype = {
 		game.load.spritesheet('sartenSpritesheet', './assets/img/props/anim/sartenSpriteSheet.png', 600, 600, 9)
 		game.load.spritesheet('fireSpritesheet', './assets/img/props/anim/fuegoSpriteSheet.png', 500, 500, 6)
 		game.load.spritesheet('doorSpritesheet', './assets/img/props/anim/puerta_sheet3.png', 400, 600, 2 )
-		game.load.spritesheet('windSpritesheet', './assets/img/props/anim/sheetViento.png', 3000, 2000, 2)
+		game.load.spritesheet('windSpritesheet', './assets/img/props/anim/sheetViento.png', 900, 1200, 6)
 		// TODO Tiles Hielo
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////

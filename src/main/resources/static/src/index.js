@@ -362,10 +362,12 @@ window.onload = function () {
                 var id = JSON.parse(msg.id)
                 if (direction == true){
                     this.console.log('a favor')
+                    game.global.arrayWinds[id].angle = 180
                     game.global.arrayWinds[id].animations.play('wind')
                 } else{
                     this.console.log('en contra')
-                    game.global.arrayWinds[id].animations.play('windReverse')
+                    game.global.arrayWinds[id].angle = 0
+                    game.global.arrayWinds[id].animations.play('wind')
                 }
                 break    
             case 'FINISH':
