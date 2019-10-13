@@ -32,8 +32,6 @@ public class SinglePlayerRoom extends Room {
 
 	}
 
-	
-
 	public void sendMap() {
 
 		// Inicializamos arraylist para cada atributo de cada elemento
@@ -42,6 +40,7 @@ public class SinglePlayerRoom extends Room {
 		ArrayList<Integer> height = new ArrayList<>();
 		ArrayList<Integer> width = new ArrayList<>();
 		ArrayList<type> myType = new ArrayList<>();
+		ArrayList<Boolean> windDir = new ArrayList<>();
 
 		for (MapObject obj : map.map) {
 			posX.add(obj.posX);
@@ -51,6 +50,10 @@ public class SinglePlayerRoom extends Room {
 				height.add((int) aux.degrees);
 			} else {
 				height.add(obj.height);
+			}
+			if(obj.myType == type.WIND){
+				Wind aux = (Wind) obj;
+				windDir.add(aux.goingRigth);
 			}
 			width.add(obj.width);
 			myType.add(obj.myType);
@@ -63,6 +66,7 @@ public class SinglePlayerRoom extends Room {
 		String heightArray = gson.toJson(height);
 		String widthArray = gson.toJson(width);
 		String myTypeArray = gson.toJson(myType);
+		String WindDirArray = gson.toJson(windDir);
 
 		JsonObject msgMap = new JsonObject();
 		msgMap.addProperty("event", "DRAWMAP");
@@ -71,6 +75,7 @@ public class SinglePlayerRoom extends Room {
 		msgMap.addProperty("height", heightArray);
 		msgMap.addProperty("width", widthArray);
 		msgMap.addProperty("myType", myTypeArray);
+		msgMap.addProperty("direction", WindDirArray);
 		try {
 			owner.sessionLock.lock();
 			owner.getSession().sendMessage(new TextMessage(msgMap.toString()));
@@ -193,8 +198,11 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosY += 5 * unit;
 
 		// el power up no cuenta para el aumento d elo sacumulatives
-		map.addMapObject(
-				new MapPowerUp(unit, unit, acumulativePosX + 3 * unit, acumulativePosY + unit / 2, type.POWERUP));
+		MapPowerUp auxPower = new MapPowerUp(unit, unit, acumulativePosX + 3 * unit, acumulativePosY + unit / 2,
+				type.POWERUP);
+
+		map.addMapObject(auxPower);
+		powerArray.add(auxPower);
 
 		map.addMapObject(new MapGround(6 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 6 * unit;
@@ -255,8 +263,11 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosYNegro -= 5 * unit;
 
 		// Las posiciones del power up no cuentan para le aumento global
-		map.addMapObject(new MapPowerUp(unit, unit, acumulativePosXNegro + 3 * unit, acumulativePosYNegro + unit / 2,
-				type.POWERUP));
+		auxPower = new MapPowerUp(unit, unit, acumulativePosXNegro + 3 * unit, acumulativePosYNegro + unit / 2,
+				type.POWERUP);
+		map.addMapObject(auxPower);
+
+		powerArray.add(auxPower);
 
 		map.addMapObject(
 				new MapGround(8 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
@@ -284,10 +295,10 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 4 * unit;
 
 		// volvemos a llegar al suelo
-		acumulativePosX += 2 * unit;
+		acumulativePosX += 3 * unit;
 		acumulativePosY = 400;
 
-		Wind windAux = new Wind(12 * unit, 2 * unit, acumulativePosX, acumulativePosY, type.WIND, false, 4, true, 5000,
+		Wind windAux = new Wind(11 * unit, 2 * unit, acumulativePosX, acumulativePosY, type.WIND, false, 4, true, 5000,
 				TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
@@ -300,19 +311,21 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 4 * unit;
 		acumulativePosY += 6 * unit;
 
-		map.addMapObject(
-				new MapPowerUp(unit, unit, acumulativePosX + 2 * unit, acumulativePosY + unit / 2, type.POWERUP));
+		auxPower = new MapPowerUp(unit, unit, acumulativePosX + 2 * unit, acumulativePosY + unit / 2, type.POWERUP);
+		map.addMapObject(auxPower);
+
+		powerArray.add(auxPower);
 
 		map.addMapObject(new MapGround(7 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 
 		acumulativePosX += 7 * unit;
 
 		// devio Rojo 1ª puerta
-		acumulativePosXRedPath = acumulativePosX;
+		acumulativePosXRedPath = acumulativePosX+1*unit;
 		acumulativePosYRedPath = acumulativePosY;
 
 		DoorMap doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
-				400000, 99, TICKTIME, 66, 66);
+				99, 400000000, TICKTIME, 66, 66);
 		map.addMapObject(doorAux);
 		doorArray.add(doorAux);
 
@@ -338,20 +351,18 @@ public class SinglePlayerRoom extends Room {
 
 		acumulativePosY += 2 * unit;
 
-		//Empieza el camino gris
+		// Empieza el camino gris
 		int acumulativePosXGris = acumulativePosX;
-		int acumulativePosYGris = acumulativePosY-2*unit;
+		int acumulativePosYGris = acumulativePosY - 2 * unit;
 
-		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosXGris, acumulativePosYGris, type.SLOPE));
+		map.addMapObject(
+				new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosXGris, acumulativePosYGris, type.SLOPE));
 		acumulativePosXGris += 4 * unit;
-		acumulativePosYGris -= 4*unit;
+		acumulativePosYGris -= 4 * unit;
 
 		map.addMapObject(new MapGround(3 * unit, groundHeigth, acumulativePosXGris, acumulativePosYGris, type.GROUND));
 
 		// FIN DESVIOGRIS
-
-
-
 
 		map.addMapObject(new MapWall(20, 10 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
 
@@ -361,19 +372,19 @@ public class SinglePlayerRoom extends Room {
 
 		acumulativePosX += 5 * unit;
 
-		//DesvioCaminoNegro2
-		acumulativePosXNegro = acumulativePosX-6*unit;
-		acumulativePosYNegro = acumulativePosY-7*unit;
+		// DesvioCaminoNegro2
+		acumulativePosXNegro = acumulativePosX - 6 * unit;
+		acumulativePosYNegro = acumulativePosY - 7 * unit;
 
 		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosX, acumulativePosY, type.SLOPE));
 		acumulativePosX += 4 * unit;
-		acumulativePosY -= 4 *unit;
+		acumulativePosY -= 4 * unit;
 
 		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 1 * unit;
 
-		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000,
-				3000, TICKTIME, 500, 500);
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000, 3000,
+				TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		trapDoorArray.add(trap);
 		acumulativePosX += 3 * unit;
@@ -381,33 +392,65 @@ public class SinglePlayerRoom extends Room {
 		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 1 * unit;
 
-		map.addMapObject(
-				new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosX, acumulativePosY, type.SLOPE));
+		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosX, acumulativePosY, type.SLOPE));
 
 		acumulativePosXNegro += 6 * unit;
 		acumulativePosYNegro -= unit;
 
-		//camino azul se junta con el negro.
+		// camino azul se junta con el negro.
 
-		map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosXNegro, acumulativePosYNegro -5*unit, type.WALL));
+		map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosXNegro,
+				acumulativePosYNegro , type.WALL));
 
 		acumulativePosY -= 5 * unit;
 
 		// DEBERIA IR PARTE DEL SUELO MOJADO
-		map.addMapObject(new MapGround(20 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		map.addMapObject(
+				new MapGround(20 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
 		acumulativePosX += 20 * unit;
 
-		/////FIN CAMINO NGERO 2 SE JUNTA CON EL AZUL
+		///// FIN CAMINO NGERO 2 SE JUNTA CON EL AZUL
+		//Empezamos segundo partido rojo
+		map.addMapObject(
+				new MapGround(7 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+				acumulativePosXRedPath += 7 * unit;
+
+		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosXRedPath, acumulativePosYRedPath, type.SLOPE));
+
+		acumulativePosXRedPath += 5 * unit;
+			acumulativePosYRedPath -= 5*unit;
+
+			map.addMapObject(
+				new MapGround(6 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+				acumulativePosXRedPath += 6 * unit;
+
+				windAux = new Wind(13*unit, 12*unit, acumulativePosXRedPath, acumulativePosYRedPath, type.WIND, true, 4, false, 4000, 33);
+				windArray.add(windAux);
 
 
 
 
+			map.addMapObject(new MapSlope(6 * unit, Math.toRadians(45), acumulativePosXRedPath-1*unit, acumulativePosYRedPath-1*unit, type.SLOPE));
+
+			acumulativePosXRedPath += 5 * unit;
+			acumulativePosYRedPath += 5*unit;
 
 
+			map.addMapObject(
+				new MapGround(7 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+				acumulativePosXRedPath += 5 * unit;
 
+			
+			map.addMapObject(new MapSlope(6 * unit, Math.toRadians(45), acumulativePosXRedPath, acumulativePosYRedPath-2*unit, type.SLOPE));
 
+			acumulativePosXRedPath += 5 * unit;
+			acumulativePosYRedPath += 5*unit;
 
-		
+			
+			map.addMapObject(
+				new MapGround(14 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+				acumulativePosXRedPath += 14 * unit;
+
 
 	}
 
@@ -433,11 +476,14 @@ public class SinglePlayerRoom extends Room {
 					if (owner.mySnail.hasFallenTrap) {
 						if (object.getClass() == TrapDoor.class) {
 						} else {
-							groundCollision = true;
-							owner.mySnail.isJumping = false;
-							if (!lastFrameGroundCollision) {
-								sendGroundCollision = true;
+							if (owner.mySnail.trapDoorPosY != object.posY) {
+								groundCollision = true;
+								owner.mySnail.isJumping = false;
+								if (!lastFrameGroundCollision) {
+									sendGroundCollision = true;
+								}
 							}
+
 						}
 					} else {
 						groundCollision = true;
@@ -475,7 +521,9 @@ public class SinglePlayerRoom extends Room {
 					slopeCollision = true;
 					slopeRadians = auxSlope.radians;
 					degrees = (int) auxSlope.degrees;
-
+					System.out.println("CHOCANDO CON CUESTA");
+					System.err.println(auxSlope.posX);
+					System.err.println(auxSlope.posY);
 					owner.mySnail.isJumping = false;
 					if (!lastFrameWallSlopeCollision) {
 						sendSlopeCollision = true;
@@ -491,7 +539,7 @@ public class SinglePlayerRoom extends Room {
 					break;
 				case POWERUP:
 					MapPowerUp powerAux = (MapPowerUp) object;
-					powerAux.playerCrash(owner);
+					powerAux.playerCrash(owner, powerArray.indexOf(powerAux));
 					break;
 				case DOOR:
 					owner.mySnail.hasPassedDoor = true;
@@ -499,6 +547,7 @@ public class SinglePlayerRoom extends Room {
 					break;
 				case TRAPDOOR:
 					owner.mySnail.hasFallenTrap = true;
+					owner.mySnail.trapDoorPosY = object.posY;
 					// System.out.println("colision trampilla");
 					break;
 				case TRAMPOLINE:
@@ -680,8 +729,24 @@ public class SinglePlayerRoom extends Room {
 	}
 
 	public void updateWind() {
+		int i = 0;
 		for (Wind wind : windArray) {
-			wind.update();
+			if(wind.update()){
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "WINDUPDATE");
+				msg.addProperty("id", i);
+				msg.addProperty("direction", wind.goingRigth);
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+			}
+			i++;
 		}
 	}
 
@@ -722,22 +787,21 @@ public class SinglePlayerRoom extends Room {
 		}
 
 		JsonObject msg = new JsonObject();
-			msg.addProperty("event", "FINISH");
-			msg.addProperty("winner", success);
-			msg.addProperty("time", acummulativeTime);
-			msg.addProperty("maxTime", TIMETOSUCESS);
+		msg.addProperty("event", "FINISH");
+		msg.addProperty("winner", success);
+		msg.addProperty("time", (int)(acummulativeTime));
+		msg.addProperty("maxTime", TIMETOSUCESS);
 
-			try {
-				owner.sessionLock.lock();
-				owner.getSession().sendMessage(new TextMessage(msg.toString()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				owner.sessionLock.unlock();
-			}
+		try {
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			owner.sessionLock.unlock();
+		}
 
-		
 		executor.shutdown();
 		destroyRoom();
 	}

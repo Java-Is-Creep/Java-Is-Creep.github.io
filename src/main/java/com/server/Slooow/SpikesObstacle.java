@@ -62,16 +62,16 @@ public class SpikesObstacle extends MapObstacle {
     public boolean update() {
         switch(estate){
             case ACTIVE:
-                restActiveTime();
-                return false;
+                
+                return restActiveTime();
            
             case NOTACTIVE:
-                restNotActiveTime();
-                return false;
+                
+                return restNotActiveTime();
             case PREACTIVATE:
-                sparkDelay();
+                return sparkDelay();
 
-                return false;
+                
             default:
             return false;
 

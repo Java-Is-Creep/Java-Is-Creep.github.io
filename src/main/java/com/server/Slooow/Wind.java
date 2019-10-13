@@ -23,15 +23,17 @@ public class Wind extends MapObject{
     }
 
 
-    public void update(){
+    public boolean update(){
         if(changeWind){
             time -= tickTime;
             if(time <0){
                 goingRigth = !goingRigth;
                 //System.out.println(" Cambio en el viento, ahora va a: " + goingRigth);
                 time = maxtime;
+                return true;
             }
         }
+        return false;
 
     }
 
