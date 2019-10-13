@@ -95,7 +95,7 @@ Slooow.singlePlayerState.prototype = {
 			game.global.arrayObstacles[i].animations.add('fire', [3,4,5], 6, true)
 			game.global.arrayObstacles[i].visible = true
 			game.global.arrayObstacles[i].anchor.setTo (0, 0.5)
-			game.global.arrayObstacles[i].scale.setTo(0.3, 0.3)
+			game.global.arrayObstacles[i].scale.setTo(0.6, 0.6)
 		}
 
 		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
@@ -133,7 +133,7 @@ Slooow.singlePlayerState.prototype = {
 			//game.global.arrayWinds[i].frame = 0
 			game.global.arrayWinds[i].visible = true
 			game.global.arrayWinds[i].anchor.setTo(0.5,0.5)
-			game.global.arrayWinds[i].scale.setTo(0.5, 0.2)
+			game.global.arrayWinds[i].scale.setTo(1, 0.4)
 		}
 
 		if (game.global.finishObject != undefined){
