@@ -101,8 +101,8 @@ window.onload = function () {
 
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
-    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -126,15 +126,22 @@ window.onload = function () {
                     console.log('[DEBUG] TICK message recieved')
                     console.dir(msg)
                 }
+                // Tratamiento del personaje
                 game.global.player.sprite.x = Math.floor(msg.posX)
                 game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY)) -10
+                // Tratamiento de la estamina (UI)
                 if (game.global.player.maxStamina == 0) {
                     game.global.player.maxStamina = msg.stamina
                 }
                 var scale = msg.stamina * 0.5 / 1200
                 game.global.player.stamina2.scale.setTo(scale, 0.5)
+                
+                // Tratamiento de la barra de progreso
+                //console.log (game.global.finishObject.x)
+                var posProgress = 100 + 1200 - game.global.player.sprite.x
+                var scaleProgress = posProgress/1200
+                game.global.player.progressBar2.scale.setTo(scaleProgress, 1)
 
-                game.global.player.stamina.setText(msg.stamina)
                 break
             case 'DRAWMAP':
                 //Arrays con los parametros de todos los objetos del mapa. Dependiendo del tipo se guardaran
@@ -254,13 +261,18 @@ window.onload = function () {
                                 numOfDoors++;
                             break    
                         case 'WIND':
+                            this.console.dir(msg)
                             var direction = JSON.parse(msg.direction)
+                            this.console.log(direction)
+                            this.console.log(direction[numOfWinds])
                             this.game.global.arrayWinds[numOfWinds] = new this.Object()
                             this.game.global.arrayWinds[numOfWinds].x = arrayPosX[i]
                             this.game.global.arrayWinds[numOfWinds].y = arrayPosY[i]
                             this.game.global.arrayWinds[numOfWinds].height = arrayHeight[i]
                             this.game.global.arrayWinds[numOfWinds].width = arrayWidth[i]
-                            this.game.global.arrayWinds[numOfWinds].direction = direction[i]
+                            this.game.global.arrayWinds[numOfWinds].direction = direction[numOfWinds]
+                            this.console.log('wind draw map')
+                            this.console.dir(game.global.arrayWinds[numOfWinds])
                             numOfWinds++
                             break    
                         case 'FINISH':
@@ -289,21 +301,25 @@ window.onload = function () {
                 break;
 
             case 'OBSTACLEUPDATE':
-                this.console.log('OPBSTACLE UPDATEEEEEEEEEEEEEEE')
-                console.log(msg)
+               // this.console.log('OPBSTACLE UPDATEEEEEEEEEEEEEEE')
+                //console.log(msg)
                 var id = JSON.parse(msg.id)
                 var state = JSON.stringify(msg.estate)
+                //this.console.log(state)
                 switch (state) {
-                    case 'ACTIVE':
+                    case '"ACTIVE"':
                         //Empezar animacion de fuego
+                        //this.console.log('Activar fuego')
                         this.game.global.arrayObstacles[id].animations.play('fire')
                         break
-                    case 'NOTACTIVE':
+                    case '"NOTACTIVE"':
                         //Apagar
+                        //this.console.log('Desactivar')
                         this.game.global.arrayObstacles[id].animations.play('stopped')
                         break
-                    case 'PREACTIVATE':
+                    case '"PREACTIVATE"':
                         //Empezar animacion chispas
+                        //this.console.log('Chispas')
                         game.global.arrayObstacles[id].animations.play('sparks')
                         break
                     default:
@@ -340,12 +356,16 @@ window.onload = function () {
                 game.global.arrayTrampolines[id].animations.play('activate', 8, false)
                 break
             case 'WINDUPDATE':
+                this.console.log('WIND UPDATEEEEEEEEEEE')
+                this.console.dir(msg)
                 var direction = JSON.parse(msg.direction)
                 var id = JSON.parse(msg.id)
                 if (direction == true){
-                    //game.global.arrayWinds[id].animations.play('wind')
+                    this.console.log('a favor')
+                    game.global.arrayWinds[id].animations.play('wind')
                 } else{
-                    //game.global.arrayWinds[id].animations.play('windReverse')
+                    this.console.log('en contra')
+                    game.global.arrayWinds[id].animations.play('windReverse')
                 }
                 break    
             case 'FINISH':
@@ -384,6 +404,7 @@ window.onload = function () {
                 break
             case 'OBSTACLECOLLISION':
                 //Poner animacion de cansado
+                game.global.player.sprite.animations.play('damage');
                 break
             case 'SLOPECOLLISION':
                 //Poner animacion cuesta
@@ -398,13 +419,15 @@ window.onload = function () {
                 break
             case 'SNAILUPDATE':
                 //Saber si me quedo sin stamina o si la recupero
-                var runOutOfStamina = JSON.parse(msg.runOutOfStamina)
+                var runOutOfStamina = JSON.parse(msg.runOutStamina)
                 var recoverStamina = JSON.parse(msg.recoverStamina)
                 if (runOutOfStamina){
                     //Animacion de cansarse
-                }
+                    game.global.player.sprite.animations.play('tired');
+                } else
                 if (recoverStamina){
                     //Animacion de andar normal
+                    game.global.player.sprite.animations.play('walk');
                 }
                 break
             case 'TAKEPOWERUP':
@@ -442,13 +465,13 @@ window.onload = function () {
                 
                 //Cambiar el sprite de la puerta
                 var id = JSON.parse(msg.id)
-                console.log(this.game.global.arrayDoors[id])
+                //console.log(this.game.global.arrayDoors[id])
                 if (this.game.global.arrayDoors[id] !== undefined) {
                     if (game.global.arrayDoors[id].frame == 0) {
-                        this.console.log('abrir puerta')
+                        //this.console.log('abrir puerta')
                         game.global.arrayDoors[id].frame = 1
                     } else {
-                        this.console.log('cerrar puerta')
+                        //this.console.log('cerrar puerta')
                         game.global.arrayDoors[id].frame = 0
                     }
                 }
