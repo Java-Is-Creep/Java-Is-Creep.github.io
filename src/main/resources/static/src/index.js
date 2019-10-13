@@ -319,9 +319,10 @@ window.onload = function () {
                 game.global.arrayTrampolines[id].animations.play('activate', 8, false)
                 break
             case 'FINISH':
-                this.game.global.winner = JSON.parse(msg.winner)
-                this.game.global.time = JSON.parse(msg.time)
-                this.game.global.maxTime = JSON.parse(msg.maxTime)
+                game.global.winner = JSON.parse(msg.winner)
+                game.global.time = JSON.parse(msg.time)
+                game.global.maxTime = JSON.parse(msg.maxTime)
+                game.state.start('gameOverState')
                 break
             case 'GROUNDCOLLISION':
                 //Poner la animacion de andar

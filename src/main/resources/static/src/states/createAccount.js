@@ -72,6 +72,32 @@ Slooow.createAccountState.prototype = {
             align: "center"
         }
 
+        //Boton ESPAÑITA AE
+        buttonAE = game.add.button(game.world.width - 60,
+            50, 'ESPAÑITABtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonAE.anchor.set(0.5)
+        buttonAE.scale.setTo(0.3, 0.3)
+        buttonAE.alpha = 0
+        buttonAE.inputEnabled = false
+        //Boton eng
+        buttonEng = game.add.button(game.world.width - 60,
+            50, 'engBtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonEng.anchor.set(0.5)
+        buttonEng.scale.setTo(0.3, 0.3)
+        buttonEng.alpha = 0
+        buttonEng.inputEnabled = false 
+        if(game.global.activeLanguage.Language == 'eng'){
+            this.language = 'eng'
+            buttonEng.alpha = 1
+            buttonEng.inputEnabled = true
+        } else {
+            this.language = 'ESPAÑITA'
+            buttonAE.alpha = 1
+            buttonAE.inputEnabled = true
+        }
+
         //Boton crear cuenta
         buttonCreateAccount = game.add.button(game.world.centerX ,
             game.world.centerY + 140, 'button', actionOnClickCreate, this,
@@ -123,6 +149,31 @@ Slooow.createAccountState.prototype = {
 
         function actionOnClickBack (){
             game.state.start('initSesionState')
+        }
+
+        function actionOnClickLanguage(){
+            //TODO Cambio real de idioma
+            if(this.language == 'eng'){
+                buttonEng.alpha = 0
+                buttonEng.inputEnabled = false
+                buttonAE.alpha = 1
+                buttonAE.inputEnabled = true
+                this.language = 'ESPAÑITA'
+                game.global.activeLanguage = game.global.languageData.ESPAÑITA
+            } else {
+                buttonAE.alpha = 0
+                buttonAE.inputEnabled = false
+                buttonEng.alpha = 1
+                buttonEng.inputEnabled = true
+                this.language = 'eng'
+                game.global.activeLanguage = game.global.languageData.eng
+            }
+            textButtonInit.setText(game.global.activeLanguage.LogIn);
+            textButtonCreate.setText(game.global.activeLanguage.SingIn);
+            textButtonBack.setText(game.global.activeLanguage.Back)
+            passwordInput.placeHolder.setText(game.global.activeLanguage.InputPass)
+            usernameInput.placeHolder.setText(game.global.activeLanguage.InputUser)
+            confirmPasswordInput.placeHolder.setText(game.global.activeLanguage.InputConfirm)
         }
     },
 

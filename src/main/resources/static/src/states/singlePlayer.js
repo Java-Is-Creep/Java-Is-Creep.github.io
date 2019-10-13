@@ -236,6 +236,11 @@ Slooow.singlePlayerState.prototype = {
 		game.global.socket.send(JSON.stringify(msg))
 
 		if (this.rKey.isDown){
+			game.global.winner = true
+            game.global.myTime = 93220
+			game.global.maxTime = 153057
+			game.global.myRecord = 87520
+			game.global.mapRecord = 75236
 			game.state.start('gameOverState')
 		}
     

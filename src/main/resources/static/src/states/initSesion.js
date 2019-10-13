@@ -3,6 +3,7 @@ Slooow.initSesionState = function (game) {
     var textButtonInit = undefined
     var inicioSesionNameButton = undefined
     var inicioSesionPassButton = undefined
+    this.language
 }
 
 Slooow.initSesionState.prototype = {
@@ -65,6 +66,32 @@ Slooow.initSesionState.prototype = {
             align: "center"
         };
 
+         //Boton ESPAÑITA AE
+        buttonAE = game.add.button(game.world.width - 60,
+            50, 'ESPAÑITABtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonAE.anchor.set(0.5)
+        buttonAE.scale.setTo(0.3, 0.3)
+        buttonAE.alpha = 0
+        buttonAE.inputEnabled = false
+        //Boton eng
+        buttonEng = game.add.button(game.world.width - 60,
+            50, 'engBtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonEng.anchor.set(0.5)
+        buttonEng.scale.setTo(0.3, 0.3)
+        buttonEng.alpha = 0
+        buttonEng.inputEnabled = false 
+        if(game.global.activeLanguage.Language == 'eng'){
+            this.language = 'eng'
+            buttonEng.alpha = 1
+            buttonEng.inputEnabled = true
+        } else {
+            this.language = 'ESPAÑITA'
+            buttonAE.alpha = 1
+            buttonAE.inputEnabled = true
+        }
+
         buttonInitSesion = game.add.button(game.world.centerX + 100,
             game.world.centerY + 100, 'button', actionOnClickInit, this,
             0, 0, 0)
@@ -72,7 +99,7 @@ Slooow.initSesionState.prototype = {
 
         // Init Sesion Text
         textButtonInit = game.add.text(game.world.centerX + 100,
-            game.world.centerY + 100, 'Log in', style)
+            game.world.centerY + 100, game.global.activeLanguage.LogIn, style)
         textButtonInit.anchor.set(0.5)
         textButtonInit.alpha = 0.5
         buttonInitSesion.alpha = 0.5
@@ -87,7 +114,7 @@ Slooow.initSesionState.prototype = {
 
         // Text Create Account
         textButtonCreate = game.add.text(game.world.centerX - 100,
-            game.world.centerY + 100, 'Sing in', style)
+            game.world.centerY + 100, game.global.activeLanguage.SingIn, style)
         textButtonCreate.anchor.set(0.5)
         textButtonCreate.scale.setTo(0.5, 0.5)
         buttonCreateAccount.scale.setTo(0.3, 0.3)
@@ -121,7 +148,30 @@ Slooow.initSesionState.prototype = {
         //Funcion que se llama cuando se pulsa en crear cuenta
         function actionOnClickCreate() {
             game.state.start('createAccountState')
-        }   
+        }
+        
+        function actionOnClickLanguage(){
+            //TODO Cambio real de idioma
+            if(this.language == 'eng'){
+                buttonEng.alpha = 0
+                buttonEng.inputEnabled = false
+                buttonAE.alpha = 1
+                buttonAE.inputEnabled = true
+                this.language = 'ESPAÑITA'
+                game.global.activeLanguage = game.global.languageData.ESPAÑITA
+            } else {
+                buttonAE.alpha = 0
+                buttonAE.inputEnabled = false
+                buttonEng.alpha = 1
+                buttonEng.inputEnabled = true
+                this.language = 'eng'
+                game.global.activeLanguage = game.global.languageData.eng
+            }
+            textButtonInit.setText(game.global.activeLanguage.LogIn);
+            textButtonCreate.setText(game.global.activeLanguage.SingIn);
+            inicioSesionPassButton.placeHolder.setText(game.global.activeLanguage.InputPass)
+            inicioSesionNameButton.placeHolder.setText(game.global.activeLanguage.InputUser)
+        }
 
     },
 

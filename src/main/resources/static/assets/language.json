@@ -26,7 +26,11 @@
         "MainMenu": "Menu principal",
         "JoinRoom" : "Unirse a Sala",
         "CreateRoom" : "Crear una Sala",
-        "SearchRoom" : "Buscar sala"
+        "SearchRoom" : "Buscar sala",
+        "Time" : "Tiempo",
+        "Max Time" : "Tiempo max",
+        "YourRecord" : "Record",
+        "MapRecord" : "Record del Mapa"
     },
     
     "eng" : {
@@ -52,11 +56,15 @@
         "Ready" : "Ready",
         "Stats" : "Stats:",
         "Score" : "Score: ",
-        "Reward" : "Recompensa: ",
+        "Reward" : "Reward: ",
         "MainMenu" : "Main menu",
         "JoinRoom" : "Join Room",
         "CreateRoom" : "Create Room",
-        "SearchRoom" : "Search Room"
+        "SearchRoom" : "Search Room",
+        "Time" : "Time",
+        "MaxTime" : "Max time",
+        "YourRecord" : "Record",
+        "MapRecord" : "Map Record"
         }
     
 }
