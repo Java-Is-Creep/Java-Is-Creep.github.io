@@ -6,7 +6,8 @@ Slooow.lobbyState.prototype = {
     init : function() {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **LOBBY** state");
-		}
+        }
+        game.world.setBounds(0, 0, 1280, 720);
 	},
 
 	preload : function() {

@@ -61,6 +61,8 @@ Slooow.preloadState.prototype = {
 		game.load.spritesheet('trapdoor', './assets/img/props/anim/trampillaSpriteSheet.png', 600, 300, 2)
 		game.load.spritesheet('sartenSpritesheet', './assets/img/props/anim/sartenSpriteSheet.png', 600, 600, 9)
 		game.load.spritesheet('fireSpritesheet', './assets/img/props/anim/fuegoSpriteSheet.png', 500, 500, 6)
+		game.load.spritesheet('doorSpritesheet', './assets/img/props/anim/puerta_sheet3.png', 400, 600, 2 )
+		game.load.spritesheet('windSpritesheet', './assets/img/props/anim/sheetViento.png', 3000, 2000, 2)
 		// TODO Tiles Hielo
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +71,14 @@ Slooow.preloadState.prototype = {
 		// Interfaz de Juego
 		game.load.image ('bar_Estamina1', './assets/img/UI/hpBar1.png')
 		game.load.image ('bar_Estamina2', './assets/img/UI/hpBar2.png')
+		game.load.image ('barStamina', './assets/img/UI/barra_estamina.png')
+		game.load.image ('barStaminaFuera', './assets/img/UI/barra_Fuera.png')
+		game.load.image ('barStaminaInterior', './assets/img/UI/barra_interior.png')
+
+		//Objectos generales del mapa
 		game.load.image('finishObject', './assets/img/props/sprites/banderin.png')
 		game.load.image('finishGround', './assets/img/props/sprites/linea_meta.png')
+		game.load.spritesheet('boxPowerUpSpritesheet', './assets/img/powerUps/anim/cajaPower_sheet.png', 500, 500, 7)
 
 		// Interfaz Global
 		game.load.image('button', './assets/img/btn/defaultBtn.png');
