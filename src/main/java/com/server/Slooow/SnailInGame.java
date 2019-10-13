@@ -40,7 +40,7 @@ public class SnailInGame {
 	public final float NORMALACELERATIONX = 5f;
 	public final float NORMALACELERATIONY = 5f; // era 0.05
 
-	// aceleracion cuando aceleras
+	// aceleracion cuando aceleras - ACTUALMENTE NO ES UN PARÁMETRO USABLE (NO BORRAR)
 	public final float ACELERATIONX = 0.2f;
 	public final float ACELERATIONY = 0.2f;
 

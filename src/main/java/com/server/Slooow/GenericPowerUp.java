@@ -11,7 +11,8 @@ public  class GenericPowerUp {
 	
 	int timeRemaining;
 	//se restarian 30 por seg
-	 protected int TIMEMAX; 
+	 protected int TIMEMAX;
+	 // El juego va a 30fps 
 	final int timeRest = 1;
 	PlayerConected player;
 	powerType myType;

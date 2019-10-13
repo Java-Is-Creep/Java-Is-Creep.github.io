@@ -237,7 +237,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 1 * unit;
 
 		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY - unit,
-				type.TRAMPOLINE, 4000, 250, 500, TICKTIME, 10, 22);
+				type.TRAMPOLINE, 4000, 250, 500, TICKTIME, 9, 22);
 
 		map.addMapObject(trampoline);
 		trampolineArray.add(trampoline);

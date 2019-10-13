@@ -101,8 +101,8 @@ window.onload = function () {
 
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
-    game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    //game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -137,9 +137,9 @@ window.onload = function () {
                 game.global.player.stamina2.scale.setTo(scale, 0.5)
                 
                 // Tratamiento de la barra de progreso
-                //console.log (game.global.finishObject.x)
-                var posProgress = 100 + 1200 - game.global.player.sprite.x
-                var scaleProgress = posProgress/1200
+                console.log (game.global.finishObject.x)
+                var posProgress = 100 + game.global.finishObject.x - game.global.player.sprite.x
+                var scaleProgress = posProgress/game.global.finishObject.x
                 game.global.player.progressBar2.scale.setTo(scaleProgress, 1)
 
                 break
@@ -276,10 +276,10 @@ window.onload = function () {
                             numOfWinds++
                             break    
                         case 'FINISH':
-                            this.game.global.finishObject.x = arrayPosX
-                            this.game.global.finishObject.y = arrayPosY
-                            this.game.global.finishObject.height = arrayHeight
-                            this.game.global.finishObject.width = arrayWidth
+                            this.game.global.finishObject.x = arrayPosX[i]
+                            this.game.global.finishObject.y = arrayPosY[i]
+                            this.game.global.finishObject.height = arrayHeight[i]
+                            this.game.global.finishObject.width = arrayWidth[i]
 
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
