@@ -86,6 +86,7 @@ window.onload = function () {
         //Array de trampolines
         arrayTrampolines: [],
         arrayObstacleFire: [],
+        arrayDoors:[],
         finishObject: new Object,
         player: new this.Object(),
         winner: false,
@@ -147,6 +148,7 @@ window.onload = function () {
                 var numOfPowerUps = 0;
                 var numOfTrapdoors = 0;
                 var numOfTrampolines = 0;
+                var numOfDoors = 0;
 
                 for (var i = 0; i < type.length; i++) {
                     switch (type[i]) {
@@ -238,6 +240,14 @@ window.onload = function () {
                             game.global.arrayTrampolines[numOfTrampolines].width = arrayWidth[i]
                             numOfTrampolines++;
                             break
+                        case 'DOOR':
+                                this.game.global.arrayDoors[numOfDoors] = new Object()
+                                game.global.arrayDoors[numOfDoors].x = arrayPosX[i]
+                                game.global.arrayDoors[numOfDoors].y = arrayPosY[i]
+                                game.global.arrayDoors[numOfDoors].height = arrayHeight[i]
+                                game.global.arrayDoors[numOfDoors].width = arrayWidth[i]
+                                numOfDoors++;
+                            break    
                         case 'FINISH':
                             this.game.global.finishObject.x = arrayPosX
                             this.game.global.finishObject.y = arrayPosY
@@ -347,6 +357,12 @@ window.onload = function () {
                 //Saber si me quedo sin stamina o si la recupero
                 var runOutOfStamina = msg.runOutOfStamina
                 var recoverStamina = msg.recoverStamina
+                if (runOutOfStamina){
+                    //Animacion de cansarse
+                }
+                if (recoverStamina){
+                    //Animacion de andar normal
+                }
                 break
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
@@ -355,16 +371,22 @@ window.onload = function () {
                 //this.game.global.arrayPowerUps[id].destroy()
                 switch (msg.type) {
                     case 'SHIELD':
+                        //Crear sprite shield
                         break
                     case 'STAMINA':
+                        //Crear sprite estamina
                         break
                     case 'WEIGHT':
+                        //Crear sprite peso
                         break
                     case 'LETUCCE':
+                        //Crear sprite lechuga
                         break
                     case 'SPEED':
+                        //Crear sprite velocidad
                         break
                     case 'INK':
+                        //Crear sprite tinta
                         break
                     case 'NULL':
                         this.console.log('MAL')
@@ -374,6 +396,8 @@ window.onload = function () {
                 }
                 break
             case 'UPDATEDOOR':
+                var id = msg.id
+                //Cambiar el sprite de la puerta
                 break
             case 'WALLCOLLISION':
                 break

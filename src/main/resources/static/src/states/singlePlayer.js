@@ -100,11 +100,21 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
-			game.global.arrayPowerUps[i] = game.add.image(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, 'roundBtn')
+			game.global.arrayPowerUps[i] = game.add.image(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, 'boxPowerUpSpritesheet')
+			game.global.arrayPowerUps[i].animations.add('turn')
+			game.global.arrayPowerUps[i].animations.play('turn', 4, true)
 			game.global.arrayPowerUps[i].visible = true
 			game.global.arrayPowerUps[i].anchor.setTo(0.5,0.5)
-			game.global.arrayPowerUps[i].scale.setTo(0.5, 0.5)
+			game.global.arrayPowerUps[i].scale.setTo(0.15, 0.15)
 		} 
+
+		for (var i = 0; i< game.global.arrayDoors.length; i++){
+			game.global.arrayDoors[i] = game.add.image(game.global.arrayDoors[i].x-18, game.world.height - game.global.arrayDoors[i].y, 'doorSpritesheet')
+			game.global.arrayDoors[i].frame = 0
+			game.global.arrayDoors[i].visible = true
+			game.global.arrayDoors[i].anchor.setTo(0,1)
+			game.global.arrayDoors[i].scale.setTo(0.5, 0.3)
+		}
 
 		if (game.global.finishObject != undefined){
 			game.global.finishObject = game.add.image(game.global.finishObject.x, game.global.finishObject.y, 'finishObject')
