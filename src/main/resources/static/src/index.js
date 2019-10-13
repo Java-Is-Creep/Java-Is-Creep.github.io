@@ -254,13 +254,13 @@ window.onload = function () {
                                 numOfDoors++;
                             break    
                         case 'WIND':
-                            var direction = msg.direction
+                            var direction = JSON.parse(msg.direction)
                             this.game.global.arrayWinds[numOfWinds] = new this.Object()
                             this.game.global.arrayWinds[numOfWinds].x = arrayPosX[i]
                             this.game.global.arrayWinds[numOfWinds].y = arrayPosY[i]
                             this.game.global.arrayWinds[numOfWinds].height = arrayHeight[i]
                             this.game.global.arrayWinds[numOfWinds].width = arrayWidth[i]
-                            this.game.global.arrayWinds[numOfWinds].direction = direction
+                            this.game.global.arrayWinds[numOfWinds].direction = direction[i]
                             numOfWinds++
                             break    
                         case 'FINISH':
@@ -290,8 +290,8 @@ window.onload = function () {
 
             case 'OBSTACLEUPDATE':
                 this.console.log('OPBSTACLE UPDATEEEEEEEEEEEEEEE')
-                var id = msg.id
-                switch (msg.estate) {
+                var id = JSON.parse(msg.id)
+                switch (JSON.parse(msg.estate)) {
                     case 'ACTIVE':
                         //Empezar animacion de fuego
                         this.game.global.arrayObstacles[id].animations.play('fire')
@@ -338,8 +338,8 @@ window.onload = function () {
                 game.global.arrayTrampolines[id].animations.play('activate', 8, false)
                 break
             case 'WINDUPDATE':
-                var direction = msg.direction
-                var id = msg.id
+                var direction = JSON.parse(msg.direction)
+                var id = JSON.parse(msg.id)
                 if (direction == true){
                     game.global.arrayWinds[i].animations.play('wind')
                 } else{
@@ -359,7 +359,7 @@ window.onload = function () {
                 this.game.global.haveToRotateToWall = false
                 break
             case 'OBJECTUSED':
-                switch (msg.type) {
+                switch (JSON.parse(msg.type)) {
                     case 'SHIELD':
                         break
                     case 'STAMINA':
@@ -384,7 +384,7 @@ window.onload = function () {
                 break
             case 'SLOPECOLLISION':
                 //Poner animacion cuesta
-                var degrees = msg.degrees
+                var degrees = JSON.parse(msg.degrees)
                 if (degrees < 0){
                     //degrees = 360 + degrees
                 }
@@ -395,8 +395,8 @@ window.onload = function () {
                 break
             case 'SNAILUPDATE':
                 //Saber si me quedo sin stamina o si la recupero
-                var runOutOfStamina = msg.runOutOfStamina
-                var recoverStamina = msg.recoverStamina
+                var runOutOfStamina = JSON.parse(msg.runOutOfStamina)
+                var recoverStamina = JSON.parse(msg.recoverStamina)
                 if (runOutOfStamina){
                     //Animacion de cansarse
                 }
@@ -406,10 +406,10 @@ window.onload = function () {
                 break
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
-                var id = msg.id
+                var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha.setTo(0)
-                switch (msg.type) {
+                switch (JSON.parse((msg.type)) {
                     case 'SHIELD':
                         //Crear sprite shield
                         break
@@ -436,7 +436,7 @@ window.onload = function () {
                 }
                 break
             case 'UPDATEDOOR':
-                var id = msg.id
+                
                 //Cambiar el sprite de la puerta
                 var id = JSON.parse(msg.id)
                 console.log(this.game.global.arrayDoors[id])
