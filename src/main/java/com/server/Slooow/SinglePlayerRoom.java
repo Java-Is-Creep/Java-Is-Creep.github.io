@@ -410,7 +410,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 20 * unit;
 
 		///// FIN CAMINO NGERO 2 SE JUNTA CON EL AZUL
-		//Empezamos segundo partido rojo
+		//Empezamos segundo camino rojo
 		map.addMapObject(
 				new MapGround(7 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
 				acumulativePosXRedPath += 7 * unit;
@@ -456,7 +456,7 @@ public class SinglePlayerRoom extends Room {
 
 			
 			map.addMapObject(
-				new MapGround(14 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+				new MapGround(14 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath-1*(unit/2), type.GROUND));
 				acumulativePosXRedPath += 14 * unit;
 
 				//acaba el suelo donde se unen el segundo camino rojo y el azul
@@ -591,6 +591,7 @@ public class SinglePlayerRoom extends Room {
 		boolean wallCollision = false;
 		boolean slopeCollision = false;
 		boolean obstacleCollision = false;
+		boolean isClimbingADoor = false;
 		double slopeRadians = 0;
 		int degrees = 0;
 
@@ -617,6 +618,7 @@ public class SinglePlayerRoom extends Room {
 
 						}
 					} else {
+						
 						groundCollision = true;
 						owner.mySnail.hasFallenTrap = false;
 						owner.mySnail.isJumping = false;
@@ -627,7 +629,6 @@ public class SinglePlayerRoom extends Room {
 					break;
 				case WALL:
 					if (owner.mySnail.hasPassedDoor) {
-						System.out.println("PASAPUERTA");
 						if (object.getClass() == DoorMap.class) {
 
 						} else {
@@ -637,11 +638,15 @@ public class SinglePlayerRoom extends Room {
 							}
 						}
 					} else {
-						System.out.println("PARED");
-						wallCollision = true;
-						if (!lastFrameWallCollision) {
-							sendWallCollision = true;
+						if(object.getClass() == DoorMap.class){
+							isClimbingADoor = true;
+						} else {
+							if (!lastFrameWallCollision) {
+								sendWallCollision = true;
+							}
 						}
+						wallCollision = true;
+
 						owner.mySnail.hasPassedDoor = false;
 						owner.mySnail.isJumping = false;
 
@@ -711,7 +716,11 @@ public class SinglePlayerRoom extends Room {
 		lastFrameWallSlopeCollision = slopeCollision;
 
 		if (sendGroundCollision) {
-			sendGroundCollision();
+			if(!isClimbingADoor){
+				sendGroundCollision();
+			} else {
+				System.out.println("TOCANDO PUERTA Y SUELO");
+			}
 		}
 
 		if (sendWallCollision) {
