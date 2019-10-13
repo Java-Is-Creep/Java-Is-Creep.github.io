@@ -116,39 +116,44 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i< game.global.arrayWinds.length; i++){
-			game.global.arrayWinds[i] = game.add.image(game.global.arrayWinds[i].x, game.world.height - game.global.arrayDoors[i].y, 'windSpritesheet')
-			game.global.arrayWinds[i].animations.add('wind', 4, true)
-			game.global.arrayWinds[i].animations.add('windReverse', [1,0], true)
+			console.log('viento')
+			console.dir(game.global.arrayWinds[i])
+			game.global.arrayWinds[i] = game.add.image(game.global.arrayWinds[i].x, game.world.height - game.global.arrayWinds[i].y, 'windSpritesheet')
+			game.global.arrayWinds[i].animations.add('wind',[0,1], 8, true)
+			game.global.arrayWinds[i].animations.add('windReverse', [1,0], 8, true)
 			if (game.global.arrayWinds[i].direction == true){
+				console.log('a favor')
 				game.global.arrayWinds[i].animations.play('wind')
 			} else{
+				console.log('en contra')
 				game.global.arrayWinds[i].animations.play('windReverse')
 			}
+			//game.global.arrayWinds[i].frame = 0
 			game.global.arrayWinds[i].visible = true
 			game.global.arrayWinds[i].anchor.setTo(0,1)
-			game.global.arrayWinds[i].scale.setTo(0.3, 0.3)
+			game.global.arrayWinds[i].scale.setTo(0.15, 0.1)
 		}
 
 		if (game.global.finishObject != undefined){
-			game.global.finishObject = game.add.image(game.global.finishObject.x, game.global.finishObject.y, 'finishObject')
+			game.global.finishObject = game.add.image(game.global.finishObject.x, game.world.height - game.global.finishObject.y, 'finishObject')
 			game.global.finishObject.visible = true
 			game.global.finishObject.anchor.setTo(0,1)
 			game.global.finishObject.scale.setTo(0.5, 0.5)
-			var finishGround =  game.add.image(game.global.finishObject.x, game.global.finishObject.y, 'finishGround')
+			var finishGround =  game.add.image(game.global.finishObject.x,game.world.height - game.global.finishObject.y, 'finishGround')
 			finishGround.visible = true
 			finishGround.anchor.setTo(0,0)
 			finishGround.scale.setTo(0.5, 0.5)
 		}
-		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// PERSONAJE
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'normalColAnimation')
 
 		game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
 		game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
 		game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 5), 5, true);
 		//game.global.player.sprite.animations.add('turn', Phaser.Animation.generateFrameNames('turn', 0, 3), 5, true);
-
 		game.global.player.sprite.animations.play('walk');
-
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);
 		game.global.player.sprite.scale.setTo(0.28, 0.28)
 
@@ -168,6 +173,22 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player.stamina3.fixedToCamera = true;
 		game.global.player.stamina2.fixedToCamera = true;
 		game.global.player.stamina1.fixedToCamera = true;
+
+		// Creacion de la barra de progreso
+		game.global.player.progressBar1 = game.add.sprite(game.width/3, 20, 'barProgressInteriorColor')
+		game.global.player.progressBar2 = game.add.sprite(game.width/3, 20, 'barProgressInteriorNegra')
+		game.global.player.progressBar3 = game.add.sprite(game.width/3, 20, 'barProgressFuera')
+
+		game.global.player.progressBar2.x += game.global.player.progressBar2.width
+		game.global.player.progressBar2.anchor.setTo (1,0)
+
+		game.global.player.progressBar1.fixedToCamera = true;
+		game.global.player.progressBar2.fixedToCamera = true;
+		game.global.player.progressBar3.fixedToCamera = true;
+
+		game.global.player.powerUpsContainer = game.add.sprite(game.width -150, 50, 'powerUpsContainer')
+		game.global.player.powerUpsContainer.scale.setTo(0.5, 0.5)
+		game.global.player.powerUpsContainer.fixedToCamera = true
 
 		//console.log ("Array Cargado")
 		//console.dir (game.global.arrayObstacleSpikes)

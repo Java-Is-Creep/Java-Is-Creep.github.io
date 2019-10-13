@@ -74,6 +74,10 @@ Slooow.preloadState.prototype = {
 		game.load.image ('barStamina', './assets/img/UI/barra_estamina.png')
 		game.load.image ('barStaminaFuera', './assets/img/UI/barra_Fuera.png')
 		game.load.image ('barStaminaInterior', './assets/img/UI/barra_interior.png')
+		game.load.image ('barProgressFuera', './assets/img/UI/barraprogreso_exterior.png')
+		game.load.image ('barProgressInteriorNegra', './assets/img/UI/barraprogreso_interiorNegra.png')
+		game.load.image ('barProgressInteriorColor', './assets/img/UI/barraprogreso_interiorColor.png')
+		game.load.image ('powerUpsContainer', './assets/img/UI/contenedorPowerups.png')
 
 		//Objectos generales del mapa
 		game.load.image('finishObject', './assets/img/props/sprites/banderin.png')
