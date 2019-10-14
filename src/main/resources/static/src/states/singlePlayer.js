@@ -160,15 +160,15 @@ Slooow.singlePlayerState.prototype = {
 		game.global.player.sprite.scale.setTo(0.28, 0.28)
 
 		// Creacion Barra de Estamina
-		game.global.player.stamina3 = game.add.sprite(0, 0, 'barStaminaInterior')
+		game.global.player.stamina3 = game.add.sprite(10, 0, 'barStaminaInterior')
 		game.global.player.stamina3.anchor.set(0,0);
 		game.global.player.stamina3.scale.setTo(0.5,0.5);
 		
-		game.global.player.stamina2 = game.add.sprite(0, 0, 'barStamina')
+		game.global.player.stamina2 = game.add.sprite(28, 20, 'barStamina')
 		game.global.player.stamina2.anchor.set(0,0);
 		game.global.player.stamina2.scale.setTo(0.5,0.5);
 
-		game.global.player.stamina1 = game.add.sprite(0, 0, 'barStaminaFuera')
+		game.global.player.stamina1 = game.add.sprite(10, 0, 'barStaminaFuera')
 		game.global.player.stamina1.anchor.set(0,0);
 		game.global.player.stamina1.scale.setTo(0.5,0.5);
 

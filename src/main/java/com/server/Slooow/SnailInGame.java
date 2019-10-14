@@ -30,15 +30,15 @@ public class SnailInGame {
 	// de stamina por segundo
 	// Tiempo que se tarda en recargar la stamina si se acaba o nos dan 151 / (1.5f
 	// * 30 fps) = 3.33 segundos
-	public final float MAXSTAMINA = 1200;
+	public final float MAXSTAMINA = 600;
 	public final float MAXVELOCITYX = 6;
-	public final float MAXVELOCITYY = 6;
-	public final float MAXNORMALVELOCITYX = 5;
-	public final float MAXNORMALVELOCITYY = 5; // era 3
+	public final float MAXVELOCITYY = 5;
+	public final float MAXNORMALVELOCITYX = 3;
+	public final float MAXNORMALVELOCITYY = 2.5f; // era 3
 
 	// aceleracion base, es decir sin acelerar
-	public final float NORMALACELERATIONX = 5f;
-	public final float NORMALACELERATIONY = 5f; // era 0.05
+	public final float NORMALACELERATIONX = 2f;
+	public final float NORMALACELERATIONY = 2f; // era 0.05
 
 	// aceleracion cuando aceleras - ACTUALMENTE NO ES UN PARÁMETRO USABLE (NO BORRAR)
 	public final float ACELERATIONX = 0.2f;

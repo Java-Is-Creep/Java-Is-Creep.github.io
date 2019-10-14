@@ -206,8 +206,8 @@ public class SinglePlayerRoom extends Room {
 
 		map.addMapObject(new MapGround(6 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 6 * unit;
-		TrapDoor trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000,
-				3000, TICKTIME, 500, 500);
+		TrapDoor trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1800,
+				2400, TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		trapDoorArray.add(trap);
 		acumulativePosX += 3 * unit;
@@ -325,7 +325,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosYRedPath = acumulativePosY;
 
 		DoorMap doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
-				300, 300000000, TICKTIME, 66, 66);
+				300, 2000, TICKTIME, 66, 66);
 		map.addMapObject(doorAux);
 		doorArray.add(doorAux);
 
