@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
+import com.google.gson.JsonObject;
 
 import org.springframework.web.socket.WebSocketSession;
 
@@ -24,10 +25,16 @@ public class SnailGame {
 	ConcurrentHashMap<String,SinglePlayerRoom> singlePlayerRoomMaps = new ConcurrentHashMap<String,SinglePlayerRoom>();
 
 	ConcurrentHashMap<String,MultiplayerRoom> multiPlayerRoomMap = new ConcurrentHashMap<String,MultiplayerRoom>();
+
+	ConcurrentHashMap<String,PlayerRegistered> playerRegistered = new ConcurrentHashMap<String,PlayerRegistered>();
 	
 
 	public SnailGame() {
 		checkLifesTime();
+	}
+
+	public void recoverRegisteredPlayers() {
+		JsonObject RegisteredPlayers = new JsonObject();
 	}
 
 	public void conectarJugador(PlayerConected jugador) {
