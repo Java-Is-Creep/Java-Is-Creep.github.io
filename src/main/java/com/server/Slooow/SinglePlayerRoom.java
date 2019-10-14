@@ -207,7 +207,7 @@ public class SinglePlayerRoom extends Room {
 		map.addMapObject(new MapGround(6 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 6 * unit;
 		TrapDoor trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1800,
-				2400, TICKTIME, 500, 500);
+				2800, TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		trapDoorArray.add(trap);
 		acumulativePosX += 3 * unit;
@@ -298,7 +298,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosX += 3 * unit;
 		acumulativePosY = 400;
 
-		Wind windAux = new Wind(11 * unit, 2 * unit, acumulativePosX, acumulativePosY, type.WIND, false, 4, true, 5000,
+		Wind windAux = new Wind(11 * unit, 2 * unit, acumulativePosX, acumulativePosY, type.WIND, false, 1.5f, true, 5800,
 				TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
@@ -325,7 +325,7 @@ public class SinglePlayerRoom extends Room {
 		acumulativePosYRedPath = acumulativePosY;
 
 		DoorMap doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
-				300, 2000, TICKTIME, 66, 66);
+				1800, 2000, TICKTIME, 66, 66);
 		map.addMapObject(doorAux);
 		doorArray.add(doorAux);
 
@@ -344,7 +344,7 @@ public class SinglePlayerRoom extends Room {
 
 		acumulativePosX += 19 * unit;
 
-		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 3000, 3000,
+		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 1500, 1000,
 				TICKTIME, 66, 66);
 		map.addMapObject(doorAux);
 		doorArray.add(doorAux);
@@ -383,7 +383,7 @@ public class SinglePlayerRoom extends Room {
 		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 1 * unit;
 
-		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 3000, 3000,
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1000, 800,
 				TICKTIME, 500, 500);
 		map.addMapObject(trap);
 		trapDoorArray.add(trap);
@@ -424,7 +424,7 @@ public class SinglePlayerRoom extends Room {
 				new MapGround(5 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
 				acumulativePosXRedPath += 6 * unit;
 
-				windAux = new Wind(13*unit, 12*unit, acumulativePosXRedPath, acumulativePosYRedPath, type.WIND, true, 4, false, 4000, 33);
+				windAux = new Wind(13*unit, 12*unit, acumulativePosXRedPath, acumulativePosYRedPath, type.WIND, true, 1.2f, false, 2000, 33);
 				windArray.add(windAux);
 				map.addMapObject(windAux);
 
@@ -481,7 +481,7 @@ public class SinglePlayerRoom extends Room {
 		
 
 				 doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
-				300000000, 300, TICKTIME, 66, 66);
+				3000, 1000, TICKTIME, 66, 66);
 				map.addMapObject(doorAux);
 				doorArray.add(doorAux);
 
@@ -499,7 +499,7 @@ public class SinglePlayerRoom extends Room {
 				acumulativePosYNegro = acumulativePosY;
 
 				
-				doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 300, 300000000,
+				doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR, 1700, 1500,
 				TICKTIME, 66, 66);
 				map.addMapObject(doorAux);
 				doorArray.add(doorAux);
@@ -566,21 +566,6 @@ public class SinglePlayerRoom extends Room {
 				acumulativePosXNegro += 6 * unit;
 				acumulativePosYNegro -= unit;
 				
-
-
-
-
-
-
-
-
-
-
-				
-
-				
-
-			
 
 
 	}

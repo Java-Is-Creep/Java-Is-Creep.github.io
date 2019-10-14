@@ -143,7 +143,7 @@ window.onload = function () {
                 if (game.global.player.maxStamina == 0) {
                     game.global.player.maxStamina = msg.stamina
                 }
-                var scale = msg.stamina * 0.5 / 1200
+                var scale = msg.stamina * 0.5 / 600
                 game.global.player.stamina2.scale.setTo(scale, 0.45)
                 
                 // Tratamiento de la barra de progreso

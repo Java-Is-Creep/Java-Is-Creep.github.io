@@ -31,8 +31,8 @@ public class SnailInGame {
 	// Tiempo que se tarda en recargar la stamina si se acaba o nos dan 151 / (1.5f
 	// * 30 fps) = 3.33 segundos
 	public final float MAXSTAMINA = 600;
-	public final float MAXVELOCITYX = 6;
-	public final float MAXVELOCITYY = 5;
+	public final float MAXVELOCITYX = 8;
+	public final float MAXVELOCITYY = 7;
 	public final float MAXNORMALVELOCITYX = 3;
 	public final float MAXNORMALVELOCITYY = 2.5f; // era 3
 

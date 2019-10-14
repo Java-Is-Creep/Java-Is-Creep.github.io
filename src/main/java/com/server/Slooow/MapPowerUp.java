@@ -44,13 +44,13 @@ public class MapPowerUp extends MapObject {
                 break;
             case 1:
                 powerCreated = powerType.STAMINA;
-                aux = new BoostStaminaPowerUp(player, 60, powerCreated);
+                aux = new BoostStaminaPowerUp(player, 120, powerCreated);
 
                 System.out.println("Se ha creado un power de stamina");
                 break;
             case 2:
                 powerCreated = powerType.WEIGHT;
-                aux = new LigthWeigthPowerUp(player, 60, 0.1f, powerCreated);
+                aux = new LigthWeigthPowerUp(player, 180, 0.1f, powerCreated);
 
                 System.out.println("Se ha creado power up de ligth weigth");
                 break;
@@ -62,12 +62,12 @@ public class MapPowerUp extends MapObject {
                 break;
             case 4:
                 powerCreated = powerType.SPEED;
-                aux = new SpeedPowerUp(player, 60, 4f, 4f, 4f, 4f, powerCreated);
+                aux = new SpeedPowerUp(player, 90, 2.5f, 2f, 2f, 2f, powerCreated);
 
                 System.out.println("Aumento velocidades");
             case 5:
                 powerCreated = powerType.INK;
-                aux = new InkPowerUp(player, 200, powerCreated);
+                aux = new InkPowerUp(player, 300, powerCreated);
 
                 System.out.println("Se ha creado un power de tinta");
                 break;
