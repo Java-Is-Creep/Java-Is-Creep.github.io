@@ -124,6 +124,13 @@ public class SnailInGame {
 	protected WebSocketSession mySession;
 	protected ReentrantLock sessionLock;
 
+	//Arreglo Aceleracionç;
+	public final int ACELERATIONTIME = 250;
+	public int acelerationTime = 0;
+	public boolean isAcelerating = false;
+	public final int TICKTIME = 33;
+
+
 	// Se accede a lastMovement tanto en esta clase como en el WebSocketSnailHandler
 	ReentrantLock lastMovementLock = new ReentrantLock();
 
@@ -205,13 +212,26 @@ public class SnailInGame {
 		}
 		sendRunOutStamina = false;
 		sendRecoverStamina = false;
-		boolean isAcelerating = false;
 		boolean useObject = false;
+		boolean wasLastFrameAcelerating = false;
 		if (lastMovement != null) {
 			lastMovementLock.lock();
-			isAcelerating = lastMovement.isAcelerating;
+			wasLastFrameAcelerating = lastMovement.isAcelerating;
 			useObject = lastMovement.useObject;
 			lastMovementLock.unlock();
+		}
+
+		if(wasLastFrameAcelerating){
+			acelerationTime = ACELERATIONTIME;
+			isAcelerating = true;
+		}
+
+		if(isAcelerating){
+			acelerationTime -= TICKTIME;
+			if(acelerationTime <0){
+				isAcelerating = false;
+				acelerationTime = ACELERATIONTIME;
+			}
 		}
 
 		if (useObject) {
@@ -252,7 +272,7 @@ public class SnailInGame {
 		// Si tienes stamina haces funcionamiento normal
 		if (!runOutStamina) {
 			// Comprobamos si aceleramos o no para perder o quitar stamina
-			if (!isAcelerating) {
+			if (!wasLastFrameAcelerating) {
 
 				if (!isOnWall) {
 					if (stamina < MAXSTAMINA) {
@@ -273,10 +293,9 @@ public class SnailInGame {
 
 				}
 
-				maxSpeedX = maxNormalSpeedX;
-				maxSpeedY = maxNormalSpeedY;
-				acelerationX = normalAcelerationX;
-				acelerationY = normalAcelerationY;
+			
+
+
 
 			} else {
 				if (!hasBoostStamina) {
@@ -291,17 +310,29 @@ public class SnailInGame {
 					System.out.println("Me quede sin stamina");
 
 				}
+				
+			}
+
+			
+			if(!isAcelerating){
+				maxSpeedX = maxNormalSpeedX;
+				maxSpeedY = maxNormalSpeedY;
+				acelerationX = normalAcelerationX;
+				acelerationY = normalAcelerationY;
+			} else {
 				maxSpeedX = maxAceleratingSpeedX;
 				maxSpeedY = maxAceleratingSpeedY;
 				//Probando aceleracion
 								
 				acelerationX = maxAceleratingSpeedX;
 				acelerationY = maxAceleratingSpeedY;
-
+				
 				//SI QUEREMOS VOLVER a poner la aceleracion normal
 				//acelerationX = maxAcelerationAceleratingX;
 				//acelerationY = maxAcelerationAceleratingY;
 			}
+
+
 
 			if (isInWind) {
 				if (wind != null) {
