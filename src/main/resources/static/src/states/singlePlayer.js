@@ -137,14 +137,18 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		if (game.global.finishObject != undefined){
+			console.log('pintar final')
+			var y = game.world.height - game.global.finishObject.y
 			game.global.finishObject = game.add.image(game.global.finishObject.x, game.world.height - game.global.finishObject.y, 'finishObject')
 			game.global.finishObject.visible = true
 			game.global.finishObject.anchor.setTo(0,1)
 			game.global.finishObject.scale.setTo(0.5, 0.5)
-			var finishGround =  game.add.image(game.global.finishObject.x,game.world.height - game.global.finishObject.y, 'finishGround')
+			console.dir(game.global.finishObject)
+			var finishGround =  game.add.image(game.global.finishObject.x,y, 'finishGround')
 			finishGround.visible = true
 			finishGround.anchor.setTo(0,0)
 			finishGround.scale.setTo(0.5, 0.5)
+			console.dir(finishGround)
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PERSONAJE

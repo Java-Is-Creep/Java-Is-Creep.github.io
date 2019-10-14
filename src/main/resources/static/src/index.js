@@ -106,6 +106,7 @@ window.onload = function () {
         clockPowerUp: null,
         inkPowerUp: null,
         speedPowerUp: null,
+        hasPowerUp: false
     }
 
     // Conexiones
@@ -394,24 +395,31 @@ window.onload = function () {
                 break
             case 'OBJECTUSED':
                 switch (JSON.stringify(msg.type)) {
-                    case 'SHIELD':
+                    case '"SHIELD"':
+                        game.global.player.shieldPowerUp.visible = false
                         break
-                    case 'STAMINA':
+                    case '"STAMINA"':
+                        game.global.player.staminaPowerUp.visible = false
                         break
-                    case 'WEIGHT':
+                    case '"WEIGHT"':
+                        game.global.player.wingPowerUp.visible = false
                         break
-                    case 'LETUCCE':
+                    case '"LETUCCE"':
+                        game.global.player.lettucePowerUp.visible = false
                         break
-                    case 'SPEED':
+                    case '"SPEED"':
+                        game.global.player.speedPowerUp.visible = false
                         break
-                    case 'INK':
+                    case '"INK"':
+                        game.global.player.inkPowerUp.visible = false
                         break
-                    case 'NULL':
+                    case '"NULL"':
                         this.console.log('MAL')
                         break
                     default:
                         break
                 }
+                this.game.global.hasPowerUp = false
                 break
             case 'OBSTACLECOLLISION':
                 //Poner animacion de cansado
@@ -447,6 +455,22 @@ window.onload = function () {
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha = 0
+                if (this.game.global.hasPowerUp){
+                    if (game.global.player.shieldPowerUp.visible == true){
+                        game.global.player.shieldPowerUp.visible = false
+                    } 
+                    else if(game.global.player.staminaPowerUp.visible == true){
+                        game.global.player.staminaPowerUp.visible = false
+                    } else if(game.global.player.wingPowerUp.visible == true){
+                        game.global.player.wingPowerUp.visible = false
+                    } else if (game.global.player.lettucePowerUp.visible == true){
+                        game.global.player.lettucePowerUp.visible = false
+                    } else if(game.global.player.speedPowerUp.visible == true){
+                        game.global.player.speedPowerUp.visible = false
+                    } else if (game.global.player.inkPowerUp.visible == true){
+                        game.global.player.inkPowerUp.visible = false
+                    }
+                }
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
                         //Crear sprite shield
@@ -478,6 +502,7 @@ window.onload = function () {
                     default:
                         break
                 }
+                this.game.global.hasPowerUp = true
                 break
             case 'UPDATEDOOR':
                 
