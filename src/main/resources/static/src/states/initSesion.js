@@ -124,8 +124,8 @@ Slooow.initSesionState.prototype = {
             if (inicioSesionNameButton.value !== undefined && inicioSesionPassButton.value !== undefined) {
                 if (inicioSesionNameButton.value.length !== 0 && inicioSesionPassButton.value.length !== 0) {
                     let msg = {
-                        event: 'NAME AND PASSWORD',
-                        name: inicioSesionNameButton.value,
+                        event: 'LOGIN',
+                        playerName: inicioSesionNameButton.value,
                         pass: inicioSesionPassButton.value
                     }
                     console.log('Usuario:' + inicioSesionNameButton.value)
@@ -140,7 +140,7 @@ Slooow.initSesionState.prototype = {
 
 //////////////////////////////////////////////////////////////////////
                     //Por ahora pasa directamente al menu principal, pero mas tarde habrá que comprobar usuario y contraseña
-                    game.state.start('mainMenuState')
+                    //game.state.start('mainMenuState')
                 }
             }
         }

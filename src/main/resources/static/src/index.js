@@ -525,7 +525,25 @@ window.onload = function () {
                 game.global.haveToRotateToSlope = false
                 this.game.global.haveToRotateToWall = true
                 break
-        }
+            case 'LOGINSTATUS':
+                if(JSON.parse(msg.conectionStatus)){
+                    game.state.start('mainMenuState')
+                } else {
+                    game.state.start('shopState')
+                }
+                break
+            case 'CREATEACCOUNTSTATUS':
+                if(JSON.parse(msg.conectionStatus)){
+                    game.state.start('mainMenuState')
+                } else {
+                    game.state.start('shopState')
+                }
+                break
+            case 'DISCONNECTSTATUS':
+                if(JSON.parse(msg.disconnectionStatus)){
+                    game.state.start('initSesionState')
+                }
+        }   
 
 
     }

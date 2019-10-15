@@ -1,5 +1,6 @@
 package com.server.Slooow;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.web.socket.WebSocketSession;
@@ -10,11 +11,14 @@ public class PlayerConected {
 	private String nombre;
 	public SnailInGame mySnail;
 	private int lifes;
+	private int points;
+	private int cash;
 	public final int MAXNUMLIFES= 5;
 	// actualmente 1 hora
 	public final int SECONDSTOGETALIFE = 30;
 	public int secondsWaitingForLife = 0;
 	ReentrantLock sessionLock;
+	ConcurrentHashMap<String,Integer> records = new ConcurrentHashMap<String,Integer>();
 
 	//Se guarda su sesion, su nombre y una instancia del caracol generico (Cambiara cuando haya mas de uno)
 	public PlayerConected(WebSocketSession session, String nombre,ReentrantLock sessionLock) {
@@ -65,6 +69,33 @@ public class PlayerConected {
 			secondsWaitingForLife = 0;
 			System.out.println("VIDA AUMENTADA");
 		}
+	}
+
+	public void playerConCast(PlayerRegistered player){
+		this.lifes = player.getLifes();
+		this.points = player.getPoints();
+		this.cash = player.getCash();
+		this.records = player.records;
+	}
+
+	public void setLifes(int lifes) {
+		this.lifes = lifes;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public int getCash() {
+		return cash;
+	}
+
+	public void setCash(int cash) {
+		this.cash = cash;
 	}
 	
 }

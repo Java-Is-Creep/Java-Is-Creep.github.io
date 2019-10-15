@@ -1,11 +1,15 @@
 package com.server.Slooow;
 
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerRegistered {
 
     private String name;
     private String pass;
 	private int lifes;
+    private int points;
+    private int cash;
+    ConcurrentHashMap<String,Integer> records = new ConcurrentHashMap<String,Integer>();
 	public final int MAXNUMLIFES= 5;
 	// actualmente 1 hora
 	public final int SECONDSTOGETALIFE = 30;
@@ -20,7 +24,9 @@ public class PlayerRegistered {
     public PlayerRegistered(String name, String pass){
         this.name = name;
         this.pass = pass;
-        this.lifes = 3;
+        this.lifes = MAXNUMLIFES;
+        this.cash = 0;
+        this.points = 0;
     }
 
     
@@ -53,6 +59,62 @@ public class PlayerRegistered {
      */
     public void setPass(String pass){
         this.pass = pass;
+    }
+
+    public int getLifes() {
+        return lifes;
+    }
+
+    public void setLifes(int lifes) {
+        this.lifes = lifes;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getCash() {
+        return cash;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
+    }
+
+    public ConcurrentHashMap<String, Integer> getRecords() {
+        return records;
+    }
+
+    public void setRecords(ConcurrentHashMap<String, Integer> records) {
+        this.records = records;
+    }
+
+    public int getMAXNUMLIFES() {
+        return MAXNUMLIFES;
+    }
+
+    public int getSECONDSTOGETALIFE() {
+        return SECONDSTOGETALIFE;
+    }
+
+    public int getSecondsWaitingForLife() {
+        return secondsWaitingForLife;
+    }
+
+    public void setSecondsWaitingForLife(int secondsWaitingForLife) {
+        this.secondsWaitingForLife = secondsWaitingForLife;
+    }
+
+    public void castFromPlayerCon(PlayerConected player){
+        this.name = player.getNombre();
+        this.cash = player.getCash();
+        this.lifes = player.getLifes();
+        this.points = player.getPoints();
+        this.records = player.records;
     }
 
 

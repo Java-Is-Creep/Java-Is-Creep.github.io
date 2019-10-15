@@ -249,15 +249,15 @@ Slooow.mainMenuState.prototype = {
             window.open('https://twitter.com/Java_Is_Creep', this)
         }
 
-        function actionOnClickDisconnect() {
-            game.global.username = ''
-            game.global.password = ''
+        function actionOnClickDisconnect() { 
             let msg = {
                 event: 'DISCONNECT',
-                playerName: game.global.username,
+                playerName: game.global.username
             }
             game.global.socket.send(JSON.stringify(msg))
-            game.state.start('initSesionState')
+            game.global.username = ''
+            game.global.password = ''
+            //game.state.start('initSesionState')
         }
 
         // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás

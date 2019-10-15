@@ -127,7 +127,7 @@ Slooow.createAccountState.prototype = {
 				if (usernameInput.value.length !== 0 && passwordInput.value.length !== 0 && confirmPasswordInput.value.length !== 0) {
 					let msg = {
 						event : 'CREATEACCOUNT',
-						name : usernameInput.value,
+						playerName : usernameInput.value,
                         pass : passwordInput.value,
                         confirmPass : confirmPasswordInput.value
                     }
@@ -144,7 +144,7 @@ Slooow.createAccountState.prototype = {
                     //game.state.start('mainMenuState')
 				}
 			}
-            game.state.start('mainMenuState')
+            //game.state.start('mainMenuState')
         }
 
         function actionOnClickBack (){

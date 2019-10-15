@@ -27,8 +27,8 @@ public class SinglePlayerRoom extends Room {
 
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
-	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game) {
-		super(name, player, game);
+	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game, String mapName) {
+		super(name, player, game, mapName);
 
 	}
 

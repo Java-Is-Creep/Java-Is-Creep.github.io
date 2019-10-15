@@ -14,6 +14,8 @@ import com.google.gson.JsonObject;
 public class WebsocketSnailHandler extends TextWebSocketHandler {
 	 //Lock que protege session cuando se mandan mensajes.
 	public ReentrantLock lockSession = new ReentrantLock();
+	//Lock que protege el registros
+	public ReentrantLock lockLogIn = new ReentrantLock();
 
 	//Instancia del juego completo
 	SnailGame game = new SnailGame();
@@ -30,6 +32,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		Post post = googleJson.fromJson(message.getPayload(), Post.class);
 
 		PlayerConected jug;
+		PlayerRegistered playerR;
 
 		switch (post.event) {
 		case "DEBUG":
@@ -54,10 +57,75 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			game.jugadoresConectados.putIfAbsent(jug.getSession(), jug); 
 			if(jug.getLifes()!=0){
 				System.out.println("Creando sala");
-				game.createSingleRoom(post.roomName, jug);
+				game.createSingleRoom(post.roomName, jug, post.mapName);
 			} 
 
 			break;
+		case "LOGIN":
+			boolean login = false;
+			lockLogIn.lock();
+			if(game.playerRegistered.containsKey(post.playerName)){
+				playerR = game.playerRegistered.get(post.playerName);
+				if (playerR.getPass() == post.pass){
+					jug = new PlayerConected(newSession, post.playerName,lockSession);
+					jug.playerConCast(playerR);
+					if(game.jugadoresConectados.putIfAbsent(jug.getSession(), jug) == null){
+						login = false;
+					} else {
+						login = true;
+					}
+					
+				}
+			}
+			lockLogIn.unlock();
+			JsonObject msg = new JsonObject();
+			msg.addProperty("event", "LOGINSTATUS");
+			if(login){
+				msg.addProperty("conectionStatus", true);
+			} else {
+				msg.addProperty("conectionStatus", false);
+			}
+			newSession.sendMessage(new TextMessage(msg.toString()));
+			
+			break;
+
+		case "CREATEACCOUNT":
+			boolean registered = false;
+			lockLogIn.lock();
+			if(post.confirmPass.compareTo(post.pass) == 0){
+				if(!game.playerRegistered.containsKey(post.playerName)){
+					PlayerRegistered newPlayer = new PlayerRegistered(post.playerName, post.pass);
+					game.playerRegistered.putIfAbsent(newPlayer.getName(), newPlayer);
+					jug = new PlayerConected(newSession, newPlayer.getName(),lockSession);
+					jug.playerConCast(newPlayer);
+					game.jugadoresConectados.putIfAbsent(newSession, jug);
+					registered = true;
+				}
+			}
+			lockLogIn.unlock();
+			JsonObject msg2 = new JsonObject();
+			msg2.addProperty("event", "CREATEACCOUNTSTATUS");
+			if(registered){
+				msg2.addProperty("conectionStatus", true);
+			} else {
+				msg2.addProperty("conectionStatus", false);
+			}
+			newSession.sendMessage(new TextMessage(msg2.toString()));
+
+			break;
+
+		case "DISCONNECT":
+			jug = game.jugadoresConectados.remove(newSession);
+			if(jug != null){
+			playerR = game.playerRegistered.get(jug.getNombre());
+			playerR.castFromPlayerCon(jug);
+			JsonObject msg3 = new JsonObject();
+			msg3.addProperty("event", "DISCONNECTSTATUS");
+			msg3.addProperty("disconnectionStatus", true);
+			newSession.sendMessage(new TextMessage(msg3.toString()));
+			} else {
+				System.out.println("JUGADOR NO EXISTE");
+			}
 
 		/*
 		 * El mensaje llega si el jugador realiza alguna acción
@@ -104,6 +172,15 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 	//Mensaje que confirma la de desconexión del jugador
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		lockSession.lock();
+		WebSocketSession newSession = session;
+		lockSession.unlock(); 
+		PlayerConected jug = game.jugadoresConectados.remove(newSession);
+		if(jug != null){
+			PlayerRegistered playerR = game.playerRegistered.get(jug.getNombre());
+			playerR.castFromPlayerCon(jug);
+		}
+		
 		System.out.println("Adios bb");
 	}
 

@@ -19,8 +19,8 @@ public class MultiplayerRoom extends Room{
 	HashMap<WebSocketSession, PlayerConected> jugadoresEnSala = new HashMap<WebSocketSession, PlayerConected>();
 
 
-	public MultiplayerRoom(String nombre,PlayerConected owner, SnailGame game) {
-		super(nombre,owner,game);
+	public MultiplayerRoom(String nombre,PlayerConected owner, SnailGame game, String mapName) {
+		super(nombre,owner,game,mapName);
 	}
 
 	/*

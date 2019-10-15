@@ -8,8 +8,8 @@ import com.server.Slooow.MapPowerUp.powerType;
 
 
 public class Room {
-    protected Map map = new Map(2000);
-   protected PlayerConected owner;
+    protected Map map;
+   	protected PlayerConected owner;
     protected String name;
     protected ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
     protected final int TICKTIME = 33;
@@ -28,10 +28,11 @@ public class Room {
 	protected ArrayList<Wind> windArray = new ArrayList<>();
 	protected ArrayList<MapPowerUp> powerArray = new ArrayList<>();
 
-    public Room(String name,PlayerConected owner, SnailGame game) {
+    public Room(String name,PlayerConected owner, SnailGame game,String mapName) {
         this.owner = owner;
 		this.name = name;
 		this.game = game;
+		map = new Map(2000,mapName);
 		createMap();
 		sendMap();
 		tick();

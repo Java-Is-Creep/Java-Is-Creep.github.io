@@ -34,7 +34,7 @@ public class SnailGame {
 	}
 
 	public void recoverRegisteredPlayers() {
-		JsonObject RegisteredPlayers = new JsonObject();
+		JsonObject registeredPlayers = new JsonObject();
 	}
 
 	public void conectarJugador(PlayerConected jugador) {
@@ -64,12 +64,9 @@ public class SnailGame {
 		executor.scheduleAtFixedRate(task, 1, 1, TimeUnit.SECONDS);
 	}
 	
-	public void createSingleRoom(String roomName, PlayerConected jug){
+	public void createSingleRoom(String roomName, PlayerConected jug, String mapName){
 		
-		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug,this);
-
-
-		
+		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug,this, mapName);
 		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
 	}
 
