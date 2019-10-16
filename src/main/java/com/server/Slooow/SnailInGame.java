@@ -106,7 +106,8 @@ public class SnailInGame {
 	public float posX = 100;
 	public float posY = 500;
 	// Última acción que se ha realizado en el cliente
-	LastMovement lastMovement;
+	//LastMovement lastMovement = new LastMovement(false, false);
+	LastMovement lastMovementAux;
 
 	// booleans para mandar mensajes de animaciones
 	protected boolean sendRunOutStamina = false;
@@ -214,15 +215,21 @@ public class SnailInGame {
 		sendRecoverStamina = false;
 		boolean useObject = false;
 		boolean wasLastFrameAcelerating = false;
-		if (lastMovement != null) {
-			lastMovementLock.lock();
-			wasLastFrameAcelerating = lastMovement.isAcelerating;
-			useObject = lastMovement.useObject;
-			lastMovementLock.unlock();
+		lastMovementLock.lock();
+		if (lastMovementAux != null) {
+			System.out.println("Last Movement no es null");
+			
+			wasLastFrameAcelerating = lastMovementAux.isAcelerating;
+			useObject = lastMovementAux.useObject;
+			
+		} else {
+			//System.out.println("Last Movement ES NULL: " + lastMovement.isAcelerating);
 		}
+		lastMovementLock.unlock();
 
 		if(wasLastFrameAcelerating){
 			acelerationTime = ACELERATIONTIME;
+			System.out.println("wasLastFrameAcelerating: " + true);
 			isAcelerating = true;
 		}
 
@@ -516,9 +523,11 @@ public class SnailInGame {
 	}
 
 	// Cambia el movement anterior por la siguiente actualizacion
-	public void updateMovement(boolean isStoping, boolean useObject) {
+	public void updateMovement(boolean isAcelerating, boolean useObject) {
 		lastMovementLock.lock();
-		lastMovement = new LastMovement(isStoping, useObject);
+		System.out.println("Se updatea movimiento");
+		lastMovementAux = new LastMovement(isAcelerating, useObject);
+		System.out.println("Las movement "+ lastMovementAux.isAcelerating);
 		lastMovementLock.unlock();
 	}
 

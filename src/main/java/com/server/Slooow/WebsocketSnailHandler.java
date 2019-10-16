@@ -49,12 +49,12 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 * comienza la partida también
 		 */
 		case "SINGLEPLAYER":
-			jug = new PlayerConected(newSession, post.playerName, lockSession);
-			System.out.println("Jugador Conectado");
-			game.jugadoresConectados.putIfAbsent(jug.getSession(), jug);
+		
+			jug = game.bucarJugadorConectado(newSession);
+			
 			if (jug.getLifes() != 0) {
 				System.out.println("Creando sala");
-				game.createSingleRoom(post.roomName, jug, post.mapName);
+				game.createSingleRoom(post.roomName, jug, "mapa1");
 			}
 
 			break;
@@ -148,6 +148,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			break;
 		case "UPDATEINPUT":
 			jug = game.bucarJugadorConectado(newSession);
+			System.out.println("UPDATE MANDADO");
+			System.out.println("is sprinting del mensaje: " +post.isSprinting);
 			jug.mySnail.updateMovement(post.isSprinting, post.useObject);
 			break;
 
@@ -194,6 +196,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		if (jug != null) {
 			PlayerRegistered playerR = game.playerRegistered.get(jug.getNombre());
 			playerR.castFromPlayerCon(jug);
+			playerR.setConnected(false);
 		}
 
 		System.out.println("Adios bb");

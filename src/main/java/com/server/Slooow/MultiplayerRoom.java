@@ -15,7 +15,7 @@ public class MultiplayerRoom extends Room{
 	public final int MAXNUMPLAYERS = 4;
 	int numPlayers = 0;
 	boolean hasStart = false;
-	ReentrantLock lock = new ReentrantLock();
+	ReentrantLock playerLock = new ReentrantLock();
 	HashMap<WebSocketSession, PlayerConected> jugadoresEnSala = new HashMap<WebSocketSession, PlayerConected>();
 
 
@@ -31,7 +31,7 @@ public class MultiplayerRoom extends Room{
 	 */
 
 	public void anadirJugador(PlayerConected jug) {
-		lock.lock();
+		playerLock.lock();
 		if (jugadoresEnSala.putIfAbsent(jug.getSession(), jug) == null) {
 			numPlayers++;
 			System.out.println("Jugador: " + jug.getNombre());
@@ -41,7 +41,7 @@ public class MultiplayerRoom extends Room{
 			System.out.println("empezando room");
 			hasStart = true;
 			Runnable task = () -> {
-				lock.lock();
+				playerLock.lock();
 				for (PlayerConected jug2 : jugadoresEnSala.values()) {
 
 					JsonObject msg = new JsonObject();
@@ -54,20 +54,41 @@ public class MultiplayerRoom extends Room{
 						e.printStackTrace();
 					}
 				}
-				lock.unlock();
+				playerLock.unlock();
 			};
 			executor.scheduleAtFixedRate(task, 1, 1, TimeUnit.SECONDS); // 6 frames por segundo
+		} else {
+			JsonObject msg = new JsonObject();
+			msg.addProperty("event", "WAITINGROOMSTART");
+			try {
+				jug.getSession().sendMessage(new TextMessage(msg.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		lock.unlock();
+		playerLock.unlock();
 	}
 
 	public void quitarJugador(PlayerConected jug) {
-		lock.lock();
+		playerLock.lock();
 		if (jugadoresEnSala.remove(jug.getSession()) != null) {
 			numPlayers--;
 		}
 		;
-		lock.unlock();
+		playerLock.unlock();
 	}
+
+	public void broadcast(TextMessage message){
+		for(WebSocketSession session : jugadoresEnSala.keySet()){
+			try {
+				session.sendMessage(message);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 }
