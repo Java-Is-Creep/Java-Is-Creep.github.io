@@ -268,8 +268,6 @@ Slooow.singlePlayerState.prototype = {
 			fill: "#CB0017",
 			align: "center"
 		}
-		game.global.player.stamina = game.add.text(0, 0, "0", style2);
-		game.global.player.stamina.fixedToCamera = true;	
 
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
@@ -279,8 +277,6 @@ Slooow.singlePlayerState.prototype = {
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
 	update: function () {
-
-		
 
 		let msg = {
 			event: 'UPDATEINPUT',
@@ -358,6 +354,14 @@ Slooow.singlePlayerState.prototype = {
 					game.global.haveToRotateToSlope = false
 					game.global.degreesToRotateSlope = 0
 				}
+			}
+		}
+
+		//Comprobamos si hay algun power up activo para quitarle opacidad poco a poco
+		if (game.global.player.sprite.children.length > 0){
+			game.global.player.sprite.children[0].alpha -= 0.005
+			if (game.global.player.sprite.children[0].alpha < 0.01){
+				game.global.player.sprite.children[0].destroy()
 			}
 		}
 	}
