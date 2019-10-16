@@ -9,6 +9,7 @@ public class PlayerRegistered {
 	private int lifes;
     private int points;
     private int cash;
+    private boolean connected = false;
     ConcurrentHashMap<String,Integer> records = new ConcurrentHashMap<String,Integer>();
 	public final int MAXNUMLIFES= 5;
 	// actualmente 1 hora
@@ -115,6 +116,14 @@ public class PlayerRegistered {
         this.lifes = player.getLifes();
         this.points = player.getPoints();
         this.records = player.records;
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
 

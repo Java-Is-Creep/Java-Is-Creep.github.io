@@ -529,14 +529,16 @@ window.onload = function () {
                 if(JSON.parse(msg.conectionStatus)){
                     game.state.start('mainMenuState')
                 } else {
-                    game.state.start('shopState')
+                    // deberia sacarse un mensaje de error
+                    game.state.start('createAccountState')
                 }
                 break
             case 'CREATEACCOUNTSTATUS':
                 if(JSON.parse(msg.conectionStatus)){
                     game.state.start('mainMenuState')
                 } else {
-                    game.state.start('shopState')
+                    //game.state.start('shopState')
+                    console.log("Creacion de cuenta negativa")
                 }
                 break
             case 'DISCONNECTSTATUS':
