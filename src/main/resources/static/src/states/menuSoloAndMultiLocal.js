@@ -149,6 +149,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         }
 
         function actionOnClickMap1(){
+            
             game.state.start('lobbyState')
 /////////////////////////////////////////////////////////////////////////////////////////////
 // AÑADIR MENSAJES AL SERVIDOR CON AMBIENTACION + MAPA

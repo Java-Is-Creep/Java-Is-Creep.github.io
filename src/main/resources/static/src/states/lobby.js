@@ -55,11 +55,13 @@ Slooow.lobbyState.prototype = {
         textButtonReady.scale.setTo(0.5,0.5)
 
         //Print image
+        
         var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
 		chosen.anchor.setTo(0.5, 0.5);
         chosen.scale.setTo(0.4, 0.4)
         chosen.inputEnabled = true
         chosen.events.onInputDown.add(chooseCharacter, this)
+        game.global.player.sprite.visible = true
         
         //Texto datos sala
 		textLobbyData = game.add.text(game.world.centerX -400,

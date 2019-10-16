@@ -26,6 +26,11 @@ Slooow.initSesionState.prototype = {
     // Escribimos nombre y contraseña para el jugador y mandamos mensaje al
     // servidor para que lo compruebe
     create: function () {
+
+        music = game.add.audio('AE');
+        music.volume = 0;
+        music.play();
+        
         // Boton Username
         inicioSesionNameButton = game.add.inputField(game.world.centerX - 160,
             game.world.centerY - 100, {

@@ -116,6 +116,8 @@ Slooow.preloadState.prototype = {
 		game.load.image('soundOffBtn', './assets/img/btn/soundOffBtn.png');
 		game.load.image('replayBtn', './assets/img/btn/replayBtn.png');
 
+		game.load.audio('AE', './assets/audio/himno-de-espana.mp3');
+
 		$.getJSON("./assets/language.json", function (data) {
 			game.global.languageData = (data);
 			game.global.activeLanguage = data.eng;
