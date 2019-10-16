@@ -148,8 +148,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			break;
 		case "UPDATEINPUT":
 			jug = game.bucarJugadorConectado(newSession);
-			System.out.println("UPDATE MANDADO");
-			System.out.println("is sprinting del mensaje: " +post.isSprinting);
 			jug.mySnail.updateMovement(post.isSprinting, post.useObject);
 			break;
 

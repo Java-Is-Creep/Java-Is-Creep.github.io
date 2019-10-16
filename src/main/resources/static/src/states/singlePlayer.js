@@ -291,7 +291,7 @@ Slooow.singlePlayerState.prototype = {
 			msg.isSprinting = true;
 		}
 		
-		if (this.wKey.isDown && this.wKey.duration > 100) {
+		if (this.wKey.isDown && this.wKey.duration > 300) {
 			msg.useObject = true;
 		}
 		
@@ -299,7 +299,7 @@ Slooow.singlePlayerState.prototype = {
 			msg.isSprinting = true;
 		}
 
-		if (game.input.pointer1.isDown && game.input.pointer1.duration > 100){
+		if (game.input.pointer1.isDown && game.input.pointer1.duration > 300){
 			msg.useObject = true;
 		}
 		game.global.socket.send(JSON.stringify(msg))
