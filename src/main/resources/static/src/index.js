@@ -110,7 +110,10 @@ window.onload = function () {
         hasPowerUp: false,
 
         snailChosen: null,
-        mapChosen: null
+        mapChosen: null,
+
+        nameMapRecords: [],
+        myTimes: []
     }
 
     // Conexiones
@@ -553,7 +556,17 @@ window.onload = function () {
                 this.console.log(snail)
                 this.game.global.snailChosen = snail
                 this.game.state.start('lobbyState')
-                break    
+                break 
+            
+            case 'MYRECORDS':
+                var nameMap = JSON.parse(msg.nameMap)
+                var myTime = JSON.parse(msg.myTime)  
+
+                for (var i = 0; i< nameMap.length; i++){
+                    this.game.global.nameMapRecords[i] = nameMap [i]
+                    this.game.global.myTimes [i] = myTime[i]
+                }
+                break
         }   
 
 

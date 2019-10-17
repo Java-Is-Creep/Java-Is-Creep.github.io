@@ -19,12 +19,19 @@ Slooow.recordsState.prototype = {
 			fill : "#ffffff",
 			align : "center"
         };
+
+        var style = {
+			font : "40px Arial",
+			fill : "#000000",
+			align : "center"
+        };
         
         //Background
         var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
 		b.anchor.set (0.5, 0.5)
         b.scale.setTo (1.2,1.2)
 
+        /*
         //Boton mapa 1
 		buttonMap1 = game.add.button(game.world.centerX - 400,
             game.world.centerY - 200, 'button', actionOnClickMap1, this,
@@ -60,6 +67,23 @@ Slooow.recordsState.prototype = {
             game.world.centerY - 200, 'Mapa 3', style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
+*/
+        var headings = ['Mapa', 'Tiempo']
+        var textHeading = game.add.text(game.world.centerX - 320,
+            game.world.centerY - 200, '', style);
+        textHeading.anchor.set(0.5)
+        textHeading.parseList(headings);
+
+        var times = []
+        if (game.global.myTimes != null){
+            for (var i = 0; i< game.global.myTimes; i++){
+                times.push([game.global.nameMapRecords[i], game.global.myTimes[i]])
+            }
+        }
+        var records = game.add.text(game.world.centerX - 425,
+            game.world.centerY - 160, '', style);
+        records.parseList(times)    
+
 
 
         //Boton desconectar

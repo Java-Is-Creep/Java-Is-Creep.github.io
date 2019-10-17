@@ -162,8 +162,47 @@ Slooow.singlePlayerState.prototype = {
 						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 5), 5, true);
 					break
 				case ('TANK'):
-						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'tanqueColWalk')
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'tanqueColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 4), 5, true);
 					break
+				case ('BAGUETTE'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'baguetteColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 4), 5, true);
+					break;
+				case ('MIAU'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'miauColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('MERCA'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'mercaColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('SEA'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('ROBA'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'robaColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('IRIS'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'irisColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 2), 5, true);
+					break;
 				default:		
 			}
 		}

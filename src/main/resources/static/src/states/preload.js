@@ -48,6 +48,13 @@ Slooow.preloadState.prototype = {
 		game.load.spritesheet ('pruebaCol', './assets/img/snails/anim/pruebaCol_spritesheet.png', 500, 300, 16)
 		
 		game.load.atlas('normalColAnimation', './assets/img/snails/anim/normalColSpritesheet.png', './assets/img/snails/anim/normalColSpritesheet.json');
+		game.load.atlas('baguetteColAnimation', './assets/img/snails/anim/baguetteColSpritesheet.png', './assets/img/snails/anim/baguetteColSpritesheet.json');
+		game.load.atlas('irisColAnimation', './assets/img/snails/anim/irisColSpritesheet.png', './assets/img/snails/anim/irisColSpritesheet.json');
+		game.load.atlas('mercaColAnimation', './assets/img/snails/anim/mercaColSpritesheet.png', './assets/img/snails/anim/mercaColSpritesheet.json');
+		game.load.atlas('miauColAnimation', './assets/img/snails/anim/miauColSpritesheet.png', './assets/img/snails/anim/miauColSpritesheet.json');
+		game.load.atlas('robaColAnimation', './assets/img/snails/anim/robaColSpritesheet.png', './assets/img/snails/anim/robaColSpritesheet.json');
+		game.load.atlas('seaColAnimation', './assets/img/snails/anim/seaColSpritesheet.png', './assets/img/snails/anim/seaColSpritesheet.json');
+		game.load.atlas('tanqueColAnimation', './assets/img/snails/anim/tanqueColSpritesheet.png', './assets/img/snails/anim/tanqueColSpritesheet.json');
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		// TILES Y ANIMACIONES POR AMBIENTACION															//																			//

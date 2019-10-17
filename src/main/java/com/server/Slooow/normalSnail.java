@@ -1,11 +1,7 @@
 package com.server.Slooow;
 
-import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.google.gson.JsonObject;
-
-import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 /*
@@ -16,8 +12,6 @@ import org.springframework.web.socket.WebSocketSession;
 */
 
 public class normalSnail extends SnailInGame {
-
-	enum SnailType{NORMAL,TANK}
 
 	// TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;

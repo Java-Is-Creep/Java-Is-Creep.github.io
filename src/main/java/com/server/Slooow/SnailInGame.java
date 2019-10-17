@@ -17,7 +17,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 public class SnailInGame {
 
-	enum SnailType{NORMAL,TANK}
+enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}	
 
 	// TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;

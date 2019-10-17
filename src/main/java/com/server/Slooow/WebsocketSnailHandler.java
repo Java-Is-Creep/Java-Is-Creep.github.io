@@ -162,18 +162,38 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			break;
 
 		case "CHOOSESNAIL":
-			
+			jug = game.bucarJugadorConectado(newSession);
 			switch(post.chooseSnail){
 				case "NORMAL":
-					jug = game.bucarJugadorConectado(newSession);
 					jug.snailType = SnailType.NORMAL;
-				break;
+					break;
 				case "TANK":
-					jug = game.bucarJugadorConectado(newSession);
 					jug.snailType = SnailType.TANK;
 					break;
+				case "BAGUETTE":
+					jug.snailType = SnailType.BAGUETTE;
+					break;
+
+				case "MIAU":
+					jug.snailType = SnailType.MIAU;
+					break;
+
+				case "MERCA":
+					jug.snailType = SnailType.MERCA;
+					break;
+
+				case "SEA":
+					jug.snailType = SnailType.SEA;
+					break;
+
+				case "ROBA":
+					jug.snailType = SnailType.ROBA;
+					break;
+
+				case "IRIS":
+					jug.snailType = SnailType.IRIS;
+					break;
 				default:
-				
 			}
 
 			break;

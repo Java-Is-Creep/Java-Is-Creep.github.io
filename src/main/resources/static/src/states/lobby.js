@@ -63,7 +63,25 @@ Slooow.lobbyState.prototype = {
                     break
                 case ('TANK'):
                         chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
+                    break   
+                case ('BAGUETTE'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'frenchCol')
                     break    
+                case ('MIAU'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'catCol')
+                    break    
+                case ('MERCA'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'slugCol')
+                    break     
+                case ('SEA'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
+                    break
+                case ('ROBA'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefCol')
+                    break
+                case ('IRIS'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
+                    break
                 default:
                     console.log('snail sprite no identificado')
                     break    

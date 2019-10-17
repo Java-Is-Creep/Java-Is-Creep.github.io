@@ -76,7 +76,25 @@ Slooow.chooseCharacterState.prototype = {
                     break
                 case ('TANK'):
                         chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
+                    break   
+                case ('BAGUETTE'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'frenchCol')
                     break    
+                case ('MIAU'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'catCol')
+                    break    
+                case ('MERCA'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'slugCol')
+                    break     
+                case ('SEA'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
+                    break
+                case ('ROBA'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefCol')
+                    break
+                case ('IRIS'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
+                    break
                 default:
                     console.log('snail sprite no identificado')
                     break    
@@ -154,6 +172,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'SEA'
         }
         
         function chooseCharacterThief(){
@@ -161,6 +180,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'ROBA'
         }
 
         function chooseCharacterRainbow(){
@@ -168,6 +188,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'IRIS'
         }
 
         function chooseCharacterCat(){
@@ -175,6 +196,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'catCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'MIAU'
         }
 
         function chooseCharacterFrench(){
@@ -182,6 +204,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'frenchCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'BAGUETTE'
         }
 
         function chooseCharacterNormal(){
@@ -205,6 +228,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'slugCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'MERCA'
         }
 
         function actionOnClickBack(){

@@ -78,7 +78,7 @@ public class SnailGame {
 				i++;
 			}
 			*/
-		}
+		//}
 		generalRecords.unlock();
 	}
 

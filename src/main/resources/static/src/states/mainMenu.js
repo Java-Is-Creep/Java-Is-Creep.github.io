@@ -252,7 +252,11 @@ Slooow.mainMenuState.prototype = {
         }
 
         function actionOnClickStartRecords() {
-            game.state.start('recordsState')
+            let msg = {
+                event: 'RECORDS'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('recordsState')
         }
 
         function actionOnClickInstagram() {
