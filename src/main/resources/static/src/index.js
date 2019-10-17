@@ -546,6 +546,52 @@ window.onload = function () {
                 }
                 break
             case 'DISCONNECTSTATUS':
+                game.global.mapDrawn= false
+                game.global.username = ''
+                game.global.password = ''
+                //Array de suelos. Tiene: x, y, width, height
+                game.global.arrayGrounds = []
+                //Array de paredes. Tiene: x, y, width, height
+                game.global.arrayWalls= []
+                //Array de rampas. Tiene: x, y, width, height
+                game.global.arraySlopes= []
+                //Array de obstaculos tipo pincho. Tiene: posX, posY
+                game.global.arrayObstacles= []
+                //Array de power ups
+                game.global.arrayPowerUps= []
+                //ArrayTrapdoors
+                game.global.arrayTrapdoors= []
+                //Array de trampolines
+                game.global.arrayTrampolines= []
+                game.global.arrayObstacleFire= []
+                game.global.arrayDoors=[]
+                game.global.arrayWinds= []
+                game.global.finishObject= new Object
+                game.global.player= new this.Object()
+                game.global.winner= false
+                game.global.time= null
+                game.global.maxTime= null
+                game.global.record = null
+                game.global.haveToRotateToWall= false
+                game.global.haveToRotateToGround= false
+                game.global.haveToRotateToSlope= false
+                game.global.degreesToRotateSlope= 0
+                game.global.wingPowerUp= null
+                game.global.shieldPowerUp= null
+                game.global.staminaPowerUp= null
+                game.global.lettucePowerUp= null
+                game.global.onPowerUp= null
+                game.global.downPowerUp= null
+                game.global.clockPowerUp= null
+                game.global.inkPowerUp= null
+                game.global.speedPowerUp= null
+                game.global.hasPowerUp= false
+
+                game.global.snailChosen= null
+                game.global.mapChosen= null
+
+                game.global.nameMapRecords= []
+                game.global.myTimes= [] 
                 if(JSON.parse(msg.disconnectionStatus)){
                     game.state.start('initSesionState')
                 }

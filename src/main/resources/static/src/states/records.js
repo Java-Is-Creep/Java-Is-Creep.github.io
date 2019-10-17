@@ -51,7 +51,7 @@ Slooow.recordsState.prototype = {
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
-        if (game.global.myTimes[0] >99999999){
+        if (game.global.myTimes[0] >99999999 || isNaN(game.global.myTimes[0])){
             textTimeMap1 = game.add.text(game.world.centerX - 400,
                 game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
@@ -72,7 +72,7 @@ Slooow.recordsState.prototype = {
             game.world.centerY - 200, game.global.nameMapRecords[1], game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
-        if (game.global.myTimes[1] >99999999){
+        if (game.global.myTimes[1] >99999999|| isNaN(game.global.myTimes[1])){
             textTimeMap2 = game.add.text(game.world.centerX ,
                 game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
@@ -94,7 +94,7 @@ Slooow.recordsState.prototype = {
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
-        if (game.global.myTimes[2] >99999999){
+        if (game.global.myTimes[2] >99999999 || isNaN(game.global.myTimes[2]) ){
             textTimeMap3 = game.add.text(game.world.centerX + 400,
                 game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
