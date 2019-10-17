@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.web.socket.TextMessage;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import com.server.Slooow.MapObject.type;
 import com.server.Slooow.Trampoline.trampolineEstate;
+
+import org.springframework.web.socket.TextMessage;
 
 public class SinglePlayerRoom extends Room {
 	// String name;
@@ -307,11 +306,26 @@ public class SinglePlayerRoom extends Room {
 			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
 		}
 
+		Integer record = owner.records.get(mapName);
+		if( record != null){
+			if(acummulativeTime < record){
+				owner.records.remove(mapName);
+				owner.records.putIfAbsent(mapName, acummulativeTime);
+			}
+		} else {
+			owner.records.putIfAbsent(mapName, acummulativeTime);
+		}
+
+		record = owner.records.get(mapName);
+
+		game.actualiceRecords(mapName,record,owner.getNombre());
+
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", "FINISH");
 		msg.addProperty("winner", success);
 		msg.addProperty("time", (int)(acummulativeTime));
 		msg.addProperty("maxTime", TIMETOSUCESS);
+		msg.addProperty("record", record);
 
 		try {
 			owner.sessionLock.lock();

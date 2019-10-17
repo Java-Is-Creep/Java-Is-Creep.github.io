@@ -1,5 +1,8 @@
 package com.server.Slooow;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.google.gson.Gson;
@@ -21,6 +24,12 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 	// Instancia del juego completo
 	SnailGame game = new SnailGame();
 
+	
+	/** 
+	 * @param session
+	 * @param message
+	 * @throws Exception
+	 */
 	// Función que se ejecuta siempre que llegue un mensaje
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -179,6 +188,77 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				newSession.sendMessage(new TextMessage(msg3.toString()));
 				jug.sessionLock.unlock();
 			break;
+
+			case "MYRECORDS":
+				jug = game.bucarJugadorConectado(newSession);
+				ConcurrentHashMap<String,Integer> recordsAux = jug.records;
+				ArrayList<String> name = new ArrayList<>();
+				ArrayList<Integer> time = new ArrayList<>();
+
+				for(String mapName : recordsAux.keySet()){
+					name.add(mapName);
+					time.add(recordsAux.get(mapName));
+				}
+
+				Gson gson = new Gson();
+				String namesArray = gson.toJson(name);
+				String timeArray = gson.toJson(time);
+
+				JsonObject msgMap = new JsonObject();
+				msgMap.addProperty("event", "MYRECORDS");
+				msgMap.addProperty("nameMap", namesArray);
+				msgMap.addProperty("myTime", timeArray);
+				try {
+					jug.sessionLock.lock();
+					jug.getSession().sendMessage(new TextMessage(msgMap.toString()));
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				} finally {
+				jug.sessionLock.unlock();
+				}
+			break;
+
+			case "RECORDS":
+				jug = game.bucarJugadorConectado(newSession);
+				ConcurrentHashMap<String,Integer> recordsAux2 = jug.records;
+				game.generalRecords.lock();
+				ArrayList<RecordInMap> recordsInMap = game.records.get(post.mapName);
+				ArrayList<String> name2 = new ArrayList<>();
+				ArrayList<Integer> time2 = new ArrayList<>();
+				for(RecordInMap record : recordsInMap){
+					name2.add(record.playerName);
+					time2.add(record.time);
+				}
+				game.generalRecords.unlock();
+
+				Gson gson2 = new Gson();
+				String names2Array = gson2.toJson(name2);
+				String time2Array = gson2.toJson(time2);
+
+				JsonObject msgMap2 = new JsonObject();
+				msgMap2.addProperty("event", "RECORDS");
+				msgMap2.addProperty("playerName", names2Array);
+				msgMap2.addProperty("time", time2Array);
+				msgMap2.addProperty("mapName", post.mapName);
+				if(recordsAux2.get(post.mapName) != null){
+					msgMap2.addProperty("myTime", recordsAux2.get(post.mapName));
+				} else {
+					msgMap2.addProperty("myTime", 0);
+				}
+
+				try {
+					jug.sessionLock.lock();
+					jug.getSession().sendMessage(new TextMessage(msgMap2.toString()));
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				} finally {
+				jug.sessionLock.unlock();
+				}
+
+
+			break;
 			
 
 		default:
@@ -201,6 +281,11 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 */
 	}
 
+	
+	/** 
+	 * @param session
+	 * @throws Exception
+	 */
 	// Mensaje que confirma la conexión al jugador si se loguea correctamente
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -214,6 +299,12 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 	}
 
+	
+	/** 
+	 * @param session
+	 * @param status
+	 * @throws Exception
+	 */
 	// Mensaje que confirma la de desconexión del jugador
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
