@@ -115,6 +115,7 @@ window.onload = function () {
         nameMapRecords: [],
         myTimes: [],
         style: null,
+        maxStamina : 0,
     }
 
     // Conexiones
@@ -592,6 +593,8 @@ window.onload = function () {
 
                 game.global.nameMapRecords= []
                 game.global.myTimes= [] 
+                
+                game.global.maxStamina = 0
                 if(JSON.parse(msg.disconnectionStatus)){
                     game.state.start('initSesionState')
                 }
@@ -603,6 +606,7 @@ window.onload = function () {
                 snail = snail.substring(1, snail.length-1)
                 this.console.log(snail)
                 this.game.global.snailChosen = snail
+                game.global.maxStamina = 0
                 this.game.state.start('lobbyState')
                 break 
             

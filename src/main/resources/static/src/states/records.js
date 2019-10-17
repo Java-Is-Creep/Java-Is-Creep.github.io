@@ -34,9 +34,21 @@ Slooow.recordsState.prototype = {
         }
         
         //Background
+        /*
         var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
 		b.anchor.set (0.5, 0.5)
-        b.scale.setTo (1.2,1.2)
+        b.scale.setTo (1.2,1.2)*/
+        this.background = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width, game.world.height, 'backgroundMenu')
+        //this.background.height = this.game.height;
+        //this.background.width = this.game.width;
+        //Tints chulos:  1653685.9351650865
+        //               10799539.640765665
+        //               4535760.527128731   
+        //this.background.tint = Math.random() * 0xffffff;
+        //this.background.tint = 4535760.527128731;
+		//console.log(this.background.tint)
+		this.background.tileScale.set(0.4, 0.4)
+        this.background.anchor.set(0.5, 0.5)
 
         
         //Boton mapa 1
@@ -47,16 +59,16 @@ Slooow.recordsState.prototype = {
         buttonMap1.scale.setTo(0.8, 0.7)
         //Texto mapa1
 		textButtonMap1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY - 200, game.global.nameMapRecords[0], game.global.style)
+            game.world.centerY - 200, game.global.nameMapRecords[1], game.global.style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
-        if (game.global.myTimes[0] >99999999 || isNaN(game.global.myTimes[0])){
+        if (game.global.myTimes[1] >= 1000000000 || isNaN(game.global.myTimes[1])){
             textTimeMap1 = game.add.text(game.world.centerX - 400,
                 game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
             textTimeMap1 = game.add.text(game.world.centerX - 400,
-                game.world.centerY , calculateTime(game.global.myTimes[0]), game.global.style)
+                game.world.centerY , calculateTime(game.global.myTimes[1]), game.global.style)
         }
         textTimeMap1.anchor.set(0.5)
         textTimeMap1.scale.setTo(0.8,0.8)
@@ -69,15 +81,15 @@ Slooow.recordsState.prototype = {
         buttonMap2.scale.setTo(0.8, 0.7)
         //Texto mapa2
 		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 200, game.global.nameMapRecords[1], game.global.style)
+            game.world.centerY - 200, game.global.nameMapRecords[0], game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
-        if (game.global.myTimes[1] >99999999|| isNaN(game.global.myTimes[1])){
+        if (game.global.myTimes[0] >= 1000000000|| isNaN(game.global.myTimes[0])){
             textTimeMap2 = game.add.text(game.world.centerX ,
                 game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
         textTimeMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY , calculateTime(game.global.myTimes[1]), game.global.style)
+            game.world.centerY , calculateTime(game.global.myTimes[0]), game.global.style)
         }
         textTimeMap2.anchor.set(0.5)
         textTimeMap2.scale.setTo(0.8,0.8)
@@ -94,7 +106,7 @@ Slooow.recordsState.prototype = {
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
-        if (game.global.myTimes[2] >99999999 || isNaN(game.global.myTimes[2]) ){
+        if (game.global.myTimes[2] >= 1000000000 || isNaN(game.global.myTimes[2]) ){
             textTimeMap3 = game.add.text(game.world.centerX + 400,
                 game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
@@ -154,5 +166,7 @@ Slooow.recordsState.prototype = {
     },
 
     update : function() {
+        this.background.tilePosition.x+=0.5
+        this.background.tilePosition.y-=0.5
     }
 }
