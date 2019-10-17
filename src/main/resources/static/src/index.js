@@ -113,7 +113,8 @@ window.onload = function () {
         snailChosen: null,
         mapChosen: null,
         nameMapRecords: [],
-        myTimes: []
+        myTimes: [],
+        style: null,
     }
 
     // Conexiones

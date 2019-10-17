@@ -66,12 +66,6 @@ Slooow.createAccountState.prototype = {
             type: PhaserInput.InputType.password
         });
 
-        var style = {
-            font: "40px Arial",
-            fill: "#ffffff",
-            align: "center"
-        }
-
         //Boton ESPAÑITA AE
         buttonAE = game.add.button(game.world.width - 60,
             50, 'ESPAÑITABtn', actionOnClickLanguage, this,
@@ -106,7 +100,7 @@ Slooow.createAccountState.prototype = {
         buttonCreateAccount.scale.setTo(0.4, 0.3)
         //Texto boton crear cuenta
         textButtonInit = game.add.text(game.world.centerX ,
-            game.world.centerY + 140, game.global.activeLanguage.SingIn, style)
+            game.world.centerY + 140, game.global.activeLanguage.SingIn, game.global.style)
         textButtonInit.anchor.set(0.5)
         textButtonInit.scale.setTo(0.5, 0.5)
 
@@ -118,7 +112,7 @@ Slooow.createAccountState.prototype = {
         buttonBack.scale.setTo(0.2, 0.3)
         //Texto atras
         textButtonBack = game.add.text(50 ,
-            40, game.global.activeLanguage.Back, style)
+            40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5, 0.5)
 

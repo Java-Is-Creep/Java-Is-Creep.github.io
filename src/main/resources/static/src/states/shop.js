@@ -14,12 +14,6 @@ Slooow.shopState.prototype = {
     },
 
     create : function() {     
-
-        var style = {
-			font : "40px Arial",
-			fill : "#ffffff",
-			align : "center"
-        };
         
         //Background
         var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
@@ -35,7 +29,7 @@ Slooow.shopState.prototype = {
 
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, game.global.activeLanguage.Back, style)
+            40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 

@@ -302,23 +302,9 @@ Slooow.singlePlayerState.prototype = {
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
-		this.rKey = game.input.keyboard.addKey(Phaser.Keyboard.R);
-		game.input.keyboard.addKeyCapture([Phaser.Keyboard.R]);
-
 		this.tapping = game.input.pointer1;
 		//this.tapTap = game.input.addPointer();
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
-		var style = {
-			font: "40px Arial",
-			fill: "#000000",
-			align: "center"
-		};
-
-		var style2 = {
-			font: "40px Arial",
-			fill: "#CB0017",
-			align: "center"
-		}
 
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
@@ -350,15 +336,6 @@ Slooow.singlePlayerState.prototype = {
 			msg.useObject = true;
 		}
 		game.global.socket.send(JSON.stringify(msg))
-
-		if (this.rKey.isDown){
-			game.global.winner = true
-            game.global.myTime = 93220
-			game.global.maxTime = 153057
-			game.global.myRecord = 87520
-			game.global.mapRecord = 75236
-			game.state.start('gameOverState')
-		}
     
 		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100);
 

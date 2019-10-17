@@ -14,6 +14,11 @@ Slooow.preloadState.prototype = {
 
 	// Hasta que este preload no acabe, no se pasa al siguiente estado
 	preload : function() {
+		game.global.style = {
+            font: "40px Arial",
+            fill: "#ffffff",
+            align: "center"
+        };
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		// BACKGROUNDS																					//
 		//////////////////////////////////////////////////////////////////////////////////////////////////

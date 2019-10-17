@@ -14,21 +14,7 @@ Slooow.chooseCharacterState.prototype = {
     },
 
     create : function() {
-     
-        var style = {
-			font : "40px Arial",
-			fill : "#ffffff",
-			align : "center"
-        };
-
-        var style2 = {
-			font : "40px Arial",
-			fill : "#ffffff",
-			align : "center"
-        };
         
-        
-
         //Background
         var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
 		b.anchor.set (0.5, 0.5)
@@ -43,7 +29,7 @@ Slooow.chooseCharacterState.prototype = {
 
         //Texto back
 		textButtonBack = game.add.text(50,
-            40, game.global.activeLanguage.Back , style)
+            40, game.global.activeLanguage.Back , game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
@@ -56,13 +42,13 @@ Slooow.chooseCharacterState.prototype = {
 
         //Texto aceptar
 		textButtonBack = game.add.text(game.world.centerX,
-            game.world.centerY+300, game.global.activeLanguage.Accept, style)
+            game.world.centerY+300, game.global.activeLanguage.Accept, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
         //Texto estadisticas seleccionado
 		textStats = game.add.text(game.world.centerX-400,
-            game.world.centerY -50, game.global.activeLanguage.Stats, style2)
+            game.world.centerY -50, game.global.activeLanguage.Stats, game.global.style)
             textStats.anchor.set(0.5)
             textStats.scale.setTo(0.5,0.5)
 
