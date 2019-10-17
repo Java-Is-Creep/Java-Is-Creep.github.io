@@ -279,6 +279,13 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 
 			break;
+
+			case "SHOP":
+				jug = game.bucarJugadorConectado(newSession);
+				
+			break;
+
+		
 			
 
 		default:

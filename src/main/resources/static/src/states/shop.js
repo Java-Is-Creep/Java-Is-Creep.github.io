@@ -13,9 +13,7 @@ Slooow.shopState.prototype = {
     preload : function() {
     },
 
-    create : function() {
-
-        
+    create : function() {     
 
         var style = {
 			font : "40px Arial",

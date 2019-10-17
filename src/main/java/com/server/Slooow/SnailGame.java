@@ -25,6 +25,7 @@ public class SnailGame {
 	// aunque el mapa es concurrente e snecesario protegerlo porque va a haber un hilo recorriendolo 
 	//constantemente
 	ReentrantLock conectedPlayersLock = new ReentrantLock();
+	ReentrantLock registeredPlayersLock = new ReentrantLock();
 	
 	ConcurrentHashMap<WebSocketSession,PlayerConected> jugadoresConectados = new ConcurrentHashMap<WebSocketSession, PlayerConected>();
 
@@ -92,6 +93,13 @@ public class SnailGame {
 		conectedPlayersLock.unlock();
 	}
 	
+	public PlayerRegistered findRegistered(PlayerConected player){
+		registeredPlayersLock.lock();
+		PlayerRegistered pr = playerRegistered.get(player.getNombre());
+		registeredPlayersLock.unlock();
+		return pr;
+	}
+
 	public PlayerConected bucarJugadorConectado(WebSocketSession session) {
 		conectedPlayersLock.lock();
 		PlayerConected aux = jugadoresConectados.get(session);
