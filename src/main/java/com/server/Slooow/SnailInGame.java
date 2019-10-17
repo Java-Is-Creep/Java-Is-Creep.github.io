@@ -203,7 +203,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		maxNormalSpeedX = MAXNORMALVELOCITYX;
 		maxNormalSpeedY = MAXNORMALVELOCITYY;
 		maxAceleratingSpeedX = MAXVELOCITYX;
-		maxAceleratingSpeedY = MAXNORMALVELOCITYY;
+		maxAceleratingSpeedY = MAXVELOCITYY;
 		normalAcelerationX = NORMALACELERATIONX;
 		normalAcelerationY = NORMALACELERATIONY;
 		maxAcelerationAceleratingX = ACELERATIONX;

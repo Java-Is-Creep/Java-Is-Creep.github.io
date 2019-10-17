@@ -210,8 +210,10 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			break;
 
 			case "MYRECORDS":
+				
 				jug = game.bucarJugadorConectado(newSession);
-				ConcurrentHashMap<String,Integer> recordsAux = jug.records;
+				PlayerRegistered play = game.findRegistered(jug);
+				ConcurrentHashMap<String,Integer> recordsAux = play.records;
 				ArrayList<String> name = new ArrayList<>();
 				ArrayList<Integer> time = new ArrayList<>();
 

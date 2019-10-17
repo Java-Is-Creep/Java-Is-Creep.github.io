@@ -2,6 +2,7 @@ package com.server.Slooow;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+
 public class PlayerRegistered {
 
     private String name;
@@ -11,10 +12,13 @@ public class PlayerRegistered {
     private int cash;
     private boolean connected = false;
     ConcurrentHashMap<String,Integer> records = new ConcurrentHashMap<String,Integer>();
-	public final int MAXNUMLIFES= 5;
+    public final int MAXNUMLIFES= 5;
 	// actualmente 1 hora
 	public final int SECONDSTOGETALIFE = 30;
     public int secondsWaitingForLife = 0;
+
+
+    
     
     
     /** 

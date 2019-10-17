@@ -67,6 +67,12 @@ public class Room {
 			case "mapa1":
 			createLevel1();
 			break;
+			case "mapa2":
+			createLevel1();
+			break;
+			case "mapa3":
+			createLevel1();
+			break;
 			default:
 			System.out.println("Mapa no existe");
 		}
@@ -391,7 +397,7 @@ public class Room {
 		acumulativePosX += 5 * unit;
 
 		// DesvioCaminoNegro2
-		acumulativePosXNegro = acumulativePosX - 6 * unit;
+		acumulativePosXNegro = acumulativePosX - 3 * unit;
 		acumulativePosYNegro = acumulativePosY - 7 * unit;
 
 		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosX, acumulativePosY, type.SLOPE));
@@ -407,13 +413,16 @@ public class Room {
 		trapDoorArray.add(trap);
 		acumulativePosX += 3 * unit;
 
-		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
-		acumulativePosX += 1 * unit;
+		auxPower = new MapPowerUp(unit, unit, acumulativePosX + 2 * unit, acumulativePosY + unit / 2,
+		type.POWERUP);
+		map.addMapObject(auxPower);
 
-		map.addMapObject(new MapSlope(6 * unit, Math.toRadians(-10), acumulativePosX, acumulativePosY, type.SLOPE));
+		powerArray.add(auxPower);
 
-		acumulativePosXNegro += 6 * unit;
-		acumulativePosYNegro -= unit;
+		map.addMapObject(new MapGround(2 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 2 * unit;
+
+
 
 		// camino azul se junta con el negro.
 
@@ -424,8 +433,8 @@ public class Room {
 
 		// DEBERIA IR PARTE DEL SUELO MOJADO
 		map.addMapObject(
-				new MapGround(20 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
-		acumulativePosX += 20 * unit;
+				new MapGround(10 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosX += 10 * unit;
 
 		///// FIN CAMINO NGERO 2 SE JUNTA CON EL AZUL
 		// Empezamos segundo camino rojo

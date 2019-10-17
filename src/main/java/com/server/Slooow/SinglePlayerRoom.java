@@ -239,10 +239,6 @@ public class SinglePlayerRoom extends Room {
 		owner.mySnail.isOnSlope = slopeCollision;
 		owner.mySnail.slopeRadians = slopeRadians;
 		owner.mySnail.isOnObstacle = obstacleCollision;
-
-		
-		
-
 	}
 
 	public void sendSlopeCollision(int degrees) {

@@ -9,7 +9,7 @@ import org.springframework.web.socket.TextMessage;
 
 public class MapPowerUp extends MapObject {
 
-    private final int NUMPOWERS = 6;
+    private final int NUMPOWERS = 5;
     ArrayList<PlayerConected> playerTargets = new ArrayList<>();
 
     enum powerType {
@@ -33,6 +33,7 @@ public class MapPowerUp extends MapObject {
             GenericPowerUp aux = new GenericPowerUp(player, 200, powerCreated);
 
             int index = (int) (Math.random() * NUMPOWERS);
+            
 
             // dependiendo del valor se generaria un power up u otro
             switch (index) {
@@ -65,6 +66,7 @@ public class MapPowerUp extends MapObject {
                 aux = new SpeedPowerUp(player, 90, 2.5f, 2f, 2f, 2f, powerCreated);
 
                 System.out.println("Aumento velocidades");
+                break;
             case 5:
                 powerCreated = powerType.INK;
                 aux = new InkPowerUp(player, 300, powerCreated);
