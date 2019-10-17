@@ -49,7 +49,7 @@ Slooow.chooseCharacterState.prototype = {
 
         //Boton aceptar
 		buttonAccept = game.add.button(game.world.centerX,
-            game.world.centerY+300, 'button', actionOnClickBack, this,
+            game.world.centerY+300, 'button', actionOnClickOK, this,
             0, 0, 0)
             buttonAccept.anchor.set(0.5)
             buttonAccept.scale.setTo(0.2, 0.3)
@@ -68,10 +68,22 @@ Slooow.chooseCharacterState.prototype = {
 
         //Print image chosen
         
-        var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
+        var chosen
+        if (game.global.snailChosen != null){
+            switch (game.global.snailChosen){
+                case ('NORMAL'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'normalCol')
+                    break
+                case ('TANK'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
+                    break    
+                default:
+                    console.log('snail sprite no identificado')
+                    break    
+            }
+        }
 		chosen.anchor.setTo(0.5, 0.5);
         chosen.scale.setTo(0.4, 0.4)
-        game.global.player.sprite.visible = true
 
         //Print image thief
         var thiefSnail = game.add.image(game.world.centerX, game.world.centerY-150, 'thiefCol')
@@ -177,6 +189,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'normalCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'NORMAL'
         }
 
         function chooseCharacterTank(){
@@ -184,6 +197,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
+            game.global.snailChosen = 'TANK'
         }
 
         function chooseCharacterSlug(){
@@ -198,7 +212,7 @@ Slooow.chooseCharacterState.prototype = {
         }
 
         function actionOnClickOK(){
-
+            game.state.start('lobbyState')
         }
     },
 

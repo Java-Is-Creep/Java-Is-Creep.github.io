@@ -106,7 +106,9 @@ window.onload = function () {
         clockPowerUp: null,
         inkPowerUp: null,
         speedPowerUp: null,
-        hasPowerUp: false
+        hasPowerUp: false,
+
+        snailChosen: null
     }
 
     // Conexiones
@@ -540,6 +542,12 @@ window.onload = function () {
                 if(JSON.parse(msg.disconnectionStatus)){
                     game.state.start('initSesionState')
                 }
+
+            case 'ENTERLOBBY':
+                var snail = JSON.parse(msg.snail)
+                this.game.global.snailChosen = snail
+                this.game.state.start('lobbyState')
+                break    
         }   
 
 

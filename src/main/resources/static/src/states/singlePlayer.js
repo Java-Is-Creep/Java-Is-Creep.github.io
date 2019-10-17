@@ -153,7 +153,18 @@ Slooow.singlePlayerState.prototype = {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PERSONAJE
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////
-		game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'normalColAnimation')
+		if (game.global.snailChosen != null){
+			switch (game.global.snailChosen){
+				case ('NORMAL'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'normalColAnimation')
+					break
+				case ('TANK'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'tanqueColWalk')
+					break
+				default:		
+			}
+		}
+		
 
 		game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
 		game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);

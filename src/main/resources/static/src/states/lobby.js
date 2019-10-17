@@ -54,14 +54,25 @@ Slooow.lobbyState.prototype = {
         textButtonReady.anchor.set(0.5)
         textButtonReady.scale.setTo(0.5,0.5)
 
-        //Print image
-        
-        var chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
+        //Print image snail
+        var chosen
+        if (game.global.snailChosen != null){
+            switch (game.global.snailChosen){
+                case ('NORMAL'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'normalCol')
+                    break
+                case ('TANK'):
+                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
+                    break    
+                default:
+                    console.log('snail sprite no identificado')
+                    break    
+            }
+        }
 		chosen.anchor.setTo(0.5, 0.5);
         chosen.scale.setTo(0.4, 0.4)
         chosen.inputEnabled = true
         chosen.events.onInputDown.add(chooseCharacter, this)
-        game.global.player.sprite.visible = true
         
         //Texto datos sala
 		textLobbyData = game.add.text(game.world.centerX -400,
@@ -75,11 +86,18 @@ Slooow.lobbyState.prototype = {
 
         function actionOnClickReady(){
             let msg = {
+                event: 'CHOOSESNAIL',
+                chooseSnail: game.global.snailChosen
+            }
+            game.global.socket.send(JSON.stringify(msg))
+
+
+            let msg2 = {
                 event: 'SINGLEPLAYER',
                 playerName: game.global.username,
                 roomName: 'sala1'
             }
-            game.global.socket.send(JSON.stringify(msg))
+            game.global.socket.send(JSON.stringify(msg2))
         }
 
         function chooseCharacter(){
