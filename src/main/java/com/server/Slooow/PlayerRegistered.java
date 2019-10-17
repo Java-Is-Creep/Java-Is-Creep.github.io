@@ -1,6 +1,7 @@
 package com.server.Slooow;
 
 import java.util.concurrent.ConcurrentHashMap;
+
 import com.server.Slooow.SnailInGame.SnailType;
 public class PlayerRegistered {
 
@@ -39,6 +40,14 @@ public class PlayerRegistered {
                 mySnails.putIfAbsent(snail, false);
             }
         }
+        initRecords();
+    }
+
+    public void initRecords(){
+        
+        records.putIfAbsent("mapa1", 1000000000);
+        records.putIfAbsent("mapa2", 1000000000);
+        records.putIfAbsent("mapa3", 1000000000);
     }
 
     
