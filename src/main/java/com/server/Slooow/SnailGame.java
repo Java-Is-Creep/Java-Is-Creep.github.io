@@ -16,8 +16,6 @@ import org.springframework.web.socket.WebSocketSession;
 public class SnailGame {
 	//TODO HashMap de salas del juego
 
-	
-
 
 	// executor para sumar vidas a nuestros jugadores
 	ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -26,6 +24,7 @@ public class SnailGame {
 	//constantemente
 	ReentrantLock conectedPlayersLock = new ReentrantLock();
 	ReentrantLock registeredPlayersLock = new ReentrantLock();
+	ReentrantLock generalRecords = new ReentrantLock();
 	
 	ConcurrentHashMap<WebSocketSession,PlayerConected> jugadoresConectados = new ConcurrentHashMap<WebSocketSession, PlayerConected>();
 
@@ -35,7 +34,6 @@ public class SnailGame {
 
 	ConcurrentHashMap<String,PlayerRegistered> playerRegistered = new ConcurrentHashMap<String,PlayerRegistered>();
 
-	ReentrantLock generalRecords = new ReentrantLock();
 	HashMap<String, ArrayList<RecordInMap>> records = new HashMap<String,ArrayList<RecordInMap>>();
 	
 	public final int RECORDSTOSTORE = 10;

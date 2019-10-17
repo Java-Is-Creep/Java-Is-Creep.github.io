@@ -20,16 +20,7 @@ Slooow.lobbyState.prototype = {
 
 	create : function() {
 
-        var style = {
-			font : "40px Arial",
-			fill : "#ffffff",
-			align : "center"
-		};
-        var style2 = {
-			font : "40px Arial",
-			fill : "#ffffff",
-			align : "center"
-		};
+
         //Boton desconectar
 		buttonBack = game.add.button(50,
             40, 'button', actionOnClickBack, this,
@@ -38,7 +29,7 @@ Slooow.lobbyState.prototype = {
         buttonBack.scale.setTo(0.2, 0.3)
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, game.global.activeLanguage.Back, style)
+            40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
@@ -50,7 +41,7 @@ Slooow.lobbyState.prototype = {
         buttonReady.scale.setTo(0.2, 0.3)
         //Texto ready
 		textButtonReady = game.add.text(game.world.centerX + 400,
-            game.world.centerY + 250, game.global.activeLanguage.Ready, style)
+            game.world.centerY + 250, game.global.activeLanguage.Ready, game.global.style)
         textButtonReady.anchor.set(0.5)
         textButtonReady.scale.setTo(0.5,0.5)
 
@@ -94,7 +85,7 @@ Slooow.lobbyState.prototype = {
         
         //Texto datos sala
 		textLobbyData = game.add.text(game.world.centerX -400,
-            game.world.centerY -50, game.global.activeLanguage.LobbyData, style2)
+            game.world.centerY -50, game.global.activeLanguage.LobbyData, game.global.style)
         textLobbyData.anchor.set(0.5)
         textLobbyData.scale.setTo(0.5,0.5)
 

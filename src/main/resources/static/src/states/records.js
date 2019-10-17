@@ -14,12 +14,6 @@ Slooow.recordsState.prototype = {
     },
 
     create : function() {
-        var style = {
-			font : "40px Arial",
-			fill : "#ffffff",
-			align : "center"
-        };
-
 
         function calculateTime(time){
             let ms
@@ -53,16 +47,16 @@ Slooow.recordsState.prototype = {
         buttonMap1.scale.setTo(0.8, 0.7)
         //Texto mapa1
 		textButtonMap1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY - 200, game.global.nameMapRecords[0], style)
+            game.world.centerY - 200, game.global.nameMapRecords[0], game.global.style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
         if (game.global.myTimes[0] >99999999){
             textTimeMap1 = game.add.text(game.world.centerX - 400,
-                game.world.centerY , 'No has jugado el mapa', style)
+                game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
             textTimeMap1 = game.add.text(game.world.centerX - 400,
-                game.world.centerY , calculateTime(game.global.myTimes[0]), style)
+                game.world.centerY , calculateTime(game.global.myTimes[0]), game.global.style)
         }
         textTimeMap1.anchor.set(0.5)
         textTimeMap1.scale.setTo(0.8,0.8)
@@ -75,15 +69,15 @@ Slooow.recordsState.prototype = {
         buttonMap2.scale.setTo(0.8, 0.7)
         //Texto mapa2
 		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 200, game.global.nameMapRecords[1], style)
+            game.world.centerY - 200, game.global.nameMapRecords[1], game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
         if (game.global.myTimes[1] >99999999){
             textTimeMap2 = game.add.text(game.world.centerX ,
-                game.world.centerY , 'No has jugado el mapa', style)
+                game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
         textTimeMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY , calculateTime(game.global.myTimes[1]), style)
+            game.world.centerY , calculateTime(game.global.myTimes[1]), game.global.style)
         }
         textTimeMap2.anchor.set(0.5)
         textTimeMap2.scale.setTo(0.8,0.8)
@@ -96,16 +90,16 @@ Slooow.recordsState.prototype = {
         buttonMap3.scale.setTo(0.8, 0.7)
         //Texto mapa3
 		textButtonMap3 = game.add.text(game.world.centerX + 400,
-            game.world.centerY - 200, game.global.nameMapRecords[2], style)
+            game.world.centerY - 200, game.global.nameMapRecords[2], game.global.style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
         if (game.global.myTimes[2] >99999999){
             textTimeMap3 = game.add.text(game.world.centerX + 400,
-                game.world.centerY , 'No has jugado el mapa', style)
+                game.world.centerY , 'No has jugado el mapa', game.global.style)
         } else {
         textTimeMap3 = game.add.text(game.world.centerX +400 ,
-            game.world.centerY , calculateTime(game.global.myTimes[2]), style)
+            game.world.centerY , calculateTime(game.global.myTimes[2]), game.global.style)
         }
         textTimeMap3.anchor.set(0.5)
         textTimeMap3.scale.setTo(0.8,0.8)
@@ -113,7 +107,7 @@ Slooow.recordsState.prototype = {
 /*
         var headings = ['Mapa', 'Tiempo']
         var textHeading = game.add.text(game.world.centerX - 320,
-            game.world.centerY - 200, '', style);
+            game.world.centerY - 200, '', game.global.style);
         textHeading.anchor.set(0.5)
         textHeading.parseList(headings);
 
@@ -124,7 +118,7 @@ Slooow.recordsState.prototype = {
             }
         }
         var records = game.add.text(game.world.centerX - 425,
-            game.world.centerY - 160, '', style);
+            game.world.centerY - 160, '', game.global.style);
         records.parseList(times)    
 */
 
@@ -138,7 +132,7 @@ Slooow.recordsState.prototype = {
 
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, game.global.activeLanguage.Back, style)
+            40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 

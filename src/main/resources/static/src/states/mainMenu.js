@@ -31,22 +31,10 @@ Slooow.mainMenuState.prototype = {
         minAlpha = 0.1
         maxAlpha = 1
 
-        var style = {
-            font: "40px Arial",
-            fill: "#ffffff",
-            align: "center"
-        };
-
-        var style2 = {
+        var styleTitle = {
             font: "bold 160px Impact",
             fill: "#ffffff",
             align: "center"
-        };
-
-        var style3 = {
-            font: "40px Arial",
-            fill: "#ffffff",
-            boundsAlignH: "left"
         };
 
         // TITLE
@@ -57,7 +45,7 @@ Slooow.mainMenuState.prototype = {
         buttonTittle.scale.setTo(1, 0.5)
         buttonTittle.inputEnable = false;
         textTitle = game.add.text(game.world.centerX,
-            50, 'SLOOOW', style2)
+            50, 'SLOOOW', styleTitle)
         textTitle.anchor.set(0.5)
         textTitle.scale.setTo(0.5, 0.5)
         
@@ -70,7 +58,7 @@ Slooow.mainMenuState.prototype = {
         buttonUser.scale.setTo(0.6, 0.35)
         buttonUser.inputEnable = false;
         textUsername = game.add.text(240,
-            40, game.global.username, style3)
+            40, game.global.username, game.global.style)
         textUsername.anchor.set(0.5)
         textUsername.scale.setTo(0.5, 0.5)
 
@@ -82,7 +70,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartSolo.scale.setTo(0.6, 0.6)
         // Texto empezar juego solo
         textButtonStartSolo = game.add.text(game.world.centerX + 300,
-            game.world.centerY - 50, game.global.activeLanguage.SoloMode, style)
+            game.world.centerY - 50, game.global.activeLanguage.SoloMode, game.global.style)
         textButtonStartSolo.anchor.set(0.5)
         //textButtonStartSolo.scale.setTo(0.7, 0.7)
 
@@ -95,7 +83,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMarathon.scale.setTo(0.3, 0.3)
         //Texto empezar maraton
         textButtonStartMarathon = game.add.text(game.world.centerX + 300,
-            game.world.centerY - 50, game.global.activeLanguage.Marathon, style)
+            game.world.centerY - 50, game.global.activeLanguage.Marathon, game.global.style)
         textButtonStartMarathon.anchor.set(0.5)
         textButtonStartMarathon.scale.setTo(0.5, 0.5)
             */
@@ -108,7 +96,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMultiOnline.scale.setTo(0.6, 0.6)
         //Texto empezar multi online
         textButtonStartMultiOnline = game.add.text(game.world.centerX + 300,
-            game.world.centerY + 100, game.global.activeLanguage.Online, style)
+            game.world.centerY + 100, game.global.activeLanguage.Online, game.global.style)
         textButtonStartMultiOnline.anchor.set(0.5)
         //textButtonStartMultiOnline.scale.setTo(0.7, 0.7)
 
@@ -121,7 +109,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartMultiLocal.scale.setTo(0.3, 0.3)
         //Texto empezar multi local
         textButtonStartMultiLocal = game.add.text(game.world.centerX + 300,
-            game.world.centerY + 100, game.global.activeLanguage.Local, style)
+            game.world.centerY + 100, game.global.activeLanguage.Local, game.global.style)
         textButtonStartMultiLocal.anchor.set(0.5)
         textButtonStartMultiLocal.scale.setTo(0.5, 0.5)
         */
@@ -141,7 +129,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartRecords.scale.setTo(0.3, 0.3)
         // Texto empezar records
         textButtonStartRecords = game.add.text(game.world.centerX,
-            game.world.centerY, game.global.activeLanguage.Records, style)
+            game.world.centerY, game.global.activeLanguage.Records, game.global.style)
         textButtonStartRecords.anchor.set(0.5)
         textButtonStartRecords.scale.setTo(0.5, 0.5)
 
