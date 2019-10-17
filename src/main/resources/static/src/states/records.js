@@ -20,18 +20,31 @@ Slooow.recordsState.prototype = {
 			align : "center"
         };
 
-        var style = {
-			font : "40px Arial",
-			fill : "#000000",
-			align : "center"
-        };
+
+        function calculateTime(time){
+            let ms
+            let seg
+            let min
+            min = parseInt(time / (60*1000))
+            seg = parseInt(time / 1000 % 60)
+            ms = time % 1000
+            let timeString
+            if(min > 0){
+                timeString = min+'´ '+seg+'´´ '+ms+'ms'
+            } else if (seg > 0) {
+                timeString =seg+'´´ '+ms+'ms'
+            } else {
+                timeString = ms+'ms'
+            }
+            return timeString       
+        }
         
         //Background
         var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
 		b.anchor.set (0.5, 0.5)
         b.scale.setTo (1.2,1.2)
 
-        /*
+        
         //Boton mapa 1
 		buttonMap1 = game.add.button(game.world.centerX - 400,
             game.world.centerY - 200, 'button', actionOnClickMap1, this,
@@ -40,9 +53,19 @@ Slooow.recordsState.prototype = {
         buttonMap1.scale.setTo(0.8, 0.7)
         //Texto mapa1
 		textButtonMap1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY - 200, 'Mapa 1', style)
+            game.world.centerY - 200, game.global.nameMapRecords[0], style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
+
+        if (game.global.myTimes[0] >99999999){
+            textTimeMap1 = game.add.text(game.world.centerX - 400,
+                game.world.centerY , 'No has jugado el mapa', style)
+        } else {
+            textTimeMap1 = game.add.text(game.world.centerX - 400,
+                game.world.centerY , calculateTime(game.global.myTimes[0]), style)
+        }
+        textTimeMap1.anchor.set(0.5)
+        textTimeMap1.scale.setTo(0.8,0.8)
 
         //Boton mapa 2
 		buttonMap2 = game.add.button(game.world.centerX ,
@@ -52,9 +75,18 @@ Slooow.recordsState.prototype = {
         buttonMap2.scale.setTo(0.8, 0.7)
         //Texto mapa2
 		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 200, 'Mapa 2', style)
+            game.world.centerY - 200, game.global.nameMapRecords[1], style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
+        if (game.global.myTimes[1] >99999999){
+            textTimeMap2 = game.add.text(game.world.centerX ,
+                game.world.centerY , 'No has jugado el mapa', style)
+        } else {
+        textTimeMap2 = game.add.text(game.world.centerX ,
+            game.world.centerY , calculateTime(game.global.myTimes[1]), style)
+        }
+        textTimeMap2.anchor.set(0.5)
+        textTimeMap2.scale.setTo(0.8,0.8)
 
         //Boton mapa 3
 		buttonMap3 = game.add.button(game.world.centerX + 400,
@@ -64,10 +96,21 @@ Slooow.recordsState.prototype = {
         buttonMap3.scale.setTo(0.8, 0.7)
         //Texto mapa3
 		textButtonMap3 = game.add.text(game.world.centerX + 400,
-            game.world.centerY - 200, 'Mapa 3', style)
+            game.world.centerY - 200, game.global.nameMapRecords[2], style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
-*/
+
+        if (game.global.myTimes[2] >99999999){
+            textTimeMap3 = game.add.text(game.world.centerX + 400,
+                game.world.centerY , 'No has jugado el mapa', style)
+        } else {
+        textTimeMap3 = game.add.text(game.world.centerX +400 ,
+            game.world.centerY , calculateTime(game.global.myTimes[2]), style)
+        }
+        textTimeMap3.anchor.set(0.5)
+        textTimeMap3.scale.setTo(0.8,0.8)
+
+/*
         var headings = ['Mapa', 'Tiempo']
         var textHeading = game.add.text(game.world.centerX - 320,
             game.world.centerY - 200, '', style);
@@ -83,7 +126,7 @@ Slooow.recordsState.prototype = {
         var records = game.add.text(game.world.centerX - 425,
             game.world.centerY - 160, '', style);
         records.parseList(times)    
-
+*/
 
 
         //Boton desconectar
