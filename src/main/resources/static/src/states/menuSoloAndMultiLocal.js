@@ -164,6 +164,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         }
 
         function actionOnClickMap2(){
+            game.global.mapChosen = 'mapa2'
             let msg = {
                 event: 'ENTERLOBBY',
                 roomName: game.global.username + 'Room',
@@ -177,6 +178,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         }
 
         function actionOnClickMap3(){
+            game.global.mapChosen = 'mapa2'
             let msg = {
                 event: 'ENTERLOBBY',
                 roomName: game.global.username + 'Room',

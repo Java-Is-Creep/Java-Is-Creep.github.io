@@ -18,7 +18,10 @@ Slooow.preloadState.prototype = {
 		// BACKGROUNDS																					//
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		// Fondo global
-		game.load.image('background', './assets/img/bg/bg.png');				
+		game.load.image('background', './assets/img/bg/bg.png');
+		game.load.image('backgroundMenu', './assets/img/bg/backgroundMenu4.png')
+		game.load.image('backgroundMenu2', './assets/img/bg/backgroundMenu2.png')	
+		game.load.image('backgroundMenu1', './assets/img/bg/backgroundMenu.png')			
 		// TODO Fondo pradera												
 		// Fondo cocina							
 		game.load.image('cocinaBg', './assets/img/bg/fondoCocinaColor.jpg');

@@ -17,9 +17,20 @@ Slooow.initSesionState.prototype = {
 
     preload: function () {
         // BackGround
+        /*
         this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
         this.background.height = this.game.height;
         this.background.width = this.game.width;
+        this.background.anchor.set(0.5, 0.5)*/
+        this.background = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width, game.world.height, 'backgroundMenu')
+        //this.background.height = this.game.height;
+        //this.background.width = this.game.width;
+        //Tints chulos:  1653685.9351650865
+        //               10799539.640765665
+        //               4535760.527128731   
+        //this.background.tint = Math.random() * 0xffffff;
+		console.log(this.background.tint)
+		this.background.tileScale.set(0.4, 0.4)
         this.background.anchor.set(0.5, 0.5)
     },
 
@@ -181,6 +192,10 @@ Slooow.initSesionState.prototype = {
     },
 
     update: function () {
+
+        this.background.tilePosition.x+=0.5
+        this.background.tilePosition.y-=0.5
+
         // Función para mostrar el boton de inicio de sesion con un alpha de 1
         if (inicioSesionNameButton.value !== undefined && inicioSesionPassButton.value !== undefined){
             if (inicioSesionNameButton.value.length !== 0 && inicioSesionPassButton.value.length !== 0){
