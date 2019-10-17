@@ -154,7 +154,7 @@ window.onload = function () {
                 game.global.player.stamina2.scale.setTo(scale, 0.45)
                 
                 // Tratamiento de la barra de progreso
-                console.log (game.global.finishObject.x)
+                //console.log (game.global.finishObject.x)
                 var posProgress = 100 + game.global.finishObject.x - game.global.player.sprite.x
                 var scaleProgress = posProgress/game.global.finishObject.x
                 game.global.player.progressBar2.scale.setTo(scaleProgress, 1)
@@ -548,6 +548,7 @@ window.onload = function () {
                 if(JSON.parse(msg.disconnectionStatus)){
                     game.state.start('initSesionState')
                 }
+                break
 
             case 'ENTERLOBBY':
                 this.console.log('me llega enter lobby')
@@ -566,6 +567,7 @@ window.onload = function () {
                     this.game.global.nameMapRecords[i] = nameMap [i]
                     this.game.global.myTimes [i] = myTime[i]
                 }
+                this.game.state.start('recordsState')
                 break
         }   
 

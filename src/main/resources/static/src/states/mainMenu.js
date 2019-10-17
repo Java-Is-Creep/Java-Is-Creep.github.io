@@ -253,7 +253,7 @@ Slooow.mainMenuState.prototype = {
 
         function actionOnClickStartRecords() {
             let msg = {
-                event: 'RECORDS'
+                event: 'MYRECORDS'
             }
             game.global.socket.send(JSON.stringify(msg))
             //game.state.start('recordsState')
