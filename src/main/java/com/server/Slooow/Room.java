@@ -8,13 +8,13 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import com.google.gson.JsonObject;
 import com.server.Slooow.MapObject.type;
-import com.server.Slooow.MapPowerUp.powerType;
 
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 public class Room {
 	protected Map map;
+	protected String mapName;
 	protected PlayerConected owner;
 	protected HashMap<WebSocketSession, PlayerConected> jugadoresEnSala = new HashMap<WebSocketSession, PlayerConected>();
 	protected String name;
@@ -39,12 +39,11 @@ public class Room {
 		this.owner = owner;
 		this.name = name;
 		this.game = game;
-		jugadoresEnSala.putIfAbsent(owner.getSession(), owner);
-		map = new Map(2000, mapName);
-		
+		jugadoresEnSala.putIfAbsent(owner.getSession(), owner);	
 	}
 
 	public void startRoom(){
+		map = new Map(2000, mapName);
 		createMap();
 		sendMap();
 		tick();
@@ -63,7 +62,14 @@ public class Room {
 	}
 
 	public void createMap() {
-		createLevel1();
+		switch(mapName){
+			case "mapa1":
+			createLevel1();
+			break;
+			default:
+			System.out.println("Mapa no existe");
+		}
+		
 
 	}
 
@@ -91,6 +97,101 @@ public class Room {
 			}
 			i++;
 		}
+	}
+
+	public void updateDoors() {
+		int i = 0;
+		for (DoorMap door : doorArray) {
+			if (door.update()) {
+
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "UPDATEDOOR");
+				msg.addProperty("id", i);
+
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+
+			}
+			i++;
+		}
+	}
+
+	public void updateWind() {
+		int i = 0;
+		for (Wind wind : windArray) {
+			if(wind.update()){
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "WINDUPDATE");
+				msg.addProperty("id", i);
+				msg.addProperty("direction", wind.goingRigth);
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+			}
+			i++;
+		}
+	}
+
+	public void updateTrampoline() {
+		int i = 0;
+		for (Trampoline trampoline : trampolineArray) {
+			if (trampoline.update()) {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "UPDATETRAMPOLINE");
+				msg.addProperty("id", i);
+				msg.addProperty("estate", trampoline.trampoEstate.toString());
+
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+
+			}
+			i++;
+		}
+	}
+
+	public void updateObstacles() {
+		int i = 0;
+		for (SpikesObstacle obstacle : spikesArray) {
+
+			if (obstacle.update() || obstacle.playerCrash) {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "OBSTACLEUPDATE");
+				msg.addProperty("id", i);
+				msg.addProperty("estate", obstacle.estate.toString());
+				try {
+					owner.sessionLock.lock();
+					owner.getSession().sendMessage(new TextMessage(msg.toString()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					owner.sessionLock.unlock();
+				}
+			}
+			obstacle.playerCrash = false;
+			i++;
+		}
+
 	}
 
 	public void createLevel1() {

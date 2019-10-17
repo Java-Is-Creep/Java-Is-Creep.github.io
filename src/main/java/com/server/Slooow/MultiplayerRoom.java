@@ -2,19 +2,18 @@ package com.server.Slooow;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.server.Slooow.MapObject.type;
 import com.server.Slooow.SpikesObstacle.Estate;
 import com.server.Slooow.Trampoline.trampolineEstate;
+
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 public class MultiplayerRoom extends Room {
 	// String name;
@@ -30,6 +29,7 @@ public class MultiplayerRoom extends Room {
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
 	public final int MAXNUMPLAYERS = 4;
+	HashMap<String,Integer> positions = new HashMap<String,Integer>();
 	int numPlayers = 0;
 	boolean hasStart = false;
 	ReentrantLock playerLock = new ReentrantLock();
@@ -209,7 +209,7 @@ public class MultiplayerRoom extends Room {
 
 						break;
 					case FINISH:
-						//finishRace();
+						 finishRace(player);
 						break;
 					case WIND:
 						player.mySnail.isInWind = true;
@@ -301,9 +301,63 @@ public class MultiplayerRoom extends Room {
 		playerLock.unlock();
 	}
 
+		synchronized public void finishRace(PlayerConected player) {
+		boolean success = false;
+		// acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
+		if (acummulativeTime > TIMETOSUCESS) {
+			System.out.println("Has perdido, tu tiempo ha sido: " + acummulativeTime);
+			player.decrementLifes();
+
+		} else {
+			success = true;
+			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
+		}
+
+		JsonObject msg = new JsonObject();
+		msg.addProperty("event", "FINISH");
+		msg.addProperty("winner", success);
+		msg.addProperty("time", (int)(acummulativeTime));
+		msg.addProperty("maxTime", TIMETOSUCESS);
+
+		try {
+			owner.sessionLock.lock();
+			owner.getSession().sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			owner.sessionLock.unlock();
+		}
+
+
+		executor.shutdown();
+		destroyRoom();
+	}
+
+	public void checkSnailState() {
+		int id = 0;
+		playerLock.lock();
+		for (PlayerConected player : jugadoresEnSala.values()) {
+			boolean mandar = false;
+			if (player.mySnail.sendRunOutStamina || player.mySnail.sendRecoverStamina) {
+				mandar = true;
+			}
+			if (mandar) {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "SNAILUPDATEMULTI");
+				msg.addProperty("runOutStamina", owner.mySnail.sendRunOutStamina);
+				msg.addProperty("recoverStamina", owner.mySnail.sendRecoverStamina);
+				msg.addProperty("id", id);
+				broadcast(msg);
+			}
+		}
+		playerLock.unlock();
+
+	}
+
 	public void tick() {
 		Runnable task = () -> {
-			/*
+
 			acummulativeTime += TICKTIME;
 			updateDoors();
 			updateTrapDoor();
@@ -316,7 +370,7 @@ public class MultiplayerRoom extends Room {
 				player.mySnail.updateSnail();
 				checkSnailState();
 			}
-			*/
+
 			ArrayList<Float> posX = new ArrayList<>();
 			ArrayList<Float> posY = new ArrayList<>();
 			ArrayList<Float> stamina = new ArrayList<>();

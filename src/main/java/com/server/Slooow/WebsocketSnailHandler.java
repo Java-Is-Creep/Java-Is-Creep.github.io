@@ -2,14 +2,14 @@ package com.server.Slooow;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.server.Slooow.SnailInGame.SnailType;
+
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.server.Slooow.SnailInGame.SnailType;
 
 //Websocket que maneja todos los mensajes entre cliente servidor
 public class WebsocketSnailHandler extends TextWebSocketHandler {
@@ -55,7 +55,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			
 			if (jug.getLifes() != 0) {
 				jug.restartSnail();
-				game.createSingleRoom(post.roomName, jug, "mapa1");
+				game.singlePlayerRoomMaps.get(post.roomName).startRoom();
 			}
 
 			break;
@@ -155,14 +155,29 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "CHOOSESNAIL":
 			
 			switch(post.chooseSnail){
-				case "normal":
+				case "NORMAL":
 					jug = game.bucarJugadorConectado(newSession);
 					jug.snailType = SnailType.NORMAL;
 				break;
+				case "TANK":
+					jug = game.bucarJugadorConectado(newSession);
+					jug.snailType = SnailType.TANK;
+					break;
 				default:
 				
 			}
 
+			break;
+
+			case "ENTERLOBBY":
+				jug = game.bucarJugadorConectado(newSession);
+				game.createSingleRoom(post.roomName, jug, post.mapName);
+				JsonObject msg3 = new JsonObject();
+				msg3.addProperty("event", "ENTERLOBBY");
+				msg3.addProperty("snail", jug.snailType.toString());
+				jug.sessionLock.lock();
+				newSession.sendMessage(new TextMessage(msg3.toString()));
+				jug.sessionLock.unlock();
 			break;
 			
 

@@ -29,9 +29,7 @@ public class SinglePlayerRoom extends Room {
 	// comienza el juego
 	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game, String mapName) {
 		super(name, player, game, mapName);
-		startRoom();
-
-	}
+		}
 
 	public void sendMap() {
 
@@ -296,102 +294,6 @@ public class SinglePlayerRoom extends Room {
 		}
 	}
 
-	
-
-	public void updateDoors() {
-		int i = 0;
-		for (DoorMap door : doorArray) {
-			if (door.update()) {
-
-				JsonObject msg = new JsonObject();
-				msg.addProperty("event", "UPDATEDOOR");
-				msg.addProperty("id", i);
-
-				try {
-					owner.sessionLock.lock();
-					owner.getSession().sendMessage(new TextMessage(msg.toString()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					owner.sessionLock.unlock();
-				}
-
-			}
-			i++;
-		}
-	}
-
-	public void updateTrampoline() {
-		int i = 0;
-		for (Trampoline trampoline : trampolineArray) {
-			if (trampoline.update()) {
-				JsonObject msg = new JsonObject();
-				msg.addProperty("event", "UPDATETRAMPOLINE");
-				msg.addProperty("id", i);
-				msg.addProperty("estate", trampoline.trampoEstate.toString());
-
-				try {
-					owner.sessionLock.lock();
-					owner.getSession().sendMessage(new TextMessage(msg.toString()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					owner.sessionLock.unlock();
-				}
-
-			}
-			i++;
-		}
-	}
-
-	public void updateWind() {
-		int i = 0;
-		for (Wind wind : windArray) {
-			if(wind.update()){
-				JsonObject msg = new JsonObject();
-				msg.addProperty("event", "WINDUPDATE");
-				msg.addProperty("id", i);
-				msg.addProperty("direction", wind.goingRigth);
-				try {
-					owner.sessionLock.lock();
-					owner.getSession().sendMessage(new TextMessage(msg.toString()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					owner.sessionLock.unlock();
-				}
-			}
-			i++;
-		}
-	}
-
-	public void updateObstacles() {
-		int i = 0;
-		for (SpikesObstacle obstacle : spikesArray) {
-
-			if (obstacle.update() || obstacle.playerCrash) {
-				JsonObject msg = new JsonObject();
-				msg.addProperty("event", "OBSTACLEUPDATE");
-				msg.addProperty("id", i);
-				msg.addProperty("estate", obstacle.estate.toString());
-				try {
-					owner.sessionLock.lock();
-					owner.getSession().sendMessage(new TextMessage(msg.toString()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					owner.sessionLock.unlock();
-				}
-			}
-			obstacle.playerCrash = false;
-			i++;
-		}
-
-	}
 
 	public void finishRace() {
 		boolean success = false;
