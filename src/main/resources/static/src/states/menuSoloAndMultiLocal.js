@@ -149,21 +149,39 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         }
 
         function actionOnClickMap1(){
-            game.state.start('lobbyState')
+            let msg = {
+                event: 'ENTERLOBBY',
+                roomName: game.global.username + 'Room',
+                mapName: 'mapa1'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('lobbyState')
 /////////////////////////////////////////////////////////////////////////////////////////////
 // AÑADIR MENSAJES AL SERVIDOR CON AMBIENTACION + MAPA
 /////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         function actionOnClickMap2(){
-            game.state.start('lobbyState')
+            let msg = {
+                event: 'ENTERLOBBY',
+                roomName: game.global.username + 'Room',
+                mapName: 'mapa2'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('lobbyState')
 /////////////////////////////////////////////////////////////////////////////////////////////
 // AÑADIR MENSAJES AL SERVIDOR CON AMBIENTACION + MAPA
 /////////////////////////////////////////////////////////////////////////////////////////////        
         }
 
         function actionOnClickMap3(){
-            game.state.start('lobbyState')
+            let msg = {
+                event: 'ENTERLOBBY',
+                roomName: game.global.username + 'Room',
+                mapName: 'mapa3'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('lobbyState')
 /////////////////////////////////////////////////////////////////////////////////////////////
 // AÑADIR MENSAJES AL SERVIDOR CON AMBIENTACION + MAPA
 /////////////////////////////////////////////////////////////////////////////////////////////         

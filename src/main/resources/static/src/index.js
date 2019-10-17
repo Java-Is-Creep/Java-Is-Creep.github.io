@@ -106,7 +106,9 @@ window.onload = function () {
         clockPowerUp: null,
         inkPowerUp: null,
         speedPowerUp: null,
-        hasPowerUp: false
+        hasPowerUp: false,
+
+        snailChosen: null
     }
 
     // Conexiones
@@ -296,17 +298,6 @@ window.onload = function () {
                             break
                     }
                 }
-                /*
-                for (var j = 0; j< arrayPosX.length; j++){
-                    this.game.global.mapObjects[j] = new Object()
-                }
-                for (var i = 0; i< arrayPosX.length; i++){
-                    game.global.mapObjects[i].x = arrayPosX[i];
-                    game.global.mapObjects[i].y =  arrayPosY[i] 
-                    game.global.mapObjects[i].height = arrayHeight[i];
-                    game.global.mapObjects[i].width = arrayWidth[i];
-                    this.console.log('Objeto ' + i + ': ' + game.global.mapObjects[i].x + ' ' + game.global.mapObjects[i].y +' ' +game.global.mapObjects[i].height + ' ' + game.global.mapObjects[i].width )
-                }*/
                 game.state.start('singlePlayerState')
                 break;
 
@@ -397,21 +388,27 @@ window.onload = function () {
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
                         game.global.player.shieldPowerUp.visible = false
+                        game.global.player.sprite.addChild(game.add.sprite(200, -200, 'shieldPowerUp'))
                         break
                     case '"STAMINA"':
                         game.global.player.staminaPowerUp.visible = false
+                        game.global.player.sprite.addChild(game.add.sprite(200, -200, 'staminaPowerUp'))
                         break
                     case '"WEIGHT"':
                         game.global.player.wingPowerUp.visible = false
+                        game.global.player.sprite.addChild(game.add.sprite(200, -200, 'wingsPowerUp'))
                         break
                     case '"LETUCCE"':
                         game.global.player.lettucePowerUp.visible = false
+                        game.global.player.sprite.addChild(game.add.sprite(200, -200, 'lettucePowerUp'))
                         break
                     case '"SPEED"':
                         game.global.player.speedPowerUp.visible = false
+                        game.global.player.sprite.addChild(game.add.sprite(200, -200, 'speedPowerUp'))
                         break
                     case '"INK"':
                         game.global.player.inkPowerUp.visible = false
+                        game.global.player.sprite.addChild(game.add.sprite(200, -200, 'inkPowerUp'))
                         break
                     case '"NULL"':
                         this.console.log('MAL')
@@ -545,6 +542,12 @@ window.onload = function () {
                 if(JSON.parse(msg.disconnectionStatus)){
                     game.state.start('initSesionState')
                 }
+
+            case 'ENTERLOBBY':
+                var snail = JSON.parse(msg.snail)
+                this.game.global.snailChosen = snail
+                this.game.state.start('lobbyState')
+                break    
         }   
 
 

@@ -133,11 +133,11 @@ Slooow.gameOverState.prototype = {
             ms = time % 1000
             let timeString
             if(min > 0){
-                timeString = min+'m '+seg+'´ '+ms+'´´'
+                timeString = min+'´ '+seg+'´´ '+ms+'ms'
             } else if (seg > 0) {
-                timeString =seg+'´ '+ms+'´´'
+                timeString =seg+'´´ '+ms+'ms'
             } else {
-                timeString = ms+'´´'
+                timeString = ms+'ms'
             }
             
             return timeString       
