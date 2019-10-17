@@ -36,6 +36,7 @@ Slooow.initGameState.prototype = {
 
 		// Pasa al state initSesion
         function itemTouched (){
+			
 			game.state.start('initSesionState')
 		}
 	},

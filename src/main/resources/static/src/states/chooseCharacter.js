@@ -16,9 +16,21 @@ Slooow.chooseCharacterState.prototype = {
     create : function() {
         
         //Background
+        /*
         var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
 		b.anchor.set (0.5, 0.5)
-        b.scale.setTo (1.2,1.2)
+        b.scale.setTo (1.2,1.2)*/
+        this.background = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width, game.world.height, 'backgroundMenu')
+        //this.background.height = this.game.height;
+        //this.background.width = this.game.width;
+        //Tints chulos:  1653685.9351650865
+        //               10799539.640765665
+        //               4535760.527128731   
+        //this.background.tint = Math.random() * 0xffffff;
+        //this.background.tint = 4535760.527128731;
+		//console.log(this.background.tint)
+		this.background.tileScale.set(0.4, 0.4)
+        this.background.anchor.set(0.5, 0.5)
 
         //Boton back
 		buttonBack = game.add.button(50,
@@ -227,5 +239,7 @@ Slooow.chooseCharacterState.prototype = {
     },
 
     update : function() {
+        this.background.tilePosition.x+=0.5
+        this.background.tilePosition.y-=0.5
     }
 }

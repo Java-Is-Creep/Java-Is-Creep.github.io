@@ -24,7 +24,7 @@ Slooow.preloadState.prototype = {
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		// Fondo global
 		game.load.image('background', './assets/img/bg/bg.png');
-		game.load.image('backgroundMenu', './assets/img/bg/backgroundMenu4.png')
+		game.load.image('backgroundMenu', './assets/img/bg/backgroundMenu6.png')
 		game.load.image('backgroundMenu2', './assets/img/bg/backgroundMenu2.png')	
 		game.load.image('backgroundMenu1', './assets/img/bg/backgroundMenu.png')			
 		// TODO Fondo pradera												
@@ -110,6 +110,7 @@ Slooow.preloadState.prototype = {
 
 		// Interfaz Global
 		game.load.image('button', './assets/img/btn/defaultBtn.png');
+		//game.load.image('button', './assets/img/btn/bigBlue.png');
 		game.load.image('roundBtn', './assets/img/btn/roundBtn.png');
 
 		// Social-btn
