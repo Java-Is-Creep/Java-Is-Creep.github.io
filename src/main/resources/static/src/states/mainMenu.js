@@ -248,7 +248,11 @@ Slooow.mainMenuState.prototype = {
         }*/
 
         function actionOnClickStartShop() {
-            game.state.start('shopState')
+            let msg = {
+                event: 'SHOP'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('shopState')
         }
 
         function actionOnClickStartRecords() {
