@@ -544,7 +544,10 @@ window.onload = function () {
                 }
 
             case 'ENTERLOBBY':
-                var snail = JSON.parse(msg.snail)
+                this.console.log('me llega enter lobby')
+                var snail = JSON.stringify(msg.snail)  
+                snail = snail.substring(1, snail.length-1)
+                this.console.log(snail)
                 this.game.global.snailChosen = snail
                 this.game.state.start('lobbyState')
                 break    

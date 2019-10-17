@@ -157,6 +157,9 @@ Slooow.singlePlayerState.prototype = {
 			switch (game.global.snailChosen){
 				case ('NORMAL'):
 						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'normalColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 5), 5, true);
 					break
 				case ('TANK'):
 						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'tanqueColWalk')
@@ -166,9 +169,7 @@ Slooow.singlePlayerState.prototype = {
 		}
 		
 
-		game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
-		game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
-		game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 5), 5, true);
+		
 		//game.global.player.sprite.animations.add('turn', Phaser.Animation.generateFrameNames('turn', 0, 3), 5, true);
 		game.global.player.sprite.animations.play('walk');
 		game.global.player.sprite.anchor.setTo(0.5, 0.5);

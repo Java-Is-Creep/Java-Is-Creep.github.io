@@ -149,6 +149,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         }
 
         function actionOnClickMap1(){
+            console.log('te mando enter lobby')
             let msg = {
                 event: 'ENTERLOBBY',
                 roomName: game.global.username + 'Room',

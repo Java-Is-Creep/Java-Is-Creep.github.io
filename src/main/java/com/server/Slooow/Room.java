@@ -39,6 +39,7 @@ public class Room {
 		this.owner = owner;
 		this.name = name;
 		this.game = game;
+		this.mapName = mapName;
 		jugadoresEnSala.putIfAbsent(owner.getSession(), owner);	
 	}
 

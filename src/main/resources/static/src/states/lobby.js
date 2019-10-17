@@ -95,7 +95,7 @@ Slooow.lobbyState.prototype = {
             let msg2 = {
                 event: 'SINGLEPLAYER',
                 playerName: game.global.username,
-                roomName: 'sala1'
+                roomName: game.global.username + 'Room'
             }
             game.global.socket.send(JSON.stringify(msg2))
         }
