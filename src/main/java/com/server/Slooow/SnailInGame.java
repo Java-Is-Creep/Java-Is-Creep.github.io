@@ -239,8 +239,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
-		System.out.println(getClass());
-		System.out.println(MAXVELOCITYX);
+
 		if(hasPassedDoor){
 			doorTime -= 33;
 			if(doorTime<0){
@@ -264,7 +263,6 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 
 		if(wasLastFrameAcelerating){
 			acelerationTime = ACELERATIONTIME;
-			System.out.println("wasLastFrameAcelerating: " + true);
 			isAcelerating = true;
 		}
 

@@ -134,6 +134,7 @@ public class SinglePlayerRoom extends Room {
 
 						} else {
 							wallCollision = true;
+							owner.mySnail.hasPassedDoor = false;
 							if (!lastFrameWallCollision) {
 								sendWallCollision = true;
 							}
@@ -141,11 +142,11 @@ public class SinglePlayerRoom extends Room {
 					} else {
 						if(object.getClass() == DoorMap.class){
 							isClimbingADoor = true;
-						} else {
-							if (!lastFrameWallCollision) {
+							System.out.println("No estas subiendo una puerta");
+						}
+						if (!lastFrameWallCollision) {
 								sendWallCollision = true;
 							}
-						}
 						wallCollision = true;
 
 						owner.mySnail.hasPassedDoor = false;
@@ -239,11 +240,8 @@ public class SinglePlayerRoom extends Room {
 		owner.mySnail.slopeRadians = slopeRadians;
 		owner.mySnail.isOnObstacle = obstacleCollision;
 
-		/*
-		 * System.out.println(" collision con suelo es: " + groundCollision);
-		 * System.out.println(" collision con pared es: " + wallCollision);
-		 * System.out.println(" collision con slope es: " + slopeCollision);
-		 */
+		
+		
 
 	}
 
