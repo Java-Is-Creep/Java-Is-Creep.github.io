@@ -108,10 +108,10 @@ window.onload = function () {
         inkPowerUp: null,
         speedPowerUp: null,
         hasPowerUp: false,
-
+        owned: [],
+        notOwned: [],
         snailChosen: null,
         mapChosen: null,
-
         nameMapRecords: [],
         myTimes: []
     }
@@ -568,6 +568,20 @@ window.onload = function () {
                     this.game.global.myTimes [i] = myTime[i]
                 }
                 this.game.state.start('recordsState')
+                break
+            case 'SHOPENTER':
+                let ownedAux = JSON.parse(msg.owned)
+                let notOwnedAux = JSON.parse(msg.notOwned)
+
+                for (var i = 0; i < ownedAux.length; i++){
+                    game.global.owned[i] = ownedAux[i];
+                }
+
+                for (var j = 0; j < notOwnedAux.length; j++){
+                    game.global.notOwned[i] = notOwnedAux[j]
+                }
+                
+                game.state.start('shopState')
                 break
         }   
 

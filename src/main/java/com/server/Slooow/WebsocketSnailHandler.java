@@ -281,8 +281,34 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			break;
 
 			case "SHOP":
-				jug = game.bucarJugadorConectado(newSession);
-				
+				playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
+				ArrayList<String> owned = new ArrayList<>();
+				ArrayList<String> notOwned = new ArrayList<>();
+				for (SnailType snail : playerR.mySnails.keySet()){
+					if(playerR.mySnails.get(snail)){
+						owned.add(snail.toString());
+					} else {
+						notOwned.add(snail.toString());
+					}
+				}
+				Gson gsonOwn = new Gson();
+				String ownedArray = gsonOwn.toJson(owned);
+				String notOwnedArray = gsonOwn.toJson(notOwned);
+
+				JsonObject msgShop = new JsonObject();
+				msgShop.addProperty("event", "SHOPENTER");
+				msgShop.addProperty("owned", ownedArray);
+				msgShop.addProperty("notOwned", notOwnedArray);
+				try {
+					jug.sessionLock.lock();
+					jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					jug.sessionLock.unlock();
+				}
+
 			break;
 
 		

@@ -1,7 +1,7 @@
 package com.server.Slooow;
 
 import java.util.concurrent.ConcurrentHashMap;
-
+import com.server.Slooow.SnailInGame.SnailType;
 public class PlayerRegistered {
 
     private String name;
@@ -11,6 +11,7 @@ public class PlayerRegistered {
     private int cash;
     private boolean connected = false;
     ConcurrentHashMap<String,Integer> records = new ConcurrentHashMap<String,Integer>();
+    ConcurrentHashMap<SnailType,Boolean> mySnails = new ConcurrentHashMap<SnailType,Boolean>(); 
 	public final int MAXNUMLIFES= 5;
 	// actualmente 1 hora
 	public final int SECONDSTOGETALIFE = 30;
@@ -28,6 +29,13 @@ public class PlayerRegistered {
         this.lifes = MAXNUMLIFES;
         this.cash = 0;
         this.points = 0;
+        for (SnailType snail : SnailType.values()){
+            if(snail == SnailType.NORMAL){
+                mySnails.putIfAbsent(snail, true);
+            } else {
+                mySnails.putIfAbsent(snail, false);
+            }
+        }
     }
 
     
