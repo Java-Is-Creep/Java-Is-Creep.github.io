@@ -39,7 +39,7 @@ Slooow.initSesionState.prototype = {
     create: function () {
 
         music = game.add.audio('AE');
-        music.volume = 1;
+        music.volume = 0;
         music.play();
         
         // Boton Username
