@@ -108,7 +108,8 @@ window.onload = function () {
         speedPowerUp: null,
         hasPowerUp: false,
 
-        snailChosen: null
+        snailChosen: null,
+        mapChosen: null
     }
 
     // Conexiones

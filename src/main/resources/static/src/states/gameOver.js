@@ -121,6 +121,14 @@ Slooow.gameOverState.prototype = {
         }
 
         function actionOnClickReplay(){
+            console.log('te mando enter lobby')
+            
+            let msg = {
+                event: 'ENTERLOBBY',
+                roomName: game.global.username + 'Room',
+                mapName: game.global.mapChosen
+            }
+            game.global.socket.send(JSON.stringify(msg))
             game.state.start('lobbyState')
         }
 
