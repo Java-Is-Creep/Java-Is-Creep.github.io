@@ -17,6 +17,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 public class SnailInGame {
 
+	enum SnailType{NORMAL,TANK}
+
 	// TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;
 	final int colliderOfsetX = 40;
@@ -30,32 +32,32 @@ public class SnailInGame {
 	// de stamina por segundo
 	// Tiempo que se tarda en recargar la stamina si se acaba o nos dan 151 / (1.5f
 	// * 30 fps) = 3.33 segundos
-	public final float MAXSTAMINA = 600;
-	public final float MAXVELOCITYX = 8;
-	public final float MAXVELOCITYY = 7;
-	public final float MAXNORMALVELOCITYX = 3;
-	public final float MAXNORMALVELOCITYY = 2.5f; // era 3
+	public  float MAXSTAMINA;
+	public  float MAXVELOCITYX;
+	public  float MAXVELOCITYY;
+	public  float MAXNORMALVELOCITYX;
+	public  float MAXNORMALVELOCITYY; // era 3
 
 	// aceleracion base, es decir sin acelerar
-	public final float NORMALACELERATIONX = 2f;
-	public final float NORMALACELERATIONY = 2f; // era 0.05
+	public  float NORMALACELERATIONX ;
+	public  float NORMALACELERATIONY ; // era 0.05
 
 	// aceleracion cuando aceleras - ACTUALMENTE NO ES UN PARÁMETRO USABLE (NO BORRAR)
-	public final float ACELERATIONX = 0.2f;
-	public final float ACELERATIONY = 0.2f;
+	public  float ACELERATIONX;
+	public  float ACELERATIONY;
 
-	public final float GRAVITY = 0.3f;
-	public final float BREAKFORCE = 0.2f;
+	public  float GRAVITY ;
+	public  float BREAKFORCE ;
 	// Tarda 5 segundos en perder la stamina
-	public final float STAMINALOSE = 10;
-	public final float STAMINAWALLLOSE = 1;
+	public  float STAMINALOSE;
+	public  float STAMINAWALLLOSE;
 	// Tarda 2 segundos en recargar la stamina
-	public final float STAMINANORMALRECOVER = 1.5f;
+	public  float STAMINANORMALRECOVER;
 	// Tarda 3.33 segundos en recargar la stamina
-	public final float STAMINARUNOUTRECOVER = 2.5f;
-	public final float MAXGRAVITYSPEED = -10;
-	public final float MASS = 1;
-	public final float SPEEDXLOSE = 1.02f;
+	public  float STAMINARUNOUTRECOVER;
+	public  float MAXGRAVITYSPEED;
+	public  float MASS ;
+	public  float SPEEDXLOSE ;
 
 	// valores que cambian por power ups
 	public float maxNormalSpeedX;
@@ -135,7 +137,39 @@ public class SnailInGame {
 	ReentrantLock lastMovementLock = new ReentrantLock();
 
 	// Inicialización según el caracol
-	public SnailInGame(WebSocketSession mySession, ReentrantLock sessionLock) {
+	public SnailInGame(WebSocketSession mySession, ReentrantLock sessionLock,float MAXSTAMINA,float MAXVELOCITYX,
+	float MAXVELOCITYY,float MAXNORMALVELOCITYX,float MAXNORMALVELOCITYY, float NORMALACELERATIONX,float NORMALACELERATIONY,
+	float ACELERATIONX,float ACELERATIONY,float GRAVITY,float BREAKFORCE,float STAMINALOSE,float STAMINAWALLLOSE,
+	float STAMINANORMALRECOVER,float STAMINARUNOUTRECOVER,float MAXGRAVITYSPEED,float MASS,float SPEEDXLOSE) {
+
+		this.MAXSTAMINA = MAXSTAMINA;
+	this.MAXVELOCITYX = MAXVELOCITYX;
+	 this.MAXVELOCITYY = MAXVELOCITYY;
+	this.MAXNORMALVELOCITYX= MAXNORMALVELOCITYX;
+	this.MAXNORMALVELOCITYY =MAXNORMALVELOCITYY; // era 3
+
+	// aceleracion base, es decir sin acelerar
+	this.NORMALACELERATIONX = NORMALACELERATIONX;
+	this.NORMALACELERATIONY  = NORMALACELERATIONY; // era 0.05
+
+	// aceleracion cuando aceleras - ACTUALMENTE NO ES UN PARÁMETRO USABLE (NO BORRAR)
+	this.ACELERATIONX = ACELERATIONX;
+	this.ACELERATIONY = ACELERATIONY;
+
+	this.GRAVITY = GRAVITY;
+	this.BREAKFORCE = BREAKFORCE;
+	// Tarda 5 segundos en perder la stamina
+	this.STAMINALOSE = STAMINALOSE;
+	this.STAMINAWALLLOSE = STAMINAWALLLOSE;
+	// Tarda 2 segundos en recargar la stamina
+	this.STAMINANORMALRECOVER = STAMINANORMALRECOVER;
+	// Tarda 3.33 segundos en recargar la stamina
+	this.STAMINARUNOUTRECOVER = STAMINARUNOUTRECOVER;
+	this.MAXGRAVITYSPEED = MAXGRAVITYSPEED;
+	this.MASS  = MASS;
+	this.SPEEDXLOSE = SPEEDXLOSE ;
+
+
 		speedX = 0;
 		speedY = 0;
 		runOutStamina = false;
@@ -146,6 +180,8 @@ public class SnailInGame {
 
 		this.mySession = mySession;
 		this.sessionLock = sessionLock;
+
+		System.out.println(MAXVELOCITYX);
 
 		// inicializamos los valores que varian con el power up
 		maxNormalSpeedX = MAXNORMALVELOCITYX;
@@ -203,6 +239,8 @@ public class SnailInGame {
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
+		System.out.println(getClass());
+		System.out.println(MAXVELOCITYX);
 		if(hasPassedDoor){
 			doorTime -= 33;
 			if(doorTime<0){
@@ -522,9 +560,7 @@ public class SnailInGame {
 	// Cambia el movement anterior por la siguiente actualizacion
 	public void updateMovement(boolean isAcelerating, boolean useObject) {
 		lastMovementLock.lock();
-		System.out.println("Se updatea movimiento");
 		lastMovement = new LastMovement(isAcelerating, useObject);
-		System.out.println("Las movement "+ lastMovement.isAcelerating);
 		lastMovementLock.unlock();
 	}
 

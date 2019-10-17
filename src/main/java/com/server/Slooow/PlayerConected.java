@@ -3,10 +3,13 @@ package com.server.Slooow;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.server.Slooow.SnailInGame.SnailType;
+
 import org.springframework.web.socket.WebSocketSession;
 
 public class PlayerConected {
 
+	SnailType snailType = SnailType.NORMAL;
 	private WebSocketSession session;
 	private String nombre;
 	public SnailInGame mySnail;
@@ -26,7 +29,7 @@ public class PlayerConected {
 		this.nombre = nombre;
 		this.sessionLock = sessionLock;
 		lifes = MAXNUMLIFES;
-		mySnail = new SnailInGame(session,sessionLock);
+		restartSnail();
 	}
 	public WebSocketSession getSession() {
 		return session;
@@ -96,6 +99,18 @@ public class PlayerConected {
 
 	public void setCash(int cash) {
 		this.cash = cash;
+	}
+
+	public void restartSnail(){
+		switch(snailType){
+			case NORMAL:
+				mySnail = new normalSnail(this.session, this.sessionLock);
+			break;
+			case TANK:
+				mySnail = new TankSnail(this.session, this.sessionLock);
+			break;
+			default:
+		}
 	}
 	
 }

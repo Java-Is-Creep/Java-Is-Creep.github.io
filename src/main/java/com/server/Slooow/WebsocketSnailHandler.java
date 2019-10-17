@@ -9,6 +9,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.server.Slooow.SnailInGame.SnailType;
 
 //Websocket que maneja todos los mensajes entre cliente servidor
 public class WebsocketSnailHandler extends TextWebSocketHandler {
@@ -53,7 +54,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			jug = game.bucarJugadorConectado(newSession);
 			
 			if (jug.getLifes() != 0) {
-				System.out.println("Creando sala");
+				jug.restartSnail();
 				game.createSingleRoom(post.roomName, jug, "mapa1");
 			}
 
@@ -150,6 +151,20 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			jug = game.bucarJugadorConectado(newSession);
 			jug.mySnail.updateMovement(post.isSprinting, post.useObject);
 			break;
+
+		case "CHOOSESNAIL":
+			
+			switch(post.chooseSnail){
+				case "normal":
+					jug = game.bucarJugadorConectado(newSession);
+					jug.snailType = SnailType.NORMAL;
+				break;
+				default:
+				
+			}
+
+			break;
+			
 
 		default:
 

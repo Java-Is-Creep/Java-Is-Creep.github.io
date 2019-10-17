@@ -12,6 +12,8 @@ import org.springframework.web.socket.WebSocketSession;
 public class SnailGame {
 	//TODO HashMap de salas del juego
 
+	
+
 
 	// executor para sumar vidas a nuestros jugadores
 	ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -31,6 +33,8 @@ public class SnailGame {
 
 	public SnailGame() {
 		checkLifesTime();
+		PlayerRegistered aux = new PlayerRegistered("a", "a");
+		playerRegistered.putIfAbsent(aux.getName(), aux);
 	}
 
 	public void recoverRegisteredPlayers() {

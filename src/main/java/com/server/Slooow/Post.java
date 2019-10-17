@@ -11,4 +11,5 @@ public class Post {
 	String confirmPass;
 	boolean isSprinting;
 	boolean useObject;
+	String chooseSnail;
 }
