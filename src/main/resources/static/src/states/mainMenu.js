@@ -75,17 +75,18 @@ Slooow.mainMenuState.prototype = {
         textUsername.scale.setTo(0.5, 0.5)
 
         // Boton empezar juego solo
-        buttonStartSolo = game.add.button(game.world.centerX + 100,
+        buttonStartSolo = game.add.button(game.world.centerX + 300,
             game.world.centerY - 50, 'button', actionOnClickStartSolo, this,
             0, 0, 0)
         buttonStartSolo.anchor.set(0.5)
-        buttonStartSolo.scale.setTo(0.3, 0.3)
+        buttonStartSolo.scale.setTo(0.6, 0.6)
         // Texto empezar juego solo
-        textButtonStartSolo = game.add.text(game.world.centerX + 100,
+        textButtonStartSolo = game.add.text(game.world.centerX + 300,
             game.world.centerY - 50, game.global.activeLanguage.SoloMode, style)
         textButtonStartSolo.anchor.set(0.5)
-        textButtonStartSolo.scale.setTo(0.5, 0.5)
+        //textButtonStartSolo.scale.setTo(0.7, 0.7)
 
+        /*
         //Boton empezar maraton
         buttonStartMarathon = game.add.button(game.world.centerX + 300,
             game.world.centerY - 50, 'button', actionOnClickStartMarathon, this,
@@ -97,19 +98,21 @@ Slooow.mainMenuState.prototype = {
             game.world.centerY - 50, game.global.activeLanguage.Marathon, style)
         textButtonStartMarathon.anchor.set(0.5)
         textButtonStartMarathon.scale.setTo(0.5, 0.5)
+            */
 
         //Boton empezar multi online
-        buttonStartMultiOnline = game.add.button(game.world.centerX + 100,
+        buttonStartMultiOnline = game.add.button(game.world.centerX + 300,
             game.world.centerY + 100, 'button', actionOnClickStartOnline, this,
             0, 0, 0)
         buttonStartMultiOnline.anchor.set(0.5)
-        buttonStartMultiOnline.scale.setTo(0.3, 0.3)
+        buttonStartMultiOnline.scale.setTo(0.6, 0.6)
         //Texto empezar multi online
-        textButtonStartMultiOnline = game.add.text(game.world.centerX + 100,
+        textButtonStartMultiOnline = game.add.text(game.world.centerX + 300,
             game.world.centerY + 100, game.global.activeLanguage.Online, style)
         textButtonStartMultiOnline.anchor.set(0.5)
-        textButtonStartMultiOnline.scale.setTo(0.5, 0.5)
+        //textButtonStartMultiOnline.scale.setTo(0.7, 0.7)
 
+        /*
         //Boton empezar multi local
         buttonStartMultiLocal = game.add.button(game.world.centerX + 300,
             game.world.centerY + 100, 'button', actionOnClickStartLocal, this,
@@ -121,6 +124,7 @@ Slooow.mainMenuState.prototype = {
             game.world.centerY + 100, game.global.activeLanguage.Local, style)
         textButtonStartMultiLocal.anchor.set(0.5)
         textButtonStartMultiLocal.scale.setTo(0.5, 0.5)
+        */
 
         //Boton tienda
         buttonShop = game.add.button(game.world.centerX - 300,
@@ -128,6 +132,18 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonShop.anchor.set(0.5)
         buttonShop.scale.setTo(0.3, 0.3)
+
+        // Boton empezar records
+        buttonStartRecords = game.add.button(game.world.centerX,
+            game.world.centerY, 'button', actionOnClickStartRecords, this,
+            0, 0, 0)
+        buttonStartRecords.anchor.set(0.5)
+        buttonStartRecords.scale.setTo(0.3, 0.3)
+        // Texto empezar records
+        textButtonStartRecords = game.add.text(game.world.centerX,
+            game.world.centerY, game.global.activeLanguage.Records, style)
+        textButtonStartRecords.anchor.set(0.5)
+        textButtonStartRecords.scale.setTo(0.5, 0.5)
 
         //Boton instagram
         buttonInstagram = game.add.button(game.world.centerX - 150,
@@ -217,20 +233,26 @@ Slooow.mainMenuState.prototype = {
             game.state.start('menuSoloAndMultiLocalState')
         }
 
+        /*
         function actionOnClickStartMarathon() {
             //game.state.start('marathonState')
-        }
+        }*/
 
         function actionOnClickStartOnline() {
             game.state.start('menuMultiOnlineState')
         }
 
+        /*
         function actionOnClickStartLocal() {
             //game.state.start('localState')
-        }
+        }*/
 
         function actionOnClickStartShop() {
             game.state.start('shopState')
+        }
+
+        function actionOnClickStartRecords() {
+            game.state.start('recordsState')
         }
 
         function actionOnClickInstagram() {
@@ -266,22 +288,30 @@ Slooow.mainMenuState.prototype = {
                 optionsClicked = true
 
                 textTitle.alpha = minAlpha;
+                buttonTittle.alpha = minAlpha;
+
+                buttonUser.alpha = minAlpha
+                textUsername.alpha = minAlpha
 
                 buttonStartSolo.alpha = minAlpha
                 buttonStartSolo.inputEnabled = false;
                 textButtonStartSolo.alpha = minAlpha
         
-                buttonStartMarathon.alpha = minAlpha
-                buttonStartMarathon.inputEnabled = false
-                textButtonStartMarathon.alpha = minAlpha
+                //buttonStartMarathon.alpha = minAlpha
+                //buttonStartMarathon.inputEnabled = false
+                //textButtonStartMarathon.alpha = minAlpha
+
+                buttonStartRecords.alpha = minAlpha
+                buttonStartRecords.inputEnabled = false
+                textButtonStartRecords.alpha = minAlpha
 
                 buttonStartMultiOnline.alpha = minAlpha
                 buttonStartMultiOnline.inputEnabled = false
                 textButtonStartMultiOnline.alpha = minAlpha
 
-                buttonStartMultiLocal.alpha = minAlpha
-                buttonStartMultiLocal.inputEnabled = false
-                textButtonStartMultiLocal.alpha = minAlpha
+                //buttonStartMultiLocal.alpha = minAlpha
+                //buttonStartMultiLocal.inputEnabled = false
+                //textButtonStartMultiLocal.alpha = minAlpha
 
                 buttonShop.alpha = minAlpha
                 buttonShop.inputEnabled = false
@@ -317,22 +347,30 @@ Slooow.mainMenuState.prototype = {
                 optionsClicked = false
 
                 textTitle.alpha = maxAlpha;
+                buttonTittle.alpha = maxAlpha;
+
+                buttonUser.alpha = maxAlpha
+                textUsername.alpha = maxAlpha
 
                 buttonStartSolo.alpha = maxAlpha
                 buttonStartSolo.inputEnabled = true;
                 textButtonStartSolo.alpha = maxAlpha
         
-                buttonStartMarathon.alpha = maxAlpha
-                buttonStartMarathon.inputEnabled = true
-                textButtonStartMarathon.alpha = maxAlpha
+               // buttonStartMarathon.alpha = maxAlpha
+               // buttonStartMarathon.inputEnabled = true
+               // textButtonStartMarathon.alpha = maxAlpha
+
+                buttonStartRecords.alpha = maxAlpha
+                buttonStartRecords.inputEnabled = true
+                textButtonStartRecords.alpha = maxAlpha
 
                 buttonStartMultiOnline.alpha = maxAlpha
                 buttonStartMultiOnline.inputEnabled = true
                 textButtonStartMultiOnline.alpha = maxAlpha
 
-                buttonStartMultiLocal.alpha = maxAlpha
-                buttonStartMultiLocal.inputEnabled = true
-                textButtonStartMultiLocal.alpha = maxAlpha
+                //buttonStartMultiLocal.alpha = maxAlpha
+               // buttonStartMultiLocal.inputEnabled = true
+                //textButtonStartMultiLocal.alpha = maxAlpha
 
                 buttonShop.alpha = maxAlpha
                 buttonShop.inputEnabled = true
@@ -404,7 +442,8 @@ Slooow.mainMenuState.prototype = {
                 this.language = 'eng'
                 game.global.activeLanguage = game.global.languageData.eng
             }
-            textButtonStartMarathon.setText(game.global.activeLanguage.Marathon);
+            textButtonStartRecords.setText(game.global.activeLanguage.Records)
+            //textButtonStartMarathon.setText(game.global.activeLanguage.Marathon);
         }
     },
 

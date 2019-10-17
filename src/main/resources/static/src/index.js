@@ -93,6 +93,7 @@ window.onload = function () {
         winner: false,
         time: null,
         maxTime: null,
+        record : null,
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
@@ -376,6 +377,7 @@ window.onload = function () {
                 game.global.winner = JSON.parse(msg.winner)
                 game.global.myTime = JSON.parse(msg.time)
                 game.global.maxTime = JSON.parse(msg.maxTime)
+                game.global.myRecord = JSON.parse(msg.record)
                 game.state.start('gameOverState')
                 break
             case 'GROUNDCOLLISION':
@@ -572,6 +574,7 @@ window.onload = function () {
     this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
     this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
     this.game.state.add('shopState', Slooow.shopState);
+    this.game.state.add('recordsState', Slooow.recordsState);
 
     this.game.state.start('bootState');
 }

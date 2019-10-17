@@ -29,8 +29,9 @@
         "SearchRoom" : "Buscar sala",
         "Time" : "Tiempo",
         "Max Time" : "Tiempo max",
-        "YourRecord" : "Record",
-        "MapRecord" : "Record del Mapa"
+        "YourRecord" : "Récord",
+        "MapRecord" : "Récord del Mapa",
+        "Records" : "Tus récords"
     },
     
     "eng" : {
@@ -64,7 +65,8 @@
         "Time" : "Time",
         "MaxTime" : "Max time",
         "YourRecord" : "Record",
-        "MapRecord" : "Map Record"
+        "MapRecord" : "Map Record",
+        "Records" : "Your records"
         }
     
 }
