@@ -74,6 +74,8 @@ public class SinglePlayerRoom extends Room {
 		msgMap.addProperty("width", widthArray);
 		msgMap.addProperty("myType", myTypeArray);
 		msgMap.addProperty("direction", WindDirArray);
+		msgMap.addProperty("roomType", "SINGLE");
+		
 		try {
 			owner.sessionLock.lock();
 			owner.getSession().sendMessage(new TextMessage(msgMap.toString()));
@@ -370,6 +372,12 @@ public class SinglePlayerRoom extends Room {
 	public void tick() {
 		Runnable task = () -> {
 			acummulativeTime += TICKTIME;
+
+			if(!game.findRegistered(owner).isConnected()){
+				System.out.println("LA SALA SE APAGO DEBIDO A QUE NO QUEDAN JUGADORES");
+				executor.shutdown();
+				destroyRoom();
+			}
 
 			updateDoors();
 			updateTrapDoor();

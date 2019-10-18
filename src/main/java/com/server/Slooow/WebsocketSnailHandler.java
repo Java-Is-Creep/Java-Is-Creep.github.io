@@ -24,8 +24,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 	// Instancia del juego completo
 	SnailGame game = new SnailGame();
 
-	
-	/** 
+	/**
 	 * @param session
 	 * @param message
 	 * @throws Exception
@@ -59,13 +58,62 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 * comienza la partida también
 		 */
 		case "SINGLEPLAYER":
-		
+
 			jug = game.bucarJugadorConectado(newSession);
-			
+
 			if (jug.getLifes() != 0) {
 				jug.restartSnail();
 				game.singlePlayerRoomMaps.get(post.roomName).startRoom();
 			}
+
+			break;
+		case "MULTIPLAYER":
+			game.multiPlayerRoomMap.get(post.roomName).addPlayerReady();
+			break;
+
+		case "SEARCHNAMEROOM":
+			jug = game.bucarJugadorConectado(newSession);
+			MultiplayerRoom roomAux = game.multiPlayerRoomMap.get(post.roomName);
+			if(roomAux != null){
+				roomAux.anadirJugador(jug);
+			} else {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "MULTIROOMSFULL");
+
+				lockSession.lock();
+				jug.getSession().sendMessage(new TextMessage(msg.toString()));
+				lockSession.unlock();
+			}
+			
+			break;
+		case "SEARCHRANDOMROOM":
+			jug = game.bucarJugadorConectado(newSession);
+			float matchPoints = jug.matchMakingPunt();
+			double diff = 1000000000;
+			MultiplayerRoom multiAux = null;
+
+			game.multiPlayerLock.lock();
+			for (MultiplayerRoom multi : game.multiPlayerRoomMap.values()) {
+				if (multi.isFull.get()) {
+					double preDiff = Math.abs((double) (multi.getMatchmakingPoints() - matchPoints));
+					if (preDiff < diff) {
+						diff = preDiff;
+						multiAux = multi;
+					}
+				}
+			}
+			if (multiAux != null) {
+				multiAux.anadirJugador(jug);
+			} else {
+				JsonObject msg = new JsonObject();
+				msg.addProperty("event", "MULTIROOMSFULL");
+
+				lockSession.lock();
+				jug.getSession().sendMessage(new TextMessage(msg.toString()));
+				lockSession.unlock();
+
+			}
+			game.multiPlayerLock.unlock();
 
 			break;
 		case "LOGIN":
@@ -86,10 +134,10 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 						System.out.println("NO LOGGEADO");
 					}
 
-				} 
+				}
 			} else {
 				System.out.println("No cotiene la clave");
-				for(String player : game.playerRegistered.keySet()){
+				for (String player : game.playerRegistered.keySet()) {
 					System.out.println(" Jugador: " + player);
 				}
 			}
@@ -102,7 +150,9 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				msg.addProperty("conectionStatus", false);
 				System.out.println("NO TE HAS LOGEADO");
 			}
+			lockSession.lock();
 			newSession.sendMessage(new TextMessage(msg.toString()));
+			lockSession.unlock();
 
 			break;
 
@@ -119,7 +169,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					registered = true;
 					newPlayer.setConnected(true);
 					System.out.println("CuentaCreada");
-					for(String player : game.playerRegistered.keySet()){
+					for (String player : game.playerRegistered.keySet()) {
 						System.out.println(" Jugador: " + player);
 					}
 				}
@@ -163,158 +213,159 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 		case "CHOOSESNAIL":
 			jug = game.bucarJugadorConectado(newSession);
-			switch(post.chooseSnail){
-				case "NORMAL":
-					jug.snailType = SnailType.NORMAL;
-					break;
-				case "TANK":
-					jug.snailType = SnailType.TANK;
-					break;
-				case "BAGUETTE":
-					jug.snailType = SnailType.BAGUETTE;
-					break;
+			switch (post.chooseSnail) {
+			case "NORMAL":
+				jug.snailType = SnailType.NORMAL;
+				break;
+			case "TANK":
+				jug.snailType = SnailType.TANK;
+				break;
+			case "BAGUETTE":
+				jug.snailType = SnailType.BAGUETTE;
+				break;
 
-				case "MIAU":
-					jug.snailType = SnailType.MIAU;
-					break;
+			case "MIAU":
+				jug.snailType = SnailType.MIAU;
+				break;
 
-				case "MERCA":
-					jug.snailType = SnailType.MERCA;
-					break;
+			case "MERCA":
+				jug.snailType = SnailType.MERCA;
+				break;
 
-				case "SEA":
-					jug.snailType = SnailType.SEA;
-					break;
+			case "SEA":
+				jug.snailType = SnailType.SEA;
+				break;
 
-				case "ROBA":
-					jug.snailType = SnailType.ROBA;
-					break;
+			case "ROBA":
+				jug.snailType = SnailType.ROBA;
+				break;
 
-				case "IRIS":
-					jug.snailType = SnailType.IRIS;
-					break;
-				default:
+			case "IRIS":
+				jug.snailType = SnailType.IRIS;
+				break;
+			default:
 			}
 
 			break;
 
-			case "ENTERLOBBY":
-				jug = game.bucarJugadorConectado(newSession);
-				game.createSingleRoom(post.roomName, jug, post.mapName);
-				JsonObject msg3 = new JsonObject();
-				msg3.addProperty("event", "ENTERLOBBY");
-				msg3.addProperty("snail", jug.snailType.toString());
+		case "ENTERLOBBYMULTI":
+			jug = game.bucarJugadorConectado(newSession);
+			game.createMultiRoom(post.roomName, jug, post.mapName);
+			break;
+
+		case "ENTERLOBBY":
+			jug = game.bucarJugadorConectado(newSession);
+			game.createSingleRoom(post.roomName, jug, post.mapName);
+			JsonObject msg3 = new JsonObject();
+			msg3.addProperty("event", "ENTERLOBBY");
+			msg3.addProperty("snail", jug.snailType.toString());
+			jug.sessionLock.lock();
+			newSession.sendMessage(new TextMessage(msg3.toString()));
+			jug.sessionLock.unlock();
+			break;
+
+		case "MYRECORDS":
+
+			jug = game.bucarJugadorConectado(newSession);
+			PlayerRegistered play = game.findRegistered(jug);
+			ConcurrentHashMap<String, Integer> recordsAux = play.records;
+			ArrayList<String> name = new ArrayList<>();
+			ArrayList<Integer> time = new ArrayList<>();
+
+			for (String mapName : recordsAux.keySet()) {
+				name.add(mapName);
+				time.add(recordsAux.get(mapName));
+			}
+
+			Gson gson = new Gson();
+			String namesArray = gson.toJson(name);
+			String timeArray = gson.toJson(time);
+
+			JsonObject msgMap = new JsonObject();
+			msgMap.addProperty("event", "MYRECORDS");
+			msgMap.addProperty("nameMap", namesArray);
+			msgMap.addProperty("myTime", timeArray);
+			try {
 				jug.sessionLock.lock();
-				newSession.sendMessage(new TextMessage(msg3.toString()));
-				jug.sessionLock.unlock();
-			break;
-
-			case "MYRECORDS":
-				
-				jug = game.bucarJugadorConectado(newSession);
-				PlayerRegistered play = game.findRegistered(jug);
-				ConcurrentHashMap<String,Integer> recordsAux = play.records;
-				ArrayList<String> name = new ArrayList<>();
-				ArrayList<Integer> time = new ArrayList<>();
-
-				for(String mapName : recordsAux.keySet()){
-					name.add(mapName);
-					time.add(recordsAux.get(mapName));
-				}
-
-				Gson gson = new Gson();
-				String namesArray = gson.toJson(name);
-				String timeArray = gson.toJson(time);
-
-				JsonObject msgMap = new JsonObject();
-				msgMap.addProperty("event", "MYRECORDS");
-				msgMap.addProperty("nameMap", namesArray);
-				msgMap.addProperty("myTime", timeArray);
-				try {
-					jug.sessionLock.lock();
-					jug.getSession().sendMessage(new TextMessage(msgMap.toString()));
-				} catch (IOException e) {
+				jug.getSession().sendMessage(new TextMessage(msgMap.toString()));
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				} finally {
+			} finally {
 				jug.sessionLock.unlock();
-				}
+			}
 			break;
 
-			case "RECORDS":
-				jug = game.bucarJugadorConectado(newSession);
-				ConcurrentHashMap<String,Integer> recordsAux2 = jug.records;
-				game.generalRecords.lock();
-				ArrayList<RecordInMap> recordsInMap = game.records.get(post.mapName);
-				ArrayList<String> name2 = new ArrayList<>();
-				ArrayList<Integer> time2 = new ArrayList<>();
-				for(RecordInMap record : recordsInMap){
-					name2.add(record.playerName);
-					time2.add(record.time);
-				}
-				game.generalRecords.unlock();
+		case "RECORDS":
+			jug = game.bucarJugadorConectado(newSession);
+			ConcurrentHashMap<String, Integer> recordsAux2 = jug.records;
+			game.generalRecords.lock();
+			ArrayList<RecordInMap> recordsInMap = game.records.get(post.mapName);
+			ArrayList<String> name2 = new ArrayList<>();
+			ArrayList<Integer> time2 = new ArrayList<>();
+			for (RecordInMap record : recordsInMap) {
+				name2.add(record.playerName);
+				time2.add(record.time);
+			}
+			game.generalRecords.unlock();
 
-				Gson gson2 = new Gson();
-				String names2Array = gson2.toJson(name2);
-				String time2Array = gson2.toJson(time2);
+			Gson gson2 = new Gson();
+			String names2Array = gson2.toJson(name2);
+			String time2Array = gson2.toJson(time2);
 
-				JsonObject msgMap2 = new JsonObject();
-				msgMap2.addProperty("event", "RECORDS");
-				msgMap2.addProperty("playerName", names2Array);
-				msgMap2.addProperty("time", time2Array);
-				msgMap2.addProperty("mapName", post.mapName);
-				if(recordsAux2.get(post.mapName) != null){
-					msgMap2.addProperty("myTime", recordsAux2.get(post.mapName));
+			JsonObject msgMap2 = new JsonObject();
+			msgMap2.addProperty("event", "RECORDS");
+			msgMap2.addProperty("playerName", names2Array);
+			msgMap2.addProperty("time", time2Array);
+			msgMap2.addProperty("mapName", post.mapName);
+			if (recordsAux2.get(post.mapName) != null) {
+				msgMap2.addProperty("myTime", recordsAux2.get(post.mapName));
+			} else {
+				msgMap2.addProperty("myTime", 0);
+			}
+
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgMap2.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				jug.sessionLock.unlock();
+			}
+
+			break;
+
+		case "SHOP":
+			playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
+			ArrayList<String> owned = new ArrayList<>();
+			ArrayList<String> notOwned = new ArrayList<>();
+			for (SnailType snail : playerR.mySnails.keySet()) {
+				if (playerR.mySnails.get(snail)) {
+					owned.add(snail.toString());
 				} else {
-					msgMap2.addProperty("myTime", 0);
+					notOwned.add(snail.toString());
 				}
+			}
+			Gson gsonOwn = new Gson();
+			String ownedArray = gsonOwn.toJson(owned);
+			String notOwnedArray = gsonOwn.toJson(notOwned);
 
-				try {
-					jug.sessionLock.lock();
-					jug.getSession().sendMessage(new TextMessage(msgMap2.toString()));
-				} catch (IOException e) {
+			JsonObject msgShop = new JsonObject();
+			msgShop.addProperty("event", "SHOPENTER");
+			msgShop.addProperty("owned", ownedArray);
+			msgShop.addProperty("notOwned", notOwnedArray);
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				} finally {
+			} finally {
 				jug.sessionLock.unlock();
-				}
-
-
-			break;
-
-			case "SHOP":
-				playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
-				ArrayList<String> owned = new ArrayList<>();
-				ArrayList<String> notOwned = new ArrayList<>();
-				for (SnailType snail : playerR.mySnails.keySet()){
-					if(playerR.mySnails.get(snail)){
-						owned.add(snail.toString());
-					} else {
-						notOwned.add(snail.toString());
-					}
-				}
-				Gson gsonOwn = new Gson();
-				String ownedArray = gsonOwn.toJson(owned);
-				String notOwnedArray = gsonOwn.toJson(notOwned);
-
-				JsonObject msgShop = new JsonObject();
-				msgShop.addProperty("event", "SHOPENTER");
-				msgShop.addProperty("owned", ownedArray);
-				msgShop.addProperty("notOwned", notOwnedArray);
-				try {
-					jug.sessionLock.lock();
-					jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
-				} catch (IOException e) {
-				// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					jug.sessionLock.unlock();
-				}
+			}
 
 			break;
-
-		
-			
 
 		default:
 
@@ -336,8 +387,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 */
 	}
 
-	
-	/** 
+	/**
 	 * @param session
 	 * @throws Exception
 	 */
@@ -354,8 +404,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 	}
 
-	
-	/** 
+	/**
 	 * @param session
 	 * @param status
 	 * @throws Exception
