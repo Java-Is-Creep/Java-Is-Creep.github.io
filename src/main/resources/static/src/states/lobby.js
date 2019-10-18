@@ -134,7 +134,6 @@ Slooow.lobbyState.prototype = {
             let msg3 = {
                 event: 'CHOOSECHARSNAIL',
             }
-            console.log("mando esta mierda")
             game.global.socket.send(JSON.stringify(msg3))
         }
 	},

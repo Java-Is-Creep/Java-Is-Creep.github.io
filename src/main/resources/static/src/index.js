@@ -653,7 +653,6 @@ window.onload = function () {
                 for (var j = 0; j < notOwnedAux2.length; j++){
                     game.global.notOwned[j] = notOwnedAux2[j]
                 }
-                this.console.log("llega esta mierda")
                 game.state.start('chooseCharacterState')
         }   
 

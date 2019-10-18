@@ -343,7 +343,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				} finally {
 					jug.sessionLock.unlock();
 				}
-				System.out.println("He mandado el mensaje");
 			break;
 		
 			
