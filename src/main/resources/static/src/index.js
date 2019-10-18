@@ -67,7 +67,6 @@ window.onload = function () {
         FPS: 60,
         DEBUG_MODE: false,
         player: null,
-        mapObjects: [],
         mapDrawn: false,
         username: '',
         password: '',
@@ -90,14 +89,19 @@ window.onload = function () {
         arrayWinds: [],
         finishObject: new Object,
         player: new this.Object(),
+        //Cosas del game over
         winner: false,
         time: null,
         maxTime: null,
         record : null,
+        puntuationGameOver : null,
+        //Cosas visuales jugador
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
         degreesToRotateSlope: 0,
+        maxStamina : 0,
+        //PowerUps
         wingPowerUp: null,
         shieldPowerUp: null,
         staminaPowerUp: null,
@@ -108,15 +112,16 @@ window.onload = function () {
         inkPowerUp: null,
         speedPowerUp: null,
         hasPowerUp: false,
+        //Saber si los tienes o no
         owned: [],
         notOwned: [],
+        //Elegir caracol y mapa
         snailChosen: null,
         mapChosen: null,
+        //Para records
         nameMapRecords: [],
         myTimes: [],
-        style: null,
-        maxStamina : 0,
-        puntuationGameOver : null
+        style: null
     }
 
     // Conexiones
@@ -638,6 +643,23 @@ window.onload = function () {
                 
                 game.state.start('shopState')
                 break
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+            case 'TICKMULTI':  
+                break
+            case 'SNAILUPDATEMULTI':
+                break   
+            case 'FINISHMULTI':
+                break
+            case 'WAITINGROOMSTART':
+                break
+            case 'SLOPECOLLISIONMULTI':
+                break
+            case 'WALLCOLLISIONMULTI':
+                break
+            case 'GROUNDCOLLISIONMULTI':
+                break                     
         }   
 
 

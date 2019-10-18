@@ -34,7 +34,9 @@
         "Records" : "Tus récords",
         "Trophies": "Trofeos",
         "Points": "Puntuación",
-        "NoPlayed": "No has jugado el mapa"
+        "NoPlayed": "No has jugado el mapa",
+        "OnlineMenuText1": "Elige una opción",
+        "RoomName": "Nombre de la sala"
     },
     
     "eng" : {
@@ -72,7 +74,9 @@
         "Records" : "Your records",
         "Trophies": "Trophies",
         "Points": "Puntuation",
-        "NoPlayed": "Map not played"
+        "NoPlayed": "Map not played",
+        "OnlineMenuText1": "Choose an option",
+        "RoomName": "Room name"
         }
     
 }
