@@ -58,7 +58,7 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonTittle.anchor.set(0.5)
         buttonTittle.scale.setTo(1, 0.5)
-        buttonTittle.inputEnable = false;
+        buttonTittle.inputEnabled = false;
         textTitle = game.add.text(game.world.centerX,
             50, 'SLOOOW', styleTitle)
         textTitle.anchor.set(0.5)
@@ -71,7 +71,7 @@ Slooow.mainMenuState.prototype = {
             0, 0, 0)
         buttonUser.anchor.set(0.5)
         buttonUser.scale.setTo(0.6, 0.35)
-        buttonUser.inputEnable = false;
+        buttonUser.inputEnabled = false;
         textUsername = game.add.text(240,
             40, game.global.username, game.global.style)
         textUsername.anchor.set(0.5)

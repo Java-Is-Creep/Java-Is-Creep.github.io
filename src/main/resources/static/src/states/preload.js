@@ -30,6 +30,7 @@ Slooow.preloadState.prototype = {
 		// TODO Fondo pradera												
 		// Fondo cocina							
 		game.load.image('cocinaBg', './assets/img/bg/fondoCocinaColor.jpg');
+		game.load.image('cocinaBg2', './assets/img/bg/fondoCocinaColorSat3.png');
 		// TODO Fondo Hielo																			
 				
 		//////////////////////////////////////////////////////////////////////////////////////////////////

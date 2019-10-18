@@ -103,16 +103,16 @@ Slooow.gameOverState.prototype = {
         textMyTime.anchor.set(0.5)
         textMyTime.scale.setTo(0.7,0.7)
 
-        //Texto Map Record
-		textTime = game.add.text(game.world.centerX + 110,
-            game.world.centerY - 110, game.global.activeLanguage.MapRecord, game.global.style)
+        //Texto Puntuation
+		textTime = game.add.text(game.world.centerX + 120,
+            game.world.centerY - 110, game.global.activeLanguage.Points, game.global.style)
         textTime.scale.setTo(0.5,0.5)
         textTime.anchor.set(0.5)
 
-        //number Map Record
-        this.mapRecordString = calculateTime(game.global.mapRecord)
+        //number puntuation
+        //this.mapRecordString = calculateTime(game.global.mapRecord)
         textMyTime = game.add.text(game.world.centerX + 120,
-            game.world.centerY - 60,  this.yourRecordString, game.global.style)
+            game.world.centerY - 60,  game.global.puntuationGameOver, game.global.style)
         textMyTime.anchor.set(0.5)
         textMyTime.scale.setTo(0.7,0.7)
 
