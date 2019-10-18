@@ -57,7 +57,7 @@ window.onload = function () {
     //launchFullScreen(document.documentElement); // the whole page
 
 
-
+    var firstFrame = 0;
 
 
     //Variables globales compartidas entre escenas
@@ -67,7 +67,6 @@ window.onload = function () {
         FPS: 60,
         DEBUG_MODE: false,
         player: null,
-        mapObjects: [],
         mapDrawn: false,
         username: '',
         password: '',
@@ -90,14 +89,30 @@ window.onload = function () {
         arrayWinds: [],
         finishObject: new Object,
         player: new this.Object(),
+        //Cosas del game over
         winner: false,
         time: null,
         maxTime: null,
         record : null,
+        puntuationGameOver : null,
+        //Cosas visuales jugador (de solo)
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
         degreesToRotateSlope: 0,
+        maxStamina : 0,
+        //Cosas visuales jugador (multi)
+        myPlayerId: null,
+        playersMulti: [],
+        snailChosenMulti: [],
+        haveToRotateToWallMulti: [],
+        haveToRotateToGroundMulti: [],
+        haveToRotateToSlopeMulti: [],
+        degreesToRotateSlopeMulti: [],
+        arrayPositionsMulti:[],
+        arrayTimesMulti: [],
+        roomNameMulti : null,
+        //PowerUps
         wingPowerUp: null,
         shieldPowerUp: null,
         staminaPowerUp: null,
@@ -108,15 +123,16 @@ window.onload = function () {
         inkPowerUp: null,
         speedPowerUp: null,
         hasPowerUp: false,
+        //Saber si los tienes o no
         owned: [],
         notOwned: [],
+        //Elegir caracol y mapa
         snailChosen: null,
         mapChosen: null,
+        //Para records
         nameMapRecords: [],
         myTimes: [],
-        style: null,
-        maxStamina : 0,
-        puntuationGameOver : null
+        style: null
     }
 
     // Conexiones
@@ -172,6 +188,8 @@ window.onload = function () {
                 var arrayHeight = JSON.parse(msg.height)
                 var arrayWidth = JSON.parse(msg.width)
                 var type = JSON.parse(msg.myType)
+
+                var roomType = JSON.parse(msg.roomType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
@@ -307,6 +325,12 @@ window.onload = function () {
                             break
                     }
                 }
+                
+                if (roomType == 'SINGLE'){
+                    game.state.start('singlePlayerState')
+                } else if (roomType == 'MULTI'){
+                    this.game.state.start('multiplayerState')
+                }
                 game.state.start('singlePlayerState')
                 break;
 
@@ -385,7 +409,6 @@ window.onload = function () {
                 game.global.myTime = JSON.parse(msg.time)
                 game.global.maxTime = JSON.parse(msg.maxTime)
                 game.global.myRecord = JSON.parse(msg.record)
-                //PUNTOS RECOGIDOS, AHORA HAY QUE PRINTEARLOS EN EL GAMEOVER !!!!!!!!!!!!!!!!!!
                 var puntos = JSON.parse(msg.points)
                 this.game.global.puntuationGameOver = puntos
                 game.state.start('gameOverState')
@@ -639,6 +662,108 @@ window.onload = function () {
                 
                 game.state.start('shopState')
                 break
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+            case 'TICKMULTI':
+                //Array de las posiciones de todos los jugadores
+                var arrayPosX = JSON.parse(msg.posX)
+                var arrayPosY = JSON.parse(msg.posY) 
+                //Stamina del jugador
+                var arrayStamina = JSON.parse(msg.stamina)
+                //Nombres de los jugadores
+                var namePlayers = JSON.parse(msg.name) 
+
+
+                 if (firstFrame == 0){
+                     for (var i = 0; i< namePlayers.length; i++){
+                         if (namePlayers[i] == this.game.global.username){
+                            this.game.global.myPlayerId = i
+                            this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
+                         }
+                     } 
+                }
+                //Actualizamos las posiciones de todos los caracoles
+                for (var i = 0; i< arrayPosX.length; i++){
+                    this.game.global.playersMulti[i].sprite.x = Math.floor(arrayPosX[i])
+                    this.game.global.playersMulti[i].sprite.y = game.world.height - Math.floor(arrayPosY[i]) - 10
+                }
+                //Actualizamos la stamina de tu jugador
+                var scale = arrayStamina[this.game.global.myPlayerId] * 0.5 / game.global.maxStamina
+                game.global.playersMulti[this.game.global.myPlayerId].stamina2.scale.setTo(scale, 0.45)
+
+                //Actualizar barra de progreso del jugador (MAS ADELANTE TODOS)
+                var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
+                var scaleProgress = posProgress/game.global.finishObject.x
+                game.global.playersMulti[this.game.global.myPlayerId].progressBar2.scale.setTo(scaleProgress, 1)
+                break
+            case 'SNAILUPDATEMULTI':
+                var runOutOfStamina = JSON.parse(msg.runOutStamina)
+                var recoverStamina = JSON.parse(msg.recoverStamina)
+                var idPlayer = JSON.parse(msg.id)
+
+                if (runOutOfStamina){
+                    //Animacion de cansarse
+                    game.global.playersMulti[idPlayer].sprite.animations.play('tired');
+                } else
+                if (recoverStamina){
+                    //Animacion de andar normal
+                    game.global.playersMulti[idPlayer].sprite.animations.play('walk');
+                }
+                break   
+            case 'FINISHMULTI':
+                var myTime = JSON.parse(msg.time)
+                var myRecord = JSON.parse(msg.record)
+                var myPoints = JSON.parse(msg.points)
+                var arrayPositionNames = JSON.parse(msg.positionName) 
+                var arrayPositionTimes = JSON.parse(msg.positionTime)
+
+                game.global.myTime = myTime
+                game.global.myRecord = myRecord
+                game.global.puntuationGameOver = myPoints
+                game.global.arrayPositionsMulti =arrayPositionNames
+                game.global.arrayTimesMulti = arrayPositionTimes
+                game.state.start('gameOverState')
+                break
+            case 'WAITINGROOMSTART':
+                var roomName = JSON.parse(msg.roomName)
+                this.game.global.roomNameMulti = roomName
+                this.game.state.start('lobbyMultiState')
+                break
+
+            case 'SLOPECOLLISIONMULTI':
+                var idPlayer = JSON.parse(msg.id) 
+                var degreesToRotate = JSON.parse(msg.degrees)
+
+                this.game.global.degreesToRotateSlopeMulti[idPlayer] = degreesToRotate
+                this.game.global.haveToRotateToGroundMulti[idPlayer] = false
+                game.global.haveToRotateToSlopeMulti[idPlayer] = true
+                this.game.global.haveToRotateToWallMulti[idPlayer] = false
+                break
+
+            case 'WALLCOLLISIONMULTI':
+                var idPlayer = JSON.parse(msg.id) 
+
+                this.game.global.haveToRotateToGroundMulti[idPlayer] = false
+                game.global.haveToRotateToSlopeMulti[idPlayer] = false
+                this.game.global.haveToRotateToWallMulti[idPlayer] = true
+                break
+
+            case 'GROUNDCOLLISIONMULTI':
+                var idPlayer = JSON.parse(msg.id) 
+                this.game.global.haveToRotateToGroundMulti[idPlayer] = true
+                game.global.haveToRotateToSlopeMulti[idPlayer] = false
+                this.game.global.haveToRotateToWallMulti[idPlayer] = false
+                break
+
+            case 'PLAYERENTER':
+                var namePlayer = JSON.parse(msg.name)    
+                break
+            case 'PLAYERLEFT':
+                var namePlayer = JSON.parse(msg.name)   
+                break 
+            case 'MULTIROOMSFULL':
+                break   
         }   
 
 
@@ -655,6 +780,8 @@ window.onload = function () {
     this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
     this.game.state.add('marathonState', Slooow.marathonState);
     this.game.state.add('lobbyState', Slooow.lobbyState);
+    this.game.state.add('lobbyMultiState', Slooow.lobbyMultiState);
+    this.game.state.add('multiplayerState', Slooow.multiplayerState);
     this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
     this.game.state.add('gameOverState', Slooow.gameOverState);
     this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);

@@ -35,7 +35,9 @@
         "Trophies": "Trofeos",
         "Points": "Puntuación",
         "NoPlayed": "No has jugado el mapa",
-        "LostCon" : "Has perdido la conexión con el servidor.\nPor favor, recarga la página"
+        "LostCon" : "Has perdido la conexión con el servidor.\nPor favor, recarga la página",
+        "OnlineMenuText1": "Elige una opción",
+        "RoomName": "Nombre de la sala"
     },
     
     "eng" : {
@@ -74,7 +76,9 @@
         "Trophies": "Trophies",
         "Points": "Puntuation",
         "NoPlayed": "Map not played",
-        "LostCon" : "You have lost connection with the server.\nPlease, refresh the page."
+        "LostCon" : "You have lost connection with the server.\nPlease, refresh the page.",
+        "OnlineMenuText1": "Choose an option",
+        "RoomName": "Room name"
         }
     
 }
