@@ -207,7 +207,7 @@ public class Room {
 		int acumulativePosY = 400;
 		int groundHeigth = 10;
 		int wallDisplacement = 0;
-		map.addMapObject(new MapGround(160 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		map.addMapObject(new MapGround(160 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 4 * unit;
 		map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
 		acumulativePosY += 5 * unit;
@@ -404,8 +404,8 @@ public class Room {
 		acumulativePosX += 4 * unit;
 		acumulativePosY -= 4 * unit;
 
-		map.addMapObject(new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
-		acumulativePosX += 1 * unit;
+		map.addMapObject(new MapGround(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 3 * unit;
 
 		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1000, 800,
 				TICKTIME, 500, 500);
@@ -468,7 +468,7 @@ public class Room {
 		windArray.add(windAux);
 		map.addMapObject(windAux);
 
-		auxPower = new MapPowerUp(unit, unit, acumulativePosXRedPath + 11 * unit, acumulativePosYNegro + unit / 2,
+		auxPower = new MapPowerUp(unit, unit, acumulativePosXRedPath + 2 * unit, acumulativePosYRedPath + unit / 2,
 				type.POWERUP);
 		map.addMapObject(auxPower);
 
@@ -525,9 +525,9 @@ public class Room {
 
 		acumulativePosY += 2 * unit;
 
-		map.addMapObject(new MapWall(20, 3 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
 
-		acumulativePosY += 3 * unit;
+		acumulativePosY += 4 * unit;
 
 		map.addMapObject(new MapGround(5 * unit, groundHeigth, acumulativePosX-2, acumulativePosY, type.GROUND));
 		acumulativePosX += 3 * unit;

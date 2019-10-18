@@ -12,7 +12,7 @@ public class InkPowerUp extends GenericPowerUp{
     public void usePowerUp(){
         //TO DO:  La sala debe mandar tinta a todos menos a mi
         player.mySnail.setUsingPowerUp(false);
-        player.mySnail.powerUp = null;
+        player.mySnail.powerUpList.removeFirst();
         sendMessage();
         System.out.println("Caracol ha lanzado tinta");
     }

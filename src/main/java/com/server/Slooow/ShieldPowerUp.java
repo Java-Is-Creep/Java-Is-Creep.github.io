@@ -17,7 +17,7 @@ public class ShieldPowerUp extends GenericPowerUp {
     public void usePowerUp(){
         player.mySnail.activateShield();
         player.mySnail.setUsingPowerUp(false);
-        player.mySnail.powerUp = null;
+        player.mySnail.powerUpList.removeFirst();
         sendMessage();
         System.out.println("Caracol protegido");
     }

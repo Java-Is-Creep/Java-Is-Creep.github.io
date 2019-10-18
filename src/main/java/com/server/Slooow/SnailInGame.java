@@ -1,6 +1,7 @@
 package com.server.Slooow;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.google.gson.JsonObject;
@@ -59,6 +60,10 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	public  float MASS ;
 	public  float SPEEDXLOSE ;
 
+	public final int TIMEPROTECTED = 30*10;
+	public int timeProtectedRemaining;
+	public boolean isProtected = false;
+
 	// valores que cambian por power ups
 	public float maxNormalSpeedX;
 	public float maxNormalSpeedY;
@@ -115,7 +120,8 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	protected boolean sendRecoverStamina = false;
 
 	// Variables relacionadas con powerUps
-	GenericPowerUp powerUp = null;
+	
+	LinkedList<GenericPowerUp> powerUpList = new LinkedList<>();
 	Wind wind = null;
 	protected boolean usingPowerUp = false;
 	protected boolean hasShield = false;
@@ -192,6 +198,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		normalAcelerationY = NORMALACELERATIONY;
 		maxAcelerationAceleratingX = ACELERATIONX;
 		maxAcelerationAceleratingY = ACELERATIONY;
+		timeProtectedRemaining = TIMEPROTECTED;
 
 		collider = new SquareCollider(colliderOfsetX, colliderOfsetY, posX, posY);
 	}
@@ -211,14 +218,15 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 
 		maxStamina = MAXSTAMINA;
 		hasBoostStamina = false;
-		powerUp = null;
+		if(powerUpList.size() >0){
+			powerUpList.remove();
+		}
 		mass = MASS;
 	}
 
 	public void usePowerUp() {
-		if (powerUp != null) {
-			powerUp.usePowerUp();
-			powerUp = null;
+		if (powerUpList.size() >0) {
+			powerUpList.getFirst().usePowerUp();
 			usingPowerUp = true;
 		}
 	}
@@ -239,6 +247,14 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
 		 * System.out.println(" acelerationX: " + acelerationX);
 		 */
+
+		 if(isProtected){
+			 timeProtectedRemaining --;
+			 if(timeProtectedRemaining <= 0){
+				isProtected = false;
+				timeProtectedRemaining = TIMEPROTECTED;
+			 }
+		 }
 
 		if(hasPassedDoor){
 			doorTime -= 33;
@@ -275,15 +291,20 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		}
 
 		if (useObject) {
+			System.out.println("Mandar Usando Power Up");
 			if (!usingPowerUp) {
-				if (powerUp != null) {
-					powerUp.usePowerUp();
+				if (powerUpList.size() >0) {
+					powerUpList.getFirst().usePowerUp();
+				} else {
+					System.out.println("No hay power up");
 				}
+			} else {
+				System.out.println("USANDO POWER UP");
 			}
 		}
 
 		if (usingPowerUp) {
-			powerUp.decrementTime();
+			powerUpList.getFirst().decrementTime();
 		}
 
 		if (isOnObstacle) {
@@ -297,10 +318,13 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 							isOnObstacle = false;
 							sendCrashMessage("LOSESHIELD");
 							System.out.println("se pincho pero se protegio con escudo");
-						} else {
+						} if(isProtected){
+							System.out.println("Se estaba recuperando del impacto anterior");
+						}else {
 							spikes.playerCrash();
 							crashObstacle();
 							isOnObstacle = false;
+							isProtected = true;
 							sendCrashMessage("OBSTACLECOLLISION");
 							System.out.println("se pincho ");
 						}
