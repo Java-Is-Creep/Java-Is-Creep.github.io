@@ -346,19 +346,20 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				} else {
 					notOwned.add(snail.toString());
 				}
-			}
-			Gson gsonOwn = new Gson();
-			String ownedArray = gsonOwn.toJson(owned);
-			String notOwnedArray = gsonOwn.toJson(notOwned);
+				Gson gsonOwn = new Gson();
+				String ownedArray = gsonOwn.toJson(owned);
+				String notOwnedArray = gsonOwn.toJson(notOwned);
 
-			JsonObject msgShop = new JsonObject();
-			msgShop.addProperty("event", "SHOPENTER");
-			msgShop.addProperty("owned", ownedArray);
-			msgShop.addProperty("notOwned", notOwnedArray);
-			try {
-				jug.sessionLock.lock();
-				jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
-			} catch (IOException e) {
+				JsonObject msgShop = new JsonObject();
+				msgShop.addProperty("event", "SHOPENTER");
+				msgShop.addProperty("owned", ownedArray);
+				msgShop.addProperty("notOwned", notOwnedArray);
+				msgShop.addProperty("points", jug.getPoints());
+				msgShop.addProperty("money", jug.getCash());
+				try {
+					jug.sessionLock.lock();
+					jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
+				} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
@@ -366,6 +367,38 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			}
 
 			break;
+
+			case "CHOOSECHARSNAIL":
+				playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
+				ArrayList<String> owned2 = new ArrayList<>();
+				ArrayList<String> notOwned2 = new ArrayList<>();
+				for (SnailType snail : playerR.mySnails.keySet()){
+					if(playerR.mySnails.get(snail)){
+						owned2.add(snail.toString());
+					} else {
+						notOwned2.add(snail.toString());
+					}
+				}
+				Gson gsonOwn2 = new Gson();
+				String ownedArray2 = gsonOwn2.toJson(owned2);
+				String notOwnedArray2 = gsonOwn2.toJson(notOwned2);
+
+				JsonObject msgChoose = new JsonObject();
+				msgChoose.addProperty("event", "CHOOSEENTER");
+				msgChoose.addProperty("owned", ownedArray2);
+				msgChoose.addProperty("notOwned", notOwnedArray2);
+				try {
+					jug.sessionLock.lock();
+					jug.getSession().sendMessage(new TextMessage(msgChoose.toString()));
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					jug.sessionLock.unlock();
+				}
+			break;
+		
+			
 
 		default:
 

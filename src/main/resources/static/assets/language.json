@@ -37,7 +37,9 @@
         "NoPlayed": "No has jugado el mapa",
         "LostCon" : "Has perdido la conexión con el servidor.\nPor favor, recarga la página",
         "OnlineMenuText1": "Elige una opción",
-        "RoomName": "Nombre de la sala"
+        "RoomName": "Nombre de la sala",
+        "Sales" : "Rebaja",
+        "Buy" : "Comprar"
     },
     
     "eng" : {
@@ -78,7 +80,9 @@
         "NoPlayed": "Map not played",
         "LostCon" : "You have lost connection with the server.\nPlease, refresh the page.",
         "OnlineMenuText1": "Choose an option",
-        "RoomName": "Room name"
+        "RoomName": "Room name",
+        "Sales" : "On sale",
+        "Buy": "Buy"
         }
     
 }

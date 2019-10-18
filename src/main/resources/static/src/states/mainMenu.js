@@ -134,7 +134,7 @@ Slooow.mainMenuState.prototype = {
             game.world.centerY, 'storeBtn', actionOnClickStartShop, this,
             0, 0, 0)
         buttonShop.anchor.set(0.5)
-        buttonShop.scale.setTo(0.3, 0.3)
+        buttonShop.scale.setTo(0.6, 0.6)
 
         // Boton empezar records
         buttonStartRecords = game.add.button(game.world.centerX+300,
