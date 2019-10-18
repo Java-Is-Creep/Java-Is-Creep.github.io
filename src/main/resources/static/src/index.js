@@ -116,6 +116,7 @@ window.onload = function () {
         myTimes: [],
         style: null,
         maxStamina : 0,
+        puntuationGameOver : null
     }
 
     // Conexiones
@@ -384,12 +385,12 @@ window.onload = function () {
                 game.global.maxTime = JSON.parse(msg.maxTime)
                 game.global.myRecord = JSON.parse(msg.record)
                 //PUNTOS RECOGIDOS, AHORA HAY QUE PRINTEARLOS EN EL GAMEOVER !!!!!!!!!!!!!!!!!!
-                //var puntos = JSON.parse(msg.points)
+                var puntos = JSON.parse(msg.points)
+                this.game.global.puntuationGameOver = puntos
                 game.state.start('gameOverState')
                 break
             case 'GROUNDCOLLISION':
                 //Poner la animacion de andar
-                //this.console.log('GROUND COLISIOOOOOOOOOOOOOOOOOOOOOON')
                 this.game.global.haveToRotateToGround = true
                 game.global.haveToRotateToSlope = false
                 this.game.global.haveToRotateToWall = false

@@ -32,7 +32,8 @@
         "YourRecord" : "Récord",
         "MapRecord" : "Récord del Mapa",
         "Records" : "Tus récords",
-        "Trophies": "Trofeos"
+        "Trophies": "Trofeos",
+        "Points": "Puntuación"
     },
     
     "eng" : {
@@ -68,7 +69,8 @@
         "YourRecord" : "Record",
         "MapRecord" : "Map Record",
         "Records" : "Your records",
-        "Trophies": "Trophies"
+        "Trophies": "Trophies",
+        "Points": "Puntuation"
         }
     
 }
