@@ -1,6 +1,7 @@
 package com.server.Slooow;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.server.Slooow.SnailInGame.SnailType;
 public class PlayerRegistered {
@@ -17,6 +18,13 @@ public class PlayerRegistered {
 	// actualmente 1 hora
 	public final int SECONDSTOGETALIFE = 30;
     public int secondsWaitingForLife = 0;
+
+    AtomicInteger gamesPlayed = new AtomicInteger(0);
+    AtomicInteger gamesWon = new AtomicInteger(0);
+    AchivementList myAchievements = new AchivementList();
+    
+
+  
 
 
     
@@ -44,11 +52,11 @@ public class PlayerRegistered {
     }
 
     public void initRecords(){
-        
         records.putIfAbsent("mapa1", 1000000000);
         records.putIfAbsent("mapa2", 1000000000);
         records.putIfAbsent("mapa3", 1000000000);
     }
+
 
     
     /** 
@@ -136,6 +144,9 @@ public class PlayerRegistered {
         this.lifes = player.getLifes();
         this.points = player.getPoints();
         this.records = player.records;
+        this.gamesPlayed = player.gamesPlayed;
+        this.gamesWon = player.gamesWon;
+        this.myAchievements = player.myAchievements;
     }
 
     public boolean isConnected() {

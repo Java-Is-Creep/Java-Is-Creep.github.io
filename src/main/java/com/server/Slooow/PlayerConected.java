@@ -1,6 +1,7 @@
 package com.server.Slooow;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.server.Slooow.SnailInGame.SnailType;
@@ -22,6 +23,14 @@ public class PlayerConected {
 	public int secondsWaitingForLife = 0;
 	ReentrantLock sessionLock;
 	ConcurrentHashMap<String, Integer> records = new ConcurrentHashMap<String, Integer>();
+
+	  public final int POINTSFORFINISH = 100;
+
+	  // usado para los logros
+	AtomicInteger gamesPlayed;
+	AtomicInteger gamesWon;
+	AchivementList myAchievements;
+
 
 	// Se guarda su sesion, su nombre y una instancia del caracol generico (Cambiara
 	// cuando haya mas de uno)
@@ -79,11 +88,24 @@ public class PlayerConected {
 		}
 	}
 
+	
+    public int getPointsInRace(int time){
+		int pointsAux = 0;
+        pointsAux += POINTSFORFINISH;
+		pointsAux += (int) (200-(time/500));
+		System.out.println("Mis puntos en esta carrera son: "+ pointsAux);
+		points += pointsAux;
+        return pointsAux;
+    }
+
 	public void playerConCast(PlayerRegistered player) {
 		this.lifes = player.getLifes();
 		this.points = player.getPoints();
 		this.cash = player.getCash();
 		this.records = player.records;
+		this.gamesPlayed = player.gamesPlayed;
+		this.gamesWon = player.gamesWon;
+		this.myAchievements = player.myAchievements;
 	}
 
 	public void setLifes(int lifes) {

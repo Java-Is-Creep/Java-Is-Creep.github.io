@@ -19,7 +19,7 @@ public class SinglePlayerRoom extends Room {
 	// TODO width del mapa de momento no es responsive
 
 	final int MAPSIZE = 5;
-	final int NUMSECONS = 16;
+	final int NUMSECONS = 60;
 	final int TIMETOSUCESS = NUMSECONS * 1000; // se multiplica por mil porque TICKTIME esta en milisegundos
 
 	// sirve para comprobar el tipo de clase con la que chocas, puerta o suelo
@@ -290,6 +290,7 @@ public class SinglePlayerRoom extends Room {
 
 	public void finishRace() {
 		boolean success = false;
+		owner.gamesPlayed.incrementAndGet();
 		// acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if (acummulativeTime > TIMETOSUCESS) {
 			System.out.println("Has perdido, tu tiempo ha sido: " + acummulativeTime);
@@ -297,8 +298,11 @@ public class SinglePlayerRoom extends Room {
 
 		} else {
 			success = true;
+			owner.gamesWon.incrementAndGet();
 			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
 		}
+
+		owner.myAchievements.checkAchievements(owner);
 
 		Integer record = owner.records.get(mapName);
 		if( record != null){
@@ -320,6 +324,7 @@ public class SinglePlayerRoom extends Room {
 		msg.addProperty("time", (int)(acummulativeTime));
 		msg.addProperty("maxTime", TIMETOSUCESS);
 		msg.addProperty("record", record);
+		msg.addProperty("points", owner.getPointsInRace((int) acummulativeTime));
 
 		try {
 			owner.sessionLock.lock();

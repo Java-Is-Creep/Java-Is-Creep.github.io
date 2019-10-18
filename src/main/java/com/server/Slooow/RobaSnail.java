@@ -6,11 +6,11 @@ import org.springframework.web.socket.WebSocketSession;
 
 public class RobaSnail extends SnailInGame {
 
-    public final static float MAXSTAMINA = 600;
-	public final static float MAXVELOCITYX = 20;
-	public final static float MAXVELOCITYY = 20;
-	public final static float MAXNORMALVELOCITYX = 3;
-	public final static float MAXNORMALVELOCITYY = 2.5f; // era 3
+    public final static float MAXSTAMINA = 400;
+	public final static float MAXVELOCITYX = 10;
+	public final static float MAXVELOCITYY = 6;
+	public final static float MAXNORMALVELOCITYX = 6;
+	public final static float MAXNORMALVELOCITYY = 5; // era 3
 
 	// aceleracion base, es decir sin acelerar
 	public final static float NORMALACELERATIONX = 2f;
