@@ -57,7 +57,7 @@ window.onload = function () {
     //launchFullScreen(document.documentElement); // the whole page
 
 
-
+    var firstFrame = 0;
 
 
     //Variables globales compartidas entre escenas
@@ -95,12 +95,20 @@ window.onload = function () {
         maxTime: null,
         record : null,
         puntuationGameOver : null,
-        //Cosas visuales jugador
+        //Cosas visuales jugador (de solo)
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
         degreesToRotateSlope: 0,
         maxStamina : 0,
+        //Cosas visuales jugador (multi)
+        myPlayerId: null,
+        playersMulti: [],
+        snailChosenMulti: [],
+        haveToRotateToWallMulti: [],
+        haveToRotateToGroundMulti: [],
+        haveToRotateToSlopeMulti: [],
+        degreesToRotateSlopeMulti: [],
         //PowerUps
         wingPowerUp: null,
         shieldPowerUp: null,
@@ -176,6 +184,8 @@ window.onload = function () {
                 var arrayHeight = JSON.parse(msg.height)
                 var arrayWidth = JSON.parse(msg.width)
                 var type = JSON.parse(msg.myType)
+
+                //var roomType = JSON.parse(msg.roomType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
@@ -311,6 +321,12 @@ window.onload = function () {
                             break
                     }
                 }
+                /*
+                if (roomType == 'SINGLE'){
+                    game.state.start('singlePlayerState')
+                } else if (roomType == 'MULTI'){
+                    this.game.state.start('multiplayerState')
+                }*/
                 game.state.start('singlePlayerState')
                 break;
 
@@ -646,20 +662,72 @@ window.onload = function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-            case 'TICKMULTI':  
+            case 'TICKMULTI':
+                //Array de las posiciones de todos los jugadores
+                var arrayPosX = JSON.parse(msg.posX)
+                var arrayPosY = JSON.parse(msg.posY) 
+                //Stamina del jugador
+                var arrayStamina = JSON.parse(msg.stamina)
+                //Nombres de los jugadores
+                var namePlayers = JSON.parse(msg.name) 
+
+
+                 if (firstFrame == 0){
+                     for (var i = 0; i< namePlayers.length; i++){
+                         if (namePlayers[i] == this.game.global.username){
+                            this.game.global.myPlayerId = i
+                            this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
+                         }
+                     } 
+                }
+                //Actualizamos las posiciones de todos los caracoles
+                for (var i = 0; i< arrayPosX.length; i++){
+                    this.game.global.playersMulti[i].sprite.x = Math.floor(arrayPosX[i])
+                    this.game.global.playersMulti[i].sprite.y = game.world.height - Math.floor(arrayPosY[i]) - 10
+                }
+                //Actualizamos la stamina de tu jugador
+                var scale = arrayStamina[this.game.global.myPlayerId] * 0.5 / game.global.maxStamina
+                game.global.playersMulti[this.game.global.myPlayerId].stamina2.scale.setTo(scale, 0.45)
+
+                //Actualizar barra de progreso del jugador (MAS ADELANTE TODOS)
+                var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
+                var scaleProgress = posProgress/game.global.finishObject.x
+                game.global.playersMulti[this.game.global.myPlayerId].progressBar2.scale.setTo(scaleProgress, 1)
+                
+
                 break
             case 'SNAILUPDATEMULTI':
+                var arrayRunOutOfStamina = JSON.parse(msg.runOutStamina)
+                var arrayRecoverStamina = JSON.parse(msg.recoverStamina)
+                var idPlayers = JSON.parse(msg.id)
                 break   
             case 'FINISHMULTI':
+                var myTime = JSON.parse(msg.time)
+                var myRecord = JSON.parse(msg.record)
+                var myPoints = JSON.parse(msg.points)
+                var arrayPositionNames = JSON.parse(msg.positionName) 
+                var arrayPositionTimes = JSON.parse(msg.positionTime)
                 break
             case 'WAITINGROOMSTART':
+                var roomName = JSON.parse(msg.roomName)
+                this.game.state.start('lobbyMultiState')
                 break
             case 'SLOPECOLLISIONMULTI':
+                var idPlayer = JSON.parse(msg.id) 
+                var degreesToRotate = JSON.parse(msg.degrees)
                 break
             case 'WALLCOLLISIONMULTI':
+                var idPlayer = JSON.parse(msg.id) 
                 break
             case 'GROUNDCOLLISIONMULTI':
-                break                     
+                var idPlayer = JSON.parse(msg.id) 
+                break  
+            case 'PLAYERENTER':
+                var namePlayer = JSON.parse(msg.name)    
+                break
+            case 'PLAYERLEFT':
+                var namePlayer = JSON.parse(msg.name)   
+                break 
         }   
 
 
@@ -675,6 +743,8 @@ window.onload = function () {
     this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
     this.game.state.add('marathonState', Slooow.marathonState);
     this.game.state.add('lobbyState', Slooow.lobbyState);
+    this.game.state.add('lobbyMultiState', Slooow.lobbyMultiState);
+    this.game.state.add('multiplayerState', Slooow.multiplayerState);
     this.game.state.add('chooseCharacterState', Slooow.chooseCharacterState);
     this.game.state.add('gameOverState', Slooow.gameOverState);
     this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
