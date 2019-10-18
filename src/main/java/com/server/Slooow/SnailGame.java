@@ -25,6 +25,7 @@ public class SnailGame {
 	ReentrantLock conectedPlayersLock = new ReentrantLock();
 	ReentrantLock registeredPlayersLock = new ReentrantLock();
 	ReentrantLock generalRecords = new ReentrantLock();
+	ReentrantLock multiPlayerLock = new ReentrantLock();
 
 	ConcurrentHashMap<WebSocketSession, PlayerConected> jugadoresConectados = new ConcurrentHashMap<WebSocketSession, PlayerConected>();
 
@@ -95,14 +96,7 @@ public class SnailGame {
 			}
 			records.putIfAbsent(mapName, recordsTime);
 		}
-		/*
-		 * int i = 0; for(String nombreMapa : records.keySet()){
-		 * System.out.println(" Nombre del mapa: "+nombreMapa); ArrayList<RecordInMap>
-		 * recordArray = records.get(nombreMapa); for(RecordInMap record : recordArray
-		 * ){ System.out.println("Indice " + i + "Nombre jugador: " +record.playerName +
-		 * " tiempo jugador" + record.time); i++; }
-		 */
-		// }
+		
 		generalRecords.unlock();
 	}
 
@@ -140,6 +134,16 @@ public class SnailGame {
 
 			}
 			conectedPlayersLock.unlock();
+
+			registeredPlayersLock.lock();
+			for(PlayerRegistered play : playerRegistered.values()){
+				if(!play.isConnected()){
+					if(play.getLifes() < play.MAXNUMLIFES){
+						play.incrementWaitingTime();
+					}
+				}
+			}
+			registeredPlayersLock.unlock();
 		};
 		executor.scheduleAtFixedRate(task, 1, 1, TimeUnit.SECONDS);
 	}
@@ -150,11 +154,21 @@ public class SnailGame {
 		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
 	}
 
+	public void createMultiRoom(String roomName, PlayerConected jug, String mapName){
+		multiPlayerLock.lock();
+		MultiplayerRoom roomAux = new MultiplayerRoom(roomName, jug, this, mapName);
+		multiPlayerRoomMap.putIfAbsent(roomAux.name, roomAux);
+		roomAux.anadirJugador(jug);
+		multiPlayerLock.unlock();
+	}
+
 	public void deleteRoom(Room room) {
 		if (room.getClass() == SinglePlayerRoom.class) {
 			singlePlayerRoomMaps.remove(room.name);
 		} else {
+			multiPlayerLock.lock();
 			multiPlayerRoomMap.remove(room.name);
+			multiPlayerLock.unlock();
 		}
 
 	}

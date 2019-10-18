@@ -318,7 +318,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 							isOnObstacle = false;
 							sendCrashMessage("LOSESHIELD");
 							System.out.println("se pincho pero se protegio con escudo");
-						} if(isProtected){
+						} else if(isProtected){
 							System.out.println("Se estaba recuperando del impacto anterior");
 						}else {
 							spikes.playerCrash();

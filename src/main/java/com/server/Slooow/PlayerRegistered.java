@@ -138,6 +138,18 @@ public class PlayerRegistered {
         this.secondsWaitingForLife = secondsWaitingForLife;
     }
 
+    public boolean incrementWaitingTime() {
+		secondsWaitingForLife++;
+
+		if (secondsWaitingForLife >= SECONDSTOGETALIFE) {
+            lifes++;
+			secondsWaitingForLife = 0;
+            System.out.println("VIDA AUMENTADA");
+            return true;
+        }
+        return false;
+	}
+
     public void castFromPlayerCon(PlayerConected player){
         this.name = player.getNombre();
         this.cash = player.getCash();
@@ -147,6 +159,7 @@ public class PlayerRegistered {
         this.gamesPlayed = player.gamesPlayed;
         this.gamesWon = player.gamesWon;
         this.myAchievements = player.myAchievements;
+        this.secondsWaitingForLife = player.secondsWaitingForLife;
     }
 
     public boolean isConnected() {

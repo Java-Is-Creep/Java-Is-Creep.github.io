@@ -106,6 +106,17 @@ public class PlayerConected {
 		this.gamesPlayed = player.gamesPlayed;
 		this.gamesWon = player.gamesWon;
 		this.myAchievements = player.myAchievements;
+		this.secondsWaitingForLife = player.secondsWaitingForLife;
+	}
+
+	public float matchMakingPunt(){
+
+			float average = 0;
+			if(gamesPlayed.get() !=0 ){
+				average = (points/gamesPlayed.get());
+			}
+			return average;
+
 	}
 
 	public void setLifes(int lifes) {
