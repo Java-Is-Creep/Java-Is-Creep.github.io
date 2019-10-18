@@ -76,7 +76,17 @@ public class MapPowerUp extends MapObject {
             default:
             }
 
-            player.mySnail.powerUp = aux;
+            if(player.mySnail.usingPowerUp){
+                    player.mySnail.powerUpList.add(aux);
+            } else {
+                if(player.mySnail.powerUpList.size()>0){
+                    player.mySnail.powerUpList.add(aux);
+                    player.mySnail.powerUpList.remove();
+                } else {
+                    player.mySnail.powerUpList.add(aux);
+                }
+
+            }
             sendMessage(player,id);
             System.out.println("POWER GENERADO CON EXITO");
         }

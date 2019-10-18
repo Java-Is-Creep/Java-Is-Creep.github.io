@@ -142,7 +142,6 @@ public class SinglePlayerRoom extends Room {
 					} else {
 						if(object.getClass() == DoorMap.class){
 							isClimbingADoor = true;
-							System.out.println("No estas subiendo una puerta");
 						}
 						if (!lastFrameWallCollision) {
 								sendWallCollision = true;
