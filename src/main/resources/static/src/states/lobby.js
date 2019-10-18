@@ -32,7 +32,6 @@ Slooow.lobbyState.prototype = {
 
 	create : function() {
 
-
         //Boton desconectar
 		buttonBack = game.add.button(50,
             40, 'button', actionOnClickBack, this,
@@ -46,44 +45,49 @@ Slooow.lobbyState.prototype = {
         textButtonBack.scale.setTo(0.5,0.5)
 
          //Boton ready
-		buttonReady = game.add.button(game.world.centerX + 400,
+		buttonReady = game.add.button(game.world.centerX + 350,
             game.world.centerY + 250, 'button', actionOnClickReady, this,
             0, 0, 0)
         buttonReady.anchor.set(0.5)
-        buttonReady.scale.setTo(0.2, 0.3)
+        buttonReady.scale.setTo(0.4, 0.5)
+       
         //Texto ready
-		textButtonReady = game.add.text(game.world.centerX + 400,
+		textButtonReady = game.add.text(game.world.centerX + 350,
             game.world.centerY + 250, game.global.activeLanguage.Ready, game.global.style)
         textButtonReady.anchor.set(0.5)
         textButtonReady.scale.setTo(0.5,0.5)
+        
+        var chosenShell = game.add.image(game.world.centerX-380, game.world.centerY-170, 'roundBtn')
+        chosenShell.anchor.setTo(0.5, 0.5);
+        chosenShell.scale.setTo(0.95, 0.95)
 
         //Print image snail
         var chosen
         if (game.global.snailChosen != null){
             switch (game.global.snailChosen){
                 case ('NORMAL'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'normalCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'normalCol')
                     break
                 case ('TANK'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'tanqueCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'tanqueCol')
                     break   
                 case ('BAGUETTE'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'frenchCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'frenchCol')
                     break    
                 case ('MIAU'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'catCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'catCol')
                     break    
                 case ('MERCA'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'slugCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'slugCol')
                     break     
                 case ('SEA'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'seaCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'seaCol')
                     break
                 case ('ROBA'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'thiefCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'thiefCol')
                     break
                 case ('IRIS'):
-                        chosen = game.add.image(game.world.centerX-350, game.world.centerY-150, 'irisCol')
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'irisCol')
                     break
                 default:
                     console.log('snail sprite no identificado')
@@ -95,11 +99,16 @@ Slooow.lobbyState.prototype = {
         chosen.inputEnabled = true
         chosen.events.onInputDown.add(chooseCharacter, this)
         
+
+        //chose bg
+
+        
         //Texto datos sala
 		textLobbyData = game.add.text(game.world.centerX -400,
             game.world.centerY -50, game.global.activeLanguage.LobbyData, game.global.style)
         textLobbyData.anchor.set(0.5)
         textLobbyData.scale.setTo(0.5,0.5)
+
 
         function actionOnClickBack(){
             game.state.start('mainMenuState')

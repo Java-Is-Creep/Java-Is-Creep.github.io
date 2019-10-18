@@ -111,8 +111,8 @@ Slooow.preloadState.prototype = {
 
 		// Interfaz Global
 		game.load.image('button', './assets/img/btn/defaultBtn.png');
-		//game.load.image('button', './assets/img/btn/bigBlue.png');
 		game.load.image('roundBtn', './assets/img/btn/roundBtn.png');
+		game.load.image('squareBtn', './assets/img/btn/squareBtn.png');
 
 		// Social-btn
 		game.load.image('twitterBtn', './assets/img/btn/twitterBtn.png');
@@ -133,6 +133,11 @@ Slooow.preloadState.prototype = {
 		game.load.image('soundOffBtn', './assets/img/btn/soundOffBtn.png');
 		game.load.image('replayBtn', './assets/img/btn/replayBtn.png');
 
+		//Shop icons
+		game.load.image('moneyShell', './assets/img/UI/monedaArcoiris.png');
+		game.load.image('moneyBaba', './assets/img/UI/baba.png');
+
+		//Musica
 		game.load.audio('AE', './assets/audio/himno-de-espana.mp3');
 
 		$.getJSON("./assets/language.json", function (data) {

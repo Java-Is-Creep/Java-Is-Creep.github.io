@@ -301,6 +301,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				msgShop.addProperty("event", "SHOPENTER");
 				msgShop.addProperty("owned", ownedArray);
 				msgShop.addProperty("notOwned", notOwnedArray);
+				msgShop.addProperty("points", jug.getPoints());
+				msgShop.addProperty("money", jug.getCash());
 				try {
 					jug.sessionLock.lock();
 					jug.getSession().sendMessage(new TextMessage(msgShop.toString()));

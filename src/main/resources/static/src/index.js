@@ -116,7 +116,9 @@ window.onload = function () {
         myTimes: [],
         style: null,
         maxStamina : 0,
-        puntuationGameOver : null
+        puntuationGameOver : null,
+        money : null,
+        points : null
     }
 
     // Conexiones
@@ -636,7 +638,8 @@ window.onload = function () {
                 for (var j = 0; j < notOwnedAux.length; j++){
                     game.global.notOwned[i] = notOwnedAux[j]
                 }
-                
+                game.global.points = JSON.parse(msg.points)
+                game.global.money = JSON.parse(msg.money)
                 game.state.start('shopState')
                 break
         }   
