@@ -109,6 +109,9 @@ window.onload = function () {
         haveToRotateToGroundMulti: [],
         haveToRotateToSlopeMulti: [],
         degreesToRotateSlopeMulti: [],
+        arrayPositionsMulti:[],
+        arrayTimesMulti: [],
+        roomNameMulti : null,
         //PowerUps
         wingPowerUp: null,
         shieldPowerUp: null,
@@ -185,7 +188,7 @@ window.onload = function () {
                 var arrayWidth = JSON.parse(msg.width)
                 var type = JSON.parse(msg.myType)
 
-                //var roomType = JSON.parse(msg.roomType)
+                var roomType = JSON.parse(msg.roomType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
@@ -321,12 +324,12 @@ window.onload = function () {
                             break
                     }
                 }
-                /*
+                
                 if (roomType == 'SINGLE'){
                     game.state.start('singlePlayerState')
                 } else if (roomType == 'MULTI'){
                     this.game.state.start('multiplayerState')
-                }*/
+                }
                 game.state.start('singlePlayerState')
                 break;
 
@@ -405,7 +408,6 @@ window.onload = function () {
                 game.global.myTime = JSON.parse(msg.time)
                 game.global.maxTime = JSON.parse(msg.maxTime)
                 game.global.myRecord = JSON.parse(msg.record)
-                //PUNTOS RECOGIDOS, AHORA HAY QUE PRINTEARLOS EN EL GAMEOVER !!!!!!!!!!!!!!!!!!
                 var puntos = JSON.parse(msg.points)
                 this.game.global.puntuationGameOver = puntos
                 game.state.start('gameOverState')
@@ -693,13 +695,20 @@ window.onload = function () {
                 var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
                 var scaleProgress = posProgress/game.global.finishObject.x
                 game.global.playersMulti[this.game.global.myPlayerId].progressBar2.scale.setTo(scaleProgress, 1)
-                
-
                 break
             case 'SNAILUPDATEMULTI':
-                var arrayRunOutOfStamina = JSON.parse(msg.runOutStamina)
-                var arrayRecoverStamina = JSON.parse(msg.recoverStamina)
-                var idPlayers = JSON.parse(msg.id)
+                var runOutOfStamina = JSON.parse(msg.runOutStamina)
+                var recoverStamina = JSON.parse(msg.recoverStamina)
+                var idPlayer = JSON.parse(msg.id)
+
+                if (runOutOfStamina){
+                    //Animacion de cansarse
+                    game.global.playersMulti[idPlayer].sprite.animations.play('tired');
+                } else
+                if (recoverStamina){
+                    //Animacion de andar normal
+                    game.global.playersMulti[idPlayer].sprite.animations.play('walk');
+                }
                 break   
             case 'FINISHMULTI':
                 var myTime = JSON.parse(msg.time)
@@ -707,27 +716,53 @@ window.onload = function () {
                 var myPoints = JSON.parse(msg.points)
                 var arrayPositionNames = JSON.parse(msg.positionName) 
                 var arrayPositionTimes = JSON.parse(msg.positionTime)
+
+                game.global.myTime = myTime
+                game.global.myRecord = myRecord
+                game.global.puntuationGameOver = myPoints
+                game.global.arrayPositionsMulti =arrayPositionNames
+                game.global.arrayTimesMulti = arrayPositionTimes
+                game.state.start('gameOverState')
                 break
             case 'WAITINGROOMSTART':
                 var roomName = JSON.parse(msg.roomName)
+                this.game.global.roomNameMulti = roomName
                 this.game.state.start('lobbyMultiState')
                 break
+
             case 'SLOPECOLLISIONMULTI':
                 var idPlayer = JSON.parse(msg.id) 
                 var degreesToRotate = JSON.parse(msg.degrees)
+
+                this.game.global.degreesToRotateSlopeMulti[idPlayer] = degreesToRotate
+                this.game.global.haveToRotateToGroundMulti[idPlayer] = false
+                game.global.haveToRotateToSlopeMulti[idPlayer] = true
+                this.game.global.haveToRotateToWallMulti[idPlayer] = false
                 break
+
             case 'WALLCOLLISIONMULTI':
                 var idPlayer = JSON.parse(msg.id) 
+
+                this.game.global.haveToRotateToGroundMulti[idPlayer] = false
+                game.global.haveToRotateToSlopeMulti[idPlayer] = false
+                this.game.global.haveToRotateToWallMulti[idPlayer] = true
                 break
+
             case 'GROUNDCOLLISIONMULTI':
                 var idPlayer = JSON.parse(msg.id) 
-                break  
+                this.game.global.haveToRotateToGroundMulti[idPlayer] = true
+                game.global.haveToRotateToSlopeMulti[idPlayer] = false
+                this.game.global.haveToRotateToWallMulti[idPlayer] = false
+                break
+
             case 'PLAYERENTER':
                 var namePlayer = JSON.parse(msg.name)    
                 break
             case 'PLAYERLEFT':
                 var namePlayer = JSON.parse(msg.name)   
                 break 
+            case 'MULTIROOMSFULL':
+                break   
         }   
 
 
