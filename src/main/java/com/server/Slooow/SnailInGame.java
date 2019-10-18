@@ -107,6 +107,9 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	final int timeToPassDoor = 2000;
 	int doorTime = 2000;
 
+	final int timeToPassTrap = 2000;
+	int trapDoorTime = 2000;
+
 	public float speedX;
 	public float speedY;
 	public float stamina;
@@ -263,6 +266,16 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 				doorTime = timeToPassDoor;
 			}
 		}
+
+		if(hasFallenTrap){
+			trapDoorTime -= 33;
+			if(trapDoorTime <0){
+				hasFallenTrap = false;
+				trapDoorTime = timeToPassTrap;
+			}
+		}
+
+
 		sendRunOutStamina = false;
 		sendRecoverStamina = false;
 		boolean useObject = false;
