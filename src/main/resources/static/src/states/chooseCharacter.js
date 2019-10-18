@@ -200,6 +200,86 @@ Slooow.chooseCharacterState.prototype = {
         rainbowShell.inputEnabled = true
         rainbowShell.events.onInputDown.add(chooseCharacterRainbow, this)
 
+        for(var i = 0; i < game.global.owned.length; i++){
+            switch (game.global.owned[i]){
+                case ('NORMAL'):
+                        normalShell.inputEnabled = true
+                        normalShell.alpha = 1
+                    break
+                case ('TANK'):
+                        tankShell.inputEnabled = true
+                        tankShell.alpha = 1
+                    break   
+                case ('BAGUETTE'):
+                        frenchShell.inputEnabled = true
+                        frenchShell.alpha = 1
+                    break    
+                case ('MIAU'):
+                        catShell.inputEnabled = true
+                        catShell.alpha = 1
+                    break    
+                case ('MERCA'):
+                        slugShell.inputEnabled = true
+                        slugShell.alpha = 1
+                    break     
+                case ('SEA'):
+                        seaShell.inputEnabled = true
+                        seaShell.alpha = 1
+                    break
+                case ('ROBA'):
+                        thiefShell.inputEnabled = true
+                        thiefShell.alpha = 1
+                    break
+                case ('IRIS'):
+                        rainbowShell.inputEnabled = true
+                        rainbowShell.alpha = 1
+                    break
+                default:
+                    console.log('snail sprite no identificado')
+                    break    
+            }
+        }
+
+        for(var i = 0; i < game.global.notOwned.length; i++){
+            switch (game.global.notOwned[i]){
+                case ('NORMAL'):
+                        normalShell.inputEnabled = false
+                        normalShell.alpha = 0.6
+                    break
+                case ('TANK'):
+                        tankShell.inputEnabled = false
+                        tankShell.alpha = 0.6
+                    break   
+                case ('BAGUETTE'):
+                        frenchShell.inputEnabled = false
+                        frenchShell.alpha = 0.6
+                    break    
+                case ('MIAU'):
+                        catShell.inputEnabled = false
+                        catShell.alpha = 0.6
+                    break    
+                case ('MERCA'):
+                        slugShell.inputEnabled = false
+                        slugShell.alpha = 0.6
+                    break     
+                case ('SEA'):
+                        seaShell.inputEnabled = false
+                        seaShell.alpha = 0.6
+                    break
+                case ('ROBA'):
+                        thiefShell.inputEnabled = false
+                        thiefShell.alpha = 0.6
+                    break
+                case ('IRIS'):
+                        rainbowShell.inputEnabled = false
+                        rainbowShell.alpha = 0.6
+                    break
+                default:
+                    console.log('snail sprite no identificado')
+                    break    
+            }
+        }
+
         function chooseCharacterSea (){
             chosen.destroy()
             chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'seaCol')

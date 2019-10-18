@@ -231,44 +231,45 @@ Slooow.shopState.prototype = {
         rainbowShell.inputEnabled = true
         rainbowShell.events.onInputDown.add(chooseCharacterRainbow, this)
 
+
         function chooseCharacterSea (){
-            
+            console.log("he dado a un caracol")
         }
         
         function chooseCharacterThief(){
-           
+           console.log("he dado a un caracol")
         }
 
         function chooseCharacterRainbow(){
-           
+           console.log("he dado a un caracol")
         }
 
         function chooseCharacterCat(){
-           
+           console.log("he dado a un caracol")
         }
 
         function chooseCharacterFrench(){
-           
+           console.log("he dado a un caracol")
         }
 
         function chooseCharacterNormal(){
-           
+           console.log("he dado a un caracol")
         }
 
         function chooseCharacterTank(){
-           
+           console.log("he dado a un caracol")
         }
 
         function chooseCharacterSlug(){
-            
+            console.log("he dado a un caracol")
         }
 
         function actionOnClickMoney(){
-
+console.log("he dado a un caracol")
         }
 
         function actionOnClickSales(){
-
+console.log("he dado a un caracol")
         }
 
         function actionOnClickBack(){

@@ -636,12 +636,25 @@ window.onload = function () {
                 }
 
                 for (var j = 0; j < notOwnedAux.length; j++){
-                    game.global.notOwned[i] = notOwnedAux[j]
+                    game.global.notOwned[j] = notOwnedAux[j]
                 }
                 game.global.points = JSON.parse(msg.points)
                 game.global.money = JSON.parse(msg.money)
                 game.state.start('shopState')
                 break
+            case 'CHOOSEENTER':
+                let ownedAux2 = JSON.parse(msg.owned)
+                let notOwnedAux2 = JSON.parse(msg.notOwned)
+
+                for (var i = 0; i < ownedAux2.length; i++){
+                    game.global.owned[i] = ownedAux2[i];
+                }
+
+                for (var j = 0; j < notOwnedAux2.length; j++){
+                    game.global.notOwned[j] = notOwnedAux2[j]
+                }
+                this.console.log("llega esta mierda")
+                game.state.start('chooseCharacterState')
         }   
 
 
