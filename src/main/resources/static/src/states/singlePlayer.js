@@ -116,17 +116,17 @@ Slooow.singlePlayerState.prototype = {
 		}
 
 		for (var i = 0; i< game.global.arrayWinds.length; i++){
-			console.log('viento')
-			console.dir(game.global.arrayWinds[i])
+			//console.log('viento')
+			//console.dir(game.global.arrayWinds[i])
 			game.global.arrayWinds[i] = game.add.image(game.global.arrayWinds[i].x+200, game.world.height - game.global.arrayWinds[i].y, 'windSpritesheet')
 			game.global.arrayWinds[i].angle = 180
 			game.global.arrayWinds[i].animations.add('wind',[0,1,2,3,4,5], 4, true)
 			game.global.arrayWinds[i].animations.add('windReverse', [5,4,3,2,1,0], 4, true)
 			if (game.global.arrayWinds[i].direction == true){
-				console.log('a favor')
+				//console.log('a favor')
 				game.global.arrayWinds[i].animations.play('wind')
 			} else{
-				console.log('en contra')
+				//console.log('en contra')
 				game.global.arrayWinds[i].angle = 0
 				game.global.arrayWinds[i].animations.play('wind')
 			}
