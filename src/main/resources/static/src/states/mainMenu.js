@@ -78,14 +78,14 @@ Slooow.mainMenuState.prototype = {
         textUsername.scale.setTo(0.5, 0.5)
 
         // Boton empezar juego solo
-        buttonStartSolo = game.add.button(game.world.centerX + 300,
-            game.world.centerY - 50, 'button', actionOnClickStartSolo, this,
+        buttonStartSolo = game.add.button(game.world.centerX - 300,
+            game.world.centerY - 100, 'button', actionOnClickStartSolo, this,
             0, 0, 0)
         buttonStartSolo.anchor.set(0.5)
         buttonStartSolo.scale.setTo(0.6, 0.6)
         // Texto empezar juego solo
-        textButtonStartSolo = game.add.text(game.world.centerX + 300,
-            game.world.centerY - 50, game.global.activeLanguage.SoloMode, game.global.style)
+        textButtonStartSolo = game.add.text(game.world.centerX - 300,
+            game.world.centerY - 100, game.global.activeLanguage.SoloMode, game.global.style)
         textButtonStartSolo.anchor.set(0.5)
         //textButtonStartSolo.scale.setTo(0.7, 0.7)
 
@@ -104,13 +104,13 @@ Slooow.mainMenuState.prototype = {
             */
 
         //Boton empezar multi online
-        buttonStartMultiOnline = game.add.button(game.world.centerX + 300,
+        buttonStartMultiOnline = game.add.button(game.world.centerX - 300,
             game.world.centerY + 100, 'button', actionOnClickStartOnline, this,
             0, 0, 0)
         buttonStartMultiOnline.anchor.set(0.5)
         buttonStartMultiOnline.scale.setTo(0.6, 0.6)
         //Texto empezar multi online
-        textButtonStartMultiOnline = game.add.text(game.world.centerX + 300,
+        textButtonStartMultiOnline = game.add.text(game.world.centerX - 300,
             game.world.centerY + 100, game.global.activeLanguage.Online, game.global.style)
         textButtonStartMultiOnline.anchor.set(0.5)
         //textButtonStartMultiOnline.scale.setTo(0.7, 0.7)
@@ -130,41 +130,53 @@ Slooow.mainMenuState.prototype = {
         */
 
         //Boton tienda
-        buttonShop = game.add.button(game.world.centerX - 300,
+        buttonShop = game.add.button(game.world.centerX ,
             game.world.centerY, 'storeBtn', actionOnClickStartShop, this,
             0, 0, 0)
         buttonShop.anchor.set(0.5)
         buttonShop.scale.setTo(0.3, 0.3)
 
         // Boton empezar records
-        buttonStartRecords = game.add.button(game.world.centerX,
-            game.world.centerY, 'button', actionOnClickStartRecords, this,
+        buttonStartRecords = game.add.button(game.world.centerX+300,
+            game.world.centerY+100, 'button', actionOnClickStartRecords, this,
             0, 0, 0)
         buttonStartRecords.anchor.set(0.5)
-        buttonStartRecords.scale.setTo(0.3, 0.3)
+        buttonStartRecords.scale.setTo(0.6, 0.6)
         // Texto empezar records
-        textButtonStartRecords = game.add.text(game.world.centerX,
-            game.world.centerY, game.global.activeLanguage.Records, game.global.style)
+        textButtonStartRecords = game.add.text(game.world.centerX+300,
+            game.world.centerY+100, game.global.activeLanguage.Records, game.global.style)
         textButtonStartRecords.anchor.set(0.5)
-        textButtonStartRecords.scale.setTo(0.5, 0.5)
+        //textButtonStartRecords.scale.setTo(0.5, 0.5)
+
+        // Boton empezar trofeos
+        buttonStartTrophies = game.add.button(game.world.centerX+300,
+            game.world.centerY-100, 'button', actionOnClickStartTrophies, this,
+            0, 0, 0)
+        buttonStartTrophies.anchor.set(0.5)
+        buttonStartTrophies.scale.setTo(0.6, 0.6)
+        // Texto empezar trofeos
+        textButtonStartTrophies = game.add.text(game.world.centerX+300,
+            game.world.centerY-100, game.global.activeLanguage.Trophies, game.global.style)
+        textButtonStartTrophies.anchor.set(0.5)
+        //textButtonStartTrophies.scale.setTo(0.5, 0.5)
 
         //Boton instagram
         buttonInstagram = game.add.button(game.world.centerX - 150,
-            game.world.centerY + 250, 'instaBtn', actionOnClickInstagram, this,
+            game.world.centerY + 300, 'instaBtn', actionOnClickInstagram, this,
             0, 0, 0)
         buttonInstagram.anchor.set(0.5)
         buttonInstagram.scale.setTo(0.3, 0.3)
 
         //Boton facebook
         buttonWeb = game.add.button(game.world.centerX,
-            game.world.centerY + 250, 'facebookBtn', actionOnClickFacebook, this,
+            game.world.centerY + 300, 'facebookBtn', actionOnClickFacebook, this,
             0, 0, 0)
         buttonWeb.anchor.set(0.5)
         buttonWeb.scale.setTo(0.3, 0.3)
 
         //Boton twitter
         buttonTwitter = game.add.button(game.world.centerX + 150,
-            game.world.centerY + 250, 'twitterBtn', actionOnClickTwitter, this,
+            game.world.centerY + 300, 'twitterBtn', actionOnClickTwitter, this,
             0, 0, 0)
         buttonTwitter.anchor.set(0.5)
         buttonTwitter.scale.setTo(0.3, 0.3)
@@ -293,6 +305,10 @@ Slooow.mainMenuState.prototype = {
             //game.state.start('initSesionState')
         }
 
+        function actionOnClickStartTrophies(){
+            game.state.start('trophiesState')
+        }
+
         // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás
         function actionOnClickOptions() {
             if (optionsClicked == false) {
@@ -315,6 +331,10 @@ Slooow.mainMenuState.prototype = {
                 buttonStartRecords.alpha = minAlpha
                 buttonStartRecords.inputEnabled = false
                 textButtonStartRecords.alpha = minAlpha
+
+                buttonStartTrophies.alpha = minAlpha
+                buttonStartTrophies.inputEnabled = false
+                textButtonStartTrophies.alpha = minAlpha
 
                 buttonStartMultiOnline.alpha = minAlpha
                 buttonStartMultiOnline.inputEnabled = false
@@ -370,6 +390,10 @@ Slooow.mainMenuState.prototype = {
                // buttonStartMarathon.alpha = maxAlpha
                // buttonStartMarathon.inputEnabled = true
                // textButtonStartMarathon.alpha = maxAlpha
+
+                buttonStartTrophies.alpha = maxAlpha
+                buttonStartTrophies.inputEnabled = true
+                textButtonStartTrophies.alpha = maxAlpha
 
                 buttonStartRecords.alpha = maxAlpha
                 buttonStartRecords.inputEnabled = true
@@ -454,6 +478,7 @@ Slooow.mainMenuState.prototype = {
                 game.global.activeLanguage = game.global.languageData.eng
             }
             textButtonStartRecords.setText(game.global.activeLanguage.Records)
+            textButtonStartTrophies.setText(game.global.activeLanguage.Trophies)
             //textButtonStartMarathon.setText(game.global.activeLanguage.Marathon);
         }
     },

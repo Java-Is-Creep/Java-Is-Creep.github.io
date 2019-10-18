@@ -120,8 +120,8 @@ window.onload = function () {
 
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
-    game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -152,7 +152,7 @@ window.onload = function () {
                 if (game.global.player.maxStamina == 0) {
                     game.global.player.maxStamina = msg.stamina
                 }
-                var scale = msg.stamina * 0.5 / 600
+                var scale = msg.stamina * 0.5 / game.global.player.maxStamina
                 game.global.player.stamina2.scale.setTo(scale, 0.45)
                 
                 // Tratamiento de la barra de progreso
@@ -280,18 +280,18 @@ window.onload = function () {
                                 numOfDoors++;
                             break    
                         case 'WIND':
-                            this.console.dir(msg)
+                            //this.console.dir(msg)
                             var direction = JSON.parse(msg.direction)
-                            this.console.log(direction)
-                            this.console.log(direction[numOfWinds])
+                            //this.console.log(direction)
+                           //this.console.log(direction[numOfWinds])
                             this.game.global.arrayWinds[numOfWinds] = new this.Object()
                             this.game.global.arrayWinds[numOfWinds].x = arrayPosX[i]
                             this.game.global.arrayWinds[numOfWinds].y = arrayPosY[i]
                             this.game.global.arrayWinds[numOfWinds].height = arrayHeight[i]
                             this.game.global.arrayWinds[numOfWinds].width = arrayWidth[i]
                             this.game.global.arrayWinds[numOfWinds].direction = direction[numOfWinds]
-                            this.console.log('wind draw map')
-                            this.console.dir(game.global.arrayWinds[numOfWinds])
+                            //this.console.log('wind draw map')
+                            //this.console.dir(game.global.arrayWinds[numOfWinds])
                             numOfWinds++
                             break    
                         case 'FINISH':
@@ -299,7 +299,7 @@ window.onload = function () {
                             this.game.global.finishObject.y = arrayPosY[i]
                             this.game.global.finishObject.height = arrayHeight[i]
                             this.game.global.finishObject.width = arrayWidth[i]
-
+                            break
                         default:
                             this.console.log('tipo sin reconocer ' + type[i])
                             break
@@ -383,6 +383,8 @@ window.onload = function () {
                 game.global.myTime = JSON.parse(msg.time)
                 game.global.maxTime = JSON.parse(msg.maxTime)
                 game.global.myRecord = JSON.parse(msg.record)
+                //PUNTOS RECOGIDOS, AHORA HAY QUE PRINTEARLOS EN EL GAMEOVER !!!!!!!!!!!!!!!!!!
+                //var puntos = JSON.parse(msg.points)
                 game.state.start('gameOverState')
                 break
             case 'GROUNDCOLLISION':
@@ -393,6 +395,7 @@ window.onload = function () {
                 this.game.global.haveToRotateToWall = false
                 break
             case 'OBJECTUSED':
+                    this.console.log('invisible')
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
                         game.global.player.shieldPowerUp.visible = false
@@ -456,7 +459,7 @@ window.onload = function () {
                 break
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
-                this.console.log('take power up')
+                //this.console.log('take power up')
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha = 0
@@ -655,6 +658,8 @@ window.onload = function () {
     this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
     this.game.state.add('shopState', Slooow.shopState);
     this.game.state.add('recordsState', Slooow.recordsState);
+    this.game.state.add('trophiesState', Slooow.trophiesState);
+    
 
     this.game.state.start('bootState');
 }

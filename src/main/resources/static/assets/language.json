@@ -31,7 +31,8 @@
         "Max Time" : "Tiempo max",
         "YourRecord" : "Récord",
         "MapRecord" : "Récord del Mapa",
-        "Records" : "Tus récords"
+        "Records" : "Tus récords",
+        "Trophies": "Trofeos"
     },
     
     "eng" : {
@@ -66,7 +67,8 @@
         "MaxTime" : "Max time",
         "YourRecord" : "Record",
         "MapRecord" : "Map Record",
-        "Records" : "Your records"
+        "Records" : "Your records",
+        "Trophies": "Trophies"
         }
     
 }

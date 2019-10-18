@@ -43,7 +43,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
             40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
-
+        /*
         //Boton ambientacion1 = Pradera
 		buttonWorld1 = game.add.button(game.world.centerX - 400,
             game.world.centerY - 200, 'button', actionOnClickWorld1, this,
@@ -79,46 +79,46 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
             game.world.centerY - 200, game.global.activeLanguage.Ice, game.global.style)
         textButtonWorld3.anchor.set(0.5)
         textButtonWorld3.scale.setTo(0.8,0.8)
-
+            */
         //Boton mapa 1
 		buttonMap1 = game.add.button(game.world.centerX ,
-            game.world.centerY , 'button', actionOnClickMap1, this,
+            game.world.centerY -200, 'button', actionOnClickMap1, this,
             0, 0, 0)
         buttonMap1.anchor.set(0.5)
         buttonMap1.scale.setTo(2, 0.8)
         //Texto mapa 1
 		textButtonMap1 = game.add.text(game.world.centerX ,
-            game.world.centerY , game.global.activeLanguage.Map1, game.global.style)
+            game.world.centerY-200 , game.global.activeLanguage.Map1, game.global.style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
         //Boton mapa 2
 		buttonMap2 = game.add.button(game.world.centerX ,
-            game.world.centerY +150 , 'button', actionOnClickMap2, this,
+            game.world.centerY  , 'button', actionOnClickMap2, this,
             0, 0, 0)
         buttonMap2.anchor.set(0.5)
         buttonMap2.scale.setTo(2, 0.8)
         //Texto mapa 2
 		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY +150 , game.global.activeLanguage.Map2, game.global.style)
+            game.world.centerY  , game.global.activeLanguage.Map2, game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
 
         //Boton mapa 3
 		buttonMap3 = game.add.button(game.world.centerX ,
-            game.world.centerY +300 , 'button', actionOnClickMap3, this,
+            game.world.centerY +200 , 'button', actionOnClickMap3, this,
             0, 0, 0)
         buttonMap3.anchor.set(0.5)
         buttonMap3.scale.setTo(2, 0.8)
         //Texto mapa 3
 		textButtonMap3 = game.add.text(game.world.centerX ,
-            game.world.centerY +300 , game.global.activeLanguage.Map3, game.global.style)
+            game.world.centerY +200 , game.global.activeLanguage.Map3, game.global.style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
-        buttonMap1.inputEnabled = false;
-        buttonMap2.inputEnabled = false;
-        buttonMap3.inputEnabled = false;
+        //buttonMap1.inputEnabled = false;
+        //buttonMap2.inputEnabled = false;
+        //buttonMap3.inputEnabled = false;
 
         function actionOnClickBack(){
             game.state.start('mainMenuState')
