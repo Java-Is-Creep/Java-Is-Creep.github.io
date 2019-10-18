@@ -33,7 +33,8 @@
         "MapRecord" : "Récord del Mapa",
         "Records" : "Tus récords",
         "Trophies": "Trofeos",
-        "Points": "Puntuación"
+        "Points": "Puntuación",
+        "NoPlayed": "No has jugado el mapa"
     },
     
     "eng" : {
@@ -70,7 +71,8 @@
         "MapRecord" : "Map Record",
         "Records" : "Your records",
         "Trophies": "Trophies",
-        "Points": "Puntuation"
+        "Points": "Puntuation",
+        "NoPlayed": "Map not played"
         }
     
 }

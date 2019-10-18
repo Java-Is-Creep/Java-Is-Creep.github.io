@@ -51,6 +51,7 @@ Slooow.recordsState.prototype = {
         this.background.anchor.set(0.5, 0.5)
 
         
+        
         //Boton mapa 1
 		buttonMap1 = game.add.button(game.world.centerX - 400,
             game.world.centerY - 200, 'button', actionOnClickMap1, this,
@@ -63,55 +64,76 @@ Slooow.recordsState.prototype = {
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
+        buttonTime1 = game.add.button(game.world.centerX +100,
+            game.world.centerY -200, 'button', null, this,
+            0, 0, 0)
+        buttonTime1.anchor.set(0.5, 0.5)
+        buttonTime1.scale.setTo(1, 0.5)
+        buttonTime1.inputEnabled = false;
+
         if (game.global.myTimes[1] >= 1000000000 || isNaN(game.global.myTimes[1])){
-            textTimeMap1 = game.add.text(game.world.centerX - 400,
-                game.world.centerY , 'No has jugado el mapa', game.global.style)
+            textTimeMap1 = game.add.text(game.world.centerX +100,
+                game.world.centerY -200, game.global.activeLanguage.NoPlayed, game.global.style)
         } else {
-            textTimeMap1 = game.add.text(game.world.centerX - 400,
-                game.world.centerY , calculateTime(game.global.myTimes[1]), game.global.style)
+            textTimeMap1 = game.add.text(game.world.centerX +100,
+                game.world.centerY -200 , calculateTime(game.global.myTimes[1]), game.global.style)
         }
         textTimeMap1.anchor.set(0.5)
         textTimeMap1.scale.setTo(0.8,0.8)
 
         //Boton mapa 2
-		buttonMap2 = game.add.button(game.world.centerX ,
-            game.world.centerY - 200, 'button', actionOnClickMap2, this,
+		buttonMap2 = game.add.button(game.world.centerX -400 ,
+            game.world.centerY , 'button', actionOnClickMap2, this,
             0, 0, 0)
         buttonMap2.anchor.set(0.5)
         buttonMap2.scale.setTo(0.8, 0.7)
         //Texto mapa2
-		textButtonMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 200, game.global.nameMapRecords[0], game.global.style)
+		textButtonMap2 = game.add.text(game.world.centerX -400,
+            game.world.centerY , game.global.nameMapRecords[0], game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
+        buttonTime1 = game.add.button(game.world.centerX +100,
+            game.world.centerY , 'button', null, this,
+            0, 0, 0)
+        buttonTime1.anchor.set(0.5, 0.5)
+        buttonTime1.scale.setTo(1, 0.5)
+        buttonTime1.inputEnabled = false;
+
         if (game.global.myTimes[0] >= 1000000000|| isNaN(game.global.myTimes[0])){
-            textTimeMap2 = game.add.text(game.world.centerX ,
-                game.world.centerY , 'No has jugado el mapa', game.global.style)
+            textTimeMap2 = game.add.text(game.world.centerX +100,
+                game.world.centerY , game.global.activeLanguage.NoPlayed, game.global.style)
         } else {
-        textTimeMap2 = game.add.text(game.world.centerX ,
-            game.world.centerY , calculateTime(game.global.myTimes[0]), game.global.style)
+            textTimeMap2 = game.add.text(game.world.centerX +100,
+                game.world.centerY , calculateTime(game.global.myTimes[0]), game.global.style)
         }
         textTimeMap2.anchor.set(0.5)
         textTimeMap2.scale.setTo(0.8,0.8)
 
         //Boton mapa 3
-		buttonMap3 = game.add.button(game.world.centerX + 400,
-            game.world.centerY - 200, 'button', actionOnClickMap3, this,
+		buttonMap3 = game.add.button(game.world.centerX - 400,
+            game.world.centerY + 200, 'button', actionOnClickMap3, this,
             0, 0, 0)
         buttonMap3.anchor.set(0.5)
         buttonMap3.scale.setTo(0.8, 0.7)
         //Texto mapa3
-		textButtonMap3 = game.add.text(game.world.centerX + 400,
-            game.world.centerY - 200, game.global.nameMapRecords[2], game.global.style)
+		textButtonMap3 = game.add.text(game.world.centerX - 400,
+            game.world.centerY + 200, game.global.nameMapRecords[2], game.global.style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
 
+        buttonTime1 = game.add.button(game.world.centerX +100,
+            game.world.centerY +200, 'button', null, this,
+            0, 0, 0)
+        buttonTime1.anchor.set(0.5, 0.5)
+        buttonTime1.scale.setTo(1, 0.5)
+        buttonTime1.inputEnabled = false;
+
         if (game.global.myTimes[2] >= 1000000000 || isNaN(game.global.myTimes[2]) ){
-            textTimeMap3 = game.add.text(game.world.centerX + 400,
-                game.world.centerY , 'No has jugado el mapa', game.global.style)
+            textTimeMap3 = game.add.text(game.world.centerX +100,
+                game.world.centerY +200, game.global.activeLanguage.NoPlayed, game.global.style)
         } else {
-        textTimeMap3 = game.add.text(game.world.centerX +400 ,
-            game.world.centerY , calculateTime(game.global.myTimes[2]), game.global.style)
+        textTimeMap3 = game.add.text(game.world.centerX +100 ,
+            game.world.centerY +200, calculateTime(game.global.myTimes[2]), game.global.style)
         }
         textTimeMap3.anchor.set(0.5)
         textTimeMap3.scale.setTo(0.8,0.8)
