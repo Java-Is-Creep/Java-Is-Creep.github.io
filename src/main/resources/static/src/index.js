@@ -193,7 +193,7 @@ window.onload = function () {
                 var arrayWidth = JSON.parse(msg.width)
                 var type = JSON.parse(msg.myType)
 
-                var roomType = JSON.parse(msg.roomType)
+                var roomType = JSON.stringify(msg.roomType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;

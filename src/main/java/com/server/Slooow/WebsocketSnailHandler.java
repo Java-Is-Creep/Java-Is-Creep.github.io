@@ -346,6 +346,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				} else {
 					notOwned.add(snail.toString());
 				}
+			}
 				Gson gsonOwn = new Gson();
 				String ownedArray = gsonOwn.toJson(owned);
 				String notOwnedArray = gsonOwn.toJson(notOwned);
@@ -365,6 +366,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			} finally {
 				jug.sessionLock.unlock();
 			}
+
 
 			break;
 
