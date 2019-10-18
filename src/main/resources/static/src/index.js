@@ -731,7 +731,8 @@ window.onload = function () {
                 game.state.start('gameOverState')
                 break
             case 'WAITINGROOMSTART':
-                var roomName = JSON.parse(msg.roomName)
+                var roomName = JSON.stringify(msg.roomName)
+                roomName = roomName.substring(1, roomName.length-1)
                 this.game.global.roomNameMulti = roomName
                 this.game.state.start('lobbyMultiState')
                 break
@@ -762,10 +763,10 @@ window.onload = function () {
                 break
 
             case 'PLAYERENTER':
-                var namePlayer = JSON.parse(msg.name)    
+                var namePlayer = JSON.stringify(msg.name)    
                 break
             case 'PLAYERLEFT':
-                var namePlayer = JSON.parse(msg.name)   
+                var namePlayer = JSON.stringify(msg.name)   
                 break 
             case 'MULTIROOMSFULL':
                 break   

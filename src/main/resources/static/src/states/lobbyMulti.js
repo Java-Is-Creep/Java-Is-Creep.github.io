@@ -37,8 +37,32 @@ Slooow.lobbyMultiState.prototype = {
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
+        //Boton listo 
+        buttonBack = game.add.button(game.world.centerX,
+            game.world.centerY, 'button', actionOnClickOK, this,
+            0, 0, 0)
+        buttonBack.anchor.set(0.5)
+        buttonBack.scale.setTo(0.2, 0.3)
+        //Texto listo
+        textButtonBack = game.add.text(game.world.centerX,
+            game.world.centerY, game.global.activeLanguage.Accept, game.global.style)
+        textButtonBack.anchor.set(0.5)
+        textButtonBack.scale.setTo(0.5,0.5)
+
         function actionOnClickBack(){
             game.state.start('mainMenuState')
+        }
+        function actionOnClickOK(){
+            let msg = {
+                event: 'CHOOSESNAIL',
+                chooseSnail: 'NORMAL'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            let msg2 = {
+                event: 'MULTIPLAYER',
+                roomName : this.game.global.roomNameMulti
+            }
+            game.global.socket.send(JSON.stringify(msg2))
         }
     },
 
