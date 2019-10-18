@@ -131,6 +131,7 @@ window.onload = function () {
 
     game.global.socket.onclose = () => {
         console.log('[DEBUG] Websocket connection closed');
+        game.state.start('errorState')
     }
 
     game.global.socket.onmessage = (message) => {
@@ -646,6 +647,7 @@ window.onload = function () {
 
     this.game.state.add('bootState', Slooow.bootState);
     this.game.state.add('preloadState', Slooow.preloadState);
+    this.game.state.add('errorState', Slooow.errorState);
     this.game.state.add('initGameState', Slooow.initGameState);
     this.game.state.add('initSesionState', Slooow.initSesionState);
     this.game.state.add('createAccountState', Slooow.createAccountState);

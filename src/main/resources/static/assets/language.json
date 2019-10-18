@@ -34,7 +34,8 @@
         "Records" : "Tus récords",
         "Trophies": "Trofeos",
         "Points": "Puntuación",
-        "NoPlayed": "No has jugado el mapa"
+        "NoPlayed": "No has jugado el mapa",
+        "LostCon" : "Has perdido la conexión con el servidor.\nPor favor, recarga la página"
     },
     
     "eng" : {
@@ -72,7 +73,8 @@
         "Records" : "Your records",
         "Trophies": "Trophies",
         "Points": "Puntuation",
-        "NoPlayed": "Map not played"
+        "NoPlayed": "Map not played",
+        "LostCon" : "You have lost connection with the server.\nPlease, refresh the page."
         }
     
 }
