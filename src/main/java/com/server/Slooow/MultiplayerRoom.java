@@ -335,6 +335,7 @@ public class MultiplayerRoom extends Room {
 
 	public void anadirJugador(PlayerConected jug) {
 		playerLock.lock();
+		
 		System.out.println("Valores iniciales");
 		System.out.println("PosX: " + jug.mySnail.posX);
 		System.out.println("PosY: " + jug.mySnail.posY);
@@ -342,6 +343,7 @@ public class MultiplayerRoom extends Room {
 		if (jugadoresEnSala.putIfAbsent(jug.getSession(), jug) == null) {
 			playerArray[numPlayers] = jug;
 			numPlayers++;
+			jug.restartSnail();
 			matchPointsLock.lock();
 			matchmakingPoints +=  jug.matchMakingPunt();
 			matchPointsLock.unlock();
