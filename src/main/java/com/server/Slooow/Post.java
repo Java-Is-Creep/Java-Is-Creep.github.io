@@ -14,4 +14,6 @@ public class Post {
 	String chooseSnail;
 	String snailToSee;
 	int purchaseId;
+	String purchaseSnail;
+	String method;
 }

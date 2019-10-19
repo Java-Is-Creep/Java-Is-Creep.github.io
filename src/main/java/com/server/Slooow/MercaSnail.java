@@ -40,7 +40,7 @@ public class MercaSnail extends SnailInGame {
 	public final static int STATREGEN = 3;
 
 	public final static int CASHPRICE = 100;
-	public final static int POINTSPRICE = 100;
+	public final static int POINTSPRICE = 12000;
 
     public MercaSnail(WebSocketSession mySession, ReentrantLock sessionLock) {
 		super(mySession, sessionLock, MAXSTAMINA, MAXVELOCITYX, 

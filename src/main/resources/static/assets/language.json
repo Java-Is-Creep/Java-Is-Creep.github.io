@@ -47,7 +47,8 @@
         "Regen" : "Regeneración",
         "Sure" : "¿Está seguro de que desea\n realizar esta compra?",
         "Yes" : "Sí",
-        "No" : "No"
+        "No" : "No",
+        "Owned" : "Ya en propiedad"
     },
     
     "eng" : {
@@ -98,7 +99,8 @@
         "Regen" : "Regeneration",
         "Sure" : "Are you sure that you want\n to confirm this purchase?",
         "Yes" : "Yes",
-        "No" : "No"
+        "No" : "No",
+        "Owned" : "Owned"
         }
     
 }

@@ -1012,6 +1012,18 @@ window.onload = function () {
                 break
             case 'PURCHASEOK':
                 game.global.money = JSON.parse(msg.shells)
+                game.global.points = JSON.parse(msg.baba)
+                let ownedAux3 = JSON.parse(msg.owned)
+                let notOwnedAux3 = JSON.parse(msg.notOwned)
+
+                for (var e = 0; e < ownedAux3.length; e++){
+                    game.global.owned[e] = ownedAux3[e];
+                }
+
+                for (var s = 0; s < notOwnedAux3.length; s++){
+                    game.global.notOwned[s] = notOwnedAux3[s]
+                }
+                
                 game.state.start('shopState')
         }   
 

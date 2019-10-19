@@ -40,7 +40,7 @@ public class MiauSnail extends SnailInGame {
 	public final static int STATREGEN = 2;
 
 	public final static int CASHPRICE = 100;
-	public final static int POINTSPRICE = 100;
+	public final static int POINTSPRICE = 12000;
 
     public MiauSnail(WebSocketSession mySession, ReentrantLock sessionLock) {
 		super(mySession, sessionLock, MAXSTAMINA, MAXVELOCITYX, MAXVELOCITYY,
