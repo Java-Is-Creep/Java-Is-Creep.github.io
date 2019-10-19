@@ -255,7 +255,6 @@ public class MultiplayerRoom extends Room {
 					case FINISH:
 						if(!player.mySnail.hasFinish){
 							finishRace(player);
-							deletePlayer[id] = true;
 							player.mySnail.hasFinish = true;
 						}
 
@@ -426,7 +425,9 @@ public class MultiplayerRoom extends Room {
 
 		public void destroyRoom() {
 
-			
+		for(int i = 0; i <MAXNUMPLAYERS; i++){
+			quitarJugador(playerArray[i]);
+		}
 		game.deleteRoom(this);
 		System.out.println("Sala Destruida");
 	}
@@ -555,13 +556,7 @@ public class MultiplayerRoom extends Room {
 
 	}
 
-	public void deletePlayers(){
-		for(int i = 0; i < MAXNUMPLAYERS; i++){
-			if(deletePlayer[i]){
-				quitarJugador(playerArray[i]);
-			}
-		}
-	}
+
 
 
 	public void tick() {
@@ -583,7 +578,6 @@ public class MultiplayerRoom extends Room {
 				}
 				checkSnailState();
 				
-				deletePlayers();
 
 				ArrayList<Float> posX = new ArrayList<>();
 				ArrayList<Float> posY = new ArrayList<>();
@@ -622,7 +616,6 @@ public class MultiplayerRoom extends Room {
 	}
 
 	public void quitarJugador(PlayerConected jug) {
-		System.out.println("QUITANDO JUGADOR INICIO");
 		playerLock.lock();
 		if (jugadoresEnSala.remove(jug.getSession()) != null) {
 			numPlayers--;
@@ -633,7 +626,6 @@ public class MultiplayerRoom extends Room {
 			broadcast(msg2);
 		}
 		playerLock.unlock();
-		System.out.println("QUITANDO JUGADOR FINAL");
 	}
 
 	public void broadcast(JsonObject msg) {
