@@ -27,6 +27,7 @@ Slooow.bootState.prototype = {
 		this.game.add.plugin(PhaserInput.Plugin)
 		this.game.renderer.renderSession.roundPixels = true
 		this.time.desiredFps = game.global.FPS
+		game.load.atlas('loading', './assets/img/bg/loading.png', './assets/img/bg/loading.json');
 	},
 
 	create: function () {},

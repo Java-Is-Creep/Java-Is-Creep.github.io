@@ -10,10 +10,14 @@ Slooow.preloadState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **PRELOAD** state");
 		}
+		game.world.setBounds(0, 0, 1280, 720);
 	},
 
 	// Hasta que este preload no acabe, no se pasa al siguiente estado
 	preload : function() {
+		/*var loading= game.add.sprite(game.world.centerX, game.world.centerY, 'loading')
+		loading.animations.add('loading', Phaser.Animation.generateFrameNames('loadingReal', 0, 7), 5, true);
+		loading.play('loading');*/
 		game.global.style = {
             font: "40px Arial",
             fill: "#ffffff",
@@ -148,7 +152,9 @@ Slooow.preloadState.prototype = {
 	},
 
 	// Pasa al inicio de sesion - crear nuevo usuario
-	create : function() {},
+	create : function() {
+
+	},
 
 	update : function() {
 		//if (typeof game.global.player.id !== 'undefined') {
