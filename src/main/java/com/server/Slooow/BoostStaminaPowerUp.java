@@ -4,15 +4,20 @@ import com.server.Slooow.MapPowerUp.powerType;
 
 public class BoostStaminaPowerUp extends GenericPowerUp {
 
-    public BoostStaminaPowerUp(PlayerConected player,int timeMax,powerType myType) {
-        super(player,timeMax,myType);
+      public BoostStaminaPowerUp(PlayerConected player,int time ,powerType myType,int id,Room room) {
+        super(player,time,myType,id,room);
     }
+
 
     @Override
     public void usePowerUp(){
         player.mySnail.setUsingPowerUp(true);
         player.mySnail.hasBoostStamina = true;
-        sendMessage();
+         if(room.myType.compareTo("MULTI") == 0){
+            sendMessageMulti();
+        } else {
+            sendMessageSingle();
+        }
     }
 
     public void decrementTime() { // se le debe pasar el tiempo por refresco

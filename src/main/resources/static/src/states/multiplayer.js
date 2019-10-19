@@ -1,24 +1,28 @@
 Slooow.multiplayerState = function (game) {
-
+    
 }
-
+var background
 Slooow.multiplayerState.prototype = {
 
     init: function () {
-        if (game.global.DEBUG_MODE) {
+        //if (game.global.DEBUG_MODE) {
             console.log("[DEBUG] Entering **MULTIPLAYER** state");
-        }
+        //}
         game.world.setBounds(0, 0, 8640, 1600);
     },
 
     preload: function () {
 
         // Cargamos el background
-        var b = game.add.tileSprite(0, game.world.height, 8640, 1600, 'cocinaBg')
-        b.anchor.set(0, 1)
-        b.tileScale.setTo(1.99, 2)
+        background = game.add.tileSprite(0, game.world.height, 8640, 1600, 'cocinaBg')
+        background.anchor.set(0, 1)
+        background.tileScale.setTo(1.99, 2)
 
         game.global.maxStamina = 0
+
+        console.log('array players')
+        console.log(game.global.playersMulti.length)
+        console.dir(game.global.playersMulti)
 
         // Cargamos los objetos posibles del mapa
         for (var i = 0; i < game.global.arrayGrounds.length; i++) {
@@ -270,7 +274,7 @@ Slooow.multiplayerState.prototype = {
         game.global.playersMulti[game.global.myPlayerId].progressBar2 = game.add.sprite(game.width / 3, 20, 'barProgressInteriorNegra')
         game.global.playersMulti[game.global.myPlayerId].progressBar3 = game.add.sprite(game.width / 3, 20, 'barProgressFuera')
 
-        game.global.playersMulti[game.global.myPlayerId].progressBar2.x += game.global.player.progressBar2.width
+        game.global.playersMulti[game.global.myPlayerId].progressBar2.x += game.global.playersMulti[game.global.myPlayerId].progressBar2.width
         game.global.playersMulti[game.global.myPlayerId].progressBar2.anchor.setTo(1, 0)
 
         game.global.playersMulti[game.global.myPlayerId].progressBar1.fixedToCamera = true;
@@ -320,6 +324,7 @@ Slooow.multiplayerState.prototype = {
         game.global.playersMulti[game.global.myPlayerId].speedPowerUp.visible = false
         game.global.playersMulti[game.global.myPlayerId].speedPowerUp.scale.setTo(0.4, 0.4)
         game.global.playersMulti[game.global.myPlayerId].speedPowerUp.fixedToCamera = true
+
     },
 
     create: function () {
@@ -332,8 +337,6 @@ Slooow.multiplayerState.prototype = {
 
     // Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
     update: function () {
-        this.background.tilePosition.x += 0.5
-        this.background.tilePosition.y -= 0.5
 
         let msg = {
             event: 'UPDATEINPUT',
@@ -386,7 +389,7 @@ Slooow.multiplayerState.prototype = {
                 if (game.global.degreesToRotateSlopeMulti[i] > 0) {
                     if (game.global.playersMulti[i].sprite.angle > -game.global.degreesToRotateSlopeMulti[i]) {
                         game.global.playersMulti[i].sprite.angle -= 3
-                        game.global.playersMulti[i].sprite.angle = Math.round(game.global.playersMultiMulti[i].sprite.angle)
+                        game.global.playersMulti[i].sprite.angle = Math.round(game.global.playersMulti[i].sprite.angle)
                     } else {
                         game.global.playersMulti[i].sprite.angle = -game.global.degreesToRotateSlopeMulti[i]
                         game.global.haveToRotateToSlopeMulti[i] = false

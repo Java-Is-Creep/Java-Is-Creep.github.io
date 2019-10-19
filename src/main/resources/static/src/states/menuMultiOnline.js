@@ -212,13 +212,13 @@ Slooow.menuMultiOnlineState.prototype = {
         }
 
         function actionOnClickMap1() {
-            map = 'map1'
+            map = 'mapa1'
         }
         function actionOnClickMap2() {
-            map = 'map2'
+            map = 'mapa2'
         }
         function actionOnClickMap3() {
-            map = 'map3'
+            map = 'mapa3'
         }
 
         function actionOnClickOK() {
@@ -231,7 +231,7 @@ Slooow.menuMultiOnlineState.prototype = {
             } else if (option == 1) {
                 let msg = {
                     event: 'ENTERLOBBYMULTI',
-                    RoomMap: map,
+                    mapName: map,
                     roomName: roomNameButton.value
                 }
                 game.global.socket.send(JSON.stringify(msg))

@@ -9,8 +9,8 @@ import org.springframework.web.socket.TextMessage;
 
 public class ShieldPowerUp extends GenericPowerUp {
 
-    public ShieldPowerUp(PlayerConected player,powerType myType) {
-        super(player,0,myType);
+    public ShieldPowerUp(PlayerConected player,powerType myType,int id,Room room) {
+        super(player,0,myType,id,room);
     }
 
     @Override
@@ -18,7 +18,12 @@ public class ShieldPowerUp extends GenericPowerUp {
         player.mySnail.activateShield();
         player.mySnail.setUsingPowerUp(false);
         player.mySnail.powerUpList.removeFirst();
-        sendMessage();
+        if(room.myType.compareTo("MULTI") == 0){
+            sendMessageMulti();
+        } else {
+            sendMessageSingle();
+        }
+        
         System.out.println("Caracol protegido");
     }
 

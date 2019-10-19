@@ -150,13 +150,13 @@ public class SnailGame {
 
 	public void createSingleRoom(String roomName, PlayerConected jug, String mapName) {
 
-		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug, this, mapName);
+		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug, this, mapName,"SINGLE");
 		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
 	}
 
 	public void createMultiRoom(String roomName, PlayerConected jug, String mapName){
 		multiPlayerLock.lock();
-		MultiplayerRoom roomAux = new MultiplayerRoom(roomName, jug, this, mapName);
+		MultiplayerRoom roomAux = new MultiplayerRoom(roomName, jug, this, mapName,"MULTI");
 		multiPlayerRoomMap.putIfAbsent(roomAux.name, roomAux);
 		roomAux.anadirJugador(jug);
 		multiPlayerLock.unlock();

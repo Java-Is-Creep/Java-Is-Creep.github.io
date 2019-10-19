@@ -58,11 +58,13 @@ Slooow.lobbyMultiState.prototype = {
                 chooseSnail: 'NORMAL'
             }
             game.global.socket.send(JSON.stringify(msg))
+            console.log(this.game.global.roomNameMulti)
             let msg2 = {
                 event: 'MULTIPLAYER',
                 roomName : this.game.global.roomNameMulti
             }
             game.global.socket.send(JSON.stringify(msg2))
+            console.log('chooseSnail y multiplayer mandados')
         }
     },
 

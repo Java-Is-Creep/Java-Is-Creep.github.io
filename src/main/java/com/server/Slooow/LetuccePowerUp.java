@@ -6,8 +6,10 @@ public class LetuccePowerUp extends GenericPowerUp {
 
     int staminaRecover;
 
-    public LetuccePowerUp(PlayerConected player, int timeMax, int staminaRecover,powerType myType) {
-        super(player, timeMax,myType);
+
+
+    public LetuccePowerUp(PlayerConected player, int timeMax, int staminaRecover,powerType myType,int id,Room room) {
+        super(player,0,myType,id,room);
         this.staminaRecover = staminaRecover;
     }
 
@@ -20,7 +22,11 @@ public class LetuccePowerUp extends GenericPowerUp {
         if(player.mySnail.stamina > player.mySnail.MAXSTAMINA){
             player.mySnail.stamina = player.mySnail.MAXSTAMINA;
         }
-        sendMessage();
+          if(room.myType.compareTo("MULTI") == 0){
+            sendMessageMulti();
+        } else {
+            sendMessageSingle();
+        }
     }
     
 }

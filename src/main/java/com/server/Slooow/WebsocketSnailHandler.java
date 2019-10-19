@@ -68,6 +68,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 			break;
 		case "MULTIPLAYER":
+			System.out.println("Mensaje de jugador Ready");
 			game.multiPlayerRoomMap.get(post.roomName).addPlayerReady();
 			break;
 
@@ -94,9 +95,10 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 			game.multiPlayerLock.lock();
 			for (MultiplayerRoom multi : game.multiPlayerRoomMap.values()) {
-				if (multi.isFull.get()) {
+				if (!multi.isFull.get()) {
 					double preDiff = Math.abs((double) (multi.getMatchmakingPoints() - matchPoints));
-					if (preDiff < diff) {
+					System.out.println("PreDiff es: "+ preDiff);
+					if (preDiff <= diff) {
 						diff = preDiff;
 						multiAux = multi;
 					}
@@ -105,6 +107,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			if (multiAux != null) {
 				multiAux.anadirJugador(jug);
 			} else {
+				System.out.println("Sala random no encontrada");
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "MULTIROOMSFULL");
 

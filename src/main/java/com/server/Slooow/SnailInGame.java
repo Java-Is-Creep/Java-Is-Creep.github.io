@@ -238,7 +238,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	// En paredes pierde stamina y cuando acelera tambien, si se queda sin estamina,
 	// se para hasta que la recupere.
 	// Actualizacion del movimiento y variables del caracol
-	public void updateSnail() {
+	public void updateSnail(Room room, int id) {
 		/*
 		 * 
 		 * System.out.println(" MAX NORMAL SPEEDX: " + maxNormalSpeedX);
@@ -329,7 +329,11 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 							hasShield = false;
 							spikes.playerCrash();
 							isOnObstacle = false;
-							sendCrashMessage("LOSESHIELD");
+							if(room.myType.compareTo("SINGLE") == 0){
+								sendCrashMessageSingle("LOSESHIELD");
+							} else {
+								sendCrashMessageMulti("LOSESHIELDMULTI",id);
+							}
 							System.out.println("se pincho pero se protegio con escudo");
 						} else if(isProtected){
 							System.out.println("Se estaba recuperando del impacto anterior");
@@ -338,7 +342,12 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 							crashObstacle();
 							isOnObstacle = false;
 							isProtected = true;
-							sendCrashMessage("OBSTACLECOLLISION");
+							if(room.myType.compareTo("SINGLE") == 0){
+								sendCrashMessageSingle("OBSTACLECOLLISION");
+							} else {
+								sendCrashMessageMulti("OBSTACLECOLLISIONMULTI",id);
+							}
+							
 							System.out.println("se pincho ");
 						}
 					}
@@ -616,7 +625,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		hasShield = true;
 	}
 
-	public void sendCrashMessage(String event) {
+	public void sendCrashMessageSingle(String event) {
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", event);
 		try {
@@ -630,5 +639,22 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		}
 
 	}
+
+	public void sendCrashMessageMulti(String event, int id) {
+		JsonObject msg = new JsonObject();
+		msg.addProperty("event", event);
+		msg.addProperty("id", id);
+		try {
+			sessionLock.lock();
+			mySession.sendMessage(new TextMessage(msg.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			sessionLock.unlock();
+		}
+
+	}
+
 
 }

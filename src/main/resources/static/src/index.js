@@ -59,7 +59,6 @@ window.onload = function () {
 
     var firstFrame = 0;
 
-
     //Variables globales compartidas entre escenas
     game.global = {
         //Socket
@@ -85,7 +84,7 @@ window.onload = function () {
         //Array de trampolines
         arrayTrampolines: [],
         arrayObstacleFire: [],
-        arrayDoors:[],
+        arrayDoors: [],
         arrayWinds: [],
         finishObject: new Object,
         player: new this.Object(),
@@ -93,14 +92,14 @@ window.onload = function () {
         winner: false,
         time: null,
         maxTime: null,
-        record : null,
-        puntuationGameOver : null,
+        record: null,
+        puntuationGameOver: null,
         //Cosas visuales jugador (de solo)
         haveToRotateToWall: false,
         haveToRotateToGround: false,
         haveToRotateToSlope: false,
         degreesToRotateSlope: 0,
-        maxStamina : 0,
+        maxStamina: 0,
         //Cosas visuales jugador (multi)
         myPlayerId: null,
         playersMulti: [],
@@ -109,9 +108,9 @@ window.onload = function () {
         haveToRotateToGroundMulti: [],
         haveToRotateToSlopeMulti: [],
         degreesToRotateSlopeMulti: [],
-        arrayPositionsMulti:[],
+        arrayPositionsMulti: [],
         arrayTimesMulti: [],
-        roomNameMulti : null,
+        roomNameMulti: null,
         //PowerUps
         wingPowerUp: null,
         shieldPowerUp: null,
@@ -133,10 +132,10 @@ window.onload = function () {
         nameMapRecords: [],
         myTimes: [],
         style: null,
-        maxStamina : 0,
-        puntuationGameOver : null,
-        money : null,
-        points : null
+        maxStamina: 0,
+        puntuationGameOver: null,
+        money: null,
+        points: null
     }
 
     // Conexiones
@@ -169,24 +168,25 @@ window.onload = function () {
                 }
                 // Tratamiento del personaje
                 game.global.player.sprite.x = Math.floor(msg.posX)
-                game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY)) -10
+                game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY)) - 10
                 // Tratamiento de la estamina (UI)
                 if (game.global.player.maxStamina == 0) {
                     game.global.player.maxStamina = msg.stamina
                 }
                 var scale = msg.stamina * 0.5 / game.global.player.maxStamina
                 game.global.player.stamina2.scale.setTo(scale, 0.45)
-                
+
                 // Tratamiento de la barra de progreso
                 //console.log (game.global.finishObject.x)
                 var posProgress = 100 + game.global.finishObject.x - game.global.player.sprite.x
-                var scaleProgress = posProgress/game.global.finishObject.x
+                var scaleProgress = posProgress / game.global.finishObject.x
                 game.global.player.progressBar2.scale.setTo(scaleProgress, 1)
 
                 break
             case 'DRAWMAP':
                 //Arrays con los parametros de todos los objetos del mapa. Dependiendo del tipo se guardaran
                 //En un array u otro
+                this.console.log('Me llega el draw map')
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 var arrayHeight = JSON.parse(msg.height)
@@ -194,6 +194,8 @@ window.onload = function () {
                 var type = JSON.parse(msg.myType)
 
                 var roomType = JSON.stringify(msg.roomType)
+                roomType = roomType.substring(1, roomType.length - 1)
+                this.console.log(roomType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
@@ -259,14 +261,14 @@ window.onload = function () {
                             // this.console.log('Posicion imagen: ' + 'x ' +  this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.x +  'y: '+this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].image.y)
                             // this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].height = arrayHeight[i]
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes].width = arrayWidth[i]
-                           // console.log("Patata")
+                            // console.log("Patata")
                             //console.dir(this.game.global.arrayObstacles[numOfObstacles])
                             this.game.global.arrayObstacles[numOfObstacles] = new Object()
                             //this.game.global.arrayObstacleSpikes[numOfObstacleSpikes] = game.add.image(arrayPosX[i],game.world.height - arrayPosY[i], 'button')
                             this.game.global.arrayObstacles[numOfObstacles].x = arrayPosX[i]
                             this.game.global.arrayObstacles[numOfObstacles].y = arrayPosY[i]
-                           // console.log("Patata777")
-                           // console.dir(this.game.global.arrayObstacles)
+                            // console.log("Patata777")
+                            // console.dir(this.game.global.arrayObstacles)
                             numOfObstacles++
                             break
                         case 'GENERICPOWERUP':
@@ -284,8 +286,8 @@ window.onload = function () {
                             game.global.arrayTrapdoors[numOfTrapdoors].height = arrayHeight[i]
                             game.global.arrayTrapdoors[numOfTrapdoors].width = arrayWidth[i]
                             numOfTrapdoors++
-                           // console.log('trapdoor')
-                           // console.dir(game.global.arrayTrapdoors)
+                            // console.log('trapdoor')
+                            // console.dir(game.global.arrayTrapdoors)
                             break
                         case 'TRAMPOLINE':
                             this.game.global.arrayTrampolines[numOfTrampolines] = new Object()
@@ -296,18 +298,18 @@ window.onload = function () {
                             numOfTrampolines++;
                             break
                         case 'DOOR':
-                                this.game.global.arrayDoors[numOfDoors] = new Object()
-                                game.global.arrayDoors[numOfDoors].x = arrayPosX[i]
-                                game.global.arrayDoors[numOfDoors].y = arrayPosY[i]
-                                game.global.arrayDoors[numOfDoors].height = arrayHeight[i]
-                                game.global.arrayDoors[numOfDoors].width = arrayWidth[i]
-                                numOfDoors++;
-                            break    
+                            this.game.global.arrayDoors[numOfDoors] = new Object()
+                            game.global.arrayDoors[numOfDoors].x = arrayPosX[i]
+                            game.global.arrayDoors[numOfDoors].y = arrayPosY[i]
+                            game.global.arrayDoors[numOfDoors].height = arrayHeight[i]
+                            game.global.arrayDoors[numOfDoors].width = arrayWidth[i]
+                            numOfDoors++;
+                            break
                         case 'WIND':
                             //this.console.dir(msg)
                             var direction = JSON.parse(msg.direction)
                             //this.console.log(direction)
-                           //this.console.log(direction[numOfWinds])
+                            //this.console.log(direction[numOfWinds])
                             this.game.global.arrayWinds[numOfWinds] = new this.Object()
                             this.game.global.arrayWinds[numOfWinds].x = arrayPosX[i]
                             this.game.global.arrayWinds[numOfWinds].y = arrayPosY[i]
@@ -317,7 +319,7 @@ window.onload = function () {
                             //this.console.log('wind draw map')
                             //this.console.dir(game.global.arrayWinds[numOfWinds])
                             numOfWinds++
-                            break    
+                            break
                         case 'FINISH':
                             this.game.global.finishObject.x = arrayPosX[i]
                             this.game.global.finishObject.y = arrayPosY[i]
@@ -329,17 +331,28 @@ window.onload = function () {
                             break
                     }
                 }
-                
-                if (roomType == 'SINGLE'){
+
+                if (roomType == 'SINGLE') {
                     game.state.start('singlePlayerState')
-                } else if (roomType == 'MULTI'){
+                } else if (roomType == 'MULTI') {
+                    var namePlayers = JSON.parse(msg.name)
+                    for (var i = 0; i < namePlayers.length; i++) {
+                        game.global.playersMulti[i] = new this.Object()
+                        this.game.global.playersMulti[i].name = namePlayers[i]
+                        this.game.global.snailChosenMulti[i] = 'NORMAL'
+                        if (namePlayers[i] == this.game.global.username) {
+                            this.game.global.myPlayerId = i
+
+                        }
+                    }
+                    this.console.log('Empiezo el multiplayer')
                     this.game.state.start('multiplayerState')
                 }
-                game.state.start('singlePlayerState')
+
                 break;
 
             case 'OBSTACLEUPDATE':
-               // this.console.log('OPBSTACLE UPDATEEEEEEEEEEEEEEE')
+                // this.console.log('OPBSTACLE UPDATEEEEEEEEEEEEEEE')
                 //console.log(msg)
                 var id = JSON.parse(msg.id)
                 var state = JSON.stringify(msg.estate)
@@ -398,16 +411,16 @@ window.onload = function () {
                 //this.console.dir(msg)
                 var direction = JSON.parse(msg.direction)
                 var id = JSON.parse(msg.id)
-                if (direction == true){
-                   // this.console.log('a favor')
+                if (direction == true) {
+                    // this.console.log('a favor')
                     game.global.arrayWinds[id].angle = 180
                     game.global.arrayWinds[id].animations.play('wind')
-                } else{
-                   // this.console.log('en contra')
+                } else {
+                    // this.console.log('en contra')
                     game.global.arrayWinds[id].angle = 0
                     game.global.arrayWinds[id].animations.play('wind')
                 }
-                break    
+                break
             case 'FINISH':
                 game.global.winner = JSON.parse(msg.winner)
                 game.global.myTime = JSON.parse(msg.time)
@@ -424,7 +437,7 @@ window.onload = function () {
                 this.game.global.haveToRotateToWall = false
                 break
             case 'OBJECTUSED':
-                    this.console.log('invisible')
+                this.console.log('invisible')
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
                         game.global.player.shieldPowerUp.visible = false
@@ -465,7 +478,7 @@ window.onload = function () {
             case 'SLOPECOLLISION':
                 //Poner animacion cuesta
                 var degrees = JSON.parse(msg.degrees)
-                if (degrees < 0){
+                if (degrees < 0) {
                     //degrees = 360 + degrees
                 }
                 this.game.global.degreesToRotateSlope = degrees
@@ -477,14 +490,14 @@ window.onload = function () {
                 //Saber si me quedo sin stamina o si la recupero
                 var runOutOfStamina = JSON.parse(msg.runOutStamina)
                 var recoverStamina = JSON.parse(msg.recoverStamina)
-                if (runOutOfStamina){
+                if (runOutOfStamina) {
                     //Animacion de cansarse
                     game.global.player.sprite.animations.play('tired');
                 } else
-                if (recoverStamina){
-                    //Animacion de andar normal
-                    game.global.player.sprite.animations.play('walk');
-                }
+                    if (recoverStamina) {
+                        //Animacion de andar normal
+                        game.global.player.sprite.animations.play('walk');
+                    }
                 break
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
@@ -492,19 +505,19 @@ window.onload = function () {
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha = 0
-                if (this.game.global.hasPowerUp){
-                    if (game.global.player.shieldPowerUp.visible == true){
+                if (this.game.global.hasPowerUp) {
+                    if (game.global.player.shieldPowerUp.visible == true) {
                         game.global.player.shieldPowerUp.visible = false
-                    } 
-                    else if(game.global.player.staminaPowerUp.visible == true){
+                    }
+                    else if (game.global.player.staminaPowerUp.visible == true) {
                         game.global.player.staminaPowerUp.visible = false
-                    } else if(game.global.player.wingPowerUp.visible == true){
+                    } else if (game.global.player.wingPowerUp.visible == true) {
                         game.global.player.wingPowerUp.visible = false
-                    } else if (game.global.player.lettucePowerUp.visible == true){
+                    } else if (game.global.player.lettucePowerUp.visible == true) {
                         game.global.player.lettucePowerUp.visible = false
-                    } else if(game.global.player.speedPowerUp.visible == true){
+                    } else if (game.global.player.speedPowerUp.visible == true) {
                         game.global.player.speedPowerUp.visible = false
-                    } else if (game.global.player.inkPowerUp.visible == true){
+                    } else if (game.global.player.inkPowerUp.visible == true) {
                         game.global.player.inkPowerUp.visible = false
                     }
                 }
@@ -542,7 +555,7 @@ window.onload = function () {
                 this.game.global.hasPowerUp = true
                 break
             case 'UPDATEDOOR':
-                
+
                 //Cambiar el sprite de la puerta
                 var id = JSON.parse(msg.id)
                 //console.log(this.game.global.arrayDoors[id])
@@ -563,7 +576,7 @@ window.onload = function () {
                 this.game.global.haveToRotateToWall = true
                 break
             case 'LOGINSTATUS':
-                if(JSON.parse(msg.conectionStatus)){
+                if (JSON.parse(msg.conectionStatus)) {
                     game.state.start('mainMenuState')
                 } else {
                     // deberia sacarse un mensaje de error
@@ -571,7 +584,7 @@ window.onload = function () {
                 }
                 break
             case 'CREATEACCOUNTSTATUS':
-                if(JSON.parse(msg.conectionStatus)){
+                if (JSON.parse(msg.conectionStatus)) {
                     game.state.start('mainMenuState')
                 } else {
                     //game.state.start('shopState')
@@ -579,76 +592,76 @@ window.onload = function () {
                 }
                 break
             case 'DISCONNECTSTATUS':
-                game.global.mapDrawn= false
+                game.global.mapDrawn = false
                 game.global.username = ''
                 game.global.password = ''
                 //Array de suelos. Tiene: x, y, width, height
                 game.global.arrayGrounds = []
                 //Array de paredes. Tiene: x, y, width, height
-                game.global.arrayWalls= []
+                game.global.arrayWalls = []
                 //Array de rampas. Tiene: x, y, width, height
-                game.global.arraySlopes= []
+                game.global.arraySlopes = []
                 //Array de obstaculos tipo pincho. Tiene: posX, posY
-                game.global.arrayObstacles= []
+                game.global.arrayObstacles = []
                 //Array de power ups
-                game.global.arrayPowerUps= []
+                game.global.arrayPowerUps = []
                 //ArrayTrapdoors
-                game.global.arrayTrapdoors= []
+                game.global.arrayTrapdoors = []
                 //Array de trampolines
-                game.global.arrayTrampolines= []
-                game.global.arrayObstacleFire= []
-                game.global.arrayDoors=[]
-                game.global.arrayWinds= []
-                game.global.finishObject= new Object
-                game.global.player= new this.Object()
-                game.global.winner= false
-                game.global.time= null
-                game.global.maxTime= null
+                game.global.arrayTrampolines = []
+                game.global.arrayObstacleFire = []
+                game.global.arrayDoors = []
+                game.global.arrayWinds = []
+                game.global.finishObject = new Object
+                game.global.player = new this.Object()
+                game.global.winner = false
+                game.global.time = null
+                game.global.maxTime = null
                 game.global.record = null
-                game.global.haveToRotateToWall= false
-                game.global.haveToRotateToGround= false
-                game.global.haveToRotateToSlope= false
-                game.global.degreesToRotateSlope= 0
-                game.global.wingPowerUp= null
-                game.global.shieldPowerUp= null
-                game.global.staminaPowerUp= null
-                game.global.lettucePowerUp= null
-                game.global.onPowerUp= null
-                game.global.downPowerUp= null
-                game.global.clockPowerUp= null
-                game.global.inkPowerUp= null
-                game.global.speedPowerUp= null
-                game.global.hasPowerUp= false
+                game.global.haveToRotateToWall = false
+                game.global.haveToRotateToGround = false
+                game.global.haveToRotateToSlope = false
+                game.global.degreesToRotateSlope = 0
+                game.global.wingPowerUp = null
+                game.global.shieldPowerUp = null
+                game.global.staminaPowerUp = null
+                game.global.lettucePowerUp = null
+                game.global.onPowerUp = null
+                game.global.downPowerUp = null
+                game.global.clockPowerUp = null
+                game.global.inkPowerUp = null
+                game.global.speedPowerUp = null
+                game.global.hasPowerUp = false
 
-                game.global.snailChosen= null
-                game.global.mapChosen= null
+                game.global.snailChosen = null
+                game.global.mapChosen = null
 
-                game.global.nameMapRecords= []
-                game.global.myTimes= [] 
-                
+                game.global.nameMapRecords = []
+                game.global.myTimes = []
+
                 game.global.maxStamina = 0
-                if(JSON.parse(msg.disconnectionStatus)){
+                if (JSON.parse(msg.disconnectionStatus)) {
                     game.state.start('initSesionState')
                 }
                 break
 
             case 'ENTERLOBBY':
                 this.console.log('me llega enter lobby')
-                var snail = JSON.stringify(msg.snail)  
-                snail = snail.substring(1, snail.length-1)
+                var snail = JSON.stringify(msg.snail)
+                snail = snail.substring(1, snail.length - 1)
                 this.console.log(snail)
                 this.game.global.snailChosen = snail
                 game.global.maxStamina = 0
                 this.game.state.start('lobbyState')
-                break 
-            
+                break
+
             case 'MYRECORDS':
                 var nameMap = JSON.parse(msg.nameMap)
-                var myTime = JSON.parse(msg.myTime)  
+                var myTime = JSON.parse(msg.myTime)
 
-                for (var i = 0; i< nameMap.length; i++){
-                    this.game.global.nameMapRecords[i] = nameMap [i]
-                    this.game.global.myTimes [i] = myTime[i]
+                for (var i = 0; i < nameMap.length; i++) {
+                    this.game.global.nameMapRecords[i] = nameMap[i]
+                    this.game.global.myTimes[i] = myTime[i]
                 }
                 this.game.state.start('recordsState')
                 break
@@ -656,40 +669,37 @@ window.onload = function () {
                 let ownedAux = JSON.parse(msg.owned)
                 let notOwnedAux = JSON.parse(msg.notOwned)
 
-                for (var i = 0; i < ownedAux.length; i++){
+                for (var i = 0; i < ownedAux.length; i++) {
                     game.global.owned[i] = ownedAux[i];
                 }
 
-                for (var j = 0; j < notOwnedAux.length; j++){
+                for (var j = 0; j < notOwnedAux.length; j++) {
                     game.global.notOwned[j] = notOwnedAux[j]
                 }
                 game.global.points = JSON.parse(msg.points)
                 game.global.money = JSON.parse(msg.money)
                 game.state.start('shopState')
                 break
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
             case 'TICKMULTI':
                 //Array de las posiciones de todos los jugadores
                 var arrayPosX = JSON.parse(msg.posX)
-                var arrayPosY = JSON.parse(msg.posY) 
+                var arrayPosY = JSON.parse(msg.posY)
+
                 //Stamina del jugador
                 var arrayStamina = JSON.parse(msg.stamina)
                 //Nombres de los jugadores
-                var namePlayers = JSON.parse(msg.name) 
+                var namePlayers = JSON.parse(msg.name)
 
-
-                 if (firstFrame == 0){
-                     for (var i = 0; i< namePlayers.length; i++){
-                         if (namePlayers[i] == this.game.global.username){
-                            this.game.global.myPlayerId = i
-                            this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
-                         }
-                     } 
+                if (firstFrame == 0) {
+                    this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
+                    firstFrame++
+                    this.console.log(game.global.playersMulti)
                 }
                 //Actualizamos las posiciones de todos los caracoles
-                for (var i = 0; i< arrayPosX.length; i++){
+                for (var i = 0; i < arrayPosX.length; i++) {
                     this.game.global.playersMulti[i].sprite.x = Math.floor(arrayPosX[i])
                     this.game.global.playersMulti[i].sprite.y = game.world.height - Math.floor(arrayPosY[i]) - 10
                 }
@@ -699,46 +709,48 @@ window.onload = function () {
 
                 //Actualizar barra de progreso del jugador (MAS ADELANTE TODOS)
                 var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
-                var scaleProgress = posProgress/game.global.finishObject.x
+                var scaleProgress = posProgress / game.global.finishObject.x
                 game.global.playersMulti[this.game.global.myPlayerId].progressBar2.scale.setTo(scaleProgress, 1)
+
                 break
             case 'SNAILUPDATEMULTI':
                 var runOutOfStamina = JSON.parse(msg.runOutStamina)
                 var recoverStamina = JSON.parse(msg.recoverStamina)
                 var idPlayer = JSON.parse(msg.id)
 
-                if (runOutOfStamina){
+                if (runOutOfStamina) {
                     //Animacion de cansarse
                     game.global.playersMulti[idPlayer].sprite.animations.play('tired');
                 } else
-                if (recoverStamina){
-                    //Animacion de andar normal
-                    game.global.playersMulti[idPlayer].sprite.animations.play('walk');
-                }
-                break   
+                    if (recoverStamina) {
+                        //Animacion de andar normal
+                        game.global.playersMulti[idPlayer].sprite.animations.play('walk');
+                    }
+                break
             case 'FINISHMULTI':
                 var myTime = JSON.parse(msg.time)
                 var myRecord = JSON.parse(msg.record)
                 var myPoints = JSON.parse(msg.points)
-                var arrayPositionNames = JSON.parse(msg.positionName) 
+                var arrayPositionNames = JSON.stringify(msg.positionName)
                 var arrayPositionTimes = JSON.parse(msg.positionTime)
 
                 game.global.myTime = myTime
                 game.global.myRecord = myRecord
                 game.global.puntuationGameOver = myPoints
-                game.global.arrayPositionsMulti =arrayPositionNames
+                game.global.arrayPositionsMulti = arrayPositionNames
                 game.global.arrayTimesMulti = arrayPositionTimes
                 game.state.start('gameOverState')
                 break
             case 'WAITINGROOMSTART':
                 var roomName = JSON.stringify(msg.roomName)
-                roomName = roomName.substring(1, roomName.length-1)
+                roomName = roomName.substring(1, roomName.length - 1)
                 this.game.global.roomNameMulti = roomName
                 this.game.state.start('lobbyMultiState')
                 break
 
             case 'SLOPECOLLISIONMULTI':
-                var idPlayer = JSON.parse(msg.id) 
+                this.console.log('colision cuesta')
+                var idPlayer = JSON.parse(msg.id)
                 var degreesToRotate = JSON.parse(msg.degrees)
 
                 this.game.global.degreesToRotateSlopeMulti[idPlayer] = degreesToRotate
@@ -746,9 +758,17 @@ window.onload = function () {
                 game.global.haveToRotateToSlopeMulti[idPlayer] = true
                 this.game.global.haveToRotateToWallMulti[idPlayer] = false
                 break
+            case 'OBSTACLECOLLISIONMULTI':
+                
+                this.console.log('colision obstaculo')
+                //Poner animacion de cansado
+                var id = JSON.parse(msg.id)
+                game.global.playersMulti[id].sprite.animations.play('damage');
+                break
 
             case 'WALLCOLLISIONMULTI':
-                var idPlayer = JSON.parse(msg.id) 
+                this.console.log('colision pared')
+                var idPlayer = JSON.parse(msg.id)
 
                 this.game.global.haveToRotateToGroundMulti[idPlayer] = false
                 game.global.haveToRotateToSlopeMulti[idPlayer] = false
@@ -756,33 +776,126 @@ window.onload = function () {
                 break
 
             case 'GROUNDCOLLISIONMULTI':
-                var idPlayer = JSON.parse(msg.id) 
+                this.console.log('colision suelo')
+                var idPlayer = JSON.parse(msg.id)
                 this.game.global.haveToRotateToGroundMulti[idPlayer] = true
                 game.global.haveToRotateToSlopeMulti[idPlayer] = false
                 this.game.global.haveToRotateToWallMulti[idPlayer] = false
                 break
+            case 'OBJECTUSEDMULTI':
+                this.console.log('invisible')
+                var myId = JSON.parse(msg.id)
+                switch (JSON.stringify(msg.type)) {
+                    case '"SHIELD"':
+                        game.global.playersMulti[myId].shieldPowerUp.visible = false
+                        game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'shieldPowerUp'))
+                        break
+                    case '"STAMINA"':
+                        game.global.playersMulti[myId].staminaPowerUp.visible = false
+                        game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'staminaPowerUp'))
+                        break
+                    case '"WEIGHT"':
+                        game.global.playersMulti[myId].wingPowerUp.visible = false
+                        game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'wingsPowerUp'))
+                        break
+                    case '"LETUCCE"':
+                        game.global.playersMulti[myId].lettucePowerUp.visible = false
+                        game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'lettucePowerUp'))
+                        break
+                    case '"SPEED"':
+                        game.global.playersMulti[myId].speedPowerUp.visible = false
+                        game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'speedPowerUp'))
+                        break
+                    case '"INK"':
+                        game.global.playersMulti[myId].inkPowerUp.visible = false
+                        game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'inkPowerUp'))
+                        break
+                    case '"NULL"':
+                        this.console.log('MAL')
+                        break
+                    default:
+                        break
+                }
+                this.game.global.hasPowerUp = false
+                break
+            case 'TAKEPOWERUPMULTI':
+                //DECIR DANI QUE ME MANDE ID
+                //this.console.log('take power up')
+                var id = JSON.parse(msg.id)
+                var idPlayer = JSON.parse(msg.idPlayer)
+                //Borrar powerup con ese id
+                this.game.global.arrayPowerUps[id].alpha = 0
+                if (this.game.global.hasPowerUp) {
+                    if (game.global.playersMulti[idPlayer].shieldPowerUp.visible == true) {
+                        game.global.playersMulti[idPlayer].shieldPowerUp.visible = false
+                    }
+                    else if (game.global.playersMulti[idPlayer].staminaPowerUp.visible == true) {
+                        game.global.playersMulti[idPlayer].staminaPowerUp.visible = false
+                    } else if (game.global.playersMulti[idPlayer].wingPowerUp.visible == true) {
+                        game.global.playersMulti[idPlayer].wingPowerUp.visible = false
+                    } else if (game.global.playersMulti[idPlayer].lettucePowerUp.visible == true) {
+                        game.global.playersMulti[idPlayer].lettucePowerUp.visible = false
+                    } else if (game.global.playersMulti[idPlayer].speedPowerUp.visible == true) {
+                        game.global.playersMulti[idPlayer].speedPowerUp.visible = false
+                    } else if (game.global.playersMulti[idPlayer].inkPowerUp.visible == true) {
+                        game.global.playersMulti[idPlayer].inkPowerUp.visible = false
+                    }
+                }
+                switch (JSON.stringify(msg.type)) {
+                    case '"SHIELD"':
+                        //Crear sprite shield
+                        game.global.playersMulti[idPlayer].shieldPowerUp.visible = true
+                        break
+                    case '"STAMINA"':
+                        //Crear sprite estamina
+                        game.global.playersMulti[idPlayer].staminaPowerUp.visible = true
+                        break
+                    case '"WEIGHT"':
+                        //Crear sprite peso
+                        game.global.playersMulti[idPlayer].wingPowerUp.visible = true
+                        break
+                    case '"LETUCCE"':
+                        //Crear sprite lechuga
+                        game.global.playersMulti[idPlayer].lettucePowerUp.visible = true
+                        break
+                    case '"SPEED"':
+                        //Crear sprite velocidad
+                        game.global.playersMulti[idPlayer].speedPowerUp.visible = true
+                        break
+                    case '"INK"':
+                        //Crear sprite tinta
+                        game.global.playersMulti[idPlayer].inkPowerUp.visible = true
+                        break
+                    case '"NULL"':
+                        this.console.log('MAL')
+                        break
+                    default:
+                        break
+                }
+                this.game.global.hasPowerUp = true
+                break
 
             case 'PLAYERENTER':
-                var namePlayer = JSON.stringify(msg.name)    
+                var namePlayer = JSON.stringify(msg.name)
                 break
             case 'PLAYERLEFT':
-                var namePlayer = JSON.stringify(msg.name)   
-                break 
+                var namePlayer = JSON.stringify(msg.name)
+                break
             case 'MULTIROOMSFULL':
-                break   
+                break
             case 'CHOOSEENTER':
                 let ownedAux2 = JSON.parse(msg.owned)
                 let notOwnedAux2 = JSON.parse(msg.notOwned)
 
-                for (var i = 0; i < ownedAux2.length; i++){
+                for (var i = 0; i < ownedAux2.length; i++) {
                     game.global.owned[i] = ownedAux2[i];
                 }
 
-                for (var j = 0; j < notOwnedAux2.length; j++){
+                for (var j = 0; j < notOwnedAux2.length; j++) {
                     game.global.notOwned[j] = notOwnedAux2[j]
                 }
                 game.state.start('chooseCharacterState')
-        }   
+        }
 
 
     }
@@ -807,7 +920,7 @@ window.onload = function () {
     this.game.state.add('shopState', Slooow.shopState);
     this.game.state.add('recordsState', Slooow.recordsState);
     this.game.state.add('trophiesState', Slooow.trophiesState);
-    
+
 
     this.game.state.start('bootState');
 }

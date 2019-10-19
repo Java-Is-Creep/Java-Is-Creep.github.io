@@ -9,8 +9,8 @@ public class SpeedPowerUp extends GenericPowerUp {
     float aceleratingAcelerationIncrease;
 
     public SpeedPowerUp(PlayerConected player, int timeMax, float normalSpeedIncrease, float aceleratingSpeedIncrease,
-            float normalAcelerationIncrease, float aceleratingAcelerationIncrease,powerType myType) {
-        super(player, timeMax, myType);
+            float normalAcelerationIncrease, float aceleratingAcelerationIncrease,powerType myType,int id,Room room) {
+        super(player, timeMax, myType,id,room);
         this.normalSpeedIncrease = normalSpeedIncrease;
         this.aceleratingSpeedIncrease = aceleratingSpeedIncrease;
         this.normalAcelerationIncrease = normalAcelerationIncrease;
@@ -27,7 +27,11 @@ public class SpeedPowerUp extends GenericPowerUp {
         player.mySnail.normalAcelerationY *= normalAcelerationIncrease;
         player.mySnail.maxAcelerationAceleratingX *= aceleratingAcelerationIncrease;
         player.mySnail.maxAcelerationAceleratingY *= aceleratingAcelerationIncrease;
-        sendMessage();
+        if(room.myType.compareTo("MULTI") == 0){
+            sendMessageMulti();
+        } else {
+            sendMessageSingle();
+        }
 
         System.out.println("Velocidades Incrementadas");
     }

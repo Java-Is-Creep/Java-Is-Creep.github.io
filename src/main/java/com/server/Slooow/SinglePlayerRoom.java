@@ -26,8 +26,8 @@ public class SinglePlayerRoom extends Room {
 
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
-	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game, String mapName) {
-		super(name, player, game, mapName);
+	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game, String mapName,String myType) {
+		super(name, player, game, mapName,myType);
 		}
 
 	public void sendMap() {
@@ -177,7 +177,7 @@ public class SinglePlayerRoom extends Room {
 					break;
 				case POWERUP:
 					MapPowerUp powerAux = (MapPowerUp) object;
-					powerAux.playerCrash(owner, powerArray.indexOf(powerAux));
+					powerAux.playerCrash(owner, powerArray.indexOf(powerAux),this,0);
 					break;
 				case DOOR:
 					owner.mySnail.hasPassedDoor = true;
@@ -386,7 +386,7 @@ public class SinglePlayerRoom extends Room {
 			checkCollisions();
 			updateObstacles();
 
-			owner.mySnail.updateSnail();
+			owner.mySnail.updateSnail(this,0);
 			checkSnailState();
 			JsonObject msg = new JsonObject();
 			msg.addProperty("event", "TICK");
