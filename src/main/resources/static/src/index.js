@@ -160,10 +160,10 @@ window.onload = function () {
 
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
     //game.global.socket = new WebSocket('wss://25.34.17.250:8080/snail')
-    game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
     //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
@@ -360,10 +360,11 @@ window.onload = function () {
                     game.state.start('singlePlayerState')
                 } else if (roomType == 'MULTI') {
                     var namePlayers = JSON.parse(msg.name)
+                    var snails = JSON.parse(msg.snails)
                     for (var i = 0; i < namePlayers.length; i++) {
                         game.global.playersMulti[i] = new this.Object()
                         this.game.global.playersMulti[i].name = namePlayers[i]
-                        this.game.global.snailChosenMulti[i] = 'NORMAL'
+                        this.game.global.snailChosenMulti[i] = snails[i]
                         if (namePlayers[i] == this.game.global.username) {
                             this.game.global.myPlayerId = i
 
