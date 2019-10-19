@@ -1,4 +1,9 @@
 Slooow.chooseCharacterState = function(game) {
+    var stat1
+    var stat2
+    var stat3
+    var stat4
+    var stat5
 }
 
 Slooow.chooseCharacterState.prototype = {
@@ -83,10 +88,9 @@ Slooow.chooseCharacterState.prototype = {
         
         textRegen = game.add.text(game.world.centerX-540, game.world.centerY+250, game.global.activeLanguage.Regen , game.global.style)
         textRegen.scale.setTo(0.5,0.5)
-        var chosen
+        var chosen = null
         loadChosen()
-		chosen.anchor.setTo(0.5, 0.5);
-        chosen.scale.setTo(0.4, 0.4)
+		
 
         //Print image gatocol
         var catShell = game.add.button(game.world.centerX+250, game.world.centerY-230, 'roundBtn')
@@ -228,35 +232,35 @@ Slooow.chooseCharacterState.prototype = {
         for(var i = 0; i < game.global.notOwned.length; i++){
             switch (game.global.notOwned[i]){
                 case ('NORMAL'):
-                        normalShell.inputEnabled = false
+                        normalShell.inputEnabled = true
                         normalShell.alpha = 0.6
                     break
                 case ('TANK'):
-                        tankShell.inputEnabled = false
+                        tankShell.inputEnabled = true
                         tankShell.alpha = 0.6
                     break   
                 case ('BAGUETTE'):
-                        frenchShell.inputEnabled = false
+                        frenchShell.inputEnabled = true
                         frenchShell.alpha = 0.6
                     break    
                 case ('MIAU'):
-                        catShell.inputEnabled = false
+                        catShell.inputEnabled = true
                         catShell.alpha = 0.6
                     break    
                 case ('MERCA'):
-                        slugShell.inputEnabled = false
+                        slugShell.inputEnabled = true
                         slugShell.alpha = 0.6
                     break     
                 case ('SEA'):
-                        seaShell.inputEnabled = false
+                        seaShell.inputEnabled = true
                         seaShell.alpha = 0.6
                     break
                 case ('ROBA'):
-                        thiefShell.inputEnabled = false
+                        thiefShell.inputEnabled = true
                         thiefShell.alpha = 0.6
                     break
                 case ('IRIS'):
-                        rainbowShell.inputEnabled = false
+                        rainbowShell.inputEnabled = true
                         rainbowShell.alpha = 0.6
                     break
                 default:
@@ -271,6 +275,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'SEA'
+            loadChosen()
         }
         
         function chooseCharacterThief(){
@@ -279,6 +284,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'ROBA'
+            loadChosen()
         }
 
         function chooseCharacterRainbow(){
@@ -287,6 +293,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'IRIS'
+            loadChosen()
         }
 
         function chooseCharacterCat(){
@@ -295,6 +302,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'MIAU'
+            loadChosen()
         }
 
         function chooseCharacterFrench(){
@@ -303,6 +311,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'BAGUETTE'
+            loadChosen()
         }
 
         function chooseCharacterNormal(){
@@ -311,6 +320,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'NORMAL'
+            loadChosen()
         }
 
         function chooseCharacterTank(){
@@ -319,6 +329,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'TANK'
+            loadChosen()
         }
 
         function chooseCharacterSlug(){
@@ -327,6 +338,7 @@ Slooow.chooseCharacterState.prototype = {
             chosen.anchor.setTo(0.5, 0.5);
             chosen.scale.setTo(0.4, 0.4)
             game.global.snailChosen = 'MERCA'
+            loadChosen()
         }
 
         function actionOnClickBack(){
@@ -341,32 +353,98 @@ Slooow.chooseCharacterState.prototype = {
             if (game.global.snailChosen != null){
             switch (game.global.snailChosen){
                 case ('NORMAL'):
+                    if(chosen == null){
                         chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'normalCol')
+                        chosen.anchor.setTo(0.5, 0.5);
+                        chosen.scale.setTo(0.4, 0.4)
+                    }   
                         textName.setText("Caralcol")
                         printStats(game.global.normalStats[4],game.global.normalStats[1],
-                            game.global.normalStats[2],game.global.normalStats[3],
+                            game.global.normalStats[2],
                             game.global.normalStats[0],game.global.normalStats[3])
                     break
                 case ('TANK'):
+                    if(chosen == null){
                         chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'tanqueCol')
+                        chosen.anchor.setTo(0.5, 0.5);
+                        chosen.scale.setTo(0.4, 0.4)
+                    }                           
+                        textName.setText("Panze")
+                        printStats(game.global.tankStats[4],game.global.tankStats[1],
+                            game.global.tankStats[2],
+                            game.global.tankStats[0],game.global.tankStats[3])
                     break   
                 case ('BAGUETTE'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'frenchCol')
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'frenchCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        textName.setText("Baguette")
+                        printStats(game.global.baguetteStats[4],game.global.baguetteStats[1],
+                            game.global.baguetteStats[2],
+                            game.global.baguetteStats[0],game.global.baguetteStats[3])
                     break    
                 case ('MIAU'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'catCol')
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'catCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Schrodinger")
+                        printStats(game.global.miauStats[4],game.global.miauStats[1],
+                            game.global.miauStats[2],
+                            game.global.miauStats[0],game.global.miauStats[3])
                     break    
                 case ('MERCA'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'slugCol')
+                         if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'slugCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        
+                        textName.setText("Jabba el Creep")
+                        printStats(game.global.mercaStats[4],game.global.mercaStats[1],
+                            game.global.mercaStats[2],
+                            game.global.mercaStats[0],game.global.mercaStats[3])
                     break     
                 case ('SEA'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'seaCol')
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'seaCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Maricol")
+                        printStats(game.global.seaStats[4],game.global.seaStats[1],
+                            game.global.seaStats[2],
+                            game.global.seaStats[0],game.global.seaStats[3])
                     break
                 case ('ROBA'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'thiefCol')
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'thiefCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Bárcenas")
+                        printStats(game.global.robaStats[4],game.global.robaStats[1],
+                            game.global.robaStats[2],
+                            game.global.robaStats[0],game.global.robaStats[3])
                     break
                 case ('IRIS'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'irisCol')
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'irisCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Iris")
+                        printStats(game.global.irisStats[4],game.global.irisStats[1],
+                            game.global.irisStats[2],game.global.irisStats[0],
+                            game.global.irisStats[3])
                     break
                 default:
                     console.log('snail sprite no identificado')
@@ -377,47 +455,69 @@ Slooow.chooseCharacterState.prototype = {
         }
 
         function printStats(speed, ac, weight, stamina, regen){
+            stat1 = [];
+            stat2 = [];
+            stat3 = [];
+            stat4 = [];
+            stat5 = [];
+            for (var i = 0; i < stat1.length; i++){
+                stat1[i].destroy();
+            }
+            for (var i = 0; i < stat2.length; i++){
+                stat2[i].destroy();
+            }
+            for (var i = 0; i < stat3.length; i++){
+                stat3[i].destroy();
+            }
+            for (var i = 0; i < stat4.length; i++){
+                stat4[i].destroy();
+            }
+            for (var i = 0; i < stat5.length; i++){
+                stat5[i].destroy();
+            }
+            
+            
             var offset = 0;
             for (var i = 0; i < speed; i++){
-                stat1 = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 100, 'statBtn')
-                stat1.anchor.set(0.5)
-                stat1.scale.setTo(0.1,0.1)
+                stat1[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 100, 'statBtn')
+                stat1[i].anchor.set(0.5)
+                stat1[i].scale.setTo(0.1,0.1)
                 offset +=50
                 
             }
-            offset = 0;  
+            var offset = 0;  
             for (var i = 0; i < ac; i++){
-                stat2 = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 140, 'statBtn')
-                stat2.anchor.set(0.5)
-                stat2.scale.setTo(0.1,0.1)
+                stat2[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 140, 'statBtn')
+                stat2[i].anchor.set(0.5)
+                stat2[i].scale.setTo(0.1,0.1)
                 offset +=50
                 
             }
-            offset = 0;   
+            var offset = 0;   
             for (var i = 0; i < weight; i++){
-                stat3 = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 180, 'statBtn')
-                stat3.anchor.set(0.5)
-                stat3.scale.setTo(0.1,0.1)
+                stat3[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 180, 'statBtn')
+                stat3[i].anchor.set(0.5)
+                stat3[i].scale.setTo(0.1,0.1)
                 offset +=50
 
             }
-            offset = 0;   
+            var offset = 0;   
             for (var i = 0; i < stamina; i++){
-                stat4 = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 220, 'statBtn')
-                stat4.anchor.set(0.5)
-                stat4.scale.setTo(0.1,0.1)
+                stat4[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 220, 'statBtn')
+                stat4[i].anchor.set(0.5)
+                stat4[i].scale.setTo(0.1,0.1)
                 offset +=50
 
             }  
-            offset = 0; 
+            var offset = 0; 
             for (var i = 0; i < regen; i++){
-                stat5 = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 260, 'statBtn')
-                stat5.anchor.set(0.5)
-                stat5.scale.setTo(0.1,0.1)
+                stat5[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 260, 'statBtn')
+                stat5[i].anchor.set(0.5)
+                stat5[i].scale.setTo(0.1,0.1)
                 offset +=50
                 
             } 
-            offset = 0;
+            
             }
     },
 
