@@ -63,6 +63,12 @@ Slooow.chooseCharacterState.prototype = {
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 
+        stat1 = [];
+        stat2 = [];
+        stat3 = [];
+        stat4 = [];
+        stat5 = [];
+
         //Print image chosen
         var chosenShell = game.add.image(game.world.centerX-380, game.world.centerY-170, 'roundBtn')
         chosenShell.anchor.setTo(0.5, 0.5);
@@ -232,35 +238,35 @@ Slooow.chooseCharacterState.prototype = {
         for(var i = 0; i < game.global.notOwned.length; i++){
             switch (game.global.notOwned[i]){
                 case ('NORMAL'):
-                        normalShell.inputEnabled = true
+                        normalShell.inputEnabled = false
                         normalShell.alpha = 0.6
                     break
                 case ('TANK'):
-                        tankShell.inputEnabled = true
+                        tankShell.inputEnabled = false
                         tankShell.alpha = 0.6
                     break   
                 case ('BAGUETTE'):
-                        frenchShell.inputEnabled = true
+                        frenchShell.inputEnabled = false
                         frenchShell.alpha = 0.6
                     break    
                 case ('MIAU'):
-                        catShell.inputEnabled = true
+                        catShell.inputEnabled = false
                         catShell.alpha = 0.6
                     break    
                 case ('MERCA'):
-                        slugShell.inputEnabled = true
+                        slugShell.inputEnabled = false
                         slugShell.alpha = 0.6
                     break     
                 case ('SEA'):
-                        seaShell.inputEnabled = true
+                        seaShell.inputEnabled = false
                         seaShell.alpha = 0.6
                     break
                 case ('ROBA'):
-                        thiefShell.inputEnabled = true
+                        thiefShell.inputEnabled = false
                         thiefShell.alpha = 0.6
                     break
                 case ('IRIS'):
-                        rainbowShell.inputEnabled = true
+                        rainbowShell.inputEnabled = false
                         rainbowShell.alpha = 0.6
                     break
                 default:
@@ -455,11 +461,7 @@ Slooow.chooseCharacterState.prototype = {
         }
 
         function printStats(speed, ac, weight, stamina, regen){
-            stat1 = [];
-            stat2 = [];
-            stat3 = [];
-            stat4 = [];
-            stat5 = [];
+            
             for (var i = 0; i < stat1.length; i++){
                 stat1[i].destroy();
             }
