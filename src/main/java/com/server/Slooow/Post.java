@@ -13,4 +13,5 @@ public class Post {
 	boolean useObject;
 	String chooseSnail;
 	String snailToSee;
+	int purchaseId;
 }

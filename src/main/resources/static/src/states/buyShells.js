@@ -112,7 +112,7 @@ Slooow.buyShellsState.prototype = {
         tShells2.scale.setTo(1,1)
 
         btnShell3 = game.add.button(game.world.centerX ,
-            game.world.centerY+110, 'button',buy3, this,
+            game.world.centerY+110, 'button', buy3, this,
             0, 0, 0)
         btnShell3.anchor.set(0.5)
         btnShell3.scale.setTo(1.2, 0.5)
@@ -200,15 +200,23 @@ Slooow.buyShellsState.prototype = {
         tNo.scale.setTo(1,1)
         tNo.alpha = 0
 
+        btnNo.inputEnabled = false;
+        btnYes.inputEnabled = false;
+
         function actionOnClickBack(){
             game.state.start('shopState')
         }
 
         function actionYes(){
-
+            let msg = {
+                        event: 'PURCHASE',
+                        purchaseId: id,
+                    }
+            game.global.socket.send(JSON.stringify(msg))
         }
 
         function actionNo(){
+            id = -1
             bgPopUp.alpha = 0;
             tPopUp.alpha = 0;
             btnNo.alpha = 0;
@@ -217,9 +225,15 @@ Slooow.buyShellsState.prototype = {
             tYes.alpha = 0;
             btnNo.inputEnabled = false;
             btnYes.inputEnabled = false;
+            btnShell1.inputEnabled = true;
+            btnShell2.inputEnabled = true;
+            btnShell3.inputEnabled = true;
+            btnShell4.inputEnabled = true;
+            buttonBack.inputEnabled = true;
         }
 
         function buy1(){
+            id = 1
             bgPopUp.alpha = 1;
             tPopUp.alpha = 1;
             btnNo.alpha = 1;
@@ -228,9 +242,15 @@ Slooow.buyShellsState.prototype = {
             tYes.alpha = 1;
             btnNo.inputEnabled = true;
             btnYes.inputEnabled = true;
+            btnShell1.inputEnabled = false;
+            btnShell2.inputEnabled = false;
+            btnShell3.inputEnabled = false;
+            btnShell4.inputEnabled = false;
+            buttonBack.inputEnabled = false;
         }
 
         function buy2(){
+            id = 2
             bgPopUp.alpha = 1;
             tPopUp.alpha = 1;
             btnNo.alpha = 1;
@@ -239,9 +259,15 @@ Slooow.buyShellsState.prototype = {
             tYes.alpha = 1;
             btnNo.inputEnabled = true;
             btnYes.inputEnabled = true;
+            btnShell1.inputEnabled = false;
+            btnShell2.inputEnabled = false;
+            btnShell3.inputEnabled = false;
+            btnShell4.inputEnabled = false;
+            buttonBack.inputEnabled = false;
         }
 
         function buy3(){
+            id = 3
             bgPopUp.alpha = 1;
             tPopUp.alpha = 1;
             btnNo.alpha = 1;
@@ -250,9 +276,15 @@ Slooow.buyShellsState.prototype = {
             tYes.alpha = 1;
             btnNo.inputEnabled = true;
             btnYes.inputEnabled = true;
+            btnShell1.inputEnabled = false;
+            btnShell2.inputEnabled = false;
+            btnShell3.inputEnabled = false;
+            btnShell4.inputEnabled = false;
+            buttonBack.inputEnabled = false;
         }
 
         function buy4(){
+            id = 4
             bgPopUp.alpha = 1;
             tPopUp.alpha = 1;
             btnNo.alpha = 1;
@@ -261,6 +293,11 @@ Slooow.buyShellsState.prototype = {
             tYes.alpha = 1;
             btnNo.inputEnabled = true;
             btnYes.inputEnabled = true;
+            btnShell1.inputEnabled = false;
+            btnShell2.inputEnabled = false;
+            btnShell3.inputEnabled = false;
+            btnShell4.inputEnabled = false;
+            buttonBack.inputEnabled = false;
         }
     },
 

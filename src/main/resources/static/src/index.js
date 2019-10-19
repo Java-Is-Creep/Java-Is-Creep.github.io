@@ -156,6 +156,8 @@ window.onload = function () {
         seaStats: [],
         robaStats: [],
         irisStats:[],
+        shellPrice: null,
+        pointsPrice: null,
     }
 
     // Conexiones
@@ -751,6 +753,9 @@ window.onload = function () {
                 var namePlayers = JSON.parse(msg.name)
 
                 if (firstFrame == 0) {
+                    /*game.global.loadingAnim.destroy();
+                    game.global.loading.destroy();*/
+
                     this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
                     firstFrame++
                     this.console.log(game.global.playersMulti)
@@ -1001,8 +1006,13 @@ window.onload = function () {
                 game.global.statRegen = JSON.parse(msg.regen)
                 game.global.statWeight = JSON.parse(msg.weight)
                 game.global.statSpeed = JSON.parse(msg.speed)
+                game.global.shellPrice = JSON.parse(msg.shells)
+                game.global.pointsPrice = JSON.parse(msg.baba)
                 game.state.start('buySnailState')
                 break
+            case 'PURCHASEOK':
+                game.global.money = JSON.parse(msg.shells)
+                game.state.start('shopState')
         }   
 
 
