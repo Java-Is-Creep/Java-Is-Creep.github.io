@@ -244,7 +244,10 @@ Slooow.mainMenuState.prototype = {
         buttonContact.alpha = 0
         buttonContact.inputEnabled = false
 
+        game.global.gameMode = null
+
         function actionOnClickStartSolo() {
+            game.global.gameMode = 'SOLO'
             game.state.start('menuSoloAndMultiLocalState')
         }
 
@@ -254,6 +257,7 @@ Slooow.mainMenuState.prototype = {
         }*/
 
         function actionOnClickStartOnline() {
+            game.global.gameMode = 'MULTI'
             game.state.start('menuMultiOnlineState')
         }
 

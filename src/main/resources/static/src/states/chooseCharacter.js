@@ -348,7 +348,12 @@ Slooow.chooseCharacterState.prototype = {
         }
 
         function actionOnClickBack(){
-            game.state.start('lobbyState')
+            if (game.global.gameMode == 'SOLO'){
+                game.state.start('lobbyState')
+            } else {
+                game.state.start('lobbyMultiState')
+            }
+            
         }
 
         function actionOnClickOK(){
