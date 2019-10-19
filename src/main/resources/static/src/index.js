@@ -451,6 +451,28 @@ window.onload = function () {
                 game.global.myRecord = JSON.parse(msg.record)
                 var puntos = JSON.parse(msg.points)
                 this.game.global.puntuationGameOver = puntos
+
+                //Resetear variables mapa
+                 //Array de suelos. Tiene: x, y, width, height
+                game.global.arrayGrounds = []
+                //Array de paredes. Tiene: x, y, width, height
+                game.global.arrayWalls = []
+                //Array de rampas. Tiene: x, y, width, height
+                game.global.arraySlopes = []
+                //Array de obstaculos tipo pincho. Tiene: posX, posY
+                game.global.arrayObstacles = []
+                //Array de power ups
+                game.global.arrayPowerUps = []
+                //ArrayTrapdoors
+                game.global.arrayTrapdoors = []
+                //Array de trampolines
+                game.global.arrayTrampolines = []
+                game.global.arrayObstacleFire = []
+                game.global.arrayDoors = []
+                game.global.arrayWinds = []
+                game.global.finishObject = new Object
+
+
                 game.state.start('gameOverState')
                 break
             case 'GROUNDCOLLISION':
@@ -578,16 +600,17 @@ window.onload = function () {
                 this.game.global.hasPowerUp = true
                 break
             case 'UPDATEDOOR':
-
                 //Cambiar el sprite de la puerta
                 var id = JSON.parse(msg.id)
+                this.console.log(JSON.parse(msg.time))
+                this.console.log(msg)
                 //console.log(this.game.global.arrayDoors[id])
                 if (this.game.global.arrayDoors[id] !== undefined) {
                     if (game.global.arrayDoors[id].frame == 0) {
-                        //this.console.log('abrir puerta')
+                        this.console.log('abrir puerta')
                         game.global.arrayDoors[id].frame = 1
                     } else {
-                        //this.console.log('cerrar puerta')
+                        this.console.log('cerrar puerta')
                         game.global.arrayDoors[id].frame = 0
                     }
                 }
@@ -718,7 +741,7 @@ window.onload = function () {
 
                 //Stamina del jugador
                 var arrayStamina = JSON.parse(msg.stamina)
-                this.console.log(arrayStamina)
+                //this.console.log(arrayStamina)
                 //Nombres de los jugadores
                 var namePlayers = JSON.parse(msg.name)
 
@@ -774,6 +797,28 @@ window.onload = function () {
                 game.global.puntuationGameOver = myPoints
                 game.global.arrayPositionsMulti = arrayPositionNames
                 game.global.arrayTimesMulti = arrayPositionTimes
+
+                //Resetear parametros
+                //Resetear variables mapa
+                 //Array de suelos. Tiene: x, y, width, height
+                game.global.arrayGrounds = []
+                //Array de paredes. Tiene: x, y, width, height
+                game.global.arrayWalls = []
+                //Array de rampas. Tiene: x, y, width, height
+                game.global.arraySlopes = []
+                //Array de obstaculos tipo pincho. Tiene: posX, posY
+                game.global.arrayObstacles = []
+                //Array de power ups
+                game.global.arrayPowerUps = []
+                //ArrayTrapdoors
+                game.global.arrayTrapdoors = []
+                //Array de trampolines
+                game.global.arrayTrampolines = []
+                game.global.arrayObstacleFire = []
+                game.global.arrayDoors = []
+                game.global.arrayWinds = []
+                game.global.finishObject = new Object
+
                 game.state.start('gameOverState')
                 break
             case 'WAITINGROOMSTART':

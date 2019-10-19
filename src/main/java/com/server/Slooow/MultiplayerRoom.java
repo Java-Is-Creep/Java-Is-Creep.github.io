@@ -492,6 +492,7 @@ public class MultiplayerRoom extends Room {
 		}
 	}
 	
+	@Override
 	public void updateDoors() {
 		int i = 0;
 		for (DoorMap door : doorArray) {
@@ -500,7 +501,9 @@ public class MultiplayerRoom extends Room {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATEDOOR");
 				msg.addProperty("id", i);
+				msg.addProperty("time",acummulativeTime);
 
+				System.out.println(msg.toString());
 				broadcast(msg);
 			}
 			i++;
@@ -547,6 +550,7 @@ public class MultiplayerRoom extends Room {
 				msg.addProperty("event", "OBSTACLEUPDATE");
 				msg.addProperty("id", i);
 				msg.addProperty("estate", obstacle.estate.toString());
+
 
 				broadcast(msg);
 			}
