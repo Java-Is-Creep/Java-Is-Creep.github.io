@@ -131,9 +131,15 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	protected boolean hasBoostStamina = false;
 	protected boolean hasInk = false;
 
+
 	// COMUNICACION A Cliente
 	protected WebSocketSession mySession;
 	protected ReentrantLock sessionLock;
+
+	
+	protected boolean lastFrameGroundCollision = false;
+	protected boolean lastFrameWallCollision = false;
+	protected boolean lastFrameWallSlopeCollision = false;
 
 	//Arreglo Aceleracionç;
 	public final int ACELERATIONTIME = 250;

@@ -95,12 +95,15 @@ Slooow.menuMultiOnlineState.prototype = {
             0, 0, 0)
         buttonMap1.anchor.set(0.5)
         buttonMap1.scale.setTo(0.8, 0.8)
+        buttonMap1.inputEnabled = false
+        buttonMap1.alpha = (0.3)
 
         //Texto map1
         textButtonMap1 = game.add.text(game.world.centerX - 400,
             game.world.centerY + 100, game.global.activeLanguage.Map1, game.global.style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8, 0.8)
+        textButtonMap1.alpha =(0.3)
 
         //Boton map2
         buttonMap2 = game.add.button(game.world.centerX,
@@ -108,12 +111,15 @@ Slooow.menuMultiOnlineState.prototype = {
             0, 0, 0)
         buttonMap2.anchor.set(0.5)
         buttonMap2.scale.setTo(0.8, 0.8)
+        buttonMap2.inputEnabled = false
+        buttonMap2.alpha=(0.3)
 
         //Texto map2
         textButtonMap2 = game.add.text(game.world.centerX,
             game.world.centerY + 100, game.global.activeLanguage.Map2, game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8, 0.8)
+        textButtonMap2.alpha=(0.3)
 
         //Boton map3
         buttonMap3 = game.add.button(game.world.centerX + 400,
@@ -121,12 +127,15 @@ Slooow.menuMultiOnlineState.prototype = {
             0, 0, 0)
         buttonMap3.anchor.set(0.5)
         buttonMap3.scale.setTo(0.8, 0.8)
+        buttonMap3.inputEnabled = false
+        buttonMap3.alpha=(0.3)
 
         //Texto map3
         textButtonMap3 = game.add.text(game.world.centerX + 400,
             game.world.centerY + 100, game.global.activeLanguage.Map3, game.global.style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8, 0.8)
+        textButtonMap3.alpha=(0.3)
 
         // Boton nombre sala
         roomNameButton = game.add.inputField(game.world.centerX - 400,
@@ -143,6 +152,8 @@ Slooow.menuMultiOnlineState.prototype = {
             placeHolder: game.global.activeLanguage.RoomName,
             zoom: true
         });
+        roomNameButton.inputEnabled = false
+        roomNameButton.alpha=(0.3)
 
 
         //Boton OK
@@ -151,12 +162,15 @@ Slooow.menuMultiOnlineState.prototype = {
             0, 0, 0)
         buttonOK.anchor.set(0.5, 0.5)
         buttonOK.scale.setTo(0.6, 0.6)
+        buttonOK.inputEnabled  =false
+        buttonOK.alpha=(0.3)
 
         //Texto OK
         textButtonOK = game.add.text(game.world.centerX + 200,
             game.world.centerY + 250, game.global.activeLanguage.Accept, game.global.style)
         textButtonOK.anchor.set(0.5)
         textButtonOK.scale.setTo(0.8, 0.8)
+        textButtonOK.alpha=(0.3)
         /*
         //Boton mapa 2
 		buttonMap2 = game.add.button(game.world.centerX ,
@@ -202,23 +216,63 @@ Slooow.menuMultiOnlineState.prototype = {
         }
 
         function actionOnClickJoinRoom() {
+            buttonOK.alpha = 1
+            buttonOK.inputEnabled = true
+            textButtonOK.alpha = 1
             option = 0;
         }
         function actionOnClickCreateRoom() {
+            buttonMap1.alpha = 1
+            buttonMap1.inputEnabled = true
+            buttonMap2.alpha = 1
+            buttonMap2.inputEnabled = true
+            buttonMap3.alpha = 1
+            buttonMap3.inputEnabled = true
+            textButtonMap1.alpha = 1
+            textButtonMap2.alpha = 1
+            textButtonMap3.alpha = 1
+            buttonOK.alpha = 0.3
+            buttonOK.inputEnabled = false
+            textButtonOK.alpha = 0.3
+            roomNameButton.inputEnabled = false
+            roomNameButton.alpha= 0.3
             option = 1;
         }
         function actionOnClickSearchRoom() {
+            roomNameButton.inputEnabled = true
+            roomNameButton.alpha= 1
+            buttonMap1.alpha = 0.3
+            buttonMap1.inputEnabled = false
+            buttonMap2.alpha = 0.3
+            buttonMap2.inputEnabled = false
+            buttonMap3.alpha = 0.3
+            buttonMap3.inputEnabled = false
+            textButtonMap1.alpha = 0.3
+            textButtonMap2.alpha = 0.3
+            textButtonMap3.alpha = 0.3
             option = 2;
         }
 
         function actionOnClickMap1() {
             map = 'mapa1'
+            if (option == 1 || option == 0){
+                roomNameButton.inputEnabled = true
+                roomNameButton.alpha= 1
+            } 
         }
         function actionOnClickMap2() {
             map = 'mapa2'
+            if (option == 1 || option == 0){
+                roomNameButton.inputEnabled = true
+                roomNameButton.alpha= 1
+            }
         }
         function actionOnClickMap3() {
             map = 'mapa3'
+            if (option == 1 || option == 0){
+                roomNameButton.inputEnabled = true
+                roomNameButton.alpha= 1
+            }
         }
 
         function actionOnClickOK() {
@@ -254,5 +308,11 @@ Slooow.menuMultiOnlineState.prototype = {
 
         this.background.tilePosition.x += 0.5
         this.background.tilePosition.y -= 0.5
+
+        if (roomNameButton.inputEnabled == true && roomNameButton.value.length){
+            buttonOK.alpha = 1
+            buttonOK.inputEnabled = true
+            textButtonOK.alpha = 1
+        }
     }
 }

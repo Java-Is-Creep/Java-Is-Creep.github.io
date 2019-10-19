@@ -130,9 +130,7 @@ public class MultiplayerRoom extends Room {
 
 	public void checkCollisions() {
 		int id = 0;
-		System.out.println("Recorre colisiones");
 		for (PlayerConected player : jugadoresEnSala.values()) {
-			System.out.println("PlayerName: " + player.getNombre());
 			boolean groundCollision = false;
 			boolean wallCollision = false;
 			boolean slopeCollision = false;
@@ -157,7 +155,7 @@ public class MultiplayerRoom extends Room {
 								if (player.mySnail.trapDoorPosY != object.posY) {
 									groundCollision = true;
 									player.mySnail.isJumping = false;
-									if (!lastFrameGroundCollision) {
+									if (!player.mySnail.lastFrameGroundCollision) {
 										sendGroundCollision = true;
 									}
 								}
@@ -168,7 +166,7 @@ public class MultiplayerRoom extends Room {
 							groundCollision = true;
 							player.mySnail.hasFallenTrap = false;
 							player.mySnail.isJumping = false;
-							if (!lastFrameGroundCollision) {
+							if (!player.mySnail.lastFrameGroundCollision) {
 								sendGroundCollision = true;
 							}
 						}
@@ -179,18 +177,20 @@ public class MultiplayerRoom extends Room {
 
 							} else {
 								wallCollision = true;
-								if (!lastFrameWallCollision) {
+								player.mySnail.hasPassedDoor = false;
+								if (!player.mySnail.lastFrameWallCollision) {
 									sendWallCollision = true;
 								}
 							}
 						} else {
 							if (object.getClass() == DoorMap.class) {
 								isClimbingADoor = true;
-							} else {
-								if (!lastFrameWallCollision) {
-									sendWallCollision = true;
-								}
 							}
+							
+							if (!player.mySnail.lastFrameWallCollision) {
+									sendWallCollision = true;
+							}
+							
 							wallCollision = true;
 
 							player.mySnail.hasPassedDoor = false;
@@ -206,7 +206,7 @@ public class MultiplayerRoom extends Room {
 						slopeRadians = auxSlope.radians;
 						degrees = (int) auxSlope.degrees;
 						player.mySnail.isJumping = false;
-						if (!lastFrameWallSlopeCollision) {
+						if (!player.mySnail.lastFrameWallSlopeCollision) {
 							sendSlopeCollision = true;
 						}
 						break;
@@ -257,9 +257,9 @@ public class MultiplayerRoom extends Room {
 				}
 			}
 
-			lastFrameGroundCollision = groundCollision;
-			lastFrameWallCollision = wallCollision;
-			lastFrameWallSlopeCollision = slopeCollision;
+			player.mySnail.lastFrameGroundCollision = groundCollision;
+			player.mySnail.lastFrameWallCollision = wallCollision;
+			player.mySnail.lastFrameWallSlopeCollision = slopeCollision;
 
 			if (sendGroundCollision) {
 				if (!isClimbingADoor) {
@@ -402,9 +402,11 @@ public class MultiplayerRoom extends Room {
 		System.out.println("Jugadores terminados: "+ playerNamePosition.size());
 
 		if(playerNamePosition.size() == MAXNUMPLAYERS){
+			System.out.println("Dentro de apagar");
 			executor.shutdown();
 			destroyRoom();
 		}
+		System.out.println("Tras comprobar los jugadores");
 
 
 	}
@@ -536,18 +538,28 @@ public class MultiplayerRoom extends Room {
 
 
 				acummulativeTime += TICKTIME;
+				System.out.println("Antes update door");
 				updateDoors();
+				System.out.println("Antes update trapDoor");
 				updateTrapDoor();
+				System.out.println("Antes update trampoline");
 				updateTrampoline();
+				System.out.println("Antes update wind");
 				updateWind();
+				System.out.println("Antes update collisions");
 				checkCollisions();
+				System.out.println("Antes update obstacle");
 				updateObstacles();
+				System.out.println("Antes update snail");
 				int id = 0;
 				for (PlayerConected player : jugadoresEnSala.values()) {
+
 					player.mySnail.updateSnail(this,id);	
 					id++;
 				}
+				System.out.println("Antes update checkCollision");
 				checkSnailState();
+				System.out.println("Despues checkCollision");
 
 				ArrayList<Float> posX = new ArrayList<>();
 				ArrayList<Float> posY = new ArrayList<>();
@@ -556,7 +568,6 @@ public class MultiplayerRoom extends Room {
 
 				System.out.println("TICK ");
 				for (PlayerConected player : jugadoresEnSala.values()) {
-					System.out.println("Player Names: " + player.getNombre());
 					posX.add((Float) player.mySnail.posX);
 					posY.add((Float) player.mySnail.posY);
 					stamina.add((Float) player.mySnail.stamina);
@@ -588,6 +599,7 @@ public class MultiplayerRoom extends Room {
 	}
 
 	public void quitarJugador(PlayerConected jug) {
+		System.out.println("QUITANDO JUGADOR INICIO");
 		playerLock.lock();
 		if (jugadoresEnSala.remove(jug.getSession()) != null) {
 			numPlayers--;
@@ -596,8 +608,8 @@ public class MultiplayerRoom extends Room {
 			msg2.addProperty("name", jug.getNombre());
 			broadcast(msg2);
 		}
-		;
 		playerLock.unlock();
+		System.out.println("QUITANDO JUGADOR FINAL");
 	}
 
 	public void broadcast(JsonObject msg) {

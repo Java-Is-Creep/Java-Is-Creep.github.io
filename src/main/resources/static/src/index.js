@@ -140,7 +140,8 @@ window.onload = function () {
 
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
     //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
     game.global.socket.onopen = () => {
 
@@ -690,6 +691,7 @@ window.onload = function () {
 
                 //Stamina del jugador
                 var arrayStamina = JSON.parse(msg.stamina)
+                this.console.log(arrayStamina)
                 //Nombres de los jugadores
                 var namePlayers = JSON.parse(msg.name)
 
@@ -704,9 +706,16 @@ window.onload = function () {
                     this.game.global.playersMulti[i].sprite.y = game.world.height - Math.floor(arrayPosY[i]) - 10
                 }
                 //Actualizamos la stamina de tu jugador
+                /*
+                for (var i = 0; i<arrayStamina; i++){
+                    var scale = arrayStamina[i] * 0.5 / game.global.maxStamina
+                    game.global.playersMulti[i].stamina2.scale.setTo(scale, 0.45)
+                }
+                */
+                
                 var scale = arrayStamina[this.game.global.myPlayerId] * 0.5 / game.global.maxStamina
                 game.global.playersMulti[this.game.global.myPlayerId].stamina2.scale.setTo(scale, 0.45)
-
+                
                 //Actualizar barra de progreso del jugador (MAS ADELANTE TODOS)
                 var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
                 var scaleProgress = posProgress / game.global.finishObject.x
@@ -760,14 +769,14 @@ window.onload = function () {
                 break
             case 'OBSTACLECOLLISIONMULTI':
                 
-                this.console.log('colision obstaculo')
+                //this.console.log('colision obstaculo')
                 //Poner animacion de cansado
                 var id = JSON.parse(msg.id)
                 game.global.playersMulti[id].sprite.animations.play('damage');
                 break
 
             case 'WALLCOLLISIONMULTI':
-                this.console.log('colision pared')
+                //this.console.log('colision pared')
                 var idPlayer = JSON.parse(msg.id)
 
                 this.game.global.haveToRotateToGroundMulti[idPlayer] = false
@@ -776,14 +785,14 @@ window.onload = function () {
                 break
 
             case 'GROUNDCOLLISIONMULTI':
-                this.console.log('colision suelo')
+                //this.console.log('colision suelo')
                 var idPlayer = JSON.parse(msg.id)
                 this.game.global.haveToRotateToGroundMulti[idPlayer] = true
                 game.global.haveToRotateToSlopeMulti[idPlayer] = false
                 this.game.global.haveToRotateToWallMulti[idPlayer] = false
                 break
             case 'OBJECTUSEDMULTI':
-                this.console.log('invisible')
+                //this.console.log('invisible')
                 var myId = JSON.parse(msg.id)
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
