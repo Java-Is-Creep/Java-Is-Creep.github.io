@@ -135,6 +135,10 @@ public class PlayerConected {
 		return cash;
 	}
 
+	public void addCash(int cash){
+		this.cash += cash;
+	}
+
 	public void setCash(int cash) {
 		this.cash = cash;
 	}

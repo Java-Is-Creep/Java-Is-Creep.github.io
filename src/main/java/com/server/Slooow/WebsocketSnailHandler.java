@@ -565,6 +565,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 				break;
 				case "TANK":
 					snailAux = new TankSnail(newSession, lockSession);
@@ -574,6 +576,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 				case "BAGUETTE":
 					snailAux = new BaguetteSnail(newSession, lockSession);
@@ -583,6 +587,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 
 				case "MIAU":
@@ -593,6 +599,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 
 				case "MERCA":
@@ -603,6 +611,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 
 				case "SEA":
@@ -613,6 +623,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 
 				case "ROBA":
@@ -623,6 +635,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 
 				case "IRIS":
@@ -633,6 +647,8 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
 					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
 					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 					break;
 				default:
 				
@@ -648,9 +664,41 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				jug.sessionLock.unlock();
 			}
 			break;
+			case "PURCHASE" :
+			jug = game.bucarJugadorConectado(newSession);
+			JsonObject msgPurchase = new JsonObject();
+			msgPurchase.addProperty("event", "PURCHASEOK");
+				switch(post.purchaseId){
+					case 1 :
+						jug.addCash(120);
+					break;
+					case 2 :
+						jug.addCash(250);
+					break;
+					case 3 :
+						jug.addCash(520);
+					break;
+					case 4 :
+						jug.addCash(1050);
+					break;
+					default:
+					break;
+				}
+				msgPurchase.addProperty("shells", jug.getCash());
+				try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgPurchase.toString()));
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					jug.sessionLock.unlock();
+				}
+			break; 
 			default:
 
 			break;
+			
 
 		}
 

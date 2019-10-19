@@ -325,6 +325,14 @@ Slooow.multiplayerState.prototype = {
         game.global.playersMulti[game.global.myPlayerId].speedPowerUp.scale.setTo(0.4, 0.4)
         game.global.playersMulti[game.global.myPlayerId].speedPowerUp.fixedToCamera = true
 
+        /*game.global.loading = game.add.sprite(game.world.centerX, game.world.centerY, 'loading')
+        game.global.loading.anchor.setTo(0.5)
+        game.global.loading.visible = true
+		game.global.loading.height = this.game.height;
+        game.global.loading.width = this.game.width;
+        game.global.loadingAnim = loading.animations.add ('move')
+        game.global.loadingAnim.play (8, true)*/
+
     },
 
     create: function () {

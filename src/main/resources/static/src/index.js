@@ -155,14 +155,16 @@ window.onload = function () {
         seaStats: [],
         robaStats: [],
         irisStats:[],
+        shellPrice: null,
+        pointsPrice: null,
     }
 
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
-    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
     //game.global.socket = new WebSocket('wss://25.34.17.250:8080/snail')
-    game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
     //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
@@ -749,6 +751,9 @@ window.onload = function () {
                 var namePlayers = JSON.parse(msg.name)
 
                 if (firstFrame == 0) {
+                    /*game.global.loadingAnim.destroy();
+                    game.global.loading.destroy();*/
+
                     this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
                     firstFrame++
                     this.console.log(game.global.playersMulti)
@@ -987,8 +992,13 @@ window.onload = function () {
                 game.global.statRegen = JSON.parse(msg.regen)
                 game.global.statWeight = JSON.parse(msg.weight)
                 game.global.statSpeed = JSON.parse(msg.speed)
+                game.global.shellPrice = JSON.parse(msg.shells)
+                game.global.pointsPrice = JSON.parse(msg.baba)
                 game.state.start('buySnailState')
                 break
+            case 'PURCHASEOK':
+                game.global.money = JSON.parse(msg.shells)
+                game.state.start('shopState')
         }   
 
 

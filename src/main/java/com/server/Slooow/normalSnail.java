@@ -60,13 +60,15 @@ public class normalSnail extends SnailInGame {
 	public final static int STATSTAMINA = 3;
 	public final static int STATREGEN = 3;
 
-
+    public final static int CASHPRICE = 100;
+	public final static int POINTSPRICE = 100;
     // Inicialización según el caracol
     public normalSnail(WebSocketSession mySession, ReentrantLock sessionLock) {
         super(mySession, sessionLock, MAXSTAMINA, MAXVELOCITYX, MAXVELOCITYY, MAXNORMALVELOCITYX, MAXNORMALVELOCITYY, 
         NORMALACELERATIONX, NORMALACELERATIONY, ACELERATIONX, 
         ACELERATIONY, GRAVITY, BREAKFORCE, STAMINALOSE, 
         STAMINAWALLLOSE, STAMINANORMALRECOVER, STAMINARUNOUTRECOVER, 
-        MAXGRAVITYSPEED, MASS, SPEEDXLOSE, STATSPEED, STATAC, STATWEIGHT, STATSTAMINA, STATREGEN);
+        MAXGRAVITYSPEED, MASS, SPEEDXLOSE, STATSPEED, STATAC, STATWEIGHT, 
+        STATSTAMINA, STATREGEN, CASHPRICE, POINTSPRICE);
 	}
 }

@@ -154,6 +154,9 @@ enum SkinType{Skin1,Skin2,Skin3}
 	public int STATSTAMINA;
 	public int STATAC;
 	public int STATREGEN;
+
+	public int CASHPRICE;
+	public int POINTSPRICE;
 	
 	// Se accede a lastMovement tanto en esta clase como en el WebSocketSnailHandler
 	ReentrantLock lastMovementLock = new ReentrantLock();
@@ -163,7 +166,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 	float MAXVELOCITYY,float MAXNORMALVELOCITYX,float MAXNORMALVELOCITYY, float NORMALACELERATIONX,float NORMALACELERATIONY,
 	float ACELERATIONX,float ACELERATIONY,float GRAVITY,float BREAKFORCE,float STAMINALOSE,float STAMINAWALLLOSE,
 	float STAMINANORMALRECOVER,float STAMINARUNOUTRECOVER,float MAXGRAVITYSPEED,float MASS,float SPEEDXLOSE,
-	int STATSPEED, int STATWEIGHT, int STATSTAMINA, int STATAC, int STATREGEN) {
+	int STATSPEED, int STATWEIGHT, int STATSTAMINA, int STATAC, int STATREGEN, int CASHPRICE, int POINTSPRICE) {
 
 		this.MAXSTAMINA = MAXSTAMINA;
 	this.MAXVELOCITYX = MAXVELOCITYX;
@@ -222,6 +225,9 @@ enum SkinType{Skin1,Skin2,Skin3}
 		this.STATSTAMINA = STATSTAMINA;
 		this.STATAC = STATAC;
 		this.STATREGEN = STATREGEN;
+
+		this.CASHPRICE = CASHPRICE;
+		this.POINTSPRICE = POINTSPRICE;
 
 		collider = new SquareCollider(colliderOfsetX, colliderOfsetY, posX, posY);
 	}
@@ -715,6 +721,22 @@ enum SkinType{Skin1,Skin2,Skin3}
 
 	public void setSTATAC(int sTATAC) {
 		STATAC = sTATAC;
+	}
+
+	public int getCASHPRICE() {
+		return CASHPRICE;
+	}
+
+	public void setCASHPRICE(int cASHPRICE) {
+		CASHPRICE = cASHPRICE;
+	}
+
+	public int getPOINTSPRICE() {
+		return POINTSPRICE;
+	}
+
+	public void setPOINTSPRICE(int pOINTSPRICE) {
+		POINTSPRICE = pOINTSPRICE;
 	}
 
 }
