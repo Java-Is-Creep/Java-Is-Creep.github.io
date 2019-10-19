@@ -341,9 +341,86 @@ public class MultiplayerRoom extends Room {
 			matchPointsLock.lock();
 			matchmakingPoints +=  jug.matchMakingPunt();
 			matchPointsLock.unlock();
+			SnailInGame snailAux = jug.mySnail;
 			JsonObject msg = new JsonObject();
 			msg.addProperty("event", "WAITINGROOMSTART");
 			msg.addProperty("roomName", name);
+			msg.addProperty("snail", jug.snailType.toString());
+			switch(jug.snailType.toString()) {
+				case "NORMAL":
+					snailAux = new normalSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+				break;
+				case "TANK":
+					snailAux = new TankSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+				case "BAGUETTE":
+					snailAux = new BaguetteSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "MIAU":
+					snailAux = new MiauSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "MERCA":
+					snailAux = new MercaSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "SEA":
+					snailAux = new SeaSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "ROBA":
+					snailAux = new RobaSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "IRIS":
+					snailAux = new IrisSnail(jug.getSession(), jug.sessionLock);
+					msg.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg.addProperty("ac", snailAux.getSTATAC());
+					msg.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg.addProperty("regen", snailAux.getSTATREGEN());
+					msg.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+				default:
+				
+				break;
+			}
+
 			try {
 				jug.sessionLock.lock();
 				jug.getSession().sendMessage(new TextMessage(msg.toString()));
