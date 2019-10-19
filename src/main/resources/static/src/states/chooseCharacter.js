@@ -381,7 +381,7 @@ Slooow.chooseCharacterState.prototype = {
                         chosen.anchor.setTo(0.5, 0.5);
                         chosen.scale.setTo(0.4, 0.4)
                     }                           
-                        textName.setText("Panze")
+                        textName.setText("Panzer")
                         printStats(game.global.tankStats[4],game.global.tankStats[1],
                             game.global.tankStats[2],
                             game.global.tankStats[0],game.global.tankStats[3])

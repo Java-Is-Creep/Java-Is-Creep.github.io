@@ -44,7 +44,8 @@
         "Ac" : "Aceleración",
         "Weight" : "Peso",
         "Stamina" : "Resistencia",
-        "Regen" : "Regeneración"
+        "Regen" : "Regeneración",
+        "Sure" : "¿Está seguro de que desea\n realizar esta compra?"
     },
     
     "eng" : {
@@ -92,7 +93,8 @@
         "Ac" : "Acceleration",
         "Weight" : "Weight",
         "Stamina" : "Stamina",
-        "Regen" : "Regeneration"
+        "Regen" : "Regeneration",
+        "Sure" : "Are you sure that you want\n to confirm this purchase?"
         }
     
 }

@@ -16,10 +16,13 @@ Slooow.preloadState.prototype = {
 	// Hasta que este preload no acabe, no se pasa al siguiente estado
 	preload : function() {
 		// Pantalla de Carga
-		/*var loading= game.add.sprite(game.world.centerX, game.world.centerY, 'loading')
+		game.load.spritesheet ('loading', './assets/img/bg/loadingSpritesheet.png', 1200, 675, 8)
+		var loading= game.add.sprite(game.world.centerX, game.world.centerY, 'loading')
 		loading.anchor.setTo(0.5)
-		this.load.setPreloadSprite(loading)
-		loading.animations.add('loading', Phaser.Animation.generateFrameNames('loadingReal', 0, 7), 5, true);*/
+		/*loading.animations.add ('move')
+		loading.animations.play ('move')*/
+		//this.load.setPreloadSprite(loading)
+		
 		game.global.style = {
             font: "40px Arial",
             fill: "#ffffff",
@@ -155,12 +158,12 @@ Slooow.preloadState.prototype = {
 
 	// Pasa al inicio de sesion - crear nuevo usuario
 	create : function() {
-
+		game.state.start('initGameState')
 	},
 
 	update : function() {
 		//if (typeof game.global.player.id !== 'undefined') {
-			game.state.start('initGameState')
+			//game.state.start('initGameState')
 		//}
 	}
 }
