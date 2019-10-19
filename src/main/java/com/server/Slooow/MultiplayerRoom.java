@@ -80,9 +80,11 @@ public class MultiplayerRoom extends Room {
 		ArrayList<type> myType = new ArrayList<>();
 		ArrayList<Boolean> windDir = new ArrayList<>();
 		ArrayList<String> names = new ArrayList<>();
+		ArrayList<String> snails = new ArrayList<>();
 
 		for (PlayerConected player : jugadoresEnSala.values()) {
 					names.add(player.getNombre());
+					snails.add(player.snailType.toString());
 		}
 
 		for (MapObject obj : map.map) {
@@ -111,6 +113,7 @@ public class MultiplayerRoom extends Room {
 		String myTypeArray = gson.toJson(myType);
 		String WindDirArray = gson.toJson(windDir);
 		String namesArray = gson.toJson(names);
+		String snailsArray = gson.toJson(snails);
 
 		System.out.println("Array de posX");
 		System.out.println(posXArray);
@@ -125,6 +128,7 @@ public class MultiplayerRoom extends Room {
 		msgMap.addProperty("direction", WindDirArray);
 		msgMap.addProperty("roomType", this.myType);
 		msgMap.addProperty("name", namesArray);
+		msgMap.addProperty("snails", snailsArray);
 
 		broadcast(msgMap);
 	}
