@@ -139,7 +139,7 @@ Slooow.lobbyState.prototype = {
                         chosen.anchor.setTo(0.5, 0.5);
                         chosen.scale.setTo(0.4, 0.4)
                     }                           
-                        textName.setText("Panze")
+                        textName.setText("Panzer")
                         printStats(game.global.statSpeed,game.global.statAc,
                             game.global.statWeight,
                             game.global.statStamina,game.global.statRegen)
