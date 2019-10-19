@@ -162,8 +162,8 @@ window.onload = function () {
     //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
     //game.global.socket = new WebSocket('wss://25.34.17.250:8080/snail')
-    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
-    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
 
@@ -414,9 +414,11 @@ window.onload = function () {
                 //console.log(msg);
 
                 var id = JSON.parse(msg.id)
+                var state = JSON.stringify(msg.state)
+                state = state.substring(1, state.length - 1)
                 //console.log(this.game.global.arrayTrapdoors[id])
                 if (this.game.global.arrayTrapdoors[id] !== undefined) {
-                    if (game.global.arrayTrapdoors[id].frame == 0) {
+                    if (state == 'CLOSE') {
                         game.global.arrayTrapdoors[id].frame = 1
                     } else {
                         game.global.arrayTrapdoors[id].frame = 0
@@ -602,11 +604,12 @@ window.onload = function () {
             case 'UPDATEDOOR':
                 //Cambiar el sprite de la puerta
                 var id = JSON.parse(msg.id)
-                this.console.log(JSON.parse(msg.time))
+                var state = JSON.stringify(msg.state)
+                state = state.substring(1, state.length - 1)
                 this.console.log(msg)
                 //console.log(this.game.global.arrayDoors[id])
                 if (this.game.global.arrayDoors[id] !== undefined) {
-                    if (game.global.arrayDoors[id].frame == 0) {
+                    if (state == 'OPEN') {
                         this.console.log('abrir puerta')
                         game.global.arrayDoors[id].frame = 1
                     } else {
@@ -798,26 +801,7 @@ window.onload = function () {
                 game.global.arrayPositionsMulti = arrayPositionNames
                 game.global.arrayTimesMulti = arrayPositionTimes
 
-                //Resetear parametros
-                //Resetear variables mapa
-                 //Array de suelos. Tiene: x, y, width, height
-                game.global.arrayGrounds = []
-                //Array de paredes. Tiene: x, y, width, height
-                game.global.arrayWalls = []
-                //Array de rampas. Tiene: x, y, width, height
-                game.global.arraySlopes = []
-                //Array de obstaculos tipo pincho. Tiene: posX, posY
-                game.global.arrayObstacles = []
-                //Array de power ups
-                game.global.arrayPowerUps = []
-                //ArrayTrapdoors
-                game.global.arrayTrapdoors = []
-                //Array de trampolines
-                game.global.arrayTrampolines = []
-                game.global.arrayObstacleFire = []
-                game.global.arrayDoors = []
-                game.global.arrayWinds = []
-                game.global.finishObject = new Object
+                
 
                 game.state.start('gameOverState')
                 break
@@ -840,9 +824,10 @@ window.onload = function () {
                 break
             case 'OBSTACLECOLLISIONMULTI':
                 
-                //this.console.log('colision obstaculo')
                 //Poner animacion de cansado
                 var id = JSON.parse(msg.id)
+                
+                this.console.log('colision obstaculo ' + id)
                 game.global.playersMulti[id].sprite.animations.play('damage');
                 break
 

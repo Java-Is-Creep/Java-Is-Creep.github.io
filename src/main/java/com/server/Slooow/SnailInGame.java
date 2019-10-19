@@ -226,6 +226,11 @@ enum SkinType{Skin1,Skin2,Skin3}
 		collider = new SquareCollider(colliderOfsetX, colliderOfsetY, posX, posY);
 	}
 
+	public void resetPosition(){
+		posX = 100;
+		posY = 500;
+	}
+
 	// Resetea los valores en caso de que hayas consumido algun power up
 	public void restoreValues() {
 		// valores que varian con el power up
@@ -238,6 +243,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 		normalAcelerationY = NORMALACELERATIONY;
 		maxAcelerationAceleratingX = ACELERATIONX;
 		maxAcelerationAceleratingY = ACELERATIONY;
+		
 
 		maxStamina = MAXSTAMINA;
 		hasBoostStamina = false;
@@ -352,7 +358,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 							if(room.myType.compareTo("SINGLE") == 0){
 								sendCrashMessageSingle("LOSESHIELD");
 							} else {
-								sendCrashMessageMulti("LOSESHIELDMULTI",id);
+								sendCrashMessageMulti("LOSESHIELDMULTI",id,room);
 							}
 							System.out.println("se pincho pero se protegio con escudo");
 						} else if(isProtected){
@@ -365,7 +371,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 							if(room.myType.compareTo("SINGLE") == 0){
 								sendCrashMessageSingle("OBSTACLECOLLISION");
 							} else {
-								sendCrashMessageMulti("OBSTACLECOLLISIONMULTI",id);
+								sendCrashMessageMulti("OBSTACLECOLLISIONMULTI",id,room);
 							}
 							
 							System.out.println("se pincho ");
@@ -660,20 +666,15 @@ enum SkinType{Skin1,Skin2,Skin3}
 
 	}
 
-	public void sendCrashMessageMulti(String event, int id) {
+	public void sendCrashMessageMulti(String event, int id, Room room) {
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", event);
 		msg.addProperty("id", id);
-		try {
-			sessionLock.lock();
-			mySession.sendMessage(new TextMessage(msg.toString()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			sessionLock.unlock();
+		System.out.println(msg.toString());
+		if(room.getClass() == MultiplayerRoom.class){
+			MultiplayerRoom aux = (MultiplayerRoom) room;
+			aux.broadcast(msg);
 		}
-
 	}
 
 	public int getSTATSPEED() {

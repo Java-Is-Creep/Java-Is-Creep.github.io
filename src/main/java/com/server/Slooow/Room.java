@@ -92,6 +92,7 @@ public class Room {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATETRAPDOOR");
 				msg.addProperty("id", i);
+				msg.addProperty("state", trap.estate.toString());
 
 				try {
 					owner.sessionLock.lock();
@@ -116,6 +117,7 @@ public class Room {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATEDOOR");
 				msg.addProperty("id", i);
+				msg.addProperty("state", door.estate.toString());
 
 				try {
 					owner.sessionLock.lock();

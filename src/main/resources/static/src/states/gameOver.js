@@ -117,6 +117,26 @@ Slooow.gameOverState.prototype = {
         textMyTime.scale.setTo(0.7,0.7)
 
         function actionOnClickMainMenu(){
+            //Resetear parametros
+                //Resetear variables mapa
+                 //Array de suelos. Tiene: x, y, width, height
+                game.global.arrayGrounds = []
+                //Array de paredes. Tiene: x, y, width, height
+                game.global.arrayWalls = []
+                //Array de rampas. Tiene: x, y, width, height
+                game.global.arraySlopes = []
+                //Array de obstaculos tipo pincho. Tiene: posX, posY
+                game.global.arrayObstacles = []
+                //Array de power ups
+                game.global.arrayPowerUps = []
+                //ArrayTrapdoors
+                game.global.arrayTrapdoors = []
+                //Array de trampolines
+                game.global.arrayTrampolines = []
+                game.global.arrayObstacleFire = []
+                game.global.arrayDoors = []
+                game.global.arrayWinds = []
+                game.global.finishObject = new Object
             game.state.start('mainMenuState')
         }
 

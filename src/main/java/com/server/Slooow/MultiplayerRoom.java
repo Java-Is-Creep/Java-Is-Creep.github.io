@@ -331,6 +331,10 @@ public class MultiplayerRoom extends Room {
 
 	public void anadirJugador(PlayerConected jug) {
 		playerLock.lock();
+		System.out.println("Valores iniciales");
+		System.out.println("PosX: " + jug.mySnail.posX);
+		System.out.println("PosY: " + jug.mySnail.posY);
+		jug.mySnail.hasFinish = false;
 		if (jugadoresEnSala.putIfAbsent(jug.getSession(), jug) == null) {
 			playerArray[numPlayers] = jug;
 			numPlayers++;
@@ -446,7 +450,6 @@ public class MultiplayerRoom extends Room {
 				msg.addProperty("runOutStamina", player.mySnail.sendRunOutStamina);
 				msg.addProperty("recoverStamina", player.mySnail.sendRecoverStamina);
 				msg.addProperty("id", id);
-				System.out.println("Nombre player: "+ player.getNombre());
 				System.out.println(msg);
 				broadcast(msg);
 			}
@@ -483,6 +486,7 @@ public class MultiplayerRoom extends Room {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATETRAPDOOR");
 				msg.addProperty("id", i);
+				msg.addProperty("state", trap.estate.toString());
 
 				
 
@@ -501,7 +505,7 @@ public class MultiplayerRoom extends Room {
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "UPDATEDOOR");
 				msg.addProperty("id", i);
-				msg.addProperty("time",acummulativeTime);
+				msg.addProperty("state", door.estate.toString());
 
 				System.out.println(msg.toString());
 				broadcast(msg);
@@ -621,6 +625,12 @@ public class MultiplayerRoom extends Room {
 
 	public void quitarJugador(PlayerConected jug) {
 		playerLock.lock();
+		System.out.println("Valores restaurados");
+		jug.mySnail.restoreValues();
+		jug.mySnail.resetPosition();
+		System.out.println("PosX: " + jug.mySnail.posX);
+		System.out.println("PosY: " + jug.mySnail.posY);
+		
 		if (jugadoresEnSala.remove(jug.getSession()) != null) {
 			numPlayers--;
 			jug.mySnail.hasFinish = true;
