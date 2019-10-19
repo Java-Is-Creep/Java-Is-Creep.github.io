@@ -1,4 +1,9 @@
 Slooow.lobbyState = function(game) {
+    var stat1
+    var stat2
+    var stat3
+    var stat4
+    var stat5
 }
 
 Slooow.lobbyState.prototype = {
@@ -62,40 +67,40 @@ Slooow.lobbyState.prototype = {
         chosenShell.scale.setTo(0.95, 0.95)
 
         //Print image snail
-        var chosen
-        if (game.global.snailChosen != null){
-            switch (game.global.snailChosen){
-                case ('NORMAL'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'normalCol')
-                    break
-                case ('TANK'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'tanqueCol')
-                    break   
-                case ('BAGUETTE'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'frenchCol')
-                    break    
-                case ('MIAU'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'catCol')
-                    break    
-                case ('MERCA'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'slugCol')
-                    break     
-                case ('SEA'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'seaCol')
-                    break
-                case ('ROBA'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'thiefCol')
-                    break
-                case ('IRIS'):
-                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'irisCol')
-                    break
-                default:
-                    console.log('snail sprite no identificado')
-                    break    
-            }
-        }
-		chosen.anchor.setTo(0.5, 0.5);
-        chosen.scale.setTo(0.4, 0.4)
+        stat1 = [];
+        stat2 = [];
+        stat3 = [];
+        stat4 = [];
+        stat5 = [];
+
+        //Print image chosen
+        var chosenShell = game.add.image(game.world.centerX-380, game.world.centerY-170, 'roundBtn')
+        chosenShell.anchor.setTo(0.5, 0.5);
+        chosenShell.scale.setTo(0.95, 0.95)
+        var statsBg = game.add.image(game.world.centerX-320, game.world.centerY+180, 'squareBtn')
+        statsBg.anchor.setTo(0.5, 0.5);
+        statsBg.scale.setTo(2.7, 1.6)
+        var textName = game.add.text(game.world.centerX-320, game.world.centerY+50, "" , game.global.style)
+        textName.anchor.set(0.5)
+        textName.scale.setTo(0.7,0.7)
+
+        textSpeed = game.add.text(game.world.centerX-540, game.world.centerY+90, game.global.activeLanguage.Speed , game.global.style)
+        textSpeed.scale.setTo(0.5,0.5)
+
+        textAc = game.add.text(game.world.centerX-540, game.world.centerY+130, game.global.activeLanguage.Ac , game.global.style)
+        textAc.scale.setTo(0.5,0.5)
+
+        textWeight = game.add.text(game.world.centerX-540, game.world.centerY+170, game.global.activeLanguage.Weight , game.global.style)
+        textWeight.scale.setTo(0.5,0.5)
+
+        textStamina = game.add.text(game.world.centerX-540, game.world.centerY+210, game.global.activeLanguage.Stamina , game.global.style)
+        textStamina.scale.setTo(0.5,0.5)
+        
+        textRegen = game.add.text(game.world.centerX-540, game.world.centerY+250, game.global.activeLanguage.Regen , game.global.style)
+        textRegen.scale.setTo(0.5,0.5)
+        var chosen = null
+        loadChosen()
+		
         chosen.inputEnabled = true
         chosen.events.onInputDown.add(chooseCharacter, this)
         
@@ -113,6 +118,173 @@ Slooow.lobbyState.prototype = {
         function actionOnClickBack(){
             game.state.start('mainMenuState')
         }
+
+        function loadChosen(){
+            if (game.global.snailChosen != null){
+            switch (game.global.snailChosen){
+                case ('NORMAL'):
+                    if(chosen == null){
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'normalCol')
+                        chosen.anchor.setTo(0.5, 0.5);
+                        chosen.scale.setTo(0.4, 0.4)
+                    }  
+                        textName.setText("Caralcol")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break
+                case ('TANK'):
+                    if(chosen == null){
+                        chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'tanqueCol')
+                        chosen.anchor.setTo(0.5, 0.5);
+                        chosen.scale.setTo(0.4, 0.4)
+                    }                           
+                        textName.setText("Panze")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break   
+                case ('BAGUETTE'):
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'frenchCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        textName.setText("Baguette")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break    
+                case ('MIAU'):
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'catCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Schrodinger")
+                       printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break    
+                case ('MERCA'):
+                         if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'slugCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        
+                        textName.setText("Jabba el Creep")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break     
+                case ('SEA'):
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'seaCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Maricol")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break
+                case ('ROBA'):
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'thiefCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Bárcenas")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break
+                case ('IRIS'):
+                        if(chosen == null){
+                            chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'irisCol')
+                            chosen.anchor.setTo(0.5, 0.5);
+                            chosen.scale.setTo(0.4, 0.4)
+                        } 
+                        
+                        textName.setText("Iris")
+                        printStats(game.global.statSpeed,game.global.statAc,
+                            game.global.statWeight,
+                            game.global.statStamina,game.global.statRegen)
+                    break
+                default:
+                    console.log('snail sprite no identificado')
+                    break    
+            }
+        }
+
+        }
+
+        function printStats(speed, ac, weight, stamina, regen){
+            
+            for (var i = 0; i < stat1.length; i++){
+                stat1[i].destroy();
+            }
+            for (var i = 0; i < stat2.length; i++){
+                stat2[i].destroy();
+            }
+            for (var i = 0; i < stat3.length; i++){
+                stat3[i].destroy();
+            }
+            for (var i = 0; i < stat4.length; i++){
+                stat4[i].destroy();
+            }
+            for (var i = 0; i < stat5.length; i++){
+                stat5[i].destroy();
+            }
+            
+            
+            var offset = 0;
+            for (var i = 0; i < speed; i++){
+                stat1[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 100, 'statBtn')
+                stat1[i].anchor.set(0.5)
+                stat1[i].scale.setTo(0.1,0.1)
+                offset +=50
+                
+            }
+            var offset = 0;  
+            for (var i = 0; i < ac; i++){
+                stat2[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 140, 'statBtn')
+                stat2[i].anchor.set(0.5)
+                stat2[i].scale.setTo(0.1,0.1)
+                offset +=50
+                
+            }
+            var offset = 0;   
+            for (var i = 0; i < weight; i++){
+                stat3[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 180, 'statBtn')
+                stat3[i].anchor.set(0.5)
+                stat3[i].scale.setTo(0.1,0.1)
+                offset +=50
+
+            }
+            var offset = 0;   
+            for (var i = 0; i < stamina; i++){
+                stat4[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 220, 'statBtn')
+                stat4[i].anchor.set(0.5)
+                stat4[i].scale.setTo(0.1,0.1)
+                offset +=50
+
+            }  
+            var offset = 0; 
+            for (var i = 0; i < regen; i++){
+                stat5[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 260, 'statBtn')
+                stat5[i].anchor.set(0.5)
+                stat5[i].scale.setTo(0.1,0.1)
+                offset +=50
+                
+            } 
+            
+            }
 
         function actionOnClickReady(){
             let msg = {
@@ -139,7 +311,7 @@ Slooow.lobbyState.prototype = {
 	},
 
 	update : function() {
-			
+        	
 		this.background.tilePosition.x+=0.5
         this.background.tilePosition.y-=0.5
 	}

@@ -654,6 +654,11 @@ window.onload = function () {
                 this.console.log(snail)
                 this.game.global.snailChosen = snail
                 game.global.maxStamina = 0
+                game.global.statStamina = JSON.parse(msg.stamina)
+                game.global.statAc = JSON.parse(msg.ac)
+                game.global.statRegen = JSON.parse(msg.regen)
+                game.global.statWeight = JSON.parse(msg.weight)
+                game.global.statSpeed = JSON.parse(msg.speed)
                 this.game.state.start('lobbyState')
                 break 
             
@@ -849,6 +854,7 @@ window.onload = function () {
     this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
     this.game.state.add('shopState', Slooow.shopState);
     this.game.state.add('buySnailState', Slooow.buySnailState);
+    this.game.state.add('buyShellsState', Slooow.buyShellsState);
     this.game.state.add('recordsState', Slooow.recordsState);
     this.game.state.add('trophiesState', Slooow.trophiesState);
     

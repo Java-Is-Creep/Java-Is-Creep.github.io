@@ -238,35 +238,35 @@ Slooow.chooseCharacterState.prototype = {
         for(var i = 0; i < game.global.notOwned.length; i++){
             switch (game.global.notOwned[i]){
                 case ('NORMAL'):
-                        normalShell.inputEnabled = false
+                        normalShell.inputEnabled = true
                         normalShell.alpha = 0.6
                     break
                 case ('TANK'):
-                        tankShell.inputEnabled = false
+                        tankShell.inputEnabled = true
                         tankShell.alpha = 0.6
                     break   
                 case ('BAGUETTE'):
-                        frenchShell.inputEnabled = false
+                        frenchShell.inputEnabled = true
                         frenchShell.alpha = 0.6
                     break    
                 case ('MIAU'):
-                        catShell.inputEnabled = false
+                        catShell.inputEnabled = true
                         catShell.alpha = 0.6
                     break    
                 case ('MERCA'):
-                        slugShell.inputEnabled = false
+                        slugShell.inputEnabled = true
                         slugShell.alpha = 0.6
                     break     
                 case ('SEA'):
-                        seaShell.inputEnabled = false
+                        seaShell.inputEnabled = true
                         seaShell.alpha = 0.6
                     break
                 case ('ROBA'):
-                        thiefShell.inputEnabled = false
+                        thiefShell.inputEnabled = true
                         thiefShell.alpha = 0.6
                     break
                 case ('IRIS'):
-                        rainbowShell.inputEnabled = false
+                        rainbowShell.inputEnabled = true
                         rainbowShell.alpha = 0.6
                     break
                 default:
@@ -368,6 +368,12 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.normalStats[4],game.global.normalStats[1],
                             game.global.normalStats[2],
                             game.global.normalStats[0],game.global.normalStats[3])
+                        game.global.statStamina = game.global.normalStats[0]
+                        game.global.statAc = game.global.normalStats[1]
+                        game.global.statRegen = game.global.normalStats[3]
+                        game.global.statWeight = game.global.normalStats[2]
+                        game.global.statSpeed = game.global.normalStats[4]
+                        
                     break
                 case ('TANK'):
                     if(chosen == null){
@@ -379,6 +385,11 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.tankStats[4],game.global.tankStats[1],
                             game.global.tankStats[2],
                             game.global.tankStats[0],game.global.tankStats[3])
+                        game.global.statStamina = game.global.tankStats[0]
+                        game.global.statAc = game.global.tankStats[1]
+                        game.global.statRegen = game.global.tankStats[3]
+                        game.global.statWeight = game.global.tankStats[2]
+                        game.global.statSpeed = game.global.tankStats[4]
                     break   
                 case ('BAGUETTE'):
                         if(chosen == null){
@@ -390,6 +401,11 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.baguetteStats[4],game.global.baguetteStats[1],
                             game.global.baguetteStats[2],
                             game.global.baguetteStats[0],game.global.baguetteStats[3])
+                        game.global.statStamina = game.global.baguetteStats[0]
+                        game.global.statAc = game.global.baguetteStats[1]
+                        game.global.statRegen = game.global.baguetteStats[3]
+                        game.global.statWeight = game.global.baguetteStats[2]
+                        game.global.statSpeed = game.global.baguetteStats[4]
                     break    
                 case ('MIAU'):
                         if(chosen == null){
@@ -402,19 +418,27 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.miauStats[4],game.global.miauStats[1],
                             game.global.miauStats[2],
                             game.global.miauStats[0],game.global.miauStats[3])
+                        game.global.statStamina = game.global.miauStats[0]
+                        game.global.statAc = game.global.miauStats[1]
+                        game.global.statRegen = game.global.miauStats[3]
+                        game.global.statWeight = game.global.miauStats[2]
+                        game.global.statSpeed = game.global.miauStats[4]
                     break    
                 case ('MERCA'):
                          if(chosen == null){
                             chosen = game.add.image(game.world.centerX-380, game.world.centerY-170, 'slugCol')
                             chosen.anchor.setTo(0.5, 0.5);
                             chosen.scale.setTo(0.4, 0.4)
-                        } 
-                        
-                        
+                        }                         
                         textName.setText("Jabba el Creep")
                         printStats(game.global.mercaStats[4],game.global.mercaStats[1],
                             game.global.mercaStats[2],
                             game.global.mercaStats[0],game.global.mercaStats[3])
+                        game.global.statStamina = game.global.mercaStats[0]
+                        game.global.statAc = game.global.mercaStats[1]
+                        game.global.statRegen = game.global.mercaStats[3]
+                        game.global.statWeight = game.global.mercaStats[2]
+                        game.global.statSpeed = game.global.mercaStats[4]
                     break     
                 case ('SEA'):
                         if(chosen == null){
@@ -427,6 +451,11 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.seaStats[4],game.global.seaStats[1],
                             game.global.seaStats[2],
                             game.global.seaStats[0],game.global.seaStats[3])
+                        game.global.statStamina = game.global.seaStats[0]
+                        game.global.statAc = game.global.seaStats[1]
+                        game.global.statRegen = game.global.seaStats[3]
+                        game.global.statWeight = game.global.seaStats[2]
+                        game.global.statSpeed = game.global.seaStats[4]
                     break
                 case ('ROBA'):
                         if(chosen == null){
@@ -439,6 +468,11 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.robaStats[4],game.global.robaStats[1],
                             game.global.robaStats[2],
                             game.global.robaStats[0],game.global.robaStats[3])
+                        game.global.statStamina = game.global.robaStats[0]
+                        game.global.statAc = game.global.robaStats[1]
+                        game.global.statRegen = game.global.robaStats[3]
+                        game.global.statWeight = game.global.robaStats[2]
+                        game.global.statSpeed = game.global.robaStats[4]
                     break
                 case ('IRIS'):
                         if(chosen == null){
@@ -451,11 +485,17 @@ Slooow.chooseCharacterState.prototype = {
                         printStats(game.global.irisStats[4],game.global.irisStats[1],
                             game.global.irisStats[2],game.global.irisStats[0],
                             game.global.irisStats[3])
+                        game.global.statStamina = game.global.irisStats[0]
+                        game.global.statAc = game.global.irisStats[1]
+                        game.global.statRegen = game.global.irisStats[3]
+                        game.global.statWeight = game.global.irisStats[2]
+                        game.global.statSpeed = game.global.irisStats[4]
                     break
                 default:
                     console.log('snail sprite no identificado')
                     break    
             }
+            
         }
 
         }
