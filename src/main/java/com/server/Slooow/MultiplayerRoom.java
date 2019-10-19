@@ -49,8 +49,17 @@ public class MultiplayerRoom extends Room {
 	ReentrantLock playerReadyLock = new ReentrantLock();
 	ReentrantLock matchPointsLock = new ReentrantLock();
 
+	public boolean deletePlayer[] = new boolean[MAXNUMPLAYERS];
+
+	public PlayerConected playerArray[] = new PlayerConected[MAXNUMPLAYERS];
+
+
+
 	public MultiplayerRoom(String nombre, PlayerConected owner, SnailGame game, String mapName,String myType) {
 		super(nombre, owner, game, mapName,myType);
+		for(int i = 0; i < MAXNUMPLAYERS; i++){
+			deletePlayer[i] = false;
+		}
 	}
 
 	/*
@@ -244,7 +253,12 @@ public class MultiplayerRoom extends Room {
 
 						break;
 					case FINISH:
-						finishRace(player);
+						if(!player.mySnail.hasFinish){
+							finishRace(player);
+							deletePlayer[id] = true;
+							player.mySnail.hasFinish = true;
+						}
+
 						break;
 					case WIND:
 						player.mySnail.isInWind = true;
@@ -294,7 +308,6 @@ public class MultiplayerRoom extends Room {
 		msg.addProperty("id", id);
 		msg.addProperty("degrees", degrees);
 
-		System.out.println(msg.toString());
 
 		broadcast(msg);
 	}
@@ -304,7 +317,6 @@ public class MultiplayerRoom extends Room {
 		msg.addProperty("event", "WALLCOLLISIONMULTI");
 		msg.addProperty("id", id);
 
-		System.out.println(msg.toString());
 
 		broadcast(msg);
 	}
@@ -314,7 +326,6 @@ public class MultiplayerRoom extends Room {
 		msg.addProperty("event", "GROUNDCOLLISIONMULTI");
 		msg.addProperty("id", id);
 
-		System.out.println(msg.toString());
 
 		broadcast(msg);
 	}
@@ -322,6 +333,7 @@ public class MultiplayerRoom extends Room {
 	public void anadirJugador(PlayerConected jug) {
 		playerLock.lock();
 		if (jugadoresEnSala.putIfAbsent(jug.getSession(), jug) == null) {
+			playerArray[numPlayers] = jug;
 			numPlayers++;
 			matchPointsLock.lock();
 			matchmakingPoints +=  jug.matchMakingPunt();
@@ -398,7 +410,7 @@ public class MultiplayerRoom extends Room {
 		} finally {
 			player.sessionLock.unlock();
 		}
-		quitarJugador(player);
+		//quitarJugador(player);
 		System.out.println("Jugadores terminados: "+ playerNamePosition.size());
 
 		if(playerNamePosition.size() == MAXNUMPLAYERS){
@@ -406,9 +418,17 @@ public class MultiplayerRoom extends Room {
 			executor.shutdown();
 			destroyRoom();
 		}
+		
 		System.out.println("Tras comprobar los jugadores");
 
 
+	}
+
+		public void destroyRoom() {
+
+			
+		game.deleteRoom(this);
+		System.out.println("Sala Destruida");
 	}
 
 	public void checkSnailState() {
@@ -425,8 +445,11 @@ public class MultiplayerRoom extends Room {
 				msg.addProperty("runOutStamina", player.mySnail.sendRunOutStamina);
 				msg.addProperty("recoverStamina", player.mySnail.sendRecoverStamina);
 				msg.addProperty("id", id);
+				System.out.println("Nombre player: "+ player.getNombre());
+				System.out.println(msg);
 				broadcast(msg);
 			}
+			id++;
 		}
 		playerLock.unlock();
 
@@ -532,41 +555,41 @@ public class MultiplayerRoom extends Room {
 
 	}
 
+	public void deletePlayers(){
+		for(int i = 0; i < MAXNUMPLAYERS; i++){
+			if(deletePlayer[i]){
+				quitarJugador(playerArray[i]);
+			}
+		}
+	}
+
 
 	public void tick() {
 		Runnable task = () -> {
 
 
 				acummulativeTime += TICKTIME;
-				System.out.println("Antes update door");
 				updateDoors();
-				System.out.println("Antes update trapDoor");
 				updateTrapDoor();
-				System.out.println("Antes update trampoline");
 				updateTrampoline();
-				System.out.println("Antes update wind");
 				updateWind();
-				System.out.println("Antes update collisions");
 				checkCollisions();
-				System.out.println("Antes update obstacle");
 				updateObstacles();
-				System.out.println("Antes update snail");
 				int id = 0;
 				for (PlayerConected player : jugadoresEnSala.values()) {
 
 					player.mySnail.updateSnail(this,id);	
 					id++;
 				}
-				System.out.println("Antes update checkCollision");
 				checkSnailState();
-				System.out.println("Despues checkCollision");
+				
+				deletePlayers();
 
 				ArrayList<Float> posX = new ArrayList<>();
 				ArrayList<Float> posY = new ArrayList<>();
 				ArrayList<Float> stamina = new ArrayList<>();
 				ArrayList<String> names = new ArrayList<>();
 
-				System.out.println("TICK ");
 				for (PlayerConected player : jugadoresEnSala.values()) {
 					posX.add((Float) player.mySnail.posX);
 					posY.add((Float) player.mySnail.posY);
@@ -603,6 +626,7 @@ public class MultiplayerRoom extends Room {
 		playerLock.lock();
 		if (jugadoresEnSala.remove(jug.getSession()) != null) {
 			numPlayers--;
+			jug.mySnail.hasFinish = true;
 			JsonObject msg2 = new JsonObject();
 			msg2.addProperty("event", "PLAYERLEFT");
 			msg2.addProperty("name", jug.getNombre());

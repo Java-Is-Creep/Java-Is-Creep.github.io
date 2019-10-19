@@ -141,8 +141,9 @@ window.onload = function () {
     // Conexiones
     //game.global.socket = new WebSocket('wss://slooow.herokuapp.com/snail');
     //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
-    game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
-    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    //game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
+    //game.global.socket = new WebSocket('wss://25.34.17.250:8080/snail')
+    game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -726,15 +727,14 @@ window.onload = function () {
                 var runOutOfStamina = JSON.parse(msg.runOutStamina)
                 var recoverStamina = JSON.parse(msg.recoverStamina)
                 var idPlayer = JSON.parse(msg.id)
-
+                console.log(msg)
                 if (runOutOfStamina) {
                     //Animacion de cansarse
                     game.global.playersMulti[idPlayer].sprite.animations.play('tired');
-                } else
-                    if (recoverStamina) {
+                } else if (recoverStamina) {
                         //Animacion de andar normal
                         game.global.playersMulti[idPlayer].sprite.animations.play('walk');
-                    }
+                }
                 break
             case 'FINISHMULTI':
                 var myTime = JSON.parse(msg.time)

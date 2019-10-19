@@ -38,21 +38,29 @@ Slooow.lobbyMultiState.prototype = {
         textButtonBack.scale.setTo(0.5,0.5)
 
         //Boton listo 
-        buttonBack = game.add.button(game.world.centerX,
+        buttonOK = game.add.button(game.world.centerX,
             game.world.centerY, 'button', actionOnClickOK, this,
             0, 0, 0)
-        buttonBack.anchor.set(0.5)
-        buttonBack.scale.setTo(0.2, 0.3)
+        buttonOK.anchor.set(0.5)
+        buttonOK.scale.setTo(0.2, 0.3)
         //Texto listo
-        textButtonBack = game.add.text(game.world.centerX,
+        textButtonOK = game.add.text(game.world.centerX,
             game.world.centerY, game.global.activeLanguage.Accept, game.global.style)
-        textButtonBack.anchor.set(0.5)
-        textButtonBack.scale.setTo(0.5,0.5)
+        textButtonOK.anchor.set(0.5)
+        textButtonOK.scale.setTo(0.5,0.5)
 
         function actionOnClickBack(){
             game.state.start('mainMenuState')
         }
         function actionOnClickOK(){
+            buttonBack.inputEnabled = false
+            buttonBack.alpha = 0.6
+            textButtonBack.alpha = 0.6
+
+            buttonOK.inputEnabled = false
+            buttonOK.alpha = 0.6
+            textButtonOK.alpha = 0.6
+
             let msg = {
                 event: 'CHOOSESNAIL',
                 chooseSnail: 'NORMAL'

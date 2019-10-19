@@ -140,6 +140,7 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	protected boolean lastFrameGroundCollision = false;
 	protected boolean lastFrameWallCollision = false;
 	protected boolean lastFrameWallSlopeCollision = false;
+	protected boolean hasFinish = false;
 
 	//Arreglo Aceleracionç;
 	public final int ACELERATIONTIME = 250;
