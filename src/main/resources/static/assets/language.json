@@ -45,7 +45,9 @@
         "Weight" : "Peso",
         "Stamina" : "Resistencia",
         "Regen" : "Regeneración",
-        "Sure" : "¿Está seguro de que desea\n realizar esta compra?"
+        "Sure" : "¿Está seguro de que desea\n realizar esta compra?",
+        "Yes" : "Sí",
+        "No" : "No"
     },
     
     "eng" : {
@@ -94,7 +96,9 @@
         "Weight" : "Weight",
         "Stamina" : "Stamina",
         "Regen" : "Regeneration",
-        "Sure" : "Are you sure that you want\n to confirm this purchase?"
+        "Sure" : "Are you sure that you want\n to confirm this purchase?",
+        "Yes" : "Yes",
+        "No" : "No"
         }
     
 }

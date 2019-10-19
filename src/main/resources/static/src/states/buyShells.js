@@ -1,5 +1,5 @@
 Slooow.buyShellsState = function (game) {
-
+    var id = -1;
 }
 
 Slooow.buyShellsState.prototype = {
@@ -89,7 +89,8 @@ Slooow.buyShellsState.prototype = {
         tShells1.scale.setTo(1,1)
 
         btnShell2 = game.add.button(game.world.centerX ,
-            game.world.centerY, 'button')
+            game.world.centerY, 'button',buy2, this,
+            0, 0, 0)
         btnShell2.anchor.set(0.5)
         btnShell2.scale.setTo(1.2, 0.5)
         //Img shells
@@ -111,7 +112,8 @@ Slooow.buyShellsState.prototype = {
         tShells2.scale.setTo(1,1)
 
         btnShell3 = game.add.button(game.world.centerX ,
-            game.world.centerY+110, 'button')
+            game.world.centerY+110, 'button',buy3, this,
+            0, 0, 0)
         btnShell3.anchor.set(0.5)
         btnShell3.scale.setTo(1.2, 0.5)
         //Img shells
@@ -133,7 +135,8 @@ Slooow.buyShellsState.prototype = {
         tShells3.scale.setTo(1,1)
 
         btnShell4 = game.add.button(game.world.centerX ,
-            game.world.centerY+220, 'button')
+            game.world.centerY+220, 'button',buy4, this,
+            0, 0, 0)
         btnShell4.anchor.set(0.5)
         btnShell4.scale.setTo(1.2, 0.5)
         //Img shells
@@ -154,7 +157,12 @@ Slooow.buyShellsState.prototype = {
         tShells4.anchor.set(0, 0.5)
         tShells4.scale.setTo(1,1)
 
-
+        /**
+         * 
+         * 
+         * POP-UP
+         * 
+         */
         //Pop up confirm
         bgPopUp = game.add.image(game.world.centerX ,
             game.world.centerY, 'squareBtn')
@@ -168,24 +176,26 @@ Slooow.buyShellsState.prototype = {
         tPopUp.scale.setTo(1,1)
         tPopUp.alpha = 0
 
-        btnYes = game.add.button(game.world.centerX ,
-            game.world.centerY+220, 'button')
+        btnYes = game.add.button(game.world.centerX+120 ,
+            game.world.centerY+120, 'blueBtn',actionYes, this,
+            0, 0, 0)
         btnYes.anchor.set(0.5)
-        btnYes.scale.setTo(1.2, 0.5)
+        btnYes.scale.setTo(0.4, 0.4)
         btnYes.alpha = 0
-        tYes = game.add.text(game.world.centerX,
-            game.world.centerY - 120, game.global.activeLanguage.Sure, game.global.style)
+        tYes = game.add.text(game.world.centerX+120,
+            game.world.centerY+120, game.global.activeLanguage.Yes, game.global.style)
         tYes.anchor.set(0.5)
         tYes.scale.setTo(1,1)
         tYes.alpha = 0
 
-        btnNo = game.add.button(game.world.centerX ,
-            game.world.centerY+220, 'button')
+        btnNo = game.add.button(game.world.centerX-120 ,
+            game.world.centerY+120, 'pinkBtn', actionNo, this,
+            0, 0, 0)
         btnNo.anchor.set(0.5)
-        btnNo.scale.setTo(1.2, 0.5)
+        btnNo.scale.setTo(0.4, 0.4)
         btnNo.alpha = 0
-        tNo = game.add.text(game.world.centerX,
-            game.world.centerY - 120, game.global.activeLanguage.Sure, game.global.style)
+        tNo = game.add.text(game.world.centerX-120,
+            game.world.centerY+120, game.global.activeLanguage.No, game.global.style)
         tNo.anchor.set(0.5)
         tNo.scale.setTo(1,1)
         tNo.alpha = 0
@@ -194,21 +204,63 @@ Slooow.buyShellsState.prototype = {
             game.state.start('shopState')
         }
 
+        function actionYes(){
+
+        }
+
+        function actionNo(){
+            bgPopUp.alpha = 0;
+            tPopUp.alpha = 0;
+            btnNo.alpha = 0;
+            tNo.alpha = 0;
+            btnYes.alpha = 0;
+            tYes.alpha = 0;
+            btnNo.inputEnabled = false;
+            btnYes.inputEnabled = false;
+        }
+
         function buy1(){
             bgPopUp.alpha = 1;
             tPopUp.alpha = 1;
+            btnNo.alpha = 1;
+            tNo.alpha = 1;
+            btnYes.alpha = 1;
+            tYes.alpha = 1;
+            btnNo.inputEnabled = true;
+            btnYes.inputEnabled = true;
         }
 
         function buy2(){
-
+            bgPopUp.alpha = 1;
+            tPopUp.alpha = 1;
+            btnNo.alpha = 1;
+            tNo.alpha = 1;
+            btnYes.alpha = 1;
+            tYes.alpha = 1;
+            btnNo.inputEnabled = true;
+            btnYes.inputEnabled = true;
         }
 
         function buy3(){
-
+            bgPopUp.alpha = 1;
+            tPopUp.alpha = 1;
+            btnNo.alpha = 1;
+            tNo.alpha = 1;
+            btnYes.alpha = 1;
+            tYes.alpha = 1;
+            btnNo.inputEnabled = true;
+            btnYes.inputEnabled = true;
         }
 
         function buy4(){
-
+            bgPopUp.alpha = 1;
+            tPopUp.alpha = 1;
+            btnNo.alpha = 1;
+            tNo.alpha = 1;
+            btnYes.alpha = 1;
+            tYes.alpha = 1;
+            btnNo.inputEnabled = true;
+            btnYes.inputEnabled = true;
         }
     },
 

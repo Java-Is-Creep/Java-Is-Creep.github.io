@@ -122,6 +122,8 @@ Slooow.preloadState.prototype = {
 		game.load.image('button', './assets/img/btn/defaultBtn.png');
 		game.load.image('roundBtn', './assets/img/btn/roundBtn.png');
 		game.load.image('squareBtn', './assets/img/btn/squareBtn.png');
+		game.load.image('blueBtn', './assets/img/btn/blueBtn.png')
+		game.load.image('pinkBtn', './assets/img/btn/pinkBtn.png')
 
 		// Social-btn
 		game.load.image('twitterBtn', './assets/img/btn/twitterBtn.png');
