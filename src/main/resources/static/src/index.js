@@ -135,7 +135,26 @@ window.onload = function () {
         maxStamina: 0,
         puntuationGameOver: null,
         money: null,
-        points: null
+        points: null,
+        maxStamina : 0,
+        puntuationGameOver : null,
+        money : null,
+        points : null,
+        snailToBuy : null,
+        skinToBuy : null,
+        statSpeed : null,
+        statAc: null,
+        statWeight: null,
+        statStamina: null,
+        statRegen: null,
+        normalStats: [],
+        tankStats: [],
+        baguetteStats: [],
+        miauStats: [],
+        mercaStats: [],
+        seaStats: [],
+        robaStats: [],
+        irisStats:[],
     }
 
     // Conexiones
@@ -143,7 +162,9 @@ window.onload = function () {
     //game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
     //game.global.socket = new WebSocket('ws://25.35.101.144:8080/snail')
     //game.global.socket = new WebSocket('wss://25.34.17.250:8080/snail')
-    game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    //game.global.socket = new WebSocket('ws://192.168.1.17:8080/snail');
+    game.global.socket = new WebSocket('ws://127.0.0.1:8080/snail');
+    //game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
 
         console.log('[DEBUG] WebSocket connection opened.')
@@ -654,6 +675,11 @@ window.onload = function () {
                 this.console.log(snail)
                 this.game.global.snailChosen = snail
                 game.global.maxStamina = 0
+                game.global.statStamina = JSON.parse(msg.stamina)
+                game.global.statAc = JSON.parse(msg.ac)
+                game.global.statRegen = JSON.parse(msg.regen)
+                game.global.statWeight = JSON.parse(msg.weight)
+                game.global.statSpeed = JSON.parse(msg.speed)
                 this.game.state.start('lobbyState')
                 break
 
@@ -895,16 +921,45 @@ window.onload = function () {
             case 'CHOOSEENTER':
                 let ownedAux2 = JSON.parse(msg.owned)
                 let notOwnedAux2 = JSON.parse(msg.notOwned)
+                let normalStatsAux = JSON.parse(msg.normal)
+                let tankStatsAux = JSON.parse(msg.tank)
+                let baguetteStatsAux = JSON.parse(msg.baguette)
+                let miauStatsAux = JSON.parse(msg.miau)
+                let mercaStatsAux = JSON.parse(msg.merca)
+                let seaStatsAux = JSON.parse(msg.sea)
+                let robaStatsAux = JSON.parse(msg.roba)
+                let irisStatsAux = JSON.parse(msg.iris)
 
-                for (var i = 0; i < ownedAux2.length; i++) {
-                    game.global.owned[i] = ownedAux2[i];
+                for (var e = 0; e < ownedAux2.length; e++){
+                    game.global.owned[e] = ownedAux2[e];
                 }
 
-                for (var j = 0; j < notOwnedAux2.length; j++) {
-                    game.global.notOwned[j] = notOwnedAux2[j]
+                for (var s = 0; s < notOwnedAux2.length; s++){
+                    game.global.notOwned[s] = notOwnedAux2[s]
                 }
+
+                for (var p = 0; p < normalStatsAux.length; p++){
+                    game.global.normalStats[p] = normalStatsAux[p]
+                    game.global.tankStats[p] = tankStatsAux[p]
+                    game.global.baguetteStats[p] = baguetteStatsAux[p]
+                    game.global.miauStats[p] = miauStatsAux[p]
+                    game.global.mercaStats[p] = mercaStatsAux[p]
+                    game.global.seaStats[p] = seaStatsAux[p]
+                    game.global.robaStats[p] = robaStatsAux[p]
+                    game.global.irisStats[p] = irisStatsAux[p]
+                }
+
                 game.state.start('chooseCharacterState')
-        }
+                break
+            case 'SEESNAILRS':
+                game.global.statStamina = JSON.parse(msg.stamina)
+                game.global.statAc = JSON.parse(msg.ac)
+                game.global.statRegen = JSON.parse(msg.regen)
+                game.global.statWeight = JSON.parse(msg.weight)
+                game.global.statSpeed = JSON.parse(msg.speed)
+                game.state.start('buySnailState')
+                break
+        }   
 
 
     }
@@ -927,6 +982,8 @@ window.onload = function () {
     this.game.state.add('menuSoloAndMultiLocalState', Slooow.menuSoloAndMultiLocalState);
     this.game.state.add('menuMultiOnlineState', Slooow.menuMultiOnlineState);
     this.game.state.add('shopState', Slooow.shopState);
+    this.game.state.add('buySnailState', Slooow.buySnailState);
+    this.game.state.add('buyShellsState', Slooow.buyShellsState);
     this.game.state.add('recordsState', Slooow.recordsState);
     this.game.state.add('trophiesState', Slooow.trophiesState);
 

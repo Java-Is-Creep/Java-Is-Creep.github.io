@@ -42,6 +42,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 		PlayerConected jug;
 		PlayerRegistered playerR;
+		SnailInGame snailAux;
 
 		switch (post.event) {
 		case "DEBUG":
@@ -262,6 +263,81 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			JsonObject msg3 = new JsonObject();
 			msg3.addProperty("event", "ENTERLOBBY");
 			msg3.addProperty("snail", jug.snailType.toString());
+			switch(jug.snailType.toString()) {
+				case "NORMAL":
+					snailAux = new normalSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
+				case "TANK":
+					snailAux = new TankSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+				case "BAGUETTE":
+					snailAux = new BaguetteSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "MIAU":
+					snailAux = new MiauSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "MERCA":
+					snailAux = new MercaSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "SEA":
+					snailAux = new SeaSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "ROBA":
+					snailAux = new RobaSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "IRIS":
+					snailAux = new IrisSnail(newSession, lockSession);
+					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msg3.addProperty("ac", snailAux.getSTATAC());
+					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+					msg3.addProperty("regen", snailAux.getSTATREGEN());
+					msg3.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+				default:
+				
+				break;
+			}
+
 			jug.sessionLock.lock();
 			newSession.sendMessage(new TextMessage(msg3.toString()));
 			jug.sessionLock.unlock();
@@ -392,7 +468,80 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				msgChoose.addProperty("event", "CHOOSEENTER");
 				msgChoose.addProperty("owned", ownedArray2);
 				msgChoose.addProperty("notOwned", notOwnedArray2);
-				try {
+				ArrayList<Integer> NORMAL = new ArrayList<>();
+				snailAux = new normalSnail(newSession, lockSession);
+				NORMAL.add(snailAux.getSTATSTAMINA());
+				NORMAL.add(snailAux.getSTATAC());
+				NORMAL.add(snailAux.getSTATWEIGHT());
+				NORMAL.add(snailAux.getSTATREGEN());
+				NORMAL.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> TANK = new ArrayList<>();
+				snailAux = new TankSnail(newSession, lockSession);
+				TANK.add(snailAux.getSTATSTAMINA());
+				TANK.add(snailAux.getSTATAC());
+				TANK.add(snailAux.getSTATWEIGHT());
+				TANK.add(snailAux.getSTATREGEN());
+				TANK.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> BAGUETTE = new ArrayList<>();
+				snailAux = new BaguetteSnail(newSession, lockSession);
+				BAGUETTE.add(snailAux.getSTATSTAMINA());
+				BAGUETTE.add(snailAux.getSTATAC());
+				BAGUETTE.add(snailAux.getSTATWEIGHT());
+				BAGUETTE.add(snailAux.getSTATREGEN());
+				BAGUETTE.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> MIAU = new ArrayList<>();
+				snailAux = new MiauSnail(newSession, lockSession);
+				MIAU.add(snailAux.getSTATSTAMINA());
+				MIAU.add(snailAux.getSTATAC());
+				MIAU.add(snailAux.getSTATWEIGHT());
+				MIAU.add(snailAux.getSTATREGEN());
+				MIAU.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> MERCA= new ArrayList<>();
+				snailAux = new MercaSnail(newSession, lockSession);
+				MERCA.add(snailAux.getSTATSTAMINA());
+				MERCA.add(snailAux.getSTATAC());
+				MERCA.add(snailAux.getSTATWEIGHT());
+				MERCA.add(snailAux.getSTATREGEN());
+				MERCA.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> SEA = new ArrayList<>();
+				snailAux = new SeaSnail(newSession, lockSession);
+				SEA.add(snailAux.getSTATSTAMINA());
+				SEA.add(snailAux.getSTATAC());
+				SEA.add(snailAux.getSTATWEIGHT());
+				SEA.add(snailAux.getSTATREGEN());
+				SEA.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> ROBA = new ArrayList<>();
+				snailAux = new RobaSnail(newSession, lockSession);
+				ROBA.add(snailAux.getSTATSTAMINA());
+				ROBA.add(snailAux.getSTATAC());
+				ROBA.add(snailAux.getSTATWEIGHT());
+				ROBA.add(snailAux.getSTATREGEN());
+				ROBA.add(snailAux.getSTATSPEED());
+				ArrayList<Integer> IRIS = new ArrayList<>();
+				snailAux = new IrisSnail(newSession, lockSession);
+				IRIS.add(snailAux.getSTATSTAMINA());
+				IRIS.add(snailAux.getSTATAC());
+				IRIS.add(snailAux.getSTATWEIGHT());
+				IRIS.add(snailAux.getSTATREGEN());
+				IRIS.add(snailAux.getSTATSPEED());
+				String normalArray = gsonOwn2.toJson(NORMAL);
+				String tankArray = gsonOwn2.toJson(TANK);
+				String baguetteArray = gsonOwn2.toJson(BAGUETTE);
+				String miauArray = gsonOwn2.toJson(MIAU);
+				String mercaArray = gsonOwn2.toJson(MERCA);
+				String seaArray = gsonOwn2.toJson(SEA);
+				String robaArray = gsonOwn2.toJson(ROBA);
+				String irisArray = gsonOwn2.toJson(IRIS);
+				msgChoose.addProperty("normal", normalArray);
+				msgChoose.addProperty("tank", tankArray);
+				msgChoose.addProperty("baguette", baguetteArray);
+				msgChoose.addProperty("miau", miauArray);
+				msgChoose.addProperty("merca", mercaArray);
+				msgChoose.addProperty("sea", seaArray);
+				msgChoose.addProperty("roba", robaArray);
+				msgChoose.addProperty("iris", irisArray);
+				
+			try {
 					jug.sessionLock.lock();
 					jug.getSession().sendMessage(new TextMessage(msgChoose.toString()));
 				} catch (IOException e) {
@@ -401,11 +550,107 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				} finally {
 					jug.sessionLock.unlock();
 				}
+				
 			break;
-		
-			
 
-		default:
+			case "SEESNAIL":
+			jug = game.bucarJugadorConectado(newSession);
+			JsonObject msgCheck = new JsonObject();
+			switch(post.snailToSee) {
+				case "NORMAL":
+					snailAux = new normalSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				break;
+				case "TANK":
+					snailAux = new TankSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+				case "BAGUETTE":
+					snailAux = new BaguetteSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "MIAU":
+					snailAux = new MiauSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "MERCA":
+					snailAux = new MercaSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "SEA":
+					snailAux = new SeaSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "ROBA":
+					snailAux = new RobaSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+
+				case "IRIS":
+					snailAux = new IrisSnail(newSession, lockSession);
+					msgCheck.addProperty("event", "SEESNAILRS");
+					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+					msgCheck.addProperty("ac", snailAux.getSTATAC());
+					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+					break;
+				default:
+				
+				break;
+			}
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgCheck.toString()));
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				jug.sessionLock.unlock();
+			}
+			break;
+			default:
+
+			break;
 
 		}
 
