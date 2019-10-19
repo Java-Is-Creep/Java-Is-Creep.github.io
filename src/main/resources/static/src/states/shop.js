@@ -232,44 +232,108 @@ Slooow.shopState.prototype = {
         rainbowShell.events.onInputDown.add(chooseCharacterRainbow, this)
 
 
-        function chooseCharacterSea (){
-            console.log("he dado a un caracol")
+        function chooseCharacterSea(){
+            game.global.snailToBuy = 'SEA'
+            let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('buySnailState')
         }
         
         function chooseCharacterThief(){
-           console.log("he dado a un caracol")
+           game.global.snailToBuy = 'ROBA'
+           let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+           //game.state.start('buySnailState')
         }
 
         function chooseCharacterRainbow(){
-           console.log("he dado a un caracol")
+           game.global.snailToBuy = 'IRIS'
+           let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+           //game.state.start('buySnailState')
         }
 
         function chooseCharacterCat(){
-           console.log("he dado a un caracol")
+           game.global.snailToBuy = 'MIAU'
+           let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+           //game.state.start('buySnailState')
         }
 
         function chooseCharacterFrench(){
-           console.log("he dado a un caracol")
+           game.global.snailToBuy = 'BAGUETTE'
+           let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+           //game.state.start('buySnailState')
         }
 
         function chooseCharacterNormal(){
-           console.log("he dado a un caracol")
+           game.global.snailToBuy = 'NORMAL'
+           let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+           //game.state.start('buySnailState')
         }
 
         function chooseCharacterTank(){
-           console.log("he dado a un caracol")
+           game.global.snailToBuy = 'TANK'
+           let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+           //game.state.start('buySnailState')
         }
 
         function chooseCharacterSlug(){
-            console.log("he dado a un caracol")
+            game.global.snailToBuy = 'MERCA'
+            let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('buySnailState')
         }
 
         function actionOnClickMoney(){
-console.log("he dado a un caracol")
+            
         }
 
         function actionOnClickSales(){
-console.log("he dado a un caracol")
+            if(id == 0) {
+                game.global.snailToBuy = 'IRIS'
+                game.global.skinToBuy = 1
+            } else if (id == 1){
+                game.global.snailToBuy = 'TANK'
+                game.global.skinToBuy = 1
+            } else if (id == 2){
+                game.global.snailToBuy = 'SLUG'
+                game.global.skinToBuy = 1
+            }
+            let msg = {
+                event: 'SEESNAIL',
+                snailToSee : game.global.snailToBuy
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('buySnailState')
+            
         }
 
         function actionOnClickBack(){

@@ -39,7 +39,12 @@
         "OnlineMenuText1": "Elige una opción",
         "RoomName": "Nombre de la sala",
         "Sales" : "Rebaja",
-        "Buy" : "Comprar"
+        "Buy" : "Comprar",
+        "Speed" : "Velocidad",
+        "Ac" : "Aceleración",
+        "Weight" : "Peso",
+        "Stamina" : "Resistencia",
+        "Regen" : "Regeneración"
     },
     
     "eng" : {
@@ -82,7 +87,12 @@
         "OnlineMenuText1": "Choose an option",
         "RoomName": "Room name",
         "Sales" : "On sale",
-        "Buy": "Buy"
+        "Buy": "Buy",
+        "Speed" : "Speed",
+        "Ac" : "Acceleration",
+        "Weight" : "Weight",
+        "Stamina" : "Stamina",
+        "Regen" : "Regeneration"
         }
     
 }

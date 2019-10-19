@@ -136,9 +136,10 @@ Slooow.preloadState.prototype = {
 		//Shop icons
 		game.load.image('moneyShell', './assets/img/UI/monedaArcoiris.png');
 		game.load.image('moneyBaba', './assets/img/UI/baba.png');
+		game.load.image('statBtn', './assets/img/UI/defaultStat.png');
 
 		//Musica
-		game.load.audio('AE', './assets/audio/himno-de-espana.mp3');
+		game.load.audio('AE', './assets/audio/te-bote.mp3');
 
 		$.getJSON("./assets/language.json", function (data) {
 			game.global.languageData = (data);

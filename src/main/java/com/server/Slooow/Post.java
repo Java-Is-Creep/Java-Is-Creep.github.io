@@ -12,5 +12,5 @@ public class Post {
 	boolean isSprinting;
 	boolean useObject;
 	String chooseSnail;
-	
+	String snailToSee;
 }

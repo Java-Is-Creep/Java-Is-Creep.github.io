@@ -18,7 +18,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 public class SnailInGame {
 
-enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}	
+enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
+enum SkinType{Skin1,Skin2,Skin3}	
 
 	// TODO tamaño no coincide con el tamaño del caracol
 	SquareCollider collider;
@@ -141,7 +142,12 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	public boolean isAcelerating = false;
 	public final int TICKTIME = 33;
 
-
+	public int STATSPEED;
+	public int STATWEIGHT;
+	public int STATSTAMINA;
+	public int STATAC;
+	public int STATREGEN;
+	
 	// Se accede a lastMovement tanto en esta clase como en el WebSocketSnailHandler
 	ReentrantLock lastMovementLock = new ReentrantLock();
 
@@ -149,7 +155,8 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 	public SnailInGame(WebSocketSession mySession, ReentrantLock sessionLock,float MAXSTAMINA,float MAXVELOCITYX,
 	float MAXVELOCITYY,float MAXNORMALVELOCITYX,float MAXNORMALVELOCITYY, float NORMALACELERATIONX,float NORMALACELERATIONY,
 	float ACELERATIONX,float ACELERATIONY,float GRAVITY,float BREAKFORCE,float STAMINALOSE,float STAMINAWALLLOSE,
-	float STAMINANORMALRECOVER,float STAMINARUNOUTRECOVER,float MAXGRAVITYSPEED,float MASS,float SPEEDXLOSE) {
+	float STAMINANORMALRECOVER,float STAMINARUNOUTRECOVER,float MAXGRAVITYSPEED,float MASS,float SPEEDXLOSE,
+	int STATSPEED, int STATWEIGHT, int STATSTAMINA, int STATAC, int STATREGEN) {
 
 		this.MAXSTAMINA = MAXSTAMINA;
 	this.MAXVELOCITYX = MAXVELOCITYX;
@@ -202,6 +209,12 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 		maxAcelerationAceleratingX = ACELERATIONX;
 		maxAcelerationAceleratingY = ACELERATIONY;
 		timeProtectedRemaining = TIMEPROTECTED;
+
+		this.STATSPEED = STATSPEED;
+		this.STATWEIGHT = STATWEIGHT;
+		this.STATSTAMINA = STATSTAMINA;
+		this.STATAC = STATAC;
+		this.STATREGEN = STATREGEN;
 
 		collider = new SquareCollider(colliderOfsetX, colliderOfsetY, posX, posY);
 	}
@@ -629,6 +642,46 @@ enum SnailType{NORMAL,TANK,BAGUETTE,MIAU,MERCA,SEA,ROBA,IRIS}
 			sessionLock.unlock();
 		}
 
+	}
+
+	public int getSTATSPEED() {
+		return STATSPEED;
+	}
+
+	public void setSTATSPEED(int sTATSPEED) {
+		STATSPEED = sTATSPEED;
+	}
+
+	public int getSTATWEIGHT() {
+		return STATWEIGHT;
+	}
+
+	public void setSTATWEIGHT(int sTATWEIGHT) {
+		STATWEIGHT = sTATWEIGHT;
+	}
+
+	public int getSTATSTAMINA() {
+		return STATSTAMINA;
+	}
+
+	public void setSTATSTAMINA(int sTATSTAMINA) {
+		STATSTAMINA = sTATSTAMINA;
+	}
+
+	public int getSTATREGEN() {
+		return STATREGEN;
+	}
+
+	public void setSTATREGEN(int sTATREGEN) {
+		STATREGEN = sTATREGEN;
+	}
+
+	public int getSTATAC() {
+		return STATAC;
+	}
+
+	public void setSTATAC(int sTATAC) {
+		STATAC = sTATAC;
 	}
 
 }
