@@ -128,6 +128,7 @@ window.onload = function () {
         //Elegir caracol y mapa
         snailChosen: null,
         mapChosen: null,
+        gameMode: null,
         //Para records
         nameMapRecords: [],
         myTimes: [],
@@ -809,6 +810,18 @@ window.onload = function () {
                 var roomName = JSON.stringify(msg.roomName)
                 roomName = roomName.substring(1, roomName.length - 1)
                 this.game.global.roomNameMulti = roomName
+
+                var snail = JSON.stringify(msg.snail)
+                snail = snail.substring(1, snail.length - 1)
+                this.console.log(snail)
+                this.game.global.snailChosen = snail
+                game.global.maxStamina = 0
+                game.global.statStamina = JSON.parse(msg.stamina)
+                game.global.statAc = JSON.parse(msg.ac)
+                game.global.statRegen = JSON.parse(msg.regen)
+                game.global.statWeight = JSON.parse(msg.weight)
+                game.global.statSpeed = JSON.parse(msg.speed)
+
                 this.game.state.start('lobbyMultiState')
                 break
 
