@@ -313,6 +313,7 @@ Slooow.shopState.prototype = {
         }
 
         function actionOnClickMoney(){
+            game.state.start('buyShellsState')
             
         }
 
