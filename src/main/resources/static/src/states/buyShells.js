@@ -60,14 +60,31 @@ Slooow.buyShellsState.prototype = {
 
         //Bg cambio divisas
         bgChange = game.add.image(game.world.centerX ,
-            game.world.centerY + 40, 'button')
+            game.world.centerY + 50, 'button')
         bgChange.anchor.set(0.5)
-        bgChange.scale.setTo(2.2, 2.5)
+        bgChange.scale.setTo(2.2, 2.7)
         
         //btn shell1
         btnShell1 = game.add.button(game.world.centerX ,
-            game.world.centerY + 40, 'button')
-            
+            game.world.centerY-110, 'button')
+        btnShell1.anchor.set(0.5)
+        btnShell1.scale.setTo(1.2, 0.5)
+
+        btnShell1 = game.add.button(game.world.centerX ,
+            game.world.centerY, 'button')
+        btnShell1.anchor.set(0.5)
+        btnShell1.scale.setTo(1.2, 0.5)
+
+        btnShell1 = game.add.button(game.world.centerX ,
+            game.world.centerY+110, 'button')
+        btnShell1.anchor.set(0.5)
+        btnShell1.scale.setTo(1.2, 0.5)
+
+        btnShell1 = game.add.button(game.world.centerX ,
+            game.world.centerY+220, 'button')
+        btnShell1.anchor.set(0.5)
+        btnShell1.scale.setTo(1.2, 0.5)
+
         function actionOnClickBack(){
             game.state.start('shopState')
         }

@@ -30,12 +30,14 @@ Slooow.bootState.prototype = {
 		game.load.atlas('loading', './assets/img/bg/loading.png', './assets/img/bg/loading.json');
 	},
 
-	create: function () {},
+	create: function () {
+		game.state.start('preloadState')
+	},
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
 	update : function() {
 		//if (typeof game.global.socket !== 'undefined') {
-		game.state.start('preloadState')
+		//game.state.start('preloadState')
 		//}
 	}
 }

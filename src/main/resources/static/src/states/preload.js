@@ -15,9 +15,11 @@ Slooow.preloadState.prototype = {
 
 	// Hasta que este preload no acabe, no se pasa al siguiente estado
 	preload : function() {
+		// Pantalla de Carga
 		/*var loading= game.add.sprite(game.world.centerX, game.world.centerY, 'loading')
-		loading.animations.add('loading', Phaser.Animation.generateFrameNames('loadingReal', 0, 7), 5, true);
-		loading.play('loading');*/
+		loading.anchor.setTo(0.5)
+		this.load.setPreloadSprite(loading)
+		loading.animations.add('loading', Phaser.Animation.generateFrameNames('loadingReal', 0, 7), 5, true);*/
 		game.global.style = {
             font: "40px Arial",
             fill: "#ffffff",
