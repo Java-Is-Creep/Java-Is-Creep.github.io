@@ -13,7 +13,7 @@ public class MapObstacle  extends MapObject{
 	public MapObstacle(int width, int height, int posX, int posY, type myType,int timeToActive, int timeActive, int tickTime) {
 		super(width, height, posX, posY, myType);
 		MAXTIMEACTIVE = timeActive;
-		this.timeActive = timeActive;
+		this.timeActive = (float)(Math.random() * timeActive);
 		this.tickTime = tickTime;
 		MAXTIMETOACTIVE = timeToActive;
 		this.timeToActive = timeToActive;

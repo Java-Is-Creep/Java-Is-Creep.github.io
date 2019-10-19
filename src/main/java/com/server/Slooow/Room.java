@@ -213,7 +213,7 @@ public class Room {
 		int wallDisplacement = 0;
 
 
-		map.addMapObject(new MapGround(160 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		map.addMapObject(new MapGround(216* unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
 		acumulativePosX += 4 * unit;
 
 		map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
@@ -280,7 +280,7 @@ public class Room {
 
 		//Camino discontinuo Negro
 
-		map.addMapObject(new MapGround(13 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
+		map.addMapObject(new MapGround(16 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
 		
 		MapPowerUp auxPower = new MapPowerUp(unit, unit, acumulativeDiscontinuoNegroX+ 6 * unit, acumulativeDiscontinuoNegroY + unit / 2,
 				type.POWERUP);
@@ -289,7 +289,7 @@ public class Room {
 		powerArray.add(auxPower);
 
 		
-		Wind windAux = new Wind(8 * unit, 2 * unit, acumulativeDiscontinuoNegroX+ 3 * unit, acumulativeDiscontinuoNegroY, type.WIND, false, 1.5f, false,
+		Wind windAux = new Wind(8 * unit, 2 * unit, acumulativeDiscontinuoNegroX+ 3 * unit, acumulativeDiscontinuoNegroY, type.WIND, true, 1.5f, false,
 				5800, TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
@@ -301,7 +301,7 @@ public class Room {
 		map.addMapObject(new MapGround(50 * unit, groundHeigth*2, acumulativeDiscontinuoRojoX, acumulativeDiscontinuoRojoY, type.GROUND));
 		
 
-		windAux = new Wind(30 * unit, 2 * unit, acumulativeDiscontinuoRojoX+ 10 * unit, acumulativeDiscontinuoRojoY, type.WIND, true, 1.5f, false,
+		windAux = new Wind(30 * unit, 2 * unit, acumulativeDiscontinuoRojoX+ 10 * unit, acumulativeDiscontinuoRojoY, type.WIND, false, 1.5f, false,
 				5800, TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
@@ -445,8 +445,8 @@ public class Room {
 		acumulativePosXRedPath += 14 * unit;
 
 		//Hacemos Camino Azul
-		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
-		acumulativePosX += 3 * unit;
+		map.addMapObject(new MapGround(4 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 4 * unit;
 
 		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1800,
 		2800, TICKTIME, 500, 500);
@@ -461,22 +461,376 @@ public class Room {
 
 
 
-		map.addMapObject(new MapGround(16 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
-		acumulativePosX += 16 * unit;
+		map.addMapObject(new MapGround(15 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 15 * unit;
 
 
 		// hacemos el camino negro 
 
-		acumulativePosXNegro =   acumulativeDiscontinuoNegroX;
+		acumulativePosXNegro =   acumulativeDiscontinuoNegroX+8*unit;
 		acumulativePosYNegro =  acumulativeDiscontinuoNegroY;
 		
 
-		acumulativeDiscontinuoNegroY -= 5*unit;
+		
 
 
 		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
 		acumulativePosXNegro += 3 * unit;
 
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.TRAPDOOR, 1800,
+		2800, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		trapDoorArray.add(trap);
+		acumulativePosXNegro += 3 * unit;
+
+		auxPower = new MapPowerUp(unit, unit, acumulativePosXNegro+ 9 * unit, acumulativePosYNegro + unit / 2,
+				type.POWERUP);
+
+		map.addMapObject(auxPower);
+		powerArray.add(auxPower);
+
+
+
+		map.addMapObject(new MapGround(17 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosX += 17 * unit;
+
+		//CAMINO DISCONTINUO NEGRO ABAJO
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
+		acumulativeDiscontinuoNegroX += 3 * unit;
+
+		acumulativeDiscontinuoNegroY -= 5 * unit;
+
+		windAux = new Wind(10 * unit, 2 * unit, acumulativeDiscontinuoNegroX+ 8 * unit, acumulativeDiscontinuoNegroY, type.WIND, false, 1.5f, false,
+				5800, TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
+
+		spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativeDiscontinuoNegroX + 20 * unit, acumulativeDiscontinuoNegroY ,
+		type.OBSTACLE, 3000, 3000, 500, TICKTIME);
+		map.addMapObject(spike1);
+		spikesArray.add(spike1);
+
+
+
+		map.addMapObject(new MapGround(30 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
+		acumulativeDiscontinuoNegroX += 30 * unit;
+
+		acumulativePosX =  acumulativeDiscontinuoNegroX + 5*unit;
+		acumulativePosY = 400;
+
+
+		//REPETICION MAPA
+
+		map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		acumulativePosY += 4 * unit;
+
+		map.addMapObject(new MapGround(5 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 5 * unit;
+
+				//// PREPARAMOS EL DESVIO ROJO
+		 acumulativePosXRedPath = acumulativePosX;
+		 acumulativePosYRedPath = acumulativePosY;
+
+			map.addMapObject(new MapWall(20, 5 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		acumulativePosY += 5 * unit;
+
+
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 3 * unit;
+
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1800,
+		2800, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		trapDoorArray.add(trap);
+		acumulativePosX += 3 * unit;
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 3 * unit;
+
+		//CREACION PARTE CAMINO NEGRO
+		 acumulativePosXNegro = acumulativePosX;
+		 acumulativePosYNegro = acumulativePosY;
+
+		 doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
+		1800, 2000, TICKTIME, 66, 66);
+		map.addMapObject(doorAux);
+		doorArray.add(doorAux);
+
+		acumulativePosY += 2 * unit;
+
+
+
+		map.addMapObject(new MapWall(20, 3 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		acumulativePosY += 3 * unit;
+
+		map.addMapObject(new MapGround(2 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 1 * unit;
+
+		 trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY,
+				type.TRAMPOLINE, 4000, 250, 500, TICKTIME, 9, 22);
+
+		map.addMapObject(trampoline);
+		trampolineArray.add(trampoline);
+		acumulativePosX += 4 * unit;
+
+		//preparamos caminos encima tramplolin
+		acumulativeDiscontinuoNegroX = acumulativePosX + 3*unit;
+		acumulativeDiscontinuoNegroY = acumulativePosY + 9*unit;
+		acumulativeDiscontinuoRojoX = acumulativePosX + 3*unit;
+		acumulativeDiscontinuoRojoY = acumulativePosY + 15*unit;
+
+		map.addMapObject(new MapGround(2 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 2 * unit;
+
+		//Camino discontinuo Negro
+
+		map.addMapObject(new MapGround(16 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
+		
+		auxPower = new MapPowerUp(unit, unit, acumulativeDiscontinuoNegroX+ 6 * unit, acumulativeDiscontinuoNegroY + unit / 2,
+				type.POWERUP);
+
+		map.addMapObject(auxPower);
+		powerArray.add(auxPower);
+
+		
+		windAux = new Wind(8 * unit, 2 * unit, acumulativeDiscontinuoNegroX+ 3 * unit, acumulativeDiscontinuoNegroY, type.WIND, true, 1.5f, false,
+				5800, TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
+
+		//FIN CAMINO NEGRO DISCONTINUO
+
+		//Camino rojo discontinuo
+
+		map.addMapObject(new MapGround(50 * unit, groundHeigth*2, acumulativeDiscontinuoRojoX, acumulativeDiscontinuoRojoY, type.GROUND));
+		
+
+		windAux = new Wind(30 * unit, 2 * unit, acumulativeDiscontinuoRojoX+ 10 * unit, acumulativeDiscontinuoRojoY, type.WIND, false, 1.5f, false,
+				5800, TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
+
+		auxPower = new MapPowerUp(unit, unit, acumulativeDiscontinuoRojoX+ 45 * unit, acumulativeDiscontinuoRojoY + unit / 2,
+				type.POWERUP);
+
+		map.addMapObject(auxPower);
+		powerArray.add(auxPower);
+
+		//Hacemos primer camino negro
+
+		spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosXNegro + 12 * unit, acumulativePosYNegro ,
+		type.OBSTACLE, 3000, 3000, 500, TICKTIME);
+		map.addMapObject(spike1);
+		spikesArray.add(spike1);
+
+		map.addMapObject(new MapGround(25 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosXNegro += 25 * unit;
+
+		//Volvemos al camino azul
+		acumulativePosX = acumulativePosXNegro;
+		acumulativePosY = acumulativePosYNegro;
+
+		map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		acumulativePosY += 4 * unit;
+		acumulativePosYNegro += 4*unit;
+
+		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.DOOR,
+		1800, 2000, TICKTIME, 66, 66);
+		map.addMapObject(doorAux);
+		doorArray.add(doorAux);
+
+		acumulativePosY += 2 * unit;
+
+		map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
+		acumulativePosY += 4 * unit;
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 3 * unit;
+
+		//hacemos caminoNegro2
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosX += 3 * unit;
+
+		//Desvio Rojo1
+
+		map.addMapObject(new MapGround(5 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 5 * unit;
+		map.addMapObject(
+				new MapSlope(6 * unit, Math.toRadians(-45), acumulativePosXRedPath, acumulativePosYRedPath, type.SLOPE));
+
+		acumulativePosXRedPath += 5 * unit;
+		acumulativePosYRedPath = 400;
+
+		windAux = new Wind(10 * unit, 2 * unit, acumulativePosXRedPath+ 3 * unit, acumulativePosYRedPath, type.WIND, true, 1.5f, false,
+				5800, TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
+
+		map.addMapObject(new MapGround(30 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 30 * unit;
+
+
+		map.addMapObject(new MapWall(20, 3 * unit - wallDisplacement, acumulativePosXRedPath, acumulativePosYRedPath, type.WALL));
+		acumulativePosYRedPath += 3 * unit;
+
+		map.addMapObject(new MapGround(1 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 1 * unit;
+
+		trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath,
+				type.TRAMPOLINE, 4000, 250, 500, TICKTIME, 9, 22);
+
+		map.addMapObject(trampoline);
+		trampolineArray.add(trampoline);
+		acumulativePosXRedPath += 4 * unit;
+
+		map.addMapObject(new MapGround(4 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 4 * unit;
+
+		map.addMapObject(new MapWall(20, 9 * unit - wallDisplacement, acumulativePosXRedPath, acumulativePosYRedPath, type.WALL));
+		acumulativePosYRedPath += 9 * unit;
+
+		spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosXRedPath + 4 * unit, acumulativePosYRedPath ,
+		type.OBSTACLE, 3000, 3000, 500, TICKTIME);
+		map.addMapObject(spike1);
+		spikesArray.add(spike1);
+
+		auxPower = new MapPowerUp(unit, unit, acumulativePosXRedPath+ 9 * unit, acumulativePosYRedPath + unit / 2,
+				type.POWERUP);
+
+		map.addMapObject(auxPower);
+		powerArray.add(auxPower);
+
+		map.addMapObject(new MapGround(11 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 11 * unit;
+
+
+		map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosXRedPath, acumulativePosYRedPath, type.WALL));
+		acumulativePosYRedPath += 4 * unit;
+
+		//Preparando discontinuo Negro2
+
+		acumulativeDiscontinuoNegroX = acumulativePosXRedPath;
+		acumulativeDiscontinuoNegroY = acumulativePosYRedPath;
+
+		
+		doorAux = new DoorMap(20, 2 * unit - wallDisplacement, acumulativePosXRedPath, acumulativePosYRedPath, type.DOOR,
+		1800, 2000, TICKTIME, 66, 66);
+		map.addMapObject(doorAux);
+		doorArray.add(doorAux);
+
+		acumulativePosYRedPath += 2 * unit;
+
+		//PREPARANDO DESVIO AZUL
+		acumulativePosX = acumulativePosXRedPath + 6*unit;
+		acumulativePosY = acumulativePosYRedPath + 2 * unit;
+
+
+			map.addMapObject(new MapWall(20, 6 * unit - wallDisplacement, acumulativePosXRedPath, acumulativePosYRedPath, type.WALL));
+		acumulativePosYRedPath += 6 * unit;
+
+
+		map.addMapObject(new MapGround(8 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 8 * unit;
+
+
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosXRedPath, acumulativePosYRedPath, type.TRAPDOOR, 1800,
+		2800, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		trapDoorArray.add(trap);
+		acumulativePosXRedPath += 3 * unit;
+
+		spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativePosXRedPath + 4 * unit, acumulativePosYRedPath ,
+		type.OBSTACLE, 3000, 3000, 500, TICKTIME);
+		map.addMapObject(spike1);
+		spikesArray.add(spike1);
+
+		map.addMapObject(new MapGround(14 * unit, groundHeigth*2, acumulativePosXRedPath, acumulativePosYRedPath, type.GROUND));
+		acumulativePosXRedPath += 14 * unit;
+
+		//Hacemos Camino Azul
+		map.addMapObject(new MapGround(4 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 4 * unit;
+
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosX, acumulativePosY, type.TRAPDOOR, 1800,
+		2800, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		trapDoorArray.add(trap);
+		acumulativePosX += 3 * unit;
+
+		windAux = new Wind(10 * unit, 2 * unit, acumulativePosX+ 3 * unit, acumulativePosY, type.WIND, false, 1.5f, false,
+				5800, TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
+
+
+
+		map.addMapObject(new MapGround(15 * unit, groundHeigth*2, acumulativePosX, acumulativePosY, type.GROUND));
+		acumulativePosX += 15 * unit;
+
+
+		// hacemos el camino negro 
+
+		acumulativePosXNegro =   acumulativeDiscontinuoNegroX+8*unit;
+		acumulativePosYNegro =  acumulativeDiscontinuoNegroY;
+		
+
+		
+
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosXNegro += 3 * unit;
+
+		trap = new TrapDoor(3 * unit, groundHeigth, acumulativePosXNegro, acumulativePosYNegro, type.TRAPDOOR, 1800,
+		2800, TICKTIME, 500, 500);
+		map.addMapObject(trap);
+		trapDoorArray.add(trap);
+		acumulativePosXNegro += 3 * unit;
+
+		auxPower = new MapPowerUp(unit, unit, acumulativePosXNegro+ 9 * unit, acumulativePosYNegro + unit / 2,
+				type.POWERUP);
+
+		map.addMapObject(auxPower);
+		powerArray.add(auxPower);
+
+
+
+		map.addMapObject(new MapGround(17 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
+		acumulativePosX += 17 * unit;
+
+		//CAMINO DISCONTINUO NEGRO ABAJO
+
+		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
+		acumulativeDiscontinuoNegroX += 3 * unit;
+
+		acumulativeDiscontinuoNegroY -= 5 * unit;
+
+		windAux = new Wind(10 * unit, 2 * unit, acumulativeDiscontinuoNegroX+ 8 * unit, acumulativeDiscontinuoNegroY, type.WIND, false, 1.5f, false,
+				5800, TICKTIME);
+		map.addMapObject(windAux);
+		windArray.add(windAux);
+
+		
+		spike1 = new SpikesObstacle(2 * unit, 2 * unit, acumulativeDiscontinuoNegroX + 20 * unit, acumulativeDiscontinuoNegroY ,
+		type.OBSTACLE, 3000, 3000, 500, TICKTIME);
+		map.addMapObject(spike1);
+		spikesArray.add(spike1);
+
+
+		map.addMapObject(new MapGround(30 * unit, groundHeigth*2, acumulativeDiscontinuoNegroX, acumulativeDiscontinuoNegroY, type.GROUND));
+		acumulativeDiscontinuoNegroX += 30 * unit;
+
+
+		acumulativePosX =  acumulativeDiscontinuoNegroX + 5*unit;
+		acumulativePosY = 400;
+
+		map.addMapObject(new FinishMap(unit*6, unit, acumulativePosX, 400, type.FINISH, this));
+
+
+
+		
 
 
 
