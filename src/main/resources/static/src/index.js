@@ -360,10 +360,11 @@ window.onload = function () {
                     game.state.start('singlePlayerState')
                 } else if (roomType == 'MULTI') {
                     var namePlayers = JSON.parse(msg.name)
+                    var snails = JSON.parse(msg.snails)
                     for (var i = 0; i < namePlayers.length; i++) {
                         game.global.playersMulti[i] = new this.Object()
                         this.game.global.playersMulti[i].name = namePlayers[i]
-                        this.game.global.snailChosenMulti[i] = 'NORMAL'
+                        this.game.global.snailChosenMulti[i] = snails[i]
                         if (namePlayers[i] == this.game.global.username) {
                             this.game.global.myPlayerId = i
 

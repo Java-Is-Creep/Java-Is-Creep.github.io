@@ -277,10 +277,10 @@ Slooow.lobbyMultiState.prototype = {
             buttonOK.inputEnabled = false
             buttonOK.alpha = 0.6
             textButtonOK.alpha = 0.6
-
+            console.log ('CARACOL ELEGIDOOOOOOOOOOOOOOOOOOOOOOOO' + game.global.snailChosen)
             let msg = {
                 event: 'CHOOSESNAIL',
-                chooseSnail: 'NORMAL'
+                chooseSnail: game.global.snailChosen
             }
             game.global.socket.send(JSON.stringify(msg))
             console.log(this.game.global.roomNameMulti)
