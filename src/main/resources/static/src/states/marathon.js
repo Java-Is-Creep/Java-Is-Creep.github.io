@@ -6,7 +6,8 @@ Slooow.marathonState.prototype = {
     init : function() {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **MARATHON** state");
-		}
+        }
+        game.world.setBounds(0, 0, 1280, 720);
 	},
 
 	preload : function() {
@@ -19,12 +20,6 @@ Slooow.marathonState.prototype = {
 		b.anchor.set (0.5, 0.5)
         b.scale.setTo (1.2,1.2)
 
-        var style = {
-			font : "40px Arial",
-			fill : "#000000",
-			align : "center"
-		};
-
         //Boton desconectar
 		buttonBack = game.add.button(50,
             40, 'button', actionOnClickBack, this,
@@ -34,7 +29,7 @@ Slooow.marathonState.prototype = {
 
         //Texto desconectar
 		textButtonBack = game.add.text(50,
-            40, 'Back', style)
+            40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
 

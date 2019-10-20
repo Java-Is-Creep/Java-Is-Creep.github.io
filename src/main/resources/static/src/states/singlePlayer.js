@@ -1,6 +1,6 @@
 Slooow.singlePlayerState = function (game) {
-	var graphics
 	var stamina
+	var camerados
 }
 
 Slooow.singlePlayerState.prototype = {
@@ -12,124 +12,299 @@ Slooow.singlePlayerState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **SINGLEPLAYER** state");
 		}
+		game.world.setBounds(0, 0, 8640, 1600);
 	},
 
 	preload: function () {
-		game.global.player = game.add.image(game.world.centerX, game.world.centerY, 'seaSnail')
-		game.global.player.anchor.setTo(0.5, 0.5);
-		game.global.player.scale.setTo(0.3, 0.3)
+
+		// Cargamos el background
+		var b = game.add.tileSprite (0, game.world.height, 8640, 1600, 'cocinaBg')
+		b.anchor.set(0, 1)
+		b.tileScale.setTo(1.99,2)
+
+		game.global.player.maxStamina = 0
+		
+		//console.log('trapdoor')
+        //console.dir(game.global.arrayTrapdoors)
+		// Cargamos los objetos posibles del mapa
+		//console.dir(game.global.arrayGrounds)
+		for (var i = 0; i< game.global.arrayGrounds.length; i++){
+			//game.global.arrayGrounds[i] = game.add.image(game.global.arrayGrounds[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayGrounds[i].y, 'groundTile')
+			game.global.arrayGrounds[i] = game.add.tileSprite(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y+25, game.global.arrayGrounds[i].width, 25, 'groundTile')
+			game.global.arrayGrounds[i].visible = true
+			game.global.arrayGrounds[i].anchor.setTo(0,1)
+			game.global.arrayGrounds[i].tileScale.setTo(0.5, 0.5)
+			//console.log(game.global.arrayGrounds[i].x + ' '+ game.global.arrayGrounds[i].y)
+		}
+
+		//Pintamos las paredes
+		for (var i = 0; i< game.global.arrayWalls.length; i++){
+			game.global.arrayWalls[i] = game.add.tileSprite(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, game.global.arrayWalls[i].height, 'wallTile')
+			game.global.arrayWalls[i].visible = true
+			game.global.arrayWalls[i].anchor.setTo(0,1)
+			game.global.arrayWalls[i].tileScale.setTo(0.5, 0.5)
+		}
+		
+
+		for (var i = 0; i< game.global.arraySlopes.length; i++){
+			//console.log('angulo en singleplayer 1: '+ game.global.arraySlopes[i].height)
+			var angulo = game.global.arraySlopes[i].height
+			game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x , game.world.height - game.global.arraySlopes[i].y -25  , 'slopeDown' )
+			//game.global.arraySlopes[i] = game.add.image(game.global.arraySlopes[i].x -20, game.world.height- game.global.arraySlopes[i].y - 30, 'slopeDown' )
+			//console.log('angulo en singleplayer 2: '+ game.global.arraySlopes[i].height)
+			game.global.arraySlopes[i].anchor.setTo (0.0,0.0)
+			
+			//console.log("Angulo en singleplayer 3"+ this.game.global.arraySlopes[i].height)
+			if (angulo < 0) {
+				game.global.arraySlopes[i].angle += - angulo
+			} else{
+				game.global.arraySlopes[i].angle -= angulo
+			}
+			game.global.arraySlopes[i].visible = true
+			//game.global.arraySlopes[i].anchor.setTo (0.5,0.5)
+			game.global.arraySlopes[i].scale.setTo (0.5,0.5)
+		}
+		//console.log('trapdoor')
+       // console.dir(game.global.arrayTrapdoors)
+		//Pintamos las trampillas
+		//console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
+		for (var i = 0; i< game.global.arrayTrapdoors.length; i++){
+			//console.log('num of trapdoors: ' + game.global.arrayTrapdoors.length)
+			game.global.arrayTrapdoors[i] = game.add.image(game.global.arrayTrapdoors[i].x, game.world.height/*game.world.getBounds().y*/ - game.global.arrayTrapdoors[i].y, 'trapdoor')
+			game.global.arrayTrapdoors[i].frame = 0
+			game.global.arrayTrapdoors[i].visible = true
+			game.global.arrayTrapdoors[i].anchor.setTo (0,0)
+			game.global.arrayTrapdoors[i].scale.setTo (0.21,0.3)
+		}
+
+		for (var i = 0; i< game.global.arrayTrampolines.length; i++){
+			game.global.arrayTrampolines[i] = game.add.image(game.global.arrayTrampolines[i].x, game.world.height - game.global.arrayTrampolines[i].y-150, 'sartenSpritesheet')
+			game.global.arrayTrampolines[i].frame = 0
+			game.global.arrayTrampolines[i].animations.add('activate')
+			//game.global.arrayTrampolines[i].animations.play('activate', 8, false)
+			game.global.arrayTrampolines[i].visible = true
+			game.global.arrayTrampolines[i].anchor.setTo(0,0)
+			game.global.arrayTrampolines[i].scale.setTo(1, 1)
+		}
+
+		for (var i = 0; i< game.global.arrayObstacles.length; i++){
+			game.global.arrayObstacles[i] = game.add.image(game.global.arrayObstacles[i].x, game.world.height - game.global.arrayObstacles[i].y-20, 'fireSpritesheet')
+			game.global.arrayObstacles[i].frame = 0;
+			game.global.arrayObstacles[i].animations.add('stopped', [0], 1, false)
+			game.global.arrayObstacles[i].animations.add('sparks', [1,2], 4, true)
+			game.global.arrayObstacles[i].animations.add('fire', [3,4,5], 6, true)
+			game.global.arrayObstacles[i].visible = true
+			game.global.arrayObstacles[i].anchor.setTo (0, 0.5)
+			game.global.arrayObstacles[i].scale.setTo(0.6, 0.6)
+		}
+
+		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
+			game.global.arrayPowerUps[i] = game.add.image(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, 'boxPowerUpSpritesheet')
+			game.global.arrayPowerUps[i].animations.add('turn')
+			game.global.arrayPowerUps[i].animations.play('turn', 4, true)
+			game.global.arrayPowerUps[i].visible = true
+			game.global.arrayPowerUps[i].anchor.setTo(0.5,0.5)
+			game.global.arrayPowerUps[i].scale.setTo(0.15, 0.15)
+		} 
+
+		for (var i = 0; i< game.global.arrayDoors.length; i++){
+			game.global.arrayDoors[i] = game.add.image(game.global.arrayDoors[i].x-14, game.world.height - game.global.arrayDoors[i].y+25, 'doorSpritesheet')
+			game.global.arrayDoors[i].frame = 1
+			game.global.arrayDoors[i].visible = true
+			game.global.arrayDoors[i].anchor.setTo(0,1)
+			game.global.arrayDoors[i].scale.setTo(0.35, 0.35)
+		}
+
+		for (var i = 0; i< game.global.arrayWinds.length; i++){
+			//console.log('viento')
+			//console.dir(game.global.arrayWinds[i])
+			game.global.arrayWinds[i] = game.add.image(game.global.arrayWinds[i].x+200, game.world.height - game.global.arrayWinds[i].y, 'windSpritesheet')
+			game.global.arrayWinds[i].angle = 180
+			game.global.arrayWinds[i].animations.add('wind',[0,1,2,3,4,5], 4, true)
+			game.global.arrayWinds[i].animations.add('windReverse', [5,4,3,2,1,0], 4, true)
+			if (game.global.arrayWinds[i].direction == true){
+				//console.log('a favor')
+				game.global.arrayWinds[i].animations.play('wind')
+			} else{
+				//console.log('en contra')
+				game.global.arrayWinds[i].angle = 0
+				game.global.arrayWinds[i].animations.play('wind')
+			}
+			//game.global.arrayWinds[i].frame = 0
+			game.global.arrayWinds[i].visible = true
+			game.global.arrayWinds[i].anchor.setTo(0.5,0.5)
+			game.global.arrayWinds[i].scale.setTo(1, 0.4)
+		}
+
+		if (game.global.finishObject != undefined){
+			console.log('pintar final')
+			var y = game.world.height - game.global.finishObject.y
+			game.global.finishObject = game.add.image(game.global.finishObject.x, game.world.height - game.global.finishObject.y, 'finishObject')
+			game.global.finishObject.visible = true
+			game.global.finishObject.anchor.setTo(0,1)
+			game.global.finishObject.scale.setTo(0.5, 0.5)
+			console.dir(game.global.finishObject)
+			var finishGround =  game.add.image(game.global.finishObject.x,y, 'finishGround')
+			finishGround.visible = true
+			finishGround.anchor.setTo(0,0)
+			finishGround.scale.setTo(0.5, 0.5)
+			console.dir(finishGround)
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// PERSONAJE
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if (game.global.snailChosen != null){
+			switch (game.global.snailChosen){
+				case ('NORMAL'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'normalColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 5), 5, true);
+					break
+				case ('TANK'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'tanqueColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 4), 5, true);
+					break
+				case ('BAGUETTE'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'baguetteColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 4), 5, true);
+					break;
+				case ('MIAU'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'miauColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('MERCA'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'mercaColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 7), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('SEA'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'seaColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('ROBA'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'robaColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 3), 5, true);
+					break;
+				case ('IRIS'):
+						game.global.player.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'irisColAnimation')
+						game.global.player.sprite.animations.add('walk', Phaser.Animation.generateFrameNames('walk', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('tired', Phaser.Animation.generateFrameNames('tired', 0, 3), 5, true);
+						game.global.player.sprite.animations.add('damage', Phaser.Animation.generateFrameNames('oof', 0, 2), 5, true);
+					break;
+				default:		
+			}
+		}
+		
+
+		
+		//game.global.player.sprite.animations.add('turn', Phaser.Animation.generateFrameNames('turn', 0, 3), 5, true);
+		game.global.player.sprite.animations.play('walk');
+		game.global.player.sprite.anchor.setTo(0.5, 0.5);
+		game.global.player.sprite.scale.setTo(0.28, 0.28)
+
+		// Creacion Barra de Estamina
+		game.global.player.stamina3 = game.add.sprite(10, 0, 'barStaminaInterior')
+		game.global.player.stamina3.anchor.set(0,0);
+		game.global.player.stamina3.scale.setTo(0.5,0.5);
+		
+		game.global.player.stamina2 = game.add.sprite(28, 20, 'barStamina')
+		game.global.player.stamina2.anchor.set(0,0);
+		game.global.player.stamina2.scale.setTo(0.5,0.5);
+
+		game.global.player.stamina1 = game.add.sprite(10, 0, 'barStaminaFuera')
+		game.global.player.stamina1.anchor.set(0,0);
+		game.global.player.stamina1.scale.setTo(0.5,0.5);
+
+		game.global.player.stamina3.fixedToCamera = true;
+		game.global.player.stamina2.fixedToCamera = true;
+		game.global.player.stamina1.fixedToCamera = true;
+
+		// Creacion de la barra de progreso
+		game.global.player.progressBar1 = game.add.sprite(game.width/3, 20, 'barProgressInteriorColor')
+		game.global.player.progressBar2 = game.add.sprite(game.width/3, 20, 'barProgressInteriorNegra')
+		game.global.player.progressBar3 = game.add.sprite(game.width/3, 20, 'barProgressFuera')
+
+		game.global.player.progressBar2.x += game.global.player.progressBar2.width
+		game.global.player.progressBar2.anchor.setTo (1,0)
+
+		game.global.player.progressBar1.fixedToCamera = true;
+		game.global.player.progressBar2.fixedToCamera = true;
+		game.global.player.progressBar3.fixedToCamera = true;
 
 
+		//Power Ups en pantalla
+		game.global.player.powerUpsContainer = game.add.sprite(game.width -150, 50, 'powerUpsContainer')
+		game.global.player.powerUpsContainer.scale.setTo(0.5, 0.5)
+		//game.global.player.powerUpsContainer.anchor.setTo(0.5, 0.5)
+		game.global.player.powerUpsContainer.fixedToCamera = true
+
+		game.global.player.wingPowerUp = game.add.sprite(game.width -140, 60, 'wingsPowerUp')
+		game.global.player.wingPowerUp.visible = false
+		game.global.player.wingPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.wingPowerUp.fixedToCamera = true
+
+		game.global.player.shieldPowerUp = game.add.sprite(game.width -140, 60, 'shieldPowerUp')
+		game.global.player.shieldPowerUp.visible = false
+		game.global.player.shieldPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.shieldPowerUp.fixedToCamera = true
+		game.global.player.staminaPowerUp = game.add.sprite(game.width -130, 60, 'staminaPowerUp')
+		game.global.player.staminaPowerUp.visible = false
+		game.global.player.staminaPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.staminaPowerUp.fixedToCamera = true
+		game.global.player.lettucePowerUp = game.add.sprite(game.width -140, 60, 'lettucePowerUp')
+		game.global.player.lettucePowerUp.visible = false
+		game.global.player.lettucePowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.lettucePowerUp.fixedToCamera = true
+		game.global.player.onPowerUp = game.add.sprite(game.width -140, 50, 'onPowerUp')
+		game.global.player.onPowerUp.visible = false
+		game.global.player.onPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.onPowerUp.fixedToCamera = true
+		game.global.player.downPowerUp = game.add.sprite(game.width -140, 45, 'downUp')
+		game.global.player.downPowerUp.visible = false
+		game.global.player.downPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.downPowerUp.fixedToCamera = true
+		game.global.player.clockPowerUp = game.add.sprite(game.width -135, 65, 'clockPowerUp')
+		game.global.player.clockPowerUp.visible = false
+		game.global.player.clockPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.clockPowerUp.fixedToCamera = true
+		game.global.player.inkPowerUp = game.add.sprite(game.width -140, 60, 'inkPowerUp')
+		game.global.player.inkPowerUp.visible = false
+		game.global.player.inkPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.inkPowerUp.fixedToCamera = true
+		game.global.player.speedPowerUp = game.add.sprite(game.width -140, 60, 'speedPowerUp')
+		game.global.player.speedPowerUp.visible = false
+		game.global.player.speedPowerUp.scale.setTo(0.4, 0.4)
+		game.global.player.speedPowerUp.fixedToCamera = true
+
+		//console.log ("Array Cargado")
+		//console.dir (game.global.arrayObstacleSpikes)
+		
 		//game.global.arrayObstacleSpikes = game.add.image(game.world.centerX, game.world.centerY, 'button')
 		//var spike = game.add.image(game.world.centerX, game.world.centerY, 'button')
 		//spike.anchor.setTo(0.5, 0.5)
 		//spike.scale.setTo(0.3, 0.3)
-
 	},
 
 	create: function () {
+		
 		this.wKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
 		game.input.keyboard.addKeyCapture([Phaser.Keyboard.W]);
 
-		this.eKey = game.input.keyboard.addKey(Phaser.Keyboard.E);
-		game.input.keyboard.addKeyCapture([Phaser.Keyboard.E]);
-
+		this.tapping = game.input.pointer1;
+		//this.tapTap = game.input.addPointer();
 		//var suelo = new Phaser.Rectangle (30, 550, 30, 500)
-		var style = {
-			font: "40px Arial",
-			fill: "#000000",
-			align: "center"
-		};
-
-		var style2 = {
-			font: "40px Arial",
-			fill: "#ffffff",
-			align: "center"
-		}
-		game.global.player.stamina = game.add.text(game.world.centerX, game.world.centerY, "0", style2);
-		/*
-				//Background
-				var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
-				b.anchor.set (0.5, 0.5)
-				b.scale.setTo (1.2,1.2)
-		*/
-		//Boton desconectar
-
-
-		buttonBack = game.add.button(50,
-			40, 'button', actionOnClickBack, this,
-			0, 0, 0)
-		buttonBack.anchor.set(0.5)
-		buttonBack.scale.setTo(0.2, 0.3)
-
-		//Texto desconectar
-		textButtonBack = game.add.text(50,
-			40, 'Back', style)
-		textButtonBack.anchor.set(0.5)
-		textButtonBack.scale.setTo(0.5, 0.5)
-
-
-		this.graphics = game.add.graphics(0, 0);
-		this.graphics.lineStyle(2, 0x0000FF, 1);
-		//this.graphics.drawRect(50, 250, 500, 100);
-		/*
-		var i = 0;
-		for (var mapObject in game.global.mapObjects) {
-				console.log(game.global.mapObjects[i].x)	
-				console.log(game.global.mapObjects[i].y)
-				console.log(game.global.mapObjects[i].height)	
-				console.log(game.global.mapObjects[i].width)
-				console.log('screen height' + game.world.height )
-			//this.graphics.drawRect(50, 250, 500, 100);
-			this.graphics.drawRect(game.global.mapObjects[i].x, game.world.height -  game.global.mapObjects[i].y, game.global.mapObjects[i].width, -game.global.mapObjects[i].height)
-			i++;
-		}
-*/
-		//Pintamos los suelos
-		for (var i = 0; i < game.global.arrayGrounds.length; i++) {
-			//console.log(game.global.arrayGrounds[i].x)
-			//console.log(game.global.arrayGrounds[i].y)
-			//console.log(game.global.arrayGrounds[i].height)
-			//console.log(game.global.arrayGrounds[i].width)
-			//console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arrayGrounds[i].x, game.world.height - game.global.arrayGrounds[i].y, game.global.arrayGrounds[i].width, -game.global.arrayGrounds[i].height)
-		}
-
-		for (var i = 0; i < game.global.arrayWalls.length; i++) {
-			//console.log(game.global.arrayWalls[i].x)
-			//console.log(game.global.arrayWalls[i].y)
-			//console.log(game.global.arrayWalls[i].height)
-			//console.log(game.global.arrayWalls[i].width)
-			//console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arrayWalls[i].x, game.world.height - game.global.arrayWalls[i].y, game.global.arrayWalls[i].width, -game.global.arrayWalls[i].height)
-		}
-
-		for (var i = 0; i < game.global.arraySlopes.length; i++) {
-			//console.log(game.global.arraySlopes[i].x)
-			//console.log(game.global.arraySlopes[i].y)
-			//console.log(game.global.arraySlopes[i].height)
-			//console.log(game.global.arraySlopes[i].width)
-			//console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arraySlopes[i].x, game.world.height - game.global.arraySlopes[i].y, game.global.arraySlopes[i].width, -game.global.arraySlopes[i].height)
-		}
-
-		for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-			console.log(game.global.arrayObstacleSpikes[i].image.x)
-			console.log(game.global.arrayObstacleSpikes[i].image.y)
-			//console.log(game.global.arrayObstacleSpikes[i].height)
-			//console.log(game.global.arrayObstacleSpikes[i].width)
-			//console.log('screen height' + game.world.height)
-			//this.graphics.drawRect(game.global.arrayObstacleSpikes[i].x, game.world.height - game.global.arrayObstacleSpikes[i].y, game.global.arrayObstacleSpikes[i].width, -game.global.arrayObstacleSpikes[i].height)
-		}
-
-		for (var i = 0; i < game.global.arrayPowerUps.length; i++) {
-			console.log(game.global.arrayPowerUps[i].x)
-			console.log(game.global.arrayPowerUps[i].y)
-			console.log(game.global.arrayPowerUps[i].height)
-			console.log(game.global.arrayPowerUps[i].width)
-			console.log('screen height' + game.world.height)
-			this.graphics.drawRect(game.global.arrayPowerUps[i].x, game.world.height - game.global.arrayPowerUps[i].y, game.global.arrayPowerUps[i].width, -game.global.arrayPowerUps[i].height)
-		}
 
 		function actionOnClickBack() {
 			//alert('Saldras de la carrera');
@@ -140,27 +315,82 @@ Slooow.singlePlayerState.prototype = {
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
 	update: function () {
 
-		if (game.global.arrayObstacleSpikes.length > 0) {
-			for (var i = 0; i < game.global.arrayObstacleSpikes.length; i++) {
-				//var spike = game.add.image(game.global.arrayObstacleSpikes[i].x,game.world.height - game.global.arrayObstacleSpikes[i].y, 'button')
-				//spike.anchor.setTo(0,1)
-				//spike.scale.setTo(0.25, 0.3)
-			}
-		}
-
 		let msg = {
 			event: 'UPDATEINPUT',
 			isSprinting: false,
 			useObject: false
 		}
-
-		if (this.wKey.isDown) {
+		if (this.wKey.isDown && this.wKey.duration <= 100) {
 			msg.isSprinting = true;
 		}
-		if (this.eKey.isDown) {
-			msg.useObject = true
+		
+		if (this.wKey.isDown && this.wKey.duration > 300) {
+			msg.useObject = true;
+		}
+		
+		if (game.input.pointer1.isDown && game.input.pointer1.duration <= 100){
+			msg.isSprinting = true;
+		}
+
+		if (game.input.pointer1.isDown && game.input.pointer1.duration > 300){
+			msg.useObject = true;
 		}
 		game.global.socket.send(JSON.stringify(msg))
+    
+		game.camera.focusOnXY(game.global.player.sprite.x+400 ,game.global.player.sprite.y+100);
 
+		if (this.game.global.haveToRotateToWall == true){
+			if (game.global.player.sprite.angle > -90){
+				game.global.player.sprite.angle-=4
+			} else{
+				game.global.haveToRotateToWall = false
+				game.global.player.sprite.angle = -90
+			}
+		}
+		if (game.global.haveToRotateToGround == true){
+			if (game.global.player.sprite.angle < -2){
+				game.global.player.sprite.angle+=2
+			} else if (game.global.player.sprite.angle > 2){
+				game.global.player.sprite.angle-=2
+			}else{
+				game.global.haveToRotateToGround = false
+				game.global.player.sprite.angle = 0
+			}
+		}
+		if(game.global.haveToRotateToSlope == true){
+			// El angulo que me pasa va desde -90 a 90
+			// Cuando me llega un 45, realmente tengo que girarlo hasta -45
+
+			//Cuesta hacia arriba
+			if (game.global.degreesToRotateSlope > 0){
+				if (game.global.player.sprite.angle > -game.global.degreesToRotateSlope){
+					game.global.player.sprite.angle-=3
+					game.global.player.sprite.angle = Math.round(game.global.player.sprite.angle)
+				}else{
+					game.global.player.sprite.angle = -game.global.degreesToRotateSlope
+					game.global.haveToRotateToSlope = false
+					game.global.degreesToRotateSlope = 0
+				}
+			}
+			// Cuesta hacia abajo
+			else{
+				if (game.global.player.sprite.angle < -game.global.degreesToRotateSlope){
+					game.global.player.sprite.angle+=3
+					game.global.player.sprite.angle = Math.round(game.global.player.sprite.angle)
+				}else{
+					game.global.player.sprite.angle = -game.global.degreesToRotateSlope
+					game.global.haveToRotateToSlope = false
+					game.global.degreesToRotateSlope = 0
+				}
+			}
+		}
+
+		//Comprobamos si hay algun power up activo para quitarle opacidad poco a poco
+		if (game.global.player.sprite.children.length > 0){
+			game.global.player.sprite.children[0].alpha -= 0.005
+			if (game.global.player.sprite.children[0].alpha < 0.01){
+				game.global.player.sprite.children[0].destroy()
+			}
+		}
 	}
 }

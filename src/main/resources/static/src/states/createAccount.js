@@ -9,80 +9,112 @@ Slooow.createAccountState.prototype = {
         if (game.global.DEBUG_MODE) {
             console.log("[DEBUG] Entering **CREATEACCOUNT** state");
         }
+        game.world.setBounds(0, 0, 1280, 720);
     },
 
     preload : function() {
-        //Background
-        var b = game.add.image (game.world.centerX, game.world.centerY, 'background')
-		b.anchor.set (0.5, 0.5)
-        b.scale.setTo (1.2,1.2)
+        // BackGround
+        /*
+        this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
+        this.background.height = this.game.height;
+        this.background.width = this.game.width;
+        this.background.anchor.set(0.5, 0.5)*/
+        this.background = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width, game.world.height, 'backgroundMenu')
+        //this.background.height = this.game.height;
+        //this.background.width = this.game.width;
+        //Tints chulos:  1653685.9351650865
+        //               10799539.640765665
+        //               4535760.527128731   
+        //this.background.tint = Math.random() * 0xffffff;
+        //this.background.tint = 4535760.527128731;
+		//console.log(this.background.tint)
+		this.background.tileScale.set(0.4, 0.4)
+        this.background.anchor.set(0.5, 0.5)
         
-        //Campo nombre de usuario
-        usernameInput = game.add.inputField(game.world.centerX - 160,
-            game.world.centerY - 100, {
-            font: '18px Arial',
+        // Campo nombre de usuario
+        usernameInput = game.add.inputField(game.world.centerX - 240,
+            game.world.centerY - 180, {
+            font: '40px Arial',
             fill: '#212121',
             fontWeight: 'bold',
-            height: 30,
-            width: 300,
+            height: 55,
+            width: 450,
             padding: 8,
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Username'
+            placeHolder: game.global.activeLanguage.InputUser
         });
 
-        var style2 = {
-            font: "40px Arial",
-            fill: "#000000",
-            align: "center"
-        }
-
         // Campo PassWord
-        passwordInput = game.add.inputField(game.world.centerX - 160,
-            game.world.centerY - 30, {
-            font: '18px Arial',
+        passwordInput = game.add.inputField(game.world.centerX - 240,
+            game.world.centerY - 70, {
+            font: '40px Arial',
             fill: '#212121',
             fontWeight: 'bold',
-            height: 30,
-            width: 300,
+            height: 55,
+            width: 450,
             padding: 8,
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Password',
+            placeHolder: game.global.activeLanguage.InputPass,
             type: PhaserInput.InputType.password
         });
 
         //Campo confirmar pass
-        confirmPasswordInput = game.add.inputField(game.world.centerX - 160,
-            game.world.centerY +40, {
-            font: '18px Arial',
+        confirmPasswordInput = game.add.inputField(game.world.centerX - 240,
+            game.world.centerY + 40, {
+            font: '40px Arial',
             fill: '#212121',
             fontWeight: 'bold',
-            height: 30,
-            width: 300,
+            height: 55,
+            width: 450,
             padding: 8,
             borderWidth: 1,
             borderColor: '#000',
             borderRadius: 6,
-            placeHolder: 'Confirm Password',
+            placeHolder: game.global.activeLanguage.InputConfirm,
             type: PhaserInput.InputType.password
         });
 
+        //Boton ESPAÑITA AE
+        buttonAE = game.add.button(game.world.width - 60,
+            50, 'ESPAÑITABtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonAE.anchor.set(0.5)
+        buttonAE.scale.setTo(0.3, 0.3)
+        buttonAE.alpha = 0
+        buttonAE.inputEnabled = false
+        //Boton eng
+        buttonEng = game.add.button(game.world.width - 60,
+            50, 'engBtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonEng.anchor.set(0.5)
+        buttonEng.scale.setTo(0.3, 0.3)
+        buttonEng.alpha = 0
+        buttonEng.inputEnabled = false 
+        if(game.global.activeLanguage.Language == 'eng'){
+            this.language = 'eng'
+            buttonEng.alpha = 1
+            buttonEng.inputEnabled = true
+        } else {
+            this.language = 'ESPAÑITA'
+            buttonAE.alpha = 1
+            buttonAE.inputEnabled = true
+        }
+
         //Boton crear cuenta
         buttonCreateAccount = game.add.button(game.world.centerX ,
-            game.world.centerY + 140, 'button', actionOnClickCreate, this,
+            game.world.centerY + 200, 'button', actionOnClickCreate, this,
             0, 0, 0)
         buttonCreateAccount.anchor.set(0.5)
-        buttonCreateAccount.scale.setTo(0.4, 0.3)
-
+        buttonCreateAccount.scale.setTo(0.65, 0.65)
         //Texto boton crear cuenta
         textButtonInit = game.add.text(game.world.centerX ,
-            game.world.centerY + 140, 'Create Account', style2)
+            game.world.centerY + 200, game.global.activeLanguage.SingIn, game.global.style)
         textButtonInit.anchor.set(0.5)
-        textButtonInit.scale.setTo(0.5, 0.5)
-
+        textButtonInit.scale.setTo(1, 1)
 
         //Boton atras
         buttonBack = game.add.button(50 ,
@@ -90,20 +122,18 @@ Slooow.createAccountState.prototype = {
             0, 0, 0)
         buttonBack.anchor.set(0.5)
         buttonBack.scale.setTo(0.2, 0.3)
-
         //Texto atras
         textButtonBack = game.add.text(50 ,
-            40, 'Back', style2)
+            40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5, 0.5)
-
 
         function actionOnClickCreate (){
             if (usernameInput.value !== undefined && passwordInput.value !== undefined && confirmPasswordInput.value != undefined) {
 				if (usernameInput.value.length !== 0 && passwordInput.value.length !== 0 && confirmPasswordInput.value.length !== 0) {
 					let msg = {
 						event : 'CREATEACCOUNT',
-						name : usernameInput.value,
+						playerName : usernameInput.value,
                         pass : passwordInput.value,
                         confirmPass : confirmPasswordInput.value
                     }
@@ -112,28 +142,51 @@ Slooow.createAccountState.prototype = {
                     game.global.username = usernameInput.value
                     game.global.password = passwordInput.value
 					//inicioSesionNameButton.text.setText('')
-					//inicioSesionNameButton.value = undefined
+					inicioSesionNameButton.value = undefined
 					//inicioSesionPassButton.text.setText('')
-                    //inicioSesionPassButton.value = undefined
-
+                    inicioSesionPassButton.value = undefined
+///////////////////////////////////////////////////////////////////////////////////////////
                     //Por ahora pasa directamente al menu principal, pero mas tarde habrá que comprobar usuario y contraseña
                     //game.state.start('mainMenuState')
 				}
 			}
-
-            console.log('Pulsado crear cuenta')
-            game.state.start('mainMenuState')
-            console.log('despues crear cuenta')
+            //game.state.start('mainMenuState')
         }
 
         function actionOnClickBack (){
             game.state.start('initSesionState')
         }
+
+        function actionOnClickLanguage(){
+            //TODO Cambio real de idioma
+            if(this.language == 'eng'){
+                buttonEng.alpha = 0
+                buttonEng.inputEnabled = false
+                buttonAE.alpha = 1
+                buttonAE.inputEnabled = true
+                this.language = 'ESPAÑITA'
+                game.global.activeLanguage = game.global.languageData.ESPAÑITA
+            } else {
+                buttonAE.alpha = 0
+                buttonAE.inputEnabled = false
+                buttonEng.alpha = 1
+                buttonEng.inputEnabled = true
+                this.language = 'eng'
+                game.global.activeLanguage = game.global.languageData.eng
+            }
+            textButtonInit.setText(game.global.activeLanguage.LogIn);
+            textButtonCreate.setText(game.global.activeLanguage.SingIn);
+            textButtonBack.setText(game.global.activeLanguage.Back)
+            passwordInput.placeHolder.setText(game.global.activeLanguage.InputPass)
+            usernameInput.placeHolder.setText(game.global.activeLanguage.InputUser)
+            confirmPasswordInput.placeHolder.setText(game.global.activeLanguage.InputConfirm)
+        }
     },
 
-    create : function() {
-    },
+    create : function() {},
 
     update : function() {
+        this.background.tilePosition.x+=0.5
+        this.background.tilePosition.y-=0.5
     }
 }
