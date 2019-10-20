@@ -643,14 +643,14 @@ window.onload = function () {
                     game.state.start('mainMenuState')
                 } else {
                     // deberia sacarse un mensaje de error
-                    game.state.start('createAccountState')
+                    game.state.start('errorLogInState')
                 }
                 break
             case 'CREATEACCOUNTSTATUS':
                 if (JSON.parse(msg.conectionStatus)) {
                     game.state.start('mainMenuState')
                 } else {
-                    //game.state.start('shopState')
+                    game.state.start('errorSignInState')
                     console.log("Creacion de cuenta negativa")
                 }
                 break
@@ -1050,6 +1050,8 @@ window.onload = function () {
     this.game.state.add('errorState', Slooow.errorState);
     this.game.state.add('initGameState', Slooow.initGameState);
     this.game.state.add('initSesionState', Slooow.initSesionState);
+    this.game.state.add('errorSignInState', Slooow.errorSignInState);
+    this.game.state.add('errorLogInState', Slooow.errorLogInState);
     this.game.state.add('createAccountState', Slooow.createAccountState);
     this.game.state.add('mainMenuState', Slooow.mainMenuState);
     this.game.state.add('singlePlayerState', Slooow.singlePlayerState);

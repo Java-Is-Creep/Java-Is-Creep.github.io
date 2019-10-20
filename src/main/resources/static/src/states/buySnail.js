@@ -347,12 +347,12 @@ Slooow.buySnailState.prototype = {
                 skinsSprite[0].anchor.setTo(0.5, 0.5);
                 skinsSprite[0].scale.setTo(0.3,0.3)
 
-                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'irisCol2')
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'irisCol1')
                 skinsSprite[1].anchor.setTo(0.5, 0.5);
                 skinsSprite[1].scale.setTo(0.3,0.3)
                 skinsSprite[1].alpha = 0.7;
 
-                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'irisCol3')
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'irisCol2')
                 skinsSprite[2].anchor.setTo(0.5, 0.5);
                 skinsSprite[2].scale.setTo(0.3,0.3)
                 skinsSprite[2].alpha = 0.7;
