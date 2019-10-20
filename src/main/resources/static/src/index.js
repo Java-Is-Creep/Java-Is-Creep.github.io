@@ -806,6 +806,7 @@ window.onload = function () {
                 }
                 break
             case 'FINISHMULTI':
+                firstFrame = 0;
                 this.console.log('FIN DE PARTIDAAAAAAAA')
                 this.console.log(msg)
                 var myTime = JSON.parse(msg.time)
@@ -827,6 +828,7 @@ window.onload = function () {
                 game.state.start('gameOverMultiState')
                 break
             case 'WAITINGROOMSTART':
+                firstFrame = 0;
                 var roomName = JSON.stringify(msg.roomName)
                 roomName = roomName.substring(1, roomName.length - 1)
                 this.game.global.roomNameMulti = roomName
@@ -1026,18 +1028,6 @@ window.onload = function () {
                 break
             case 'PURCHASEOK':
                 game.global.money = JSON.parse(msg.shells)
-                game.global.points = JSON.parse(msg.baba)
-                let ownedAux3 = JSON.parse(msg.owned)
-                let notOwnedAux3 = JSON.parse(msg.notOwned)
-
-                for (var e = 0; e < ownedAux3.length; e++){
-                    game.global.owned[e] = ownedAux3[e];
-                }
-
-                for (var s = 0; s < notOwnedAux3.length; s++){
-                    game.global.notOwned[s] = notOwnedAux3[s]
-                }
-                
                 game.state.start('shopState')
         }   
 
