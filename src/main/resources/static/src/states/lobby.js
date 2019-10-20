@@ -77,26 +77,26 @@ Slooow.lobbyState.prototype = {
         var chosenShell = game.add.image(game.world.centerX-380, game.world.centerY-170, 'roundBtn')
         chosenShell.anchor.setTo(0.5, 0.5);
         chosenShell.scale.setTo(0.95, 0.95)
-        var statsBg = game.add.image(game.world.centerX-320, game.world.centerY+180, 'squareBtn')
+        var statsBg = game.add.image(game.world.centerX+180, game.world.centerY-170, 'squareBtn')
         statsBg.anchor.setTo(0.5, 0.5);
         statsBg.scale.setTo(2.7, 1.6)
-        var textName = game.add.text(game.world.centerX-320, game.world.centerY+50, "" , game.global.style)
+        var textName = game.add.text(game.world.centerX+180, game.world.centerY-300, "" , game.global.style)
         textName.anchor.set(0.5)
         textName.scale.setTo(0.7,0.7)
 
-        textSpeed = game.add.text(game.world.centerX-540, game.world.centerY+90, game.global.activeLanguage.Speed , game.global.style)
+        textSpeed = game.add.text(game.world.centerX-40, game.world.centerY-260, game.global.activeLanguage.Speed , game.global.style)
         textSpeed.scale.setTo(0.5,0.5)
 
-        textAc = game.add.text(game.world.centerX-540, game.world.centerY+130, game.global.activeLanguage.Ac , game.global.style)
+        textAc = game.add.text(game.world.centerX-40, game.world.centerY-220, game.global.activeLanguage.Ac , game.global.style)
         textAc.scale.setTo(0.5,0.5)
 
-        textWeight = game.add.text(game.world.centerX-540, game.world.centerY+170, game.global.activeLanguage.Weight , game.global.style)
+        textWeight = game.add.text(game.world.centerX-40, game.world.centerY-180, game.global.activeLanguage.Weight , game.global.style)
         textWeight.scale.setTo(0.5,0.5)
 
-        textStamina = game.add.text(game.world.centerX-540, game.world.centerY+210, game.global.activeLanguage.Stamina , game.global.style)
+        textStamina = game.add.text(game.world.centerX-40, game.world.centerY-140, game.global.activeLanguage.Stamina , game.global.style)
         textStamina.scale.setTo(0.5,0.5)
         
-        textRegen = game.add.text(game.world.centerX-540, game.world.centerY+250, game.global.activeLanguage.Regen , game.global.style)
+        textRegen = game.add.text(game.world.centerX-40, game.world.centerY-100, game.global.activeLanguage.Regen , game.global.style)
         textRegen.scale.setTo(0.5,0.5)
         var chosen = null
         loadChosen()
@@ -106,13 +106,20 @@ Slooow.lobbyState.prototype = {
         
 
         //chose bg
-
+        var lobbyInfoBg = game.add.image(game.world.centerX-250, game.world.centerY+170, 'squareBtn')
+        lobbyInfoBg.anchor.setTo(0.5, 0.5);
+        lobbyInfoBg.scale.setTo(2.5, 1.2)
         
         //Texto datos sala
-		textLobbyData = game.add.text(game.world.centerX -400,
-            game.world.centerY -50, game.global.activeLanguage.LobbyData, game.global.style)
+		textLobbyData = game.add.text(game.world.centerX -380,
+            game.world.centerY + 105, game.global.activeLanguage.LobbyData+":", game.global.style)
         textLobbyData.anchor.set(0.5)
-        textLobbyData.scale.setTo(0.5,0.5)
+        textLobbyData.scale.setTo(.7,.7)
+
+        textLobbyData = game.add.text(game.world.centerX -360,
+            game.world.centerY + 135, game.global.mapChosen, game.global.style)
+        textLobbyData.anchor.set(0.5)
+        textLobbyData.scale.setTo(.6,.6)
 
 
         function actionOnClickBack(){
@@ -250,7 +257,7 @@ Slooow.lobbyState.prototype = {
             
             var offset = 0;
             for (var i = 0; i < speed; i++){
-                stat1[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 100, 'statBtn')
+                stat1[i] = game.add.image(game.world.centerX+160 + parseInt(offset), game.world.centerY - 250, 'statBtn')
                 stat1[i].anchor.set(0.5)
                 stat1[i].scale.setTo(0.1,0.1)
                 offset +=50
@@ -258,7 +265,7 @@ Slooow.lobbyState.prototype = {
             }
             var offset = 0;  
             for (var i = 0; i < ac; i++){
-                stat2[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 140, 'statBtn')
+                stat2[i] = game.add.image(game.world.centerX+160 + parseInt(offset), game.world.centerY - 210, 'statBtn')
                 stat2[i].anchor.set(0.5)
                 stat2[i].scale.setTo(0.1,0.1)
                 offset +=50
@@ -266,7 +273,7 @@ Slooow.lobbyState.prototype = {
             }
             var offset = 0;   
             for (var i = 0; i < weight; i++){
-                stat3[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 180, 'statBtn')
+                stat3[i] = game.add.image(game.world.centerX+160 + parseInt(offset), game.world.centerY - 170, 'statBtn')
                 stat3[i].anchor.set(0.5)
                 stat3[i].scale.setTo(0.1,0.1)
                 offset +=50
@@ -274,7 +281,7 @@ Slooow.lobbyState.prototype = {
             }
             var offset = 0;   
             for (var i = 0; i < stamina; i++){
-                stat4[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 220, 'statBtn')
+                stat4[i] = game.add.image(game.world.centerX+160 + parseInt(offset), game.world.centerY -130, 'statBtn')
                 stat4[i].anchor.set(0.5)
                 stat4[i].scale.setTo(0.1,0.1)
                 offset +=50
@@ -282,7 +289,7 @@ Slooow.lobbyState.prototype = {
             }  
             var offset = 0; 
             for (var i = 0; i < regen; i++){
-                stat5[i] = game.add.image(game.world.centerX-360 + parseInt(offset), game.world.centerY + 260, 'statBtn')
+                stat5[i] = game.add.image(game.world.centerX+160 + parseInt(offset), game.world.centerY - 90, 'statBtn')
                 stat5[i].anchor.set(0.5)
                 stat5[i].scale.setTo(0.1,0.1)
                 offset +=50
