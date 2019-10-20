@@ -11,11 +11,13 @@ public class Map {
 	int negativeYOfset; // si borramos el objeto en cuanto pase el caracol, la camara ve un poc por detras del caracol
 	// por lo que desaparecerian cosas, este ofset arregla eso
 	int negativeXOfset;
+	String name;
 	
 	
 	
-	public Map(int widthCamara) {
+	public Map(int widthCamara,String name) {
 		this.widthCamara = widthCamara;
+		this.name = name;
 	}
 
 	public void addMapObject(MapObject object) {

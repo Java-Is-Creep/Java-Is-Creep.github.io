@@ -1,8 +1,11 @@
 Slooow.mainMenuState = function (game) {
     var buttonStartSolo
-    var optionsClicked 
+    var optionsClicked
     var minAlpha
     var maxAlpha
+    var activeSound
+    var language
+    var background
 }
 
 Slooow.mainMenuState.prototype = {
@@ -11,255 +14,286 @@ Slooow.mainMenuState.prototype = {
         if (game.global.DEBUG_MODE) {
             console.log("[DEBUG] Entering **MainMenu** state");
         }
+        game.world.setBounds(0, 0, 1280, 720);
     },
 
     preload: function () {
+        //Background
+        /*
+        this.background = game.add.image(game.world.centerX, game.world.centerY, 'background')
+        this.background.height = this.game.height;
+        this.background.width = this.game.width;
+        this.background.anchor.set(0.5, 0.5)
+*/
+        this.background = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width, game.world.height, 'backgroundMenu')
+        //this.background.height = this.game.height;
+        //this.background.width = this.game.width;
+        //Tints chulos:  1653685.9351650865
+        //               10799539.640765665
+        //               4535760.527128731   
+        //this.background.tint = Math.random() * 0xffffff;
+        //this.background.tint = 4535760.527128731;
+        //console.log(this.background.tint)
+        this.background.tileScale.set(0.4, 0.4)
+        this.background.anchor.set(0.5, 0.5)
+
     },
 
     create: function () {
-
+        // Control de la pestaña de opciones
+        if (game.global.musicGame != undefined) {
+            game.global.musicGame.stop()
+        }
         optionsClicked = false
+        // MinAlpha poner casi en invisible los botones no disponibles
         minAlpha = 0.1
         maxAlpha = 1
 
-        var style = {
-            font: "40px Arial",
-            fill: "#000000",
-            align: "center"
-        };
-
         var styleTitle = {
-            font: "bold 200px Impact",
+            font: "bold 160px Impact",
             fill: "#ffffff",
             align: "center"
         };
-        //Background
-        b = game.add.image(game.world.centerX, game.world.centerY, 'background')
-        b.anchor.set(0.5, 0.5)
-        b.scale.setTo(1.2, 1.2)
 
-        //Texto titulo
+        // TITLE
+        buttonTittle = game.add.button(game.world.centerX,
+            50, 'button', null, this,
+            0, 0, 0)
+        buttonTittle.anchor.set(0.5)
+        buttonTittle.scale.setTo(1, 0.5)
+        buttonTittle.inputEnabled = false;
         textTitle = game.add.text(game.world.centerX,
             50, 'SLOOOW', styleTitle)
         textTitle.anchor.set(0.5)
         textTitle.scale.setTo(0.5, 0.5)
 
-        //Boton empezar juego solo
-        buttonStartSolo = game.add.button(game.world.centerX + 100,
-            game.world.centerY - 50, 'button', actionOnClickStartSolo, this,
+
+        //User
+        buttonUser = game.add.button(240,
+            40, 'button', null, this,
+            0, 0, 0)
+        buttonUser.anchor.set(0.5)
+        buttonUser.scale.setTo(0.6, 0.35)
+        buttonUser.inputEnabled = false;
+        textUsername = game.add.text(240,
+            40, game.global.username, game.global.style)
+        textUsername.anchor.set(0.5)
+        textUsername.scale.setTo(0.5, 0.5)
+
+        // Boton empezar juego solo
+        buttonStartSolo = game.add.button(game.world.centerX - 300,
+            game.world.centerY - 100, 'button', actionOnClickStartSolo, this,
             0, 0, 0)
         buttonStartSolo.anchor.set(0.5)
-        buttonStartSolo.scale.setTo(0.3, 0.3)
-
-        //Texto empezar juego solo
-        textButtonStartSolo = game.add.text(game.world.centerX + 100,
-            game.world.centerY - 50, 'Solo', style)
+        buttonStartSolo.scale.setTo(0.6, 0.6)
+        // Texto empezar juego solo
+        textButtonStartSolo = game.add.text(game.world.centerX - 300,
+            game.world.centerY - 100, game.global.activeLanguage.SoloMode, game.global.style)
         textButtonStartSolo.anchor.set(0.5)
-        textButtonStartSolo.scale.setTo(0.5, 0.5)
+        //textButtonStartSolo.scale.setTo(0.7, 0.7)
 
+        /*
         //Boton empezar maraton
         buttonStartMarathon = game.add.button(game.world.centerX + 300,
             game.world.centerY - 50, 'button', actionOnClickStartMarathon, this,
             0, 0, 0)
         buttonStartMarathon.anchor.set(0.5)
         buttonStartMarathon.scale.setTo(0.3, 0.3)
-
         //Texto empezar maraton
         textButtonStartMarathon = game.add.text(game.world.centerX + 300,
-            game.world.centerY - 50, 'Maraton', style)
+            game.world.centerY - 50, game.global.activeLanguage.Marathon, game.global.style)
         textButtonStartMarathon.anchor.set(0.5)
         textButtonStartMarathon.scale.setTo(0.5, 0.5)
+            */
 
         //Boton empezar multi online
-        buttonStartMultiOnline = game.add.button(game.world.centerX + 100,
+        buttonStartMultiOnline = game.add.button(game.world.centerX - 300,
             game.world.centerY + 100, 'button', actionOnClickStartOnline, this,
             0, 0, 0)
         buttonStartMultiOnline.anchor.set(0.5)
-        buttonStartMultiOnline.scale.setTo(0.3, 0.3)
-
+        buttonStartMultiOnline.scale.setTo(0.6, 0.6)
         //Texto empezar multi online
-        textButtonStartMultiOnline = game.add.text(game.world.centerX + 100,
-            game.world.centerY + 100, 'Online', style)
+        textButtonStartMultiOnline = game.add.text(game.world.centerX - 300,
+            game.world.centerY + 100, game.global.activeLanguage.Online, game.global.style)
         textButtonStartMultiOnline.anchor.set(0.5)
-        textButtonStartMultiOnline.scale.setTo(0.5, 0.5)
+        //textButtonStartMultiOnline.scale.setTo(0.7, 0.7)
 
+        /*
         //Boton empezar multi local
         buttonStartMultiLocal = game.add.button(game.world.centerX + 300,
             game.world.centerY + 100, 'button', actionOnClickStartLocal, this,
             0, 0, 0)
         buttonStartMultiLocal.anchor.set(0.5)
         buttonStartMultiLocal.scale.setTo(0.3, 0.3)
-
         //Texto empezar multi local
         textButtonStartMultiLocal = game.add.text(game.world.centerX + 300,
-            game.world.centerY + 100, 'Local', style)
+            game.world.centerY + 100, game.global.activeLanguage.Local, game.global.style)
         textButtonStartMultiLocal.anchor.set(0.5)
         textButtonStartMultiLocal.scale.setTo(0.5, 0.5)
-
+        */
 
         //Boton tienda
-        buttonShop = game.add.button(game.world.centerX - 300,
-            game.world.centerY, 'button', actionOnClickStartShop, this,
+        buttonShop = game.add.button(game.world.centerX,
+            game.world.centerY, 'storeBtn', actionOnClickStartShop, this,
             0, 0, 0)
         buttonShop.anchor.set(0.5)
-        buttonShop.scale.setTo(0.3, 0.3)
+        buttonShop.scale.setTo(0.6, 0.6)
 
-        //Texto tienda
-        textButtonShop = game.add.text(game.world.centerX - 300,
-            game.world.centerY, 'Shop', style)
-        textButtonShop.anchor.set(0.5)
-        textButtonShop.scale.setTo(0.5, 0.5)
+        // Boton empezar records
+        buttonStartRecords = game.add.button(game.world.centerX + 300,
+            game.world.centerY + 100, 'button', actionOnClickStartRecords, this,
+            0, 0, 0)
+        buttonStartRecords.anchor.set(0.5)
+        buttonStartRecords.scale.setTo(0.6, 0.6)
+        // Texto empezar records
+        textButtonStartRecords = game.add.text(game.world.centerX + 300,
+            game.world.centerY + 100, game.global.activeLanguage.RecordsOnly, game.global.style)
+        textButtonStartRecords.anchor.set(0.5)
+        //textButtonStartRecords.scale.setTo(0.5, 0.5)
+
+        // Boton empezar trofeos
+        buttonStartTrophies = game.add.button(game.world.centerX + 300,
+            game.world.centerY - 100, 'button', actionOnClickStartTrophies, this,
+            0, 0, 0)
+        buttonStartTrophies.anchor.set(0.5)
+        buttonStartTrophies.scale.setTo(0.6, 0.6)
+        // Texto empezar trofeos
+        textButtonStartTrophies = game.add.text(game.world.centerX + 300,
+            game.world.centerY - 100, game.global.activeLanguage.Trophies, game.global.style)
+        textButtonStartTrophies.anchor.set(0.5)
+        //textButtonStartTrophies.scale.setTo(0.5, 0.5)
 
         //Boton instagram
         buttonInstagram = game.add.button(game.world.centerX - 150,
-            game.world.centerY + 250, 'button', actionOnClickInstagram, this,
+            game.world.centerY + 300, 'instaBtn', actionOnClickInstagram, this,
             0, 0, 0)
         buttonInstagram.anchor.set(0.5)
         buttonInstagram.scale.setTo(0.3, 0.3)
 
-        //Texto instagram
-        textButtonInstagram = game.add.text(game.world.centerX - 150,
-            game.world.centerY + 250, 'Instagram', style)
-        textButtonInstagram.anchor.set(0.5)
-        textButtonInstagram.scale.setTo(0.5, 0.5)
-
-        //Boton web
+        //Boton facebook
         buttonWeb = game.add.button(game.world.centerX,
-            game.world.centerY + 250, 'button', actionOnClickWeb, this,
+            game.world.centerY + 300, 'facebookBtn', actionOnClickFacebook, this,
             0, 0, 0)
         buttonWeb.anchor.set(0.5)
         buttonWeb.scale.setTo(0.3, 0.3)
 
-        //Texto web
-        textButtonWeb = game.add.text(game.world.centerX,
-            game.world.centerY + 250, 'Web', style)
-        textButtonWeb.anchor.set(0.5)
-        textButtonWeb.scale.setTo(0.5, 0.5)
-
         //Boton twitter
         buttonTwitter = game.add.button(game.world.centerX + 150,
-            game.world.centerY + 250, 'button', actionOnClickTwitter, this,
+            game.world.centerY + 300, 'twitterBtn', actionOnClickTwitter, this,
             0, 0, 0)
         buttonTwitter.anchor.set(0.5)
         buttonTwitter.scale.setTo(0.3, 0.3)
 
-        //Texto twitter
-        textButtonTwitter = game.add.text(game.world.centerX + 150,
-            game.world.centerY + 250, 'Twitter', style)
-        textButtonTwitter.anchor.set(0.5)
-        textButtonTwitter.scale.setTo(0.5, 0.5)
-
-
         //Boton desconectar
         buttonDisconnect = game.add.button(60,
-            40, 'button', actionOnClickDisconnect, this,
+            40, 'logOffBtn', actionOnClickDisconnect, this,
             0, 0, 0)
         buttonDisconnect.anchor.set(0.5)
-        buttonDisconnect.scale.setTo(0.25, 0.3)
-
-        //Texto desconectar
-        textButtonDisconnect = game.add.text(60,
-            40, 'Disconnect', style)
-        textButtonDisconnect.anchor.set(0.5)
-        textButtonDisconnect.scale.setTo(0.5, 0.5)
+        buttonDisconnect.scale.setTo(0.3, 0.3)
 
         //Boton opciones
         buttonOptions = game.add.button(game.world.width - 60,
-            40, 'button', actionOnClickOptions, this,
+            40, 'settingsBtn', actionOnClickOptions, this,
             0, 0, 0)
         buttonOptions.anchor.set(0.5)
-        buttonOptions.scale.setTo(0.25, 0.3)
+        buttonOptions.scale.setTo(0.3, 0.3)
 
-        //Texto opciones
-        textButtonOptions = game.add.text(game.world.width - 60,
-            40, 'Options', style)
-        textButtonOptions.anchor.set(0.5)
-        textButtonOptions.scale.setTo(0.5, 0.5)
-
-        //Boton sonido
-        buttonSound = game.add.button(game.world.width - 200,
-            100, 'button', actionOnClickSound, this,
+        //Boton sonido on
+        buttonSoundOn = game.add.button(game.world.width - 60,
+            120, 'soundOnBtn', actionOnClickSound, this,
             0, 0, 0)
-        buttonSound.anchor.set(0.5)
-        buttonSound.scale.setTo(0.25, 0.3)
-        buttonSound.alpha = 0
-        buttonSound.inputEnabled = false
-
-        //Texto sonido
-        textButtonSound = game.add.text(game.world.width - 200,
-            100, 'Sound', style)
-        textButtonSound.anchor.set(0.5)
-        textButtonSound.scale.setTo(0.5, 0.5)
-        textButtonSound.alpha = 0
-
-        //Boton sonido
-        buttonLanguage = game.add.button(game.world.width - 200,
-            150, 'button', actionOnClickLanguage, this,
+        buttonSoundOn.anchor.set(0.5)
+        buttonSoundOn.scale.setTo(0.3, 0.3)
+        buttonSoundOn.alpha = 0
+        buttonSoundOn.inputEnabled = false
+        this.activeSound = true;
+        //Boton sonido off
+        buttonSoundOff = game.add.button(game.world.width - 60,
+            120, 'soundOffBtn', actionOnClickSound, this,
             0, 0, 0)
-        buttonLanguage.anchor.set(0.5)
-        buttonLanguage.scale.setTo(0.25, 0.3)
-        buttonLanguage.alpha = 0
-        buttonLanguage.inputEnabled = false
+        buttonSoundOff.anchor.set(0.5)
+        buttonSoundOff.scale.setTo(0.3, 0.3)
+        buttonSoundOff.alpha = 0
+        buttonSoundOff.inputEnabled = false
 
-        //Texto sonido
-        textButtonLanguage = game.add.text(game.world.width - 200,
-            150, 'Language', style)
-        textButtonLanguage.anchor.set(0.5)
-        textButtonLanguage.scale.setTo(0.5, 0.5)
-        textButtonLanguage.alpha = 0
+        //Boton ESPAÑITA AE
+        if (game.global.activeLanguage.Language == 'eng') {
+            this.language = 'eng'
+        } else {
+            this.language = 'ESPAÑITA'
+        }
+        buttonAE = game.add.button(game.world.width - 60,
+            200, 'ESPAÑITABtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonAE.anchor.set(0.5)
+        buttonAE.scale.setTo(0.3, 0.3)
+        buttonAE.alpha = 0
+        buttonAE.inputEnabled = false
+        //Boton eng
+        buttonEng = game.add.button(game.world.width - 60,
+            200, 'engBtn', actionOnClickLanguage, this,
+            0, 0, 0)
+        buttonEng.anchor.set(0.5)
+        buttonEng.scale.setTo(0.3, 0.3)
+        buttonEng.alpha = 0
+        buttonEng.inputEnabled = false
 
         //Boton contacto
-        buttonContact = game.add.button(game.world.width - 200,
-            200, 'button', actionOnClickWeb, this,
+        buttonContact = game.add.button(game.world.width - 60,
+            280, 'jTeamBtn', actionOnClickWeb, this,
             0, 0, 0)
         buttonContact.anchor.set(0.5)
-        buttonContact.scale.setTo(0.25, 0.3)
+        buttonContact.scale.setTo(0.3, 0.3)
         buttonContact.alpha = 0
         buttonContact.inputEnabled = false
 
-        //Texto sonido
-        textButtonContact = game.add.text(game.world.width - 200,
-            200, 'Contact Us', style)
-        textButtonContact.anchor.set(0.5)
-        textButtonContact.scale.setTo(0.5, 0.5)
-        textButtonContact.alpha = 0
+        game.global.gameMode = null
 
         function actionOnClickStartSolo() {
+            game.global.gameMode = 'SOLO'
             let msg = {
-                event: 'SINGLEPLAYER',
-                playerName: game.global.username,
-                roomName: 'sala1'
+                event: 'ENTERSOLO',
             }
             game.global.socket.send(JSON.stringify(msg))
-            game.state.start('singlePlayerState')
         }
 
+        /*
         function actionOnClickStartMarathon() {
-            let msg = {
-                event: 'MARATHON',
-                playerName: game.global.username,
-                roomName: 'sala1'
-            }
-            game.global.socket.send(JSON.stringify(msg))
-            game.state.start('marathonState')
-        }
+            //game.state.start('marathonState')
+        }*/
 
         function actionOnClickStartOnline() {
-            console.log('pulsado online')
-            //game.state.start('shopState')
+            game.global.gameMode = 'MULTI'
+            game.state.start('menuMultiOnlineState')
         }
 
+        /*
         function actionOnClickStartLocal() {
-            console.log('Pulsado local')
-            //game.state.start('shopState')
-        }
+            //game.state.start('localState')
+        }*/
 
         function actionOnClickStartShop() {
-            game.state.start('shopState')
+            let msg = {
+                event: 'SHOP'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            //game.state.start('shopState')
+        }
+
+        function actionOnClickStartRecords() {
+            /*let msg = {
+                event: 'MYRECORDS'
+            }
+            game.global.socket.send(JSON.stringify(msg))
+            */game.state.start('midRecordsState')
         }
 
         function actionOnClickInstagram() {
             window.open('https://www.instagram.com/java_is_creep/', this)
+        }
+
+        function actionOnClickFacebook() {
+            window.open('https://www.facebook.com/javaiscreepteam/', this)
         }
 
         function actionOnClickWeb() {
@@ -271,141 +305,207 @@ Slooow.mainMenuState.prototype = {
         }
 
         function actionOnClickDisconnect() {
-            game.global.username = ''
-            game.global.password = ''
             let msg = {
                 event: 'DISCONNECT',
-                playerName: game.global.username,
+                playerName: game.global.username
             }
             game.global.socket.send(JSON.stringify(msg))
-            game.state.start('initSesionState')
+            game.global.username = ''
+            game.global.password = ''
+            //game.state.start('initSesionState')
         }
 
-        function actionOnClickStartShop() {
-            game.state.start('shopState')
+        function actionOnClickStartTrophies() {
+            game.state.start('trophiesState')
         }
 
+        // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás
         function actionOnClickOptions() {
-            //console.log('pulsado')
             if (optionsClicked == false) {
+                optionsClicked = true
+
                 textTitle.alpha = minAlpha;
+                buttonTittle.alpha = minAlpha;
+
+                buttonUser.alpha = minAlpha
+                textUsername.alpha = minAlpha
 
                 buttonStartSolo.alpha = minAlpha
                 buttonStartSolo.inputEnabled = false;
                 textButtonStartSolo.alpha = minAlpha
-        
-                buttonStartMarathon.alpha = minAlpha
-                buttonStartMarathon.inputEnabled = false
-                textButtonStartMarathon.alpha = minAlpha
+
+                //buttonStartMarathon.alpha = minAlpha
+                //buttonStartMarathon.inputEnabled = false
+                //textButtonStartMarathon.alpha = minAlpha
+
+                buttonStartRecords.alpha = minAlpha
+                buttonStartRecords.inputEnabled = false
+                textButtonStartRecords.alpha = minAlpha
+
+                buttonStartTrophies.alpha = minAlpha
+                buttonStartTrophies.inputEnabled = false
+                textButtonStartTrophies.alpha = minAlpha
 
                 buttonStartMultiOnline.alpha = minAlpha
                 buttonStartMultiOnline.inputEnabled = false
                 textButtonStartMultiOnline.alpha = minAlpha
 
-                buttonStartMultiLocal.alpha = minAlpha
-                buttonStartMultiLocal.inputEnabled = false
-                textButtonStartMultiLocal.alpha = minAlpha
+                //buttonStartMultiLocal.alpha = minAlpha
+                //buttonStartMultiLocal.inputEnabled = false
+                //textButtonStartMultiLocal.alpha = minAlpha
 
                 buttonShop.alpha = minAlpha
                 buttonShop.inputEnabled = false
-                textButtonShop.alpha = minAlpha
 
                 buttonInstagram.alpha = minAlpha
                 buttonInstagram.inputEnabled = false
-                textButtonInstagram.alpha = minAlpha
 
                 buttonWeb.alpha = minAlpha
                 buttonWeb.inputEnabled = false
-                textButtonWeb.alpha = minAlpha
 
                 buttonTwitter.alpha = minAlpha
                 buttonTwitter.inputEnabled = false
-                textButtonTwitter.alpha = minAlpha
 
                 buttonDisconnect.alpha = minAlpha
                 buttonDisconnect.inputEnabled = false
-                textButtonDisconnect.alpha = minAlpha
 
-                optionsClicked = true
+                if (game.sound.mute == true) {
+                    buttonSoundOff.alpha = 1
+                    buttonSoundOff.inputEnabled = true
+                } else {
+                    buttonSoundOn.alpha = 1
+                    buttonSoundOn.inputEnabled = true
+                }
 
-                buttonSound.alpha = 1
-                buttonSound.inputEnabled = true
-                textButtonSound.alpha = 1
+                if (this.language == 'eng') {
+                    buttonEng.alpha = 1
+                    buttonEng.inputEnabled = true
+                } else {
+                    buttonAE.alpha = 1
+                    buttonAE.inputEnabled = true
+                }
 
-                buttonLanguage.alpha = 1
-                buttonLanguage.inputEnabled = true
-                textButtonLanguage.alpha = 1
 
                 buttonContact.alpha = 1
                 buttonContact.inputEnabled = true
-                textButtonContact.alpha = 1
+            } else {
 
-            } else{
+                optionsClicked = false
+
                 textTitle.alpha = maxAlpha;
+                buttonTittle.alpha = maxAlpha;
+
+                buttonUser.alpha = maxAlpha
+                textUsername.alpha = maxAlpha
 
                 buttonStartSolo.alpha = maxAlpha
                 buttonStartSolo.inputEnabled = true;
                 textButtonStartSolo.alpha = maxAlpha
-        
-                buttonStartMarathon.alpha = maxAlpha
-                buttonStartMarathon.inputEnabled = true
-                textButtonStartMarathon.alpha = maxAlpha
+
+                // buttonStartMarathon.alpha = maxAlpha
+                // buttonStartMarathon.inputEnabled = true
+                // textButtonStartMarathon.alpha = maxAlpha
+
+                buttonStartTrophies.alpha = maxAlpha
+                buttonStartTrophies.inputEnabled = true
+                textButtonStartTrophies.alpha = maxAlpha
+
+                buttonStartRecords.alpha = maxAlpha
+                buttonStartRecords.inputEnabled = true
+                textButtonStartRecords.alpha = maxAlpha
 
                 buttonStartMultiOnline.alpha = maxAlpha
                 buttonStartMultiOnline.inputEnabled = true
                 textButtonStartMultiOnline.alpha = maxAlpha
 
-                buttonStartMultiLocal.alpha = maxAlpha
-                buttonStartMultiLocal.inputEnabled = true
-                textButtonStartMultiLocal.alpha = maxAlpha
+                //buttonStartMultiLocal.alpha = maxAlpha
+                // buttonStartMultiLocal.inputEnabled = true
+                //textButtonStartMultiLocal.alpha = maxAlpha
 
                 buttonShop.alpha = maxAlpha
                 buttonShop.inputEnabled = true
-                textButtonShop.alpha = maxAlpha
 
                 buttonInstagram.alpha = maxAlpha
                 buttonInstagram.inputEnabled = true
-                textButtonInstagram.alpha = maxAlpha
 
                 buttonWeb.alpha = maxAlpha
                 buttonWeb.inputEnabled = true
-                textButtonWeb.alpha = maxAlpha
 
                 buttonTwitter.alpha = maxAlpha
                 buttonTwitter.inputEnabled = true
-                textButtonTwitter.alpha = maxAlpha
 
                 buttonDisconnect.alpha = maxAlpha
                 buttonDisconnect.inputEnabled = true
-                textButtonDisconnect.alpha = maxAlpha
 
-                optionsClicked = false
 
-                buttonSound.alpha = 0
-                buttonSound.inputEnabled = false
-                textButtonSound.alpha = 0
+                buttonSoundOn.alpha = 0
+                buttonSoundOn.inputEnabled = false
 
-                buttonLanguage.alpha = 0
-                buttonLanguage.inputEnabled = false
-                textButtonLanguage.alpha = 0
+                buttonSoundOff.alpha = 0
+                buttonSoundOff.inputEnabled = false
+
+
+                buttonEng.alpha = 0
+                buttonEng.inputEnabled = false
+
+                buttonAE.alpha = 0
+                buttonAE.inputEnabled = false
+
 
                 buttonContact.alpha = 0
                 buttonContact.inputEnabled = false
-                textButtonContact.alpha = 0
+            }
+        }
+
+        function actionOnClickSound() {
+            //TODO Cambio real de sonido
+            if (this.activeSound) {
+                buttonSoundOff.alpha = maxAlpha
+                buttonSoundOff.inputEnabled = true
+                buttonSoundOn.alpha = 0
+                buttonSoundOn.inputEnabled = false
+                this.activeSound = false;
+
+                //NO FUNCIONA PERO DEBERIA
+                game.sound.mute = true;
+            } else {
+                buttonSoundOn.alpha = maxAlpha
+                buttonSoundOn.inputEnabled = true
+                buttonSoundOff.alpha = 0
+                buttonSoundOff.inputEnabled = false
+                this.activeSound = true;
+
+                //NO FUNCIONA PERO DEBERIA
+                game.sound.mute = false;
             }
 
         }
 
-        function actionOnClickSound (){
-            console.log ('boton sonido pulsado')
+        function actionOnClickLanguage() {
+            //TODO Cambio real de idioma
+            if (this.language == 'eng') {
+                buttonEng.alpha = 0
+                buttonEng.inputEnabled = false
+                buttonAE.alpha = maxAlpha
+                buttonAE.inputEnabled = true
+                this.language = 'ESPAÑITA'
+                game.global.activeLanguage = game.global.languageData.ESPAÑITA
+            } else {
+                buttonAE.alpha = 0
+                buttonAE.inputEnabled = false
+                buttonEng.alpha = maxAlpha
+                buttonEng.inputEnabled = true
+                this.language = 'eng'
+                game.global.activeLanguage = game.global.languageData.eng
+            }
+            textButtonStartRecords.setText(game.global.activeLanguage.Records)
+            textButtonStartTrophies.setText(game.global.activeLanguage.Trophies)
+            //textButtonStartMarathon.setText(game.global.activeLanguage.Marathon);
         }
-
-        function actionOnClickLanguage(){
-            console.log ('pulsado boton lenguaje')
-        }
-
     },
 
     update: function () {
+        this.background.tilePosition.x += 0.5
+        this.background.tilePosition.y -= 0.5
     }
 }

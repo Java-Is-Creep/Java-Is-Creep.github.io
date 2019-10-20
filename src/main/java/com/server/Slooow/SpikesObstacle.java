@@ -2,85 +2,88 @@
 package com.server.Slooow;
 
 public class SpikesObstacle extends MapObstacle {
-    private int posYnotActive;
-    private int activePosY;
     private int increment = 1;
+    public int sparkDelay;
+    int timeToDelay;
 
-    enum Estate { ACTIVE, NOTACTIVE, GOINGUP,GOINGDOWN}
+    boolean playerCrash = false;
+
+    enum Estate { ACTIVE, NOTACTIVE, PREACTIVATE}
     Estate estate = Estate.NOTACTIVE;
 
-    public SpikesObstacle(int width, int height, int posX, int posY, type myType, int timeToActive,int timeActive, int tickTime) {
+    public SpikesObstacle(int width, int height, int posX, int posY, type myType, int timeToActive,int timeActive, int sparkDelay,int tickTime) {
         super(width, height, posX, posY, myType,timeToActive,timeActive,tickTime);
         this.timeToActive = timeToActive ;
         MAXTIMETOACTIVE = timeToActive ;
-        activePosY = posY;
-        posYnotActive = posY - (height + 5);
+        this.sparkDelay = sparkDelay;
+        timeToDelay = sparkDelay;
+
         estate = Estate.ACTIVE;
-        System.out.println("pos y active: " + activePosY + " pos y no active: " +posYnotActive);
 
     }
+    
 
-    public void restActiveTime(){
+    public boolean restActiveTime(){
         timeActive -= tickTime;
         if(timeActive <= 0){
-            estate = Estate.GOINGDOWN;
-            timeActive = MAXTIMEACTIVE;
-
-        }
-    }
-
-    public void goingDown(){
-        posY -= increment;
-        if(posY <= posYnotActive){
-            posY = posYnotActive;
             estate = Estate.NOTACTIVE;
+            timeActive = MAXTIMEACTIVE;
+            return true;
+
         }
+        return false;
     }
 
-    public void restNotActiveTime(){
+
+
+    public boolean restNotActiveTime(){
         timeToActive -= tickTime;
         if(timeToActive <= 0){
-            estate = Estate.GOINGUP;
+            estate = Estate.PREACTIVATE;
             timeToActive = MAXTIMETOACTIVE;
+            return true;
         }
+        return false;
     }
 
-    public void goingUp(){
-        posY += increment;
-        if(posY >= activePosY){
-            posY = activePosY;
+    public boolean sparkDelay(){
+        
+        timeToDelay -= tickTime;
+        if(timeToDelay <= 0){
             estate = Estate.ACTIVE;
+            timeToDelay = sparkDelay;
+            return true;
         }
+        return false;
+
     }
 
+
+    // el devolver un boolean es necesario para las animaciones d elas puerta
     @Override
-    public void update() {
+    public boolean update() {
         switch(estate){
             case ACTIVE:
-                restActiveTime();
-            break;
+                
+                return restActiveTime();
+           
             case NOTACTIVE:
-                restNotActiveTime();
-            break;
-            case GOINGUP:
-                goingUp();
-            break;
-            case GOINGDOWN:
-                goingDown();
-            break;
+                return restNotActiveTime();
+            case PREACTIVATE:
+                return sparkDelay();
+
+                
             default:
+            return false;
 
         }
-        /*
-        System.out.println(estate);
-        System.out.println("PosX es: "+posX + "PosY es: " + posY);
-        collider.recalculatePosition(posX, posY);
-        */
     }
 
     public void playerCrash(){
-        estate = Estate.GOINGDOWN;
+        estate = Estate.NOTACTIVE;
         timeToActive = MAXTIMETOACTIVE;
+        playerCrash = true;
+
     } 
 
     public float getTimeToActive() {
@@ -98,22 +101,6 @@ public class SpikesObstacle extends MapObstacle {
 
     public void setTickTime(float tickTime) {
         this.tickTime = tickTime;
-    }
-
-    public int getPosYnotActive() {
-        return posYnotActive;
-    }
-
-    public void setPosYnotActive(int posYnotActive) {
-        this.posYnotActive = posYnotActive;
-    }
-
-    public int getActivePosY() {
-        return activePosY;
-    }
-
-    public void setActivePosY(int activePosY) {
-        this.activePosY = activePosY;
     }
 
     public int getIncrement() {

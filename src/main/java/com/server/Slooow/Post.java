@@ -4,10 +4,16 @@ package com.server.Slooow;
 //Si falta algún parámetro al construirlo se incializa a NULL y los parámetro que sobren se ignoran
 public class Post { 
 	String event;
-
+	String mapName;
 	String playerName;
 	String roomName;
-	
+	String pass;
+	String confirmPass;
 	boolean isSprinting;
 	boolean useObject;
+	String chooseSnail;
+	String snailToSee;
+	int purchaseId;
+	String purchaseSnail;
+	String method;
 }

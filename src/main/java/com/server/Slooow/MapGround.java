@@ -8,7 +8,6 @@ public class MapGround extends MapObject{
 	} // suelos de nuestro mapa
 	
 	public void collisionInfo() {
-		System.out.println("Ground collision at the ground: x: " + posX + " y: " +posY);
 	}
 
 	
