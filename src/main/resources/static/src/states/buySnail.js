@@ -52,7 +52,7 @@ Slooow.buySnailState.prototype = {
                 chosen = game.add.image(game.world.centerX - 380, game.world.centerY - 110, 'irisCol')
                 break
             default:
-                console.log('snail sprite no identificado')
+                //console.log('snail sprite no identificado')
                 break
         }
         chosen.anchor.setTo(0.5, 0.5);
@@ -358,7 +358,7 @@ Slooow.buySnailState.prototype = {
                 skinsSprite[2].alpha = 0.7;
                 break
             default:
-                console.log('snail sprite no identificado')
+                //console.log('snail sprite no identificado')
                 break
 
         }

@@ -230,7 +230,7 @@ Slooow.lobbyState.prototype = {
                             game.global.statStamina,game.global.statRegen)
                     break
                 default:
-                    console.log('snail sprite no identificado')
+                   // console.log('snail sprite no identificado')
                     break    
             }
         }

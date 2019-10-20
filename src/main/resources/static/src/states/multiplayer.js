@@ -20,9 +20,9 @@ Slooow.multiplayerState.prototype = {
 
         game.global.maxStamina = 0
 
-        console.log('array players')
-        console.log(game.global.playersMulti.length)
-        console.dir(game.global.playersMulti)
+        //console.log('array players')
+        //console.log(game.global.playersMulti.length)
+        //console.dir(game.global.playersMulti)
 
         // Cargamos los objetos posibles del mapa
         for (var i = 0; i < game.global.arrayGrounds.length; i++) {

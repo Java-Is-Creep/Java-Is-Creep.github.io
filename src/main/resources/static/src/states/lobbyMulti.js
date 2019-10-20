@@ -215,7 +215,7 @@ Slooow.lobbyMultiState.prototype = {
                             game.global.statStamina,game.global.statRegen)
                     break
                 default:
-                    console.log('snail sprite no identificado')
+                    //console.log('snail sprite no identificado')
                     break    
             }
         }
@@ -286,13 +286,13 @@ Slooow.lobbyMultiState.prototype = {
 
 
         function actionOnClickBack(){
-            /*let msg = {
+            let msg = {
                     event: 'EXITLOBBYMULTI',
-                    roomName: game.global.multiRoomName
+                    roomName: game.global.roomNameMulti
                 }
-            game.global.socket.send(JSON.stringify(msg))*/
-            game.global.multiRoomName = "NoRoom"
-            game.state.start('mainMenuState')
+            game.global.socket.send(JSON.stringify(msg))
+            game.global.roomNameMulti = "NoRoom"
+            //game.state.start('mainMenuState')
         }
         
         function actionOnClickOK(){
@@ -300,22 +300,24 @@ Slooow.lobbyMultiState.prototype = {
             buttonBack.alpha = 0.6
             textButtonBack.alpha = 0.6
 
+            chosen.inputEnabled = false
+
             buttonOK.inputEnabled = false
             buttonOK.alpha = 0.6
             textButtonOK.alpha = 0.6
-            console.log ('CARACOL ELEGIDOOOOOOOOOOOOOOOOOOOOOOOO' + game.global.snailChosen)
+            //console.log ('CARACOL ELEGIDOOOOOOOOOOOOOOOOOOOOOOOO' + game.global.snailChosen)
             let msg = {
                 event: 'CHOOSESNAIL',
                 chooseSnail: game.global.snailChosen
             }
             game.global.socket.send(JSON.stringify(msg))
-            console.log(this.game.global.roomNameMulti)
+            //console.log(this.game.global.roomNameMulti)
             let msg2 = {
                 event: 'MULTIPLAYER',
                 roomName : this.game.global.roomNameMulti
             }
             game.global.socket.send(JSON.stringify(msg2))
-            console.log('chooseSnail y multiplayer mandados')
+            //console.log('chooseSnail y multiplayer mandados')
         }
 
         function chooseCharacter(){

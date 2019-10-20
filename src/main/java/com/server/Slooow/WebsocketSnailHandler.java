@@ -74,7 +74,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "MULTIPLAYER":
 			jug = game.bucarJugadorConectado(newSession);
 			jug.restartSnail();
-			game.multiPlayerRoomMap.get(post.roomName).addPlayerReady();
+			game.multiPlayerRoomMap.get(post.roomName).addPlayerReady(jug);
 			break;
 
 		case "SEARCHNAMEROOM":
@@ -247,27 +247,24 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "ENTERLOBBYMULTI":
 			jug = game.bucarJugadorConectado(newSession);
 			game.createMultiRoom(post.roomName, jug, post.mapName);
-			/*JsonObject msgMultiN = new JsonObject();
-			msgMultiN.addProperty("event", "NUMMULTIPLAYERS");
-			msgMultiN.addProperty("numPlayers", game.multiPlayerRoomMap.get(post.roomName).getNumPlayers());
-			try {
-				jug.sessionLock.lock();
-				jug.getSession().sendMessage(new TextMessage(msgMultiN.toString()));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				jug.sessionLock.unlock();
-			}
+			System.out.println("Sala creada");
 			break;
 
 		case "EXITLOBBYMULTI":
-			
-			game.multiPlayerRoomMap.remove(post.roomName);
-			break;*/
+			System.out.println("Exit lobby multi enviado y nombre sala: " + post.roomName);
+			jug = game.bucarJugadorConectado(newSession);
+			MultiplayerRoom aux = game.multiPlayerRoomMap.get(post.roomName);
+			if( aux!= null){
+				aux.quitarJugador(jug);
+			}
+			break;
 
 		case"EXITLOBBY":
-			game.singlePlayerRoomMaps.remove(post.roomName);
+			SinglePlayerRoom aux2 = game.singlePlayerRoomMaps.get(post.roomName);
+			if(aux2 != null){
+				game.singlePlayerRoomMaps.remove(post.roomName);
+			}
+
 			break;
 
 		case "ENTERLOBBY":

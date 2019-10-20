@@ -144,7 +144,7 @@ Slooow.gameOverState.prototype = {
         }
 
         function actionOnClickReplay() {
-            console.log('te mando enter lobby')
+            //console.log('te mando enter lobby')
 
             let msg = {
                 event: 'ENTERLOBBY',

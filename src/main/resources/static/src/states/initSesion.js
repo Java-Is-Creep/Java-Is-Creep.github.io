@@ -29,7 +29,7 @@ Slooow.initSesionState.prototype = {
         //               10799539.640765665
         //               4535760.527128731   
         //this.background.tint = Math.random() * 0xffffff;
-        console.log(this.background.tint)
+        //console.log(this.background.tint)
         this.background.tileScale.set(0.4, 0.4)
         this.background.anchor.set(0.5, 0.5)
     },
@@ -59,6 +59,7 @@ Slooow.initSesionState.prototype = {
             borderColor: '#000',
             borderRadius: 6,
             placeHolder: game.global.activeLanguage.InputUser,
+            zoom: false
         });
 
         // Boton PassWord
@@ -75,6 +76,7 @@ Slooow.initSesionState.prototype = {
             borderRadius: 6,
             placeHolder: game.global.activeLanguage.InputPass,
             type: PhaserInput.InputType.password,
+            zoom: false
         });
         //Boton ESPAÑITA AE
         buttonAE = game.add.button(game.world.width - 60,
@@ -138,8 +140,8 @@ Slooow.initSesionState.prototype = {
                         playerName: inicioSesionNameButton.value,
                         pass: inicioSesionPassButton.value
                     }
-                    console.log('Usuario:' + inicioSesionNameButton.value)
-                    console.log('contrasena: ' + inicioSesionPassButton.value)
+                    //console.log('Usuario:' + inicioSesionNameButton.value)
+                    //console.log('contrasena: ' + inicioSesionPassButton.value)
                     game.global.username = inicioSesionNameButton.value
                     game.global.password = inicioSesionPassButton.value
                     game.global.socket.send(JSON.stringify(msg))

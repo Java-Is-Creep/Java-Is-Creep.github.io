@@ -31,6 +31,8 @@ public class PlayerConected {
 	AtomicInteger gamesWon;
 	AchivementList myAchievements;
 
+	public boolean isReady = false;
+
 
 	// Se guarda su sesion, su nombre y una instancia del caracol generico (Cambiara
 	// cuando haya mas de uno)
