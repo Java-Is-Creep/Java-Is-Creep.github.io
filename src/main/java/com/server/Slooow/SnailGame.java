@@ -192,8 +192,23 @@ public class SnailGame {
 	public void createMultiRoom(String roomName, PlayerConected jug, String mapName){
 		multiPlayerLock.lock();
 		MultiplayerRoom roomAux = new MultiplayerRoom(roomName, jug, this, mapName,"MULTI");
-		multiPlayerRoomMap.putIfAbsent(roomAux.name, roomAux);
-		roomAux.anadirJugador(jug);
+		if(!multiPlayerRoomMap.containsKey(roomName)){
+			multiPlayerRoomMap.putIfAbsent(roomAux.name, roomAux);
+			roomAux.anadirJugador(jug);
+		} else {
+			JsonObject msg = new JsonObject();
+			msg.addProperty("event", "MULTIROOMSFULL");
+
+			jug.sessionLock.lock();
+			try {
+				jug.getSession().sendMessage(new TextMessage(msg.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			jug.sessionLock.unlock();
+		
+		}
 		multiPlayerLock.unlock();
 	}
 
