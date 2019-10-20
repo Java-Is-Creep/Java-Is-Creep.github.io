@@ -110,6 +110,11 @@ window.onload = function () {
         haveToRotateToSlope: false,
         degreesToRotateSlope: 0,
         maxStamina: 0,
+
+        //TOP 10
+        top10UserNames : [],
+        top10Times: [],
+
         //Cosas visuales jugador (multi)
         myPlayerId: null,
         playersMulti: [],
@@ -748,6 +753,11 @@ window.onload = function () {
                 game.global.money = JSON.parse(msg.money)
                 game.state.start('shopState')
                 break
+
+            case 'RECORDS':
+                this.game.global.top10UserNames = JSON.parse(msg.playerName)
+                this.game.global.top10Times = JSON.parse(msg.time)
+                break    
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1057,6 +1067,7 @@ window.onload = function () {
     this.game.state.add('recordsState', Slooow.recordsState);
     this.game.state.add('trophiesState', Slooow.trophiesState);
     this.game.state.add('gameOverMultiState', Slooow.gameOverMultiState)
+    this.game.state.add('top10State', Slooow.top10State)
 
 
     this.game.state.start('bootState');
