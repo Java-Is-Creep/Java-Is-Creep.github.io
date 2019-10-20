@@ -1,7 +1,7 @@
 var game;
 
 function fullscreen() {
-    console.log(game);
+    //console.log(game);
     document.body.requestFullscreen();
     screen.orientation.lock('landscape');
 }
@@ -128,7 +128,7 @@ window.onload = function () {
         degreesToRotateSlopeMulti: [],
         arrayPositionsMulti: [],
         arrayTimesMulti: [],
-        roomNameMulti: null,
+        roomNameMulti: 'noRoom',
         //PowerUps
         wingPowerUp: null,
         shieldPowerUp: null,
@@ -194,12 +194,12 @@ window.onload = function () {
     //game.global.socket = new WebSocket('ws://192.168.1.109:8080/snail');
     game.global.socket.onopen = () => {
 
-        console.log('[DEBUG] WebSocket connection opened.')
+        // console.log('[DEBUG] WebSocket connection opened.')
 
     }
 
     game.global.socket.onclose = () => {
-        console.log('[DEBUG] Websocket connection closed');
+        //console.log('[DEBUG] Websocket connection closed');
         game.state.start('errorState')
     }
 
@@ -242,7 +242,7 @@ window.onload = function () {
             case 'DRAWMAP':
                 //Arrays con los parametros de todos los objetos del mapa. Dependiendo del tipo se guardaran
                 //En un array u otro
-                this.console.log('Me llega el draw map')
+                //this.console.log('Me llega el draw map')
                 var arrayPosX = JSON.parse(msg.posX)
                 var arrayPosY = JSON.parse(msg.posY)
                 var arrayHeight = JSON.parse(msg.height)
@@ -251,7 +251,7 @@ window.onload = function () {
 
                 var roomType = JSON.stringify(msg.roomType)
                 roomType = roomType.substring(1, roomType.length - 1)
-                this.console.log(roomType)
+                //this.console.log(roomType)
 
                 var numOfGrounds = 0;
                 var numOfWalls = 0;
@@ -383,7 +383,7 @@ window.onload = function () {
                             this.game.global.finishObject.width = arrayWidth[i]
                             break
                         default:
-                            this.console.log('tipo sin reconocer ' + type[i])
+                            //this.console.log('tipo sin reconocer ' + type[i])
                             break
                     }
                 }
@@ -402,7 +402,7 @@ window.onload = function () {
 
                         }
                     }
-                    this.console.log('Empiezo el multiplayer')
+                    //this.console.log('Empiezo el multiplayer')
                     this.game.state.start('multiplayerState')
                 }
 
@@ -518,7 +518,7 @@ window.onload = function () {
                 this.game.global.haveToRotateToWall = false
                 break
             case 'OBJECTUSED':
-                this.console.log('invisible')
+                //this.console.log('invisible')
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
                         audio = this.game.add.audio('shield')
@@ -565,7 +565,7 @@ window.onload = function () {
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'inkPowerUp'))
                         break
                     case '"NULL"':
-                        this.console.log('MAL')
+                        //this.console.log('MAL')
                         break
                     default:
                         break
@@ -652,7 +652,7 @@ window.onload = function () {
                         game.global.player.inkPowerUp.visible = true
                         break
                     case '"NULL"':
-                        this.console.log('MAL')
+                        //this.console.log('MAL')
                         break
                     default:
                         break
@@ -695,7 +695,7 @@ window.onload = function () {
                     game.state.start('mainMenuState')
                 } else {
                     game.state.start('errorSignInState')
-                    console.log("Creacion de cuenta negativa")
+                    //console.log("Creacion de cuenta negativa")
                 }
                 break
             case 'DISCONNECTSTATUS':
@@ -753,10 +753,10 @@ window.onload = function () {
                 break
 
             case 'ENTERLOBBY':
-                this.console.log('me llega enter lobby')
+                //this.console.log('me llega enter lobby')
                 var snail = JSON.stringify(msg.snail)
                 snail = snail.substring(1, snail.length - 1)
-                this.console.log(snail)
+                //this.console.log(snail)
                 this.game.global.snailChosen = snail
                 game.global.maxStamina = 0
                 game.global.statStamina = JSON.parse(msg.stamina)
@@ -798,7 +798,7 @@ window.onload = function () {
                 this.game.global.top10Times = JSON.parse(msg.time)
                 break
             case 'ACHIEVE':
-                this.console.log(msg)
+                //this.console.log(msg)
                 this.index = JSON.stringify(msg.text)
                 index = index.substring(1, index.length - 1)
                 index = parseInt(index)
@@ -831,7 +831,7 @@ window.onload = function () {
 
                     this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
                     firstFrame++
-                    this.console.log(game.global.playersMulti)
+                    //this.console.log(game.global.playersMulti)
                 }
                 //Actualizamos las posiciones de todos los caracoles
                 for (var i = 0; i < arrayPosX.length; i++) {
@@ -868,8 +868,8 @@ window.onload = function () {
                 }
                 break
             case 'FINISHMULTI':
-                this.console.log('FIN DE PARTIDAAAAAAAA')
-                this.console.log(msg)
+                //this.console.log('FIN DE PARTIDAAAAAAAA')
+                //this.console.log(msg)
                 var myTime = JSON.parse(msg.time)
                 var myRecord = JSON.parse(msg.record)
                 var myPoints = JSON.parse(msg.points)
@@ -883,7 +883,7 @@ window.onload = function () {
                     //arrayPositionNames[i] = arrayPositionNames[i].substring(1, arrayPositionNames[i].length-1)
                     game.global.finishedPlayersMulti[i] = arrayPositionNames[i]
                 }
-                console.log(game.global.finishedPlayersMulti)
+                //console.log(game.global.finishedPlayersMulti)
                 game.global.finishedTimesMulti = arrayPositionTimes
 
                 game.state.start('gameOverMultiState')
@@ -896,7 +896,7 @@ window.onload = function () {
 
                 var snail = JSON.stringify(msg.snail)
                 snail = snail.substring(1, snail.length - 1)
-                this.console.log(snail)
+                // this.console.log(snail)
                 this.game.global.snailChosen = snail
                 game.global.maxStamina = 0
                 game.global.statStamina = JSON.parse(msg.stamina)
@@ -992,7 +992,7 @@ window.onload = function () {
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'inkPowerUp'))
                         break
                     case '"NULL"':
-                        this.console.log('MAL')
+                        //this.console.log('MAL')
                         break
                     default:
                         break
@@ -1052,7 +1052,7 @@ window.onload = function () {
                         game.global.playersMulti[idPlayer].inkPowerUp.visible = true
                         break
                     case '"NULL"':
-                        this.console.log('MAL')
+                        //this.console.log('MAL')
                         break
                     default:
                         break
@@ -1065,6 +1065,13 @@ window.onload = function () {
                 break
             case 'PLAYERLEFT':
                 var namePlayer = JSON.stringify(msg.name)
+                console.log(namePlayer)
+                namePlayer = namePlayer.substring(1, namePlayer.length -1)
+                console.log(namePlayer)
+                console.log(game.global.username)
+                if (game.global.username == namePlayer){
+                    game.state.start('mainMenuState')
+                }
                 break
             case 'MULTIROOMSFULL':
                 break
@@ -1115,7 +1122,7 @@ window.onload = function () {
                 game.global.money = JSON.parse(msg.shells)
                 game.state.start('shopState')
             case 'ENTERSOLORS':
-                this.console.log("asiudhas")
+                //this.console.log("asiudhas")
                 let myTimesAux = JSON.parse(msg.myTimes);
                 let mapTimesAux = JSON.parse(msg.mapTimes)
                 for (var e = 0; e < myTimesAux.length; e++) {

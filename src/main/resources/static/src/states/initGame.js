@@ -20,7 +20,7 @@ Slooow.initGameState.prototype = {
         //               10799539.640765665
         //               4535760.527128731   
         //this.background.tint = Math.random() * 0xffffff;
-		console.log(this.background.tint)
+		//console.log(this.background.tint)
 		this.background.tileScale.set(0.4, 0.4)
         this.background.anchor.set(0.5, 0.5)
 	},

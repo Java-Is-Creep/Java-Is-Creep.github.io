@@ -235,7 +235,7 @@ Slooow.chooseCharacterState.prototype = {
                         rainbowShell.alpha = 1
                     break
                 default:
-                    console.log('snail sprite no identificado')
+                    //console.log('snail sprite no identificado')
                     break    
             }
         }
@@ -275,7 +275,7 @@ Slooow.chooseCharacterState.prototype = {
                         rainbowShell.alpha = 0.6
                     break
                 default:
-                    console.log('snail sprite no identificado')
+                    //console.log('snail sprite no identificado')
                     break    
             }
         }
@@ -353,7 +353,7 @@ Slooow.chooseCharacterState.prototype = {
         }
 
         function actionOnClickBack(){
-            console.log (game.global.gameMode)
+            //console.log (game.global.gameMode)
             if (game.global.gameMode == 'SOLO'){
                 game.state.start('lobbyState')
             } else {
@@ -363,7 +363,7 @@ Slooow.chooseCharacterState.prototype = {
         }
 
         function actionOnClickOK(){
-            console.log (game.global.gameMode)
+            //console.log (game.global.gameMode)
             if (game.global.gameMode == 'SOLO'){
                 game.state.start('lobbyState')
             } else {
@@ -516,7 +516,7 @@ Slooow.chooseCharacterState.prototype = {
                         printSkins('irisCol','irisCol1','irisCol2')
                     break
                 default:
-                    console.log('snail sprite no identificado')
+                    //console.log('snail sprite no identificado')
                     break    
             }
             

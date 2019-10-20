@@ -16,7 +16,7 @@ public class PlayerRegistered {
     ConcurrentHashMap<SnailType,Boolean> mySnails = new ConcurrentHashMap<SnailType,Boolean>(); 
 	public final int MAXNUMLIFES= 5;
 	// actualmente 1 hora
-	public final int SECONDSTOGETALIFE = 30;
+	public final int SECONDSTOGETALIFE = 300;
     public int secondsWaitingForLife = 0;
 
     AtomicInteger gamesPlayed = new AtomicInteger(0);

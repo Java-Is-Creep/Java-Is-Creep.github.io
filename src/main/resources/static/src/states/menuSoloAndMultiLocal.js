@@ -243,7 +243,7 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         
 
         function actionOnClickMap1(){
-            console.log('te mando enter lobby')
+            //console.log('te mando enter lobby')
             game.global.mapChosen = 'mapa1'
             let msg = {
                 event: 'ENTERLOBBY',

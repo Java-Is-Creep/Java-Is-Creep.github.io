@@ -294,7 +294,7 @@ Slooow.menuMultiOnlineState.prototype = {
                 }
                 game.global.socket.send(JSON.stringify(msg))
             } else if (option == 1) {
-                game.global.multiRoomName = roomNameButton.value
+                game.global.roomNameMulti = roomNameButton.value
                 //game.global.mapChosen = map
                 let msg = {
                     event: 'ENTERLOBBYMULTI',
@@ -303,7 +303,7 @@ Slooow.menuMultiOnlineState.prototype = {
                 }
                 game.global.socket.send(JSON.stringify(msg))
             } else if (option == 2){
-                game.global.multiRoomName = roomNameButton.value
+                game.global.roomNameMulti = roomNameButton.value
                 //game.global.mapChosen = map
                 let msg = {
                     event: 'SEARCHNAMEROOM',
@@ -311,7 +311,7 @@ Slooow.menuMultiOnlineState.prototype = {
                 }
                 game.global.socket.send(JSON.stringify(msg))
             } else {
-                console.log('fallo en algun lado')
+                //console.log('fallo en algun lado')
             }
             
         }
