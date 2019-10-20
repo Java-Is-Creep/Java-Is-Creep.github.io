@@ -50,7 +50,9 @@
         "No" : "No",
         "Position": "Puesto",
         "NotFinished": "No ha terminado la carrera",
-        "Owned" : "Ya en propiedad"
+        "Owned" : "Ya en propiedad",
+        "ErrorLogin" : "Lo sentimos, credenciales incorrectas\no tu cuenta ya ha iniciado sesión",
+        "ErrorSignIn" : "Lo sentimos, ese usuario ya está en\n uso o las contraseñas no coinciden"
     },
     
     "eng" : {
@@ -104,7 +106,9 @@
         "No" : "No",
         "Position": "Ranking",
         "NotFinished": "Has not finished the race",
-        "Owned" : "Owned"
+        "Owned" : "Owned",
+        "ErrorLogin" : "Sorry, your account is already logged or\n you have submit wrong credentials",
+        "ErrorSignIn" : "Sorry, username is already in use or\n  passwords don't match"
         }
     
 }
