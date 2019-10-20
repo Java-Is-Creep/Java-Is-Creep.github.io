@@ -42,8 +42,8 @@ public class SnailGame {
 	public final int RECORDSTOSTORE = 10;
 
 	public final int TIMETOPASSMAP1 =60;
-	public final int TIMETOPASSMAP2 =80;
-	public final int TIMETOPASSMAP3 =70;
+	public final int TIMETOPASSMAP2 =100;
+	public final int TIMETOPASSMAP3 =75;
 
 	public SnailGame() {
 		checkLifesTime();

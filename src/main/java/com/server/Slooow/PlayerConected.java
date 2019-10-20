@@ -19,7 +19,7 @@ public class PlayerConected {
 	private int cash;
 	public final int MAXNUMLIFES = 5;
 	// actualmente 1 hora
-	public final int SECONDSTOGETALIFE = 30;
+	public final int SECONDSTOGETALIFE = 300;
 	public int secondsWaitingForLife = 0;
 	ReentrantLock sessionLock;
 	ConcurrentHashMap<String, Integer> records = new ConcurrentHashMap<String, Integer>();

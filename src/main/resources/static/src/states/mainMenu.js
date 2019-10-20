@@ -312,6 +312,8 @@ Slooow.mainMenuState.prototype = {
             game.global.socket.send(JSON.stringify(msg))
             game.global.username = ''
             game.global.password = ''
+            game.global.owned = [];
+            game.global.notOwned = [];
             //game.state.start('initSesionState')
         }
 
