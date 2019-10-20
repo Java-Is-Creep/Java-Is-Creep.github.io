@@ -248,7 +248,10 @@ Slooow.mainMenuState.prototype = {
 
         function actionOnClickStartSolo() {
             game.global.gameMode = 'SOLO'
-            game.state.start('menuSoloAndMultiLocalState')
+            let msg = {
+                    event: 'ENTERSOLO',    
+                }
+            game.global.socket.send(JSON.stringify(msg))
         }
 
         /*
