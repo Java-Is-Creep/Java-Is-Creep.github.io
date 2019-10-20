@@ -6,15 +6,15 @@ import org.springframework.web.socket.WebSocketSession;
 
 public class TankSnail extends SnailInGame {
 
-    public final static float MAXSTAMINA = 1000;
-	public final static float MAXVELOCITYX = 6.5f;
-	public final static float MAXVELOCITYY = 5.0f;
-	public final static float MAXNORMALVELOCITYX = 1.5f;
-	public final static float MAXNORMALVELOCITYY = 1.8f; // era 3
+    public final static float MAXSTAMINA = 1400;
+	public final static float MAXVELOCITYX = 7;
+	public final static float MAXVELOCITYY = 4.5f;
+	public final static float MAXNORMALVELOCITYX = 2.2f;
+	public final static float MAXNORMALVELOCITYY = 1.5f; // era 3
 
 	// aceleracion base, es decir sin acelerar
-	public final static float NORMALACELERATIONX = 1.5f;
-	public final static float NORMALACELERATIONY = 1.5f; // era 0.05
+	public final static float NORMALACELERATIONX = 0.7f;
+	public final static float NORMALACELERATIONY = 0.7f; // era 0.05
 
 	// aceleracion cuando aceleras - ACTUALMENTE NO ES UN PARÁMETRO USABLE (NO BORRAR)
 	public final static float ACELERATIONX = 0.2f;
@@ -23,14 +23,14 @@ public class TankSnail extends SnailInGame {
 	public final static float GRAVITY = 0.3f;
 	public final static float BREAKFORCE = 0.2f;
 	// Tarda 5 segundos en perder la stamina
-	public final static float STAMINALOSE = 7;
-	public final static float STAMINAWALLLOSE = 1.5f;
+	public final static float STAMINALOSE = 10;
+	public final static float STAMINAWALLLOSE = 3.5f;
 	// Tarda 2 segundos en recargar la stamina
-	public final static float STAMINANORMALRECOVER = 3.0f;
+	public final static float STAMINANORMALRECOVER = 3.2f;
 	// Tarda 3.33 segundos en recargar la stamina
-	public final static float STAMINARUNOUTRECOVER = 6.0f;
-	public final static float MAXGRAVITYSPEED = -16;
-	public final static float MASS = 2;
+	public final static float STAMINARUNOUTRECOVER = 5.6f;
+	public final static float MAXGRAVITYSPEED = -14;
+	public final static float MASS = 1.3f;
 	public final static float SPEEDXLOSE = 1.02f;
 
 	public final static int STATSPEED = 1;
