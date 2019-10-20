@@ -506,22 +506,42 @@ window.onload = function () {
                 this.console.log('invisible')
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
+                        audio = this.game.add.audio('shield')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.shieldPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'shieldPowerUp'))
                         break
                     case '"STAMINA"':
+                        audio = this.game.add.audio('energicol')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.staminaPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'staminaPowerUp'))
                         break
                     case '"WEIGHT"':
+                        audio = this.game.add.audio('wing')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.wingPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'wingsPowerUp'))
                         break
                     case '"LETUCCE"':
+                        audio = this.game.add.audio('lettuce')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.lettucePowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'lettucePowerUp'))
                         break
                     case '"SPEED"':
+                        audio = this.game.add.audio('chili')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.speedPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'speedPowerUp'))
                         break
@@ -897,22 +917,42 @@ window.onload = function () {
                 var myId = JSON.parse(msg.id)
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
+                        audio = this.game.add.audio('shield')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].shieldPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'shieldPowerUp'))
                         break
                     case '"STAMINA"':
+                        audio = this.game.add.audio('energicol')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].staminaPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'staminaPowerUp'))
                         break
                     case '"WEIGHT"':
+                        audio = this.game.add.audio('wing')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].wingPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'wingsPowerUp'))
                         break
                     case '"LETUCCE"':
+                        audio = this.game.add.audio('lettuce')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].lettucePowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'lettucePowerUp'))
                         break
                     case '"SPEED"':
+                        audio = this.game.add.audio('chili')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].speedPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'speedPowerUp'))
                         break
