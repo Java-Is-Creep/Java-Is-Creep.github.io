@@ -698,15 +698,16 @@ public class MultiplayerRoom extends Room {
 				readyPlayers.decrementAndGet();
 				jug.isReady = false;
 			}
+			if (!hasStart) {
+				jug.mySnail.hasFinish = true;
+				JsonObject msg2 = new JsonObject();
+				msg2.addProperty("event", "PLAYERLEFT");
+				msg2.addProperty("name", jug.getNombre());
+				try {
+					jug.getSession().sendMessage(new TextMessage(msg2.toString()));
+				} catch (Exception a) {
 
-			jug.mySnail.hasFinish = true;
-			JsonObject msg2 = new JsonObject();
-			msg2.addProperty("event", "PLAYERLEFT");
-			msg2.addProperty("name", jug.getNombre());
-			try {
-				jug.getSession().sendMessage(new TextMessage(msg2.toString()));
-			} catch (Exception a) {
-
+				}
 			}
 
 			System.out.println("ENVIADO: " + msg2.toString());
