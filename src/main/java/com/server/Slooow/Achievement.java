@@ -8,12 +8,14 @@ public class Achievement{
     private ACHIVETYPE type;
     private boolean conseguido = false;
     private int points;
+    private String level;
 
-    public Achievement(String text, int numericCondition, ACHIVETYPE type, int points) {
+    public Achievement(String text, int numericCondition, ACHIVETYPE type, int points,String level) {
         this.text = text;
         this.numericCondition = numericCondition;
         this.type = type;
         this.points = points;
+        this.level = level;
     }
 
     public String getText() {
@@ -60,6 +62,14 @@ public class Achievement{
     public String toString() {
         return "Achievement [conseguido=" + conseguido + ", numericCondition=" + numericCondition + ", points=" + points
                 + ", text=" + text + ", type=" + type + "]";
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
 

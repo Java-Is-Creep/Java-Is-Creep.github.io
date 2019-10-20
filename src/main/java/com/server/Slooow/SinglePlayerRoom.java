@@ -292,6 +292,7 @@ public class SinglePlayerRoom extends Room {
 	public void finishRace() {
 		boolean success = false;
 		owner.gamesPlayed.incrementAndGet();
+		System.out.println("PARTIDAS JUGADAS: "+ owner.gamesPlayed.get());
 		// acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if (acummulativeTime > TIMETOSUCESS) {
 			System.out.println("Has perdido, tu tiempo ha sido: " + acummulativeTime);
@@ -303,13 +304,17 @@ public class SinglePlayerRoom extends Room {
 			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
 		}
 
-		owner.myAchievements.checkAchievements(owner);
+		owner.myAchievements.checkAchievements(owner,mapName,success);
 
 		Integer record = owner.records.get(mapName);
 		if( record != null){
 			if(acummulativeTime < record){
 				owner.records.remove(mapName);
 				owner.records.putIfAbsent(mapName, acummulativeTime);
+				if(record != 1000000000){
+					owner.myAchievements.beatRecord(owner);
+				}
+
 			}
 		} else {
 			owner.records.putIfAbsent(mapName, acummulativeTime);
@@ -317,7 +322,7 @@ public class SinglePlayerRoom extends Room {
 
 		record = owner.records.get(mapName);
 
-		game.actualiceRecords(mapName,record,owner.getNombre());
+		game.actualiceRecords(mapName,record,owner);
 
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", "FINISH");

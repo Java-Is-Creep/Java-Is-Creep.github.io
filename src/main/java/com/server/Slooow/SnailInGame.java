@@ -105,11 +105,11 @@ enum SkinType{Skin1,Skin2,Skin3}
 	int trapDoorPosY = 0;
 
 	//para evitar que se bugee con varias puertas
-	final int timeToPassDoor = 300;
+	final int timeToPassDoor = 2000;
 	int doorTime = 2000;
 
-	final int timeToPassTrap = 2000;
-	int trapDoorTime = 2000;
+	final int timeToPassTrap = 1000;
+	int trapDoorTime = 1000;
 
 	public float speedX;
 	public float speedY;

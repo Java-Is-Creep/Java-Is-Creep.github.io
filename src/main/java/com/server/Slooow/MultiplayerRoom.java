@@ -335,15 +335,10 @@ public class MultiplayerRoom extends Room {
 
 	public void anadirJugador(PlayerConected jug) {
 		playerLock.lock();
-		
-		System.out.println("Valores iniciales");
-		System.out.println("PosX: " + jug.mySnail.posX);
-		System.out.println("PosY: " + jug.mySnail.posY);
 		jug.mySnail.hasFinish = false;
 		if (jugadoresEnSala.putIfAbsent(jug.getSession(), jug) == null) {
 			playerArray[numPlayers] = jug;
 			numPlayers++;
-			jug.restartSnail();
 			matchPointsLock.lock();
 			matchmakingPoints +=  jug.matchMakingPunt();
 			matchPointsLock.unlock();
@@ -459,7 +454,7 @@ public class MultiplayerRoom extends Room {
 			player.gamesPlayed.incrementAndGet();
 		}
 
-		player.myAchievements.checkAchievements(player);
+		player.myAchievements.checkAchievements(player,"",false);
 
 		Integer record = player.records.get(mapName);
 		if (record != null) {
@@ -473,7 +468,7 @@ public class MultiplayerRoom extends Room {
 
 		record = player.records.get(mapName);
 
-		game.actualiceRecords(mapName, record, player.getNombre());
+		game.actualiceRecords(mapName, record, player);
 
 		Gson gson = new Gson();
 		String namesArray = gson.toJson(playerNamePosition);

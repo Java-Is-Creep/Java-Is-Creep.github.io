@@ -358,7 +358,7 @@ public class Room {
 		acumulativePosXRedPath += 5 * unit;
 		acumulativePosYRedPath = 400;
 
-		windAux = new Wind(10 * unit, 2 * unit, acumulativePosXRedPath+ 3 * unit, acumulativePosYRedPath, type.WIND, true, 1.5f, false,
+		windAux = new Wind(10 * unit, 2 * unit, acumulativePosXRedPath+ 3 * unit, acumulativePosYRedPath, type.WIND, false, 1.5f, false,
 				5800, TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
@@ -599,6 +599,7 @@ public class Room {
 				5800, TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
+		
 
 		//FIN CAMINO NEGRO DISCONTINUO
 
@@ -607,10 +608,11 @@ public class Room {
 		map.addMapObject(new MapGround(50 * unit, groundHeigth*2, acumulativeDiscontinuoRojoX, acumulativeDiscontinuoRojoY, type.GROUND));
 		
 
-		windAux = new Wind(30 * unit, 2 * unit, acumulativeDiscontinuoRojoX+ 10 * unit, acumulativeDiscontinuoRojoY, type.WIND, false, 1.5f, false,
+		windAux = new Wind(30 * unit, 2 * unit, acumulativeDiscontinuoRojoX+ 10 * unit, acumulativeDiscontinuoRojoY, type.WIND, true, 1.5f, false,
 				5800, TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
+		
 
 		auxPower = new MapPowerUp(unit, unit, acumulativeDiscontinuoRojoX+ 45 * unit, acumulativeDiscontinuoRojoY + unit / 2,
 				type.POWERUP);
@@ -664,7 +666,7 @@ public class Room {
 		acumulativePosXRedPath += 5 * unit;
 		acumulativePosYRedPath = 400;
 
-		windAux = new Wind(10 * unit, 2 * unit, acumulativePosXRedPath+ 3 * unit, acumulativePosYRedPath, type.WIND, true, 1.5f, false,
+		windAux = new Wind(10 * unit, 2 * unit, acumulativePosXRedPath+ 3 * unit, acumulativePosYRedPath, type.WIND, false, 1.5f, false,
 				5800, TICKTIME);
 		map.addMapObject(windAux);
 		windArray.add(windAux);
@@ -775,10 +777,6 @@ public class Room {
 
 		acumulativePosXNegro =   acumulativeDiscontinuoNegroX+8*unit;
 		acumulativePosYNegro =  acumulativeDiscontinuoNegroY;
-		
-
-		
-
 
 		map.addMapObject(new MapGround(3 * unit, groundHeigth*2, acumulativePosXNegro, acumulativePosYNegro, type.GROUND));
 		acumulativePosXNegro += 3 * unit;

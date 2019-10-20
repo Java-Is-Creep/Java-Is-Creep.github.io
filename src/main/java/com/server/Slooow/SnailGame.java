@@ -1,5 +1,6 @@
 package com.server.Slooow;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.google.gson.JsonObject;
 
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 public class SnailGame {
@@ -73,13 +75,13 @@ public class SnailGame {
 
 	}
 
-	public void actualiceRecords(String mapName, int time, String playerName) {
+	public void actualiceRecords(String mapName, int time, PlayerConected player){
 		generalRecords.lock();
 		if (records.containsKey(mapName)) {
 			ArrayList<RecordInMap> recordsTime = records.get(mapName);
 			if (time < recordsTime.get(9).time) {
 				recordsTime.remove(9);
-				RecordInMap recordAux = new RecordInMap(playerName, time);
+				RecordInMap recordAux = new RecordInMap(player.getNombre(), time);
 				recordsTime.add(recordAux);
 				Collections.sort(recordsTime, new RecordsComparator());
 			}
@@ -90,13 +92,13 @@ public class SnailGame {
 			}
 			if (time < recordsTime.get(9).time) {
 				recordsTime.remove(9);
-				RecordInMap recordAux = new RecordInMap(playerName, time);
+				RecordInMap recordAux = new RecordInMap(player.getNombre(), time);
 				recordsTime.add(recordAux);
 				Collections.sort(recordsTime, new RecordsComparator());
 			}
 			records.putIfAbsent(mapName, recordsTime);
 		}
-		
+
 		generalRecords.unlock();
 	}
 
@@ -130,6 +132,19 @@ public class SnailGame {
 			for (PlayerConected player : jugadoresConectados.values()) {
 				if (player.getLifes() < player.MAXNUMLIFES) {
 					player.incrementWaitingTime();
+					JsonObject msg3 = new JsonObject();
+					msg3.addProperty("event", "LIVEUP");
+					player.sessionLock.lock();
+					try {
+						player.getSession().sendMessage(new TextMessage(msg3.toString()));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} finally{
+						player.sessionLock.unlock();
+					}
+						
+
 				}
 
 			}

@@ -58,6 +58,13 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		 * Crea una Partida y añade al jugador a una sala single player De momento
 		 * comienza la partida también
 		 */
+
+		case "LIVEUP":
+			jug = game.bucarJugadorConectado(newSession);
+			if(jug.getLifes() < jug.MAXNUMLIFES){
+				jug.incrementLifes();
+			}
+		break;
 		case "SINGLEPLAYER":
 
 			jug = game.bucarJugadorConectado(newSession);
@@ -69,7 +76,12 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 			break;
 		case "MULTIPLAYER":
+			jug = game.bucarJugadorConectado(newSession);
 			System.out.println("Mensaje de jugador Ready");
+			jug.restartSnail();
+			System.out.println("Mi tipo de caracol es: "+ jug.mySnail.getClass());
+			System.out.println("Su velocidadX es: " + jug.mySnail.MAXNORMALVELOCITYX);
+			System.out.println("Su velocidadX acelerando es: " + jug.mySnail.MAXVELOCITYX);
 			game.multiPlayerRoomMap.get(post.roomName).addPlayerReady();
 			break;
 
