@@ -155,11 +155,12 @@ Slooow.preloadState.prototype = {
 		game.load.image('soundOnBtn', './assets/img/btn/soundOnBtn.png');
 		game.load.image('soundOffBtn', './assets/img/btn/soundOffBtn.png');
 		game.load.image('replayBtn', './assets/img/btn/replayBtn.png');
-
+		
 		//Shop icons
 		game.load.image('moneyShell', './assets/img/UI/monedaArcoiris.png');
 		game.load.image('moneyBaba', './assets/img/UI/baba.png');
 		game.load.image('statBtn', './assets/img/UI/defaultStat.png');
+		game.load.image('add', './assets/img/UI/add.png');
 
 		//Musica
 		//game.load.audio('AE', './assets/audio/te-bote.mp3');

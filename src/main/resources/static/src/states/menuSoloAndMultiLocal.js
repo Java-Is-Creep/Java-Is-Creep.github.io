@@ -230,7 +230,11 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
         }
 
         function getLifes(){
-
+            let msg = {
+                    event: 'LIVEUP',    
+                }
+            game.global.socket.send(JSON.stringify(msg))
+            game.state.start('addLifeState')
         }
         
         function actionOnClickBack(){

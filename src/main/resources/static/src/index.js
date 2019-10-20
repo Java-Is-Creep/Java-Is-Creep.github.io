@@ -1114,6 +1114,7 @@ window.onload = function () {
     this.game.state.add('mainMenuState', Slooow.mainMenuState);
     this.game.state.add('singlePlayerState', Slooow.singlePlayerState);
     this.game.state.add('marathonState', Slooow.marathonState);
+    this.game.state.add('addLifeState', Slooow.addLifeState);
     this.game.state.add('lobbyState', Slooow.lobbyState);
     this.game.state.add('lobbyMultiState', Slooow.lobbyMultiState);
     this.game.state.add('multiplayerState', Slooow.multiplayerState);
