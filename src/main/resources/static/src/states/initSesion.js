@@ -22,22 +22,30 @@ Slooow.initSesionState.prototype = {
         this.background.height = this.game.height;
         this.background.width = this.game.width;
         this.background.anchor.set(0.5, 0.5)*/
-        this.background = game.add.tileSprite(game.world.centerX , game.world.centerY , game.world.width, game.world.height, 'backgroundMenu')
+        this.background = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width, game.world.height, 'backgroundMenu')
         //this.background.height = this.game.height;
         //this.background.width = this.game.width;
         //Tints chulos:  1653685.9351650865
         //               10799539.640765665
         //               4535760.527128731   
         //this.background.tint = Math.random() * 0xffffff;
-		console.log(this.background.tint)
-		this.background.tileScale.set(0.4, 0.4)
+        console.log(this.background.tint)
+        this.background.tileScale.set(0.4, 0.4)
         this.background.anchor.set(0.5, 0.5)
     },
 
     // Escribimos nombre y contraseña para el jugador y mandamos mensaje al
     // servidor para que lo compruebe
     create: function () {
-        
+
+        if ( game.global.musicMenu == undefined){
+            game.global.musicMenu = this.game.add.audio('musicMenu')
+        }
+            game.global.musicMenu.loop = true
+            game.global.musicMenu.volume = 0.2
+        if (game.global.musicMenu.isPlaying == false) {
+            game.global.musicMenu.play()
+        }
         // Boton Username
         inicioSesionNameButton = game.add.inputField(game.world.centerX - 240,
             game.world.centerY - 140, {
@@ -68,7 +76,7 @@ Slooow.initSesionState.prototype = {
             placeHolder: game.global.activeLanguage.InputPass,
             type: PhaserInput.InputType.password,
         });
-         //Boton ESPAÑITA AE
+        //Boton ESPAÑITA AE
         buttonAE = game.add.button(game.world.width - 60,
             50, 'ESPAÑITABtn', actionOnClickLanguage, this,
             0, 0, 0)
@@ -83,8 +91,8 @@ Slooow.initSesionState.prototype = {
         buttonEng.anchor.set(0.5)
         buttonEng.scale.setTo(0.3, 0.3)
         buttonEng.alpha = 0
-        buttonEng.inputEnabled = false 
-        if(game.global.activeLanguage.Language == 'eng'){
+        buttonEng.inputEnabled = false
+        if (game.global.activeLanguage.Language == 'eng') {
             this.language = 'eng'
             buttonEng.alpha = 1
             buttonEng.inputEnabled = true
@@ -140,7 +148,7 @@ Slooow.initSesionState.prototype = {
                     inicioSesionPassButton.text.setText('')
                     inicioSesionPassButton.value = undefined
 
-//////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////
                     //Por ahora pasa directamente al menu principal, pero mas tarde habrá que comprobar usuario y contraseña
                     //game.state.start('mainMenuState')
                 }
@@ -151,10 +159,10 @@ Slooow.initSesionState.prototype = {
         function actionOnClickCreate() {
             game.state.start('createAccountState')
         }
-        
-        function actionOnClickLanguage(){
+
+        function actionOnClickLanguage() {
             //TODO Cambio real de idioma
-            if(this.language == 'eng'){
+            if (this.language == 'eng') {
                 buttonEng.alpha = 0
                 buttonEng.inputEnabled = false
                 buttonAE.alpha = 1
@@ -179,15 +187,15 @@ Slooow.initSesionState.prototype = {
 
     update: function () {
 
-        this.background.tilePosition.x+=0.5
-        this.background.tilePosition.y-=0.5
+        this.background.tilePosition.x += 0.5
+        this.background.tilePosition.y -= 0.5
 
         // Función para mostrar el boton de inicio de sesion con un alpha de 1
-        if (inicioSesionNameButton.value !== undefined && inicioSesionPassButton.value !== undefined){
-            if (inicioSesionNameButton.value.length !== 0 && inicioSesionPassButton.value.length !== 0){
+        if (inicioSesionNameButton.value !== undefined && inicioSesionPassButton.value !== undefined) {
+            if (inicioSesionNameButton.value.length !== 0 && inicioSesionPassButton.value.length !== 0) {
                 textButtonInit.alpha = 1
                 buttonInitSesion.alpha = 1
-            }else {
+            } else {
                 textButtonInit.alpha = 0.5
                 buttonInitSesion.alpha = 0.5
             }

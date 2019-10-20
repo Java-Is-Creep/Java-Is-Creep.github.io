@@ -341,7 +341,7 @@ Slooow.singlePlayerState.prototype = {
 
 		if (this.game.global.haveToRotateToWall == true){
 			if (game.global.player.sprite.angle > -90){
-				game.global.player.sprite.angle-=2
+				game.global.player.sprite.angle-=4
 			} else{
 				game.global.haveToRotateToWall = false
 				game.global.player.sprite.angle = -90

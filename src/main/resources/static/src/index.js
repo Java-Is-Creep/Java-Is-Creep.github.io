@@ -94,6 +94,9 @@ window.onload = function () {
         maxTime: null,
         record: null,
         puntuationGameOver: null,
+        //Cosas musica
+        musicGame: null,
+        musicMenu: null,
         //Cosas game Over multi
         //Mi tiempo
         myTimeMulti: null,
@@ -216,6 +219,12 @@ window.onload = function () {
                 game.global.player.sprite.y = game.world.height - (Math.floor(msg.posY)) - 10
                 // Tratamiento de la estamina (UI)
                 if (game.global.player.maxStamina == 0) {
+
+                    game.global.musicMenu.stop()
+                    game.global.musicGame = this.game.add.audio('musicGame')
+                    game.global.musicGame.loop = true
+                    game.global.musicGame.volume = 0.2
+                    game.global.musicGame.play()
                     game.global.player.maxStamina = msg.stamina
                 }
                 var scale = msg.stamina * 0.5 / game.global.player.maxStamina
@@ -799,6 +808,13 @@ window.onload = function () {
                 if (firstFrame == 0) {
                     game.global.loadingAnim.destroy();
                     game.global.loading.destroy();
+
+                    game.global.musicMenu.stop()
+
+                    game.global.musicGame = this.game.add.audio('musicGame')
+                    game.global.musicGame.loop = true
+                    game.global.musicGame.volume = 0.2
+                    game.global.musicGame.play()
 
                     this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
                     firstFrame++

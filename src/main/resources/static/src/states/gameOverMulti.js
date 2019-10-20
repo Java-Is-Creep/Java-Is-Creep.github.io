@@ -181,6 +181,10 @@ Slooow.gameOverMultiState.prototype = {
             game.global.arrayDoors = []
             game.global.arrayWinds = []
             game.global.finishObject = new Object
+
+            game.global.musicGame.stop()
+            game.global.musicMenu.play()
+
             game.state.start('mainMenuState')
         }
 

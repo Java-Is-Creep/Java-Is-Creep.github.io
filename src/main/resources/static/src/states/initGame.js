@@ -26,6 +26,9 @@ Slooow.initGameState.prototype = {
 	},
 
 	create : function() {
+
+		
+		
 		// Texto inicial en el centro de la pantalla
 		continueBtn = game.add.button(game.world.centerX,
             game.world.centerY, 'playBtn', itemTouched, this,

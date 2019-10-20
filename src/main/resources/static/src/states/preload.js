@@ -163,7 +163,10 @@ Slooow.preloadState.prototype = {
 		game.load.image('add', './assets/img/UI/add.png');
 
 		//Musica
-		//game.load.audio('AE', './assets/audio/te-bote.mp3');
+		game.load.audio('musicGame', './assets/audio/powerUps/musicGame.mp3');
+		game.load.audio('musicMenu', './assets/audio/powerUps/musicMenu.mp3');
+
+		//Efectos Sonido Power Ups
 		game.load.audio('chili', './assets/audio/powerUps/chili_editado.mp3');
 		game.load.audio('energicol', './assets/audio/powerUps/energicoleructo_editado.mp3');
 		game.load.audio('lettuce', './assets/audio/powerUps/letuce_editado.mp3');
