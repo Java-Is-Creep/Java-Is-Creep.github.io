@@ -46,7 +46,7 @@ public class MapPowerUp extends MapObject {
                 break;
             case 2:
                 powerCreated = powerType.WEIGHT;
-                aux = new LigthWeigthPowerUp(player, 180, 0.1f, powerCreated,idPlayer,myRoom);
+                aux = new LigthWeigthPowerUp(player, 180, 0.5f, powerCreated,idPlayer,myRoom);
                 break;
             case 3:
                 powerCreated = powerType.LETUCCE;

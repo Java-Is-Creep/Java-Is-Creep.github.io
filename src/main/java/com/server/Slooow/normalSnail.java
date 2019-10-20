@@ -26,15 +26,15 @@ public class normalSnail extends SnailInGame {
 	// de stamina por segundo
 	// Tiempo que se tarda en recargar la stamina si se acaba o nos dan 151 / (1.5f
 	// * 30 fps) = 3.33 segundos
-	public final static float MAXSTAMINA = 600;
-    public final static float MAXVELOCITYX = 8;
-    public final static float MAXVELOCITYY = 7;
-    public final static float MAXNORMALVELOCITYX = 3;
-    public final static float MAXNORMALVELOCITYY = 2.5f; // era 3
+	public final static float MAXSTAMINA = 1050;
+    public final static float MAXVELOCITYX = 7.6f;
+    public final static float MAXVELOCITYY = 5.3f;
+    public final static float MAXNORMALVELOCITYX = 2.6f;
+    public final static float MAXNORMALVELOCITYY = 1.9f; // era 3
 
     // aceleracion base, es decir sin acelerar
-    public final static float NORMALACELERATIONX = 2f;
-    public final static float NORMALACELERATIONY = 2f; // era 0.05
+    public final static float NORMALACELERATIONX = 1.1f;
+    public final static float NORMALACELERATIONY = 1.1f; // era 0.05
 
     // aceleracion cuando aceleras - ACTUALMENTE NO ES UN PARÁMETRO USABLE (NO
     // BORRAR)
@@ -44,12 +44,12 @@ public class normalSnail extends SnailInGame {
     public final static float GRAVITY = 0.3f;
     public final static float BREAKFORCE = 0.2f;
     // Tarda 5 segundos en perder la stamina
-    public final static float STAMINALOSE = 10;
-    public final static float STAMINAWALLLOSE = 1;
+    public final static float STAMINALOSE = 9;
+    public final static float STAMINAWALLLOSE = 2.4f;
     // Tarda 2 segundos en recargar la stamina
-    public final static float STAMINANORMALRECOVER = 1.5f;
+    public final static float STAMINANORMALRECOVER = 2.8f;
     // Tarda 3.33 segundos en recargar la stamina
-    public final static float STAMINARUNOUTRECOVER = 2.5f;
+    public final static float STAMINARUNOUTRECOVER = 5f;
     public final static float MAXGRAVITYSPEED = -10;
     public final static float MASS = 1;
     public final static float SPEEDXLOSE = 1.02f;
