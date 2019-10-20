@@ -94,6 +94,16 @@ window.onload = function () {
         maxTime: null,
         record: null,
         puntuationGameOver: null,
+        //Cosas game Over multi
+        //Mi tiempo
+        myTimeMulti: null,
+        //Puntos
+        myPointsMulti: null,
+        //Array de los nombres de los jugadores que han acabao la carrera ordenados
+        finishedPlayersMulti: [],
+        //Array del tiempo
+        finishedTimesMulti: [],
+
         //Cosas visuales jugador (de solo)
         haveToRotateToWall: false,
         haveToRotateToGround: false,
@@ -610,14 +620,14 @@ window.onload = function () {
                 var id = JSON.parse(msg.id)
                 var state = JSON.stringify(msg.state)
                 state = state.substring(1, state.length - 1)
-                this.console.log(msg)
+                //this.console.log(msg)
                 //console.log(this.game.global.arrayDoors[id])
                 if (this.game.global.arrayDoors[id] !== undefined) {
                     if (state == 'OPEN') {
-                        this.console.log('abrir puerta')
+                        //this.console.log('abrir puerta')
                         game.global.arrayDoors[id].frame = 1
                     } else {
-                        this.console.log('cerrar puerta')
+                        //this.console.log('cerrar puerta')
                         game.global.arrayDoors[id].frame = 0
                     }
                 }
@@ -753,8 +763,8 @@ window.onload = function () {
                 var namePlayers = JSON.parse(msg.name)
 
                 if (firstFrame == 0) {
-                    /*game.global.loadingAnim.destroy();
-                    game.global.loading.destroy();*/
+                    game.global.loadingAnim.destroy();
+                    game.global.loading.destroy();
 
                     this.game.global.maxStamina = arrayStamina[this.game.global.myPlayerId]
                     firstFrame++
@@ -786,7 +796,7 @@ window.onload = function () {
                 var runOutOfStamina = JSON.parse(msg.runOutStamina)
                 var recoverStamina = JSON.parse(msg.recoverStamina)
                 var idPlayer = JSON.parse(msg.id)
-                console.log(msg)
+                //console.log(msg)
                 if (runOutOfStamina) {
                     //Animacion de cansarse
                     game.global.playersMulti[idPlayer].sprite.animations.play('tired');
@@ -796,21 +806,25 @@ window.onload = function () {
                 }
                 break
             case 'FINISHMULTI':
+                this.console.log('FIN DE PARTIDAAAAAAAA')
+                this.console.log(msg)
                 var myTime = JSON.parse(msg.time)
                 var myRecord = JSON.parse(msg.record)
                 var myPoints = JSON.parse(msg.points)
-                var arrayPositionNames = JSON.stringify(msg.positionName)
+                var arrayPositionNames = JSON.parse(msg.positionNames)
                 var arrayPositionTimes = JSON.parse(msg.positionTime)
 
-                game.global.myTime = myTime
-                game.global.myRecord = myRecord
-                game.global.puntuationGameOver = myPoints
-                game.global.arrayPositionsMulti = arrayPositionNames
-                game.global.arrayTimesMulti = arrayPositionTimes
+                game.global.myTimeMulti = myTime
+                //game.global.myRecord = myRecord
+                game.global.myPointsMulti = myPoints
+                for (var i = 0; i< arrayPositionNames.length; i++){
+                    //arrayPositionNames[i] = arrayPositionNames[i].substring(1, arrayPositionNames[i].length-1)
+                    game.global.finishedPlayersMulti[i] = arrayPositionNames[i]
+                }
+                console.log(game.global.finishedPlayersMulti)
+                game.global.finishedTimesMulti = arrayPositionTimes
 
-                
-
-                game.state.start('gameOverState')
+                game.state.start('gameOverMultiState')
                 break
             case 'WAITINGROOMSTART':
                 var roomName = JSON.stringify(msg.roomName)
@@ -832,7 +846,7 @@ window.onload = function () {
                 break
 
             case 'SLOPECOLLISIONMULTI':
-                this.console.log('colision cuesta')
+                //this.console.log('colision cuesta')
                 var idPlayer = JSON.parse(msg.id)
                 var degreesToRotate = JSON.parse(msg.degrees)
 
@@ -846,7 +860,7 @@ window.onload = function () {
                 //Poner animacion de cansado
                 var id = JSON.parse(msg.id)
                 
-                this.console.log('colision obstaculo ' + id)
+                //this.console.log('colision obstaculo ' + id)
                 game.global.playersMulti[id].sprite.animations.play('damage');
                 break
 
@@ -1040,6 +1054,7 @@ window.onload = function () {
     this.game.state.add('buyShellsState', Slooow.buyShellsState);
     this.game.state.add('recordsState', Slooow.recordsState);
     this.game.state.add('trophiesState', Slooow.trophiesState);
+    this.game.state.add('gameOverMultiState', Slooow.gameOverMultiState)
 
 
     this.game.state.start('bootState');

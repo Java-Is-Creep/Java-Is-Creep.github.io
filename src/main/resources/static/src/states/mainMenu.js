@@ -310,7 +310,7 @@ Slooow.mainMenuState.prototype = {
         }
 
         function actionOnClickStartTrophies(){
-            game.state.start('trophiesState')
+            game.state.start('gameOverMultiState')
         }
 
         // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás

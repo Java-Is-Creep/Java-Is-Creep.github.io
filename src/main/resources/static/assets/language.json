@@ -47,7 +47,9 @@
         "Regen" : "Regeneración",
         "Sure" : "¿Está seguro de que desea\n realizar esta compra?",
         "Yes" : "Sí",
-        "No" : "No"
+        "No" : "No",
+        "Position": "Puesto",
+        "NotFinished": "No ha terminado la carrera"
     },
     
     "eng" : {
@@ -98,7 +100,9 @@
         "Regen" : "Regeneration",
         "Sure" : "Are you sure that you want\n to confirm this purchase?",
         "Yes" : "Yes",
-        "No" : "No"
+        "No" : "No",
+        "Position": "Ranking",
+        "NotFinished": "Has not finished the race"
         }
     
 }
