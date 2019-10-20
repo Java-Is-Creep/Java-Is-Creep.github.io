@@ -710,7 +710,7 @@ public class MultiplayerRoom extends Room {
 				}
 			}
 
-			System.out.println("ENVIADO: " + msg2.toString());
+			
 			if (numPlayers <= 0) {
 				System.out.println("Sala borrada por falta de jugadores");
 				game.deleteRoom(this);
