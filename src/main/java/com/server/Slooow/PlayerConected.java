@@ -94,6 +94,9 @@ public class PlayerConected {
         pointsAux += POINTSFORFINISH;
 		pointsAux += (int) (200-(time/500));
 		System.out.println("Mis puntos en esta carrera son: "+ pointsAux);
+		if(pointsAux <0){
+			pointsAux = 0;
+		}
 		points += pointsAux;
         return pointsAux;
     }
