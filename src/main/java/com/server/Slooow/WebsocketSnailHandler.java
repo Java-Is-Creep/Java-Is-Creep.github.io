@@ -249,6 +249,14 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			game.createMultiRoom(post.roomName, jug, post.mapName);
 			break;
 
+		case "EXITLOBBYMULTI":
+			game.multiPlayerRoomMap.remove(post.roomName);
+			break;
+
+		case"EXITLOBBY":
+			game.singlePlayerRoomMaps.remove(post.roomName);
+			break;
+
 		case "ENTERLOBBY":
 			jug = game.bucarJugadorConectado(newSession);
 			game.createSingleRoom(post.roomName, jug, post.mapName);
