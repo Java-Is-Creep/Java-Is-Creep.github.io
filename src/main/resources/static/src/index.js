@@ -110,6 +110,11 @@ window.onload = function () {
         haveToRotateToSlope: false,
         degreesToRotateSlope: 0,
         maxStamina: 0,
+
+        //TOP 10
+        top10UserNames : [],
+        top10Times: [],
+
         //Cosas visuales jugador (multi)
         myPlayerId: null,
         playersMulti: [],
@@ -501,22 +506,42 @@ window.onload = function () {
                 this.console.log('invisible')
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
+                        audio = this.game.add.audio('shield')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.shieldPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'shieldPowerUp'))
                         break
                     case '"STAMINA"':
+                        audio = this.game.add.audio('energicol')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.staminaPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'staminaPowerUp'))
                         break
                     case '"WEIGHT"':
+                        audio = this.game.add.audio('wing')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.wingPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'wingsPowerUp'))
                         break
                     case '"LETUCCE"':
+                        audio = this.game.add.audio('lettuce')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.lettucePowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'lettucePowerUp'))
                         break
                     case '"SPEED"':
+                        audio = this.game.add.audio('chili')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.player.speedPowerUp.visible = false
                         game.global.player.sprite.addChild(game.add.sprite(200, -200, 'speedPowerUp'))
                         break
@@ -748,6 +773,11 @@ window.onload = function () {
                 game.global.money = JSON.parse(msg.money)
                 game.state.start('shopState')
                 break
+
+            case 'RECORDS':
+                this.game.global.top10UserNames = JSON.parse(msg.playerName)
+                this.game.global.top10Times = JSON.parse(msg.time)
+                break    
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -806,6 +836,7 @@ window.onload = function () {
                 }
                 break
             case 'FINISHMULTI':
+                firstFrame = 0;
                 this.console.log('FIN DE PARTIDAAAAAAAA')
                 this.console.log(msg)
                 var myTime = JSON.parse(msg.time)
@@ -827,6 +858,7 @@ window.onload = function () {
                 game.state.start('gameOverMultiState')
                 break
             case 'WAITINGROOMSTART':
+                firstFrame = 0;
                 var roomName = JSON.stringify(msg.roomName)
                 roomName = roomName.substring(1, roomName.length - 1)
                 this.game.global.roomNameMulti = roomName
@@ -885,22 +917,42 @@ window.onload = function () {
                 var myId = JSON.parse(msg.id)
                 switch (JSON.stringify(msg.type)) {
                     case '"SHIELD"':
+                        audio = this.game.add.audio('shield')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].shieldPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'shieldPowerUp'))
                         break
                     case '"STAMINA"':
+                        audio = this.game.add.audio('energicol')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].staminaPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'staminaPowerUp'))
                         break
                     case '"WEIGHT"':
+                        audio = this.game.add.audio('wing')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].wingPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'wingsPowerUp'))
                         break
                     case '"LETUCCE"':
+                        audio = this.game.add.audio('lettuce')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].lettucePowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'lettucePowerUp'))
                         break
                     case '"SPEED"':
+                        audio = this.game.add.audio('chili')
+                        audio.loop = false
+                        audio.volume = 1
+                        audio.play()
                         game.global.playersMulti[myId].speedPowerUp.visible = false
                         game.global.playersMulti[myId].sprite.addChild(game.add.sprite(200, -200, 'speedPowerUp'))
                         break
@@ -1026,18 +1078,6 @@ window.onload = function () {
                 break
             case 'PURCHASEOK':
                 game.global.money = JSON.parse(msg.shells)
-                game.global.points = JSON.parse(msg.baba)
-                let ownedAux3 = JSON.parse(msg.owned)
-                let notOwnedAux3 = JSON.parse(msg.notOwned)
-
-                for (var e = 0; e < ownedAux3.length; e++){
-                    game.global.owned[e] = ownedAux3[e];
-                }
-
-                for (var s = 0; s < notOwnedAux3.length; s++){
-                    game.global.notOwned[s] = notOwnedAux3[s]
-                }
-                
                 game.state.start('shopState')
         }   
 
@@ -1069,6 +1109,7 @@ window.onload = function () {
     this.game.state.add('recordsState', Slooow.recordsState);
     this.game.state.add('trophiesState', Slooow.trophiesState);
     this.game.state.add('gameOverMultiState', Slooow.gameOverMultiState)
+    this.game.state.add('top10State', Slooow.top10State)
 
 
     this.game.state.start('bootState');

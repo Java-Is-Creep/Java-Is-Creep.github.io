@@ -310,7 +310,7 @@ Slooow.mainMenuState.prototype = {
         }
 
         function actionOnClickStartTrophies(){
-            game.state.start('gameOverMultiState')
+            game.state.start('top10State')
         }
 
         // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás
@@ -454,12 +454,18 @@ Slooow.mainMenuState.prototype = {
                 buttonSoundOn.alpha = 0
                 buttonSoundOn.inputEnabled = false
                 this.activeSound = false;
+
+                //NO FUNCIONA PERO DEBERIA
+                game.sound.mute = true;
             } else {
                 buttonSoundOn.alpha = maxAlpha
                 buttonSoundOn.inputEnabled = true
                 buttonSoundOff.alpha = 0
                 buttonSoundOff.inputEnabled = false
                 this.activeSound = true;
+
+                //NO FUNCIONA PERO DEBERIA
+                game.sound.mute = false;
             }
 
         }

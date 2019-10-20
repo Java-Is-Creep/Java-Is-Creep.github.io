@@ -162,7 +162,12 @@ Slooow.preloadState.prototype = {
 		game.load.image('statBtn', './assets/img/UI/defaultStat.png');
 
 		//Musica
-		
+		game.load.audio('AE', './assets/audio/te-bote.mp3');
+		game.load.audio('chili', './assets/audio/powerUps/chili_editado.mp3');
+		game.load.audio('energicol', './assets/audio/powerUps/energicoleructo_editado.mp3');
+		game.load.audio('lettuce', './assets/audio/powerUps/letuce_editado.mp3');
+		game.load.audio('shield', './assets/audio/powerUps/shield_editado.mp3');
+		game.load.audio('wing', './assets/audio/powerUps/wing_editado.mp3');
 
 		$.getJSON("./assets/language.json", function (data) {
 			game.global.languageData = (data);

@@ -219,6 +219,17 @@ Slooow.menuMultiOnlineState.prototype = {
             buttonOK.alpha = 1
             buttonOK.inputEnabled = true
             textButtonOK.alpha = 1
+            buttonMap1.alpha = 0.3
+            buttonMap1.inputEnabled = false
+            buttonMap2.alpha = 0.3
+            buttonMap2.inputEnabled = false
+            buttonMap3.alpha = 0.3
+            buttonMap3.inputEnabled = false
+            textButtonMap1.alpha = 0.3
+            textButtonMap2.alpha = 0.3
+            textButtonMap3.alpha = 0.3
+            roomNameButton.inputEnabled = false
+            roomNameButton.alpha= 0.3
             option = 0;
         }
         function actionOnClickCreateRoom() {
