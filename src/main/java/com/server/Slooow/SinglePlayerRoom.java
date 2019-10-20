@@ -19,15 +19,17 @@ public class SinglePlayerRoom extends Room {
 	// TODO width del mapa de momento no es responsive
 
 	final int MAPSIZE = 5;
-	final int NUMSECONS = 60;
-	final int TIMETOSUCESS = NUMSECONS * 1000; // se multiplica por mil porque TICKTIME esta en milisegundos
+	int NUMSECONS;
+	 int TIMETOSUCESS; // se multiplica por mil porque TICKTIME esta en milisegundos
 
 	// sirve para comprobar el tipo de clase con la que chocas, puerta o suelo
 
 	// Crear la sala, asigna el jugador, creas el map y lo envias al cliente y
 	// comienza el juego
-	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game, String mapName,String myType) {
+	public SinglePlayerRoom(String name, PlayerConected player, SnailGame game, String mapName,String myType,int NUMSECONS) {
 		super(name, player, game, mapName,myType);
+		this.NUMSECONS = NUMSECONS;
+		TIMETOSUCESS = NUMSECONS * 1000;
 		}
 
 	public void sendMap() {

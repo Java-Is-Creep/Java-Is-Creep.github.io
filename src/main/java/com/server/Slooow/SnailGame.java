@@ -41,6 +41,10 @@ public class SnailGame {
 
 	public final int RECORDSTOSTORE = 10;
 
+	public final int TIMETOPASSMAP1 =60;
+	public final int TIMETOPASSMAP2 =80;
+	public final int TIMETOPASSMAP3 =70;
+
 	public SnailGame() {
 		checkLifesTime();
 		PlayerRegistered aux = new PlayerRegistered("a", "a");
@@ -164,8 +168,24 @@ public class SnailGame {
 	}
 
 	public void createSingleRoom(String roomName, PlayerConected jug, String mapName) {
+		int secondsToPass = 0;
+		switch(mapName){
+			case "mapa1":
+				secondsToPass= TIMETOPASSMAP1;
+			break;
+			
+			case "mapa2":
+				secondsToPass= TIMETOPASSMAP2;
+			break;
 
-		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug, this, mapName,"SINGLE");
+			case "mapa3":
+				secondsToPass= TIMETOPASSMAP3;
+			break;
+			default:
+			break;
+		}
+
+		SinglePlayerRoom roomAux = new SinglePlayerRoom(roomName, jug, this, mapName,"SINGLE",secondsToPass);
 		singlePlayerRoomMaps.putIfAbsent(roomAux.name, roomAux);
 	}
 
