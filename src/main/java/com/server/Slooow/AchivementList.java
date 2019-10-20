@@ -20,23 +20,22 @@ public class AchivementList {
     }
 
     public void initAchievements() {
-        Achievement aux = new Achievement("Juega 3 carreras", 3, ACHIVETYPE.GAMESPLAYED, 200, "");
+        Achievement aux = new Achievement("0", 3, ACHIVETYPE.GAMESPLAYED, 200, "");
         achievementsList.add(aux);
-        aux = new Achievement("Juega 10 carreras", 10, ACHIVETYPE.GAMESPLAYED, 500, "");
+        aux = new Achievement("1", 10, ACHIVETYPE.GAMESPLAYED, 500, "");
         achievementsList.add(aux);
-        aux = new Achievement("Gana tu primera Carrera", 1, ACHIVETYPE.GAMESWON, 150, "");
+        aux = new Achievement("2", 1, ACHIVETYPE.GAMESWON, 150, "");
         achievementsList.add(aux);
-        aux = new Achievement("Gana 3 Carreras", 3, ACHIVETYPE.GAMESWON, 300, "");
+        aux = new Achievement("3", 3, ACHIVETYPE.GAMESWON, 300, "");
         achievementsList.add(aux);
         // retos solo en modo solo
-        aux = new Achievement("Enhorabuena! Superaste el nivel 1", 0, ACHIVETYPE.LEVELPASS, 200, "mapa1");
+        aux = new Achievement("4", 0, ACHIVETYPE.LEVELPASS, 200, "mapa1");
         achievementsList.add(aux);
-        aux = new Achievement("Enhorabuena! Superaste el nivel 2", 0, ACHIVETYPE.LEVELPASS, 200, "mapa2");
+        aux = new Achievement("5", 0, ACHIVETYPE.LEVELPASS, 200, "mapa2");
         achievementsList.add(aux);
-        aux = new Achievement("Enhorabuena! Superaste el nivel 3", 0, ACHIVETYPE.LEVELPASS, 200, "mapa3");
+        aux = new Achievement("6", 0, ACHIVETYPE.LEVELPASS, 200, "mapa3");
         achievementsList.add(aux);
-        aux = new Achievement("Enhorabuena, los mejores siempre se superan, Bate tu propio record!", 0,
-                ACHIVETYPE.RECORDS, 300, "");
+        aux = new Achievement("7", 0,ACHIVETYPE.RECORDS, 300, "");
         record = aux;
 
     }

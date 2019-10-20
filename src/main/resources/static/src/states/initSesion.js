@@ -42,7 +42,7 @@ Slooow.initSesionState.prototype = {
             game.global.musicMenu = this.game.add.audio('musicMenu')
         }
             game.global.musicMenu.loop = true
-            game.global.musicMenu.volume = 0.2
+            game.global.musicMenu.volume = 0
         if (game.global.musicMenu.isPlaying == false) {
             game.global.musicMenu.play()
         }

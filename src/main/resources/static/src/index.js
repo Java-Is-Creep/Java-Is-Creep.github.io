@@ -143,6 +143,8 @@ window.onload = function () {
         //Saber si los tienes o no
         owned: [],
         notOwned: [],
+        //Trofeos que tienes y que no
+        trophiesPlayer: [false,false,false,false,false,false,false,false],
         //Elegir caracol y mapa
         snailChosen: null,
         mapChosen: null,
@@ -790,7 +792,14 @@ window.onload = function () {
             case 'RECORDS':
                 this.game.global.top10UserNames = JSON.parse(msg.playerName)
                 this.game.global.top10Times = JSON.parse(msg.time)
-                break    
+                break   
+            case 'ACHIEVE':
+                this.console.log(msg)
+                this.index = JSON.stringify(msg.text)
+                index = index.substring(1, index.length-1)
+                index = parseInt(index)
+                game.global.trophiesPlayer[index] = true
+                break;     
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -840,7 +849,6 @@ window.onload = function () {
                 var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
                 var scaleProgress = posProgress / game.global.finishObject.x
                 game.global.playersMulti[this.game.global.myPlayerId].progressBar2.scale.setTo(scaleProgress, 1)
-
                 break
             case 'SNAILUPDATEMULTI':
                 var runOutOfStamina = JSON.parse(msg.runOutStamina)
@@ -1145,6 +1153,7 @@ window.onload = function () {
     this.game.state.add('trophiesState', Slooow.trophiesState);
     this.game.state.add('gameOverMultiState', Slooow.gameOverMultiState)
     this.game.state.add('top10State', Slooow.top10State)
+    this.game.state.add('midRecordsState', Slooow.midRecordsState)
 
 
     this.game.state.start('bootState');

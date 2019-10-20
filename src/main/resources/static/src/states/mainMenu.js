@@ -144,7 +144,7 @@ Slooow.mainMenuState.prototype = {
         buttonStartRecords.scale.setTo(0.6, 0.6)
         // Texto empezar records
         textButtonStartRecords = game.add.text(game.world.centerX+300,
-            game.world.centerY+100, game.global.activeLanguage.Records, game.global.style)
+            game.world.centerY+100, game.global.activeLanguage.RecordsOnly, game.global.style)
         textButtonStartRecords.anchor.set(0.5)
         //textButtonStartRecords.scale.setTo(0.5, 0.5)
 
@@ -278,11 +278,11 @@ Slooow.mainMenuState.prototype = {
         }
 
         function actionOnClickStartRecords() {
-            let msg = {
+            /*let msg = {
                 event: 'MYRECORDS'
             }
             game.global.socket.send(JSON.stringify(msg))
-            //game.state.start('recordsState')
+            */game.state.start('midRecordsState')
         }
 
         function actionOnClickInstagram() {
@@ -313,7 +313,7 @@ Slooow.mainMenuState.prototype = {
         }
 
         function actionOnClickStartTrophies(){
-            game.state.start('top10State')
+            game.state.start('trophiesState')
         }
 
         // Desplega una ventana en un lateral para acceder a las opciones, deshabilitando todo lo demás

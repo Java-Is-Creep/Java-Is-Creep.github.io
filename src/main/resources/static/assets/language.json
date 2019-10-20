@@ -54,7 +54,18 @@
         "ErrorLogin" : "Lo sentimos, credenciales incorrectas\no tu cuenta ya ha iniciado sesión",
         "ErrorSignIn" : "Lo sentimos, ese usuario ya está en\n uso o las contraseñas no coinciden",
         "TitleMyTime" : "Tus tiempos",
-        "TitleMapTime" : "Objetivo"
+        "TitleMapTime" : "Objetivo",
+        "RecordsOnly": "Récords",
+        "Troph1": "1. Juega 3 carreras. Puntos: 200",
+        "Troph2": "2. Juega 10 carreras. Puntos: 500",
+        "Troph3": "3. Gana tu primera carrera. Puntos: 150",
+        "Troph4": "4. Gana 3 carreras. Puntos: 300",
+        "Troph5": "5. Supera el mapa 1. Puntos: 200",
+        "Troph6": "6. Supera el mapa 2. Puntos: 200",
+        "Troph7": "7. Supera el mapa 3. Puntos: 200",
+        "Troph8": "8. Bate tu propio record. Puntos: 300",
+        "Conseguido": "¡CONSEGUIDO!",
+        "NoConseguido": "NO CONSEGUIDO"
     },
     
     "eng" : {
@@ -112,7 +123,18 @@
         "ErrorLogin" : "Sorry, your account is already logged or\n you have submit wrong credentials",
         "ErrorSignIn" : "Sorry, username is already in use or\n  passwords don't match",
         "TitleMyTime" : "Your times",
-        "TitleMapTime" : "Goal"
+        "TitleMapTime" : "Goal",
+        "RecordsOnly": "Records",
+        "Troph1": "1. Complete 3 races. Points: 200",
+        "Troph2": "2. Complete 10 races. Points: 500",
+        "Troph3": "3. Win your first race. Points: 150",
+        "Troph4": "4. Win 3 races. Points: 300",
+        "Troph5": "5. Beat map 1. Points: 200",
+        "Troph6": "6. Beat map 2. Points: 200",
+        "Troph7": "7. Beat map 3. Points: 200",
+        "Troph8": "8. Beat your own record. Points: 300",
+        "Conseguido": "ACHIEVED!",
+        "NoConseguido": "NOT ACHIEVED"
         }
     
 }
