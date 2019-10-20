@@ -53,17 +53,26 @@ Slooow.preloadState.prototype = {
 		game.load.image('normalCol', './assets/img/snails/sprites/normalCol.png');
 		game.load.image('slugCol', './assets/img/snails/sprites/slugCol.png');
 		game.load.image('tanqueCol', './assets/img/snails/sprites/tanqueCol.png');
-		// Snails SpriteSheet (los anteriores no valen, se cambiaran por estos)
-		game.load.spritesheet ('normalColWalk', './assets/img/snails/anim/normalColWalk.png', 360, 216, 8)
-		game.load.spritesheet ('seaColWalk', './assets/img/snails/anim/seaColWalk.png', 500, 300, 4)
-		game.load.spritesheet ('catColWalk', './assets/img/snails/anim/catColWalk.png', 500, 300, 8)
-		game.load.spritesheet ('irisColWalk', './assets/img/snails/anim/irisColWalk.png', 500, 300, 8)
-		game.load.spritesheet ('tanqueColWalk', './assets/img/snails/anim/tanqueColWalk.png', 500, 300, 8)
-		game.load.spritesheet ('frenchColWalk', './assets/img/snails/anim/frenchColWalk.png', 500, 300, 8)
-		game.load.spritesheet ('slugColWalk', './assets/img/snails/anim/slugColWalk.png', 500, 300, 8)
-		game.load.spritesheet ('thiefWalk', './assets/img/snails/anim/thiefColWalk.png', 500, 300, 8)
 
-		game.load.spritesheet ('pruebaCol', './assets/img/snails/anim/pruebaCol_spritesheet.png', 500, 300, 16)
+		game.load.image('seaCol1', './assets/img/snails/sprites/seaColAlt01.png');
+		game.load.image('thiefCol1', './assets/img/snails/sprites/thiefColAlt01.png');
+		game.load.image('irisCol1', './assets/img/snails/sprites/irisColAlt01.png');
+		game.load.image('catCol1', './assets/img/snails/sprites/catColAlt01.png');
+		game.load.image('frenchCol1', './assets/img/snails/sprites/frenchColAlt01.png');
+		game.load.image('normalCol1', './assets/img/snails/sprites/normalColAlt01.png');
+		game.load.image('slugCol1', './assets/img/snails/sprites/slugColAlt01.png');
+		game.load.image('tanqueCol1', './assets/img/snails/sprites/tanqueColAlt01.png');
+
+		game.load.image('seaCol2', './assets/img/snails/sprites/seaColAlt02.png');
+		game.load.image('thiefCol2', './assets/img/snails/sprites/thiefColAlt02.png');
+		game.load.image('irisCol2', './assets/img/snails/sprites/irisColAlt02.png');
+		game.load.image('catCol2', './assets/img/snails/sprites/catColAlt02.png');
+		game.load.image('frenchCol2', './assets/img/snails/sprites/frenchColAlt02.png');
+		game.load.image('normalCol2', './assets/img/snails/sprites/normalColAlt02.png');
+		game.load.image('slugCol2', './assets/img/snails/sprites/slugColAlt02.png');
+		game.load.image('tanqueCol2', './assets/img/snails/sprites/tanqueColAlt02.png');
+		// Snails SpriteSheet (los anteriores no valen, se cambiaran por estos)
+		
 		
 		game.load.atlas('normalColAnimation', './assets/img/snails/anim/normalColSpritesheet.png', './assets/img/snails/anim/normalColSpritesheet.json');
 		game.load.atlas('baguetteColAnimation', './assets/img/snails/anim/baguetteColSpritesheet.png', './assets/img/snails/anim/baguetteColSpritesheet.json');

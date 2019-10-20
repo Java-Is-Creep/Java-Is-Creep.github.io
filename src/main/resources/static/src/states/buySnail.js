@@ -1,5 +1,7 @@
 Slooow.buySnailState = function (game) {
     var method = "noMethod"
+    var skinsBg = []
+    var skinsSprite = []
 }
 
 Slooow.buySnailState.prototype = {
@@ -60,6 +62,24 @@ Slooow.buySnailState.prototype = {
         var statsBg = game.add.image(game.world.centerX + 200, game.world.centerY - 70, 'squareBtn')
         statsBg.anchor.setTo(0.5, 0.5);
         statsBg.scale.setTo(2.8, 1.7)
+
+        skinsBg = [];
+        skinsSprite = [];
+
+        skinsBg[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'roundBtn')
+        skinsBg[0].anchor.setTo(0.5, 0.5);
+        skinsBg[0].scale.setTo(0.7,0.7)
+
+        skinsBg[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'roundBtn')
+        skinsBg[1].anchor.setTo(0.5, 0.5);
+        skinsBg[1].scale.setTo(0.7,0.7)
+        skinsBg[1].alpha = 0.7;
+
+        skinsBg[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'roundBtn')
+        skinsBg[2].anchor.setTo(0.5, 0.5);
+        skinsBg[2].scale.setTo(0.7,0.7)
+        skinsBg[2].alpha = 0.7;
+
         switch (game.global.snailToBuy) {
             case ('NORMAL'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Caralcol", game.global.style)
@@ -80,6 +100,21 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'normalCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'normalCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'normalCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
+                
                 break
             case ('TANK'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Panzer", game.global.style)
@@ -100,6 +135,21 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'tanqueCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'tanqueCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'tanqueCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
+
                 break
             case ('BAGUETTE'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Baguette", game.global.style)
@@ -120,6 +170,20 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'frenchCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'frenchCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'frenchCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
                 break
             case ('MIAU'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Schoringer", game.global.style)
@@ -140,6 +204,20 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'catCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'catCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'catCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
                 break
             case ('MERCA'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Jabba el Creep", game.global.style)
@@ -160,6 +238,20 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'slugCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'slugCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'slugCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
                 break
             case ('SEA'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Maricol", game.global.style)
@@ -180,6 +272,21 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'seaCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'seaCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'seaCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
+
                 break
             case ('ROBA'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Bárcenas", game.global.style)
@@ -200,6 +307,21 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'thiefCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'thiefCol1')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'thiefCol2')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
+
                 break
             case ('IRIS'):
                 textName = game.add.text(game.world.centerX + 200, game.world.centerY - 200, "Iris", game.global.style)
@@ -220,6 +342,20 @@ Slooow.buySnailState.prototype = {
 
                 textRegen = game.add.text(game.world.centerX - 20, game.world.centerY, game.global.activeLanguage.Regen, game.global.style)
                 textRegen.scale.setTo(0.5, 0.5)
+
+                skinsSprite[0] = game.add.image(game.world.centerX - 540, game.world.centerY + 190, 'irisCol')
+                skinsSprite[0].anchor.setTo(0.5, 0.5);
+                skinsSprite[0].scale.setTo(0.3,0.3)
+
+                skinsSprite[1] = game.add.image(game.world.centerX - 360, game.world.centerY + 190, 'irisCol2')
+                skinsSprite[1].anchor.setTo(0.5, 0.5);
+                skinsSprite[1].scale.setTo(0.3,0.3)
+                skinsSprite[1].alpha = 0.7;
+
+                skinsSprite[2] = game.add.image(game.world.centerX - 180, game.world.centerY + 190, 'irisCol3')
+                skinsSprite[2].anchor.setTo(0.5, 0.5);
+                skinsSprite[2].scale.setTo(0.3,0.3)
+                skinsSprite[2].alpha = 0.7;
                 break
             default:
                 console.log('snail sprite no identificado')
@@ -334,20 +470,20 @@ Slooow.buySnailState.prototype = {
         }
 
         if (!bought) {
-            buttonShells2 = game.add.button(game.world.centerX + 380,
+            buttonShells2 = game.add.button(game.world.centerX + 400,
                 game.world.centerY + 240, 'button', purchaseShells, this,
                 0, 0, 0)
             buttonShells2.anchor.set(0.5)
             buttonShells2.scale.setTo(0.7, 0.5)
 
             //Img shells
-            moneyShell2 = game.add.image(game.world.centerX + 300,
+            moneyShell2 = game.add.image(game.world.centerX + 320,
                 game.world.centerY + 240, 'moneyShell')
             moneyShell2.anchor.set(0.5)
             moneyShell2.scale.setTo(0.35, 0.35)
 
             //Text shells
-            textMoneyShells2 = game.add.text(game.world.centerX + 400,
+            textMoneyShells2 = game.add.text(game.world.centerX + 420,
                 game.world.centerY + 240, game.global.shellPrice, game.global.style)
             textMoneyShells2.anchor.set(0.5)
             textMoneyShells2.scale.setTo(0.8, 0.8)
@@ -359,20 +495,20 @@ Slooow.buySnailState.prototype = {
             }
 
             //Boton baba
-            buttonBaba2 = game.add.button(game.world.centerX + 40,
+            buttonBaba2 = game.add.button(game.world.centerX + 60,
                 game.world.centerY + 240, 'button', purchaseBaba, this,
                 0, 0, 0)
             buttonBaba2.anchor.set(0.5)
             buttonBaba2.scale.setTo(0.7, 0.5)
 
             //Img baba
-            moneyBaba2 = game.add.image(game.world.centerX - 40,
+            moneyBaba2 = game.add.image(game.world.centerX - 20,
                 game.world.centerY + 240, 'moneyBaba')
             moneyBaba2.anchor.set(0.5)
             moneyBaba2.scale.setTo(0.35, 0.35)
 
             //Text baba
-            textMoneyBaba2 = game.add.text(game.world.centerX + 60,
+            textMoneyBaba2 = game.add.text(game.world.centerX + 80,
                 game.world.centerY + 240, game.global.pointsPrice, game.global.style)
             textMoneyBaba2.anchor.set(0.5)
             textMoneyBaba2.scale.setTo(0.8, 0.8)

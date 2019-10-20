@@ -808,8 +808,6 @@ window.onload = function () {
                 game.global.arrayPositionsMulti = arrayPositionNames
                 game.global.arrayTimesMulti = arrayPositionTimes
 
-                
-
                 game.state.start('gameOverState')
                 break
             case 'WAITINGROOMSTART':
