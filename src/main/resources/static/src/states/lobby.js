@@ -116,6 +116,11 @@ Slooow.lobbyState.prototype = {
 
 
         function actionOnClickBack(){
+            let msg = {
+                event: 'EXITLOBBY',
+                roomName: game.global.username + 'Room',
+            }
+            game.global.socket.send(JSON.stringify(msg))
             game.state.start('mainMenuState')
         }
 

@@ -43,116 +43,200 @@ Slooow.menuSoloAndMultiLocalState.prototype = {
             40, game.global.activeLanguage.Back, game.global.style)
         textButtonBack.anchor.set(0.5)
         textButtonBack.scale.setTo(0.5,0.5)
-        /*
-        //Boton ambientacion1 = Pradera
-		buttonWorld1 = game.add.button(game.world.centerX - 400,
-            game.world.centerY - 200, 'button', actionOnClickWorld1, this,
-            0, 0, 0)
-        buttonWorld1.anchor.set(0.5)
-        buttonWorld1.scale.setTo(0.8, 0.8)
-        //Texto ambientacion1
-		textButtonWorld1 = game.add.text(game.world.centerX - 400,
-            game.world.centerY - 200, game.global.activeLanguage.Field, game.global.style)
-        textButtonWorld1.anchor.set(0.5)
-        textButtonWorld1.scale.setTo(0.8,0.8)
 
-        //Boton ambientacion2 = Cocina
-		buttonWorld2 = game.add.button(game.world.centerX ,
-            game.world.centerY - 200, 'button', actionOnClickWorld2, this,
+        //Boton life
+		btnLifes = game.add.button(game.world.centerX - 350,
+            game.world.centerY - 300, 'pinkBtn', getLifes, this,
             0, 0, 0)
-        buttonWorld2.anchor.set(0.5)
-        buttonWorld2.scale.setTo(0.8, 0.8)
-        //Texto ambientacion2
-		textButtonWorld2 = game.add.text(game.world.centerX ,
-            game.world.centerY - 200, game.global.activeLanguage.Kitchen, game.global.style)
-        textButtonWorld2.anchor.set(0.5)
-        textButtonWorld2.scale.setTo(0.8,0.8)
-
-        //Boton ambientacion3 = Hielo
-		buttonWorld3 = game.add.button(game.world.centerX +400,
-            game.world.centerY - 200, 'button', actionOnClickWorld3, this,
-            0, 0, 0)
-        buttonWorld3.anchor.set(0.5)
-        buttonWorld3.scale.setTo(0.8, 0.8)
-        //Texto ambientacion3
-		textButtonWorld3 = game.add.text(game.world.centerX +400,
-            game.world.centerY - 200, game.global.activeLanguage.Ice, game.global.style)
-        textButtonWorld3.anchor.set(0.5)
-        textButtonWorld3.scale.setTo(0.8,0.8)
-            */
+        btnLifes.anchor.set(0.5)
+        btnLifes.scale.setTo(0.5, 0.5)
+        //Texto life
+		tLifes = game.add.text(game.world.centerX -320,
+            game.world.centerY-300 , game.global.lifes, game.global.style)
+        tLifes.anchor.set(0.5)
+        tLifes.scale.setTo(0.8,0.8)
+        //Heart
+        lifes = game.add.image(game.world.centerX - 390,
+            game.world.centerY - 300, 'lifes')
+        lifes.anchor.set(0.5,0.5)
+        lifes.scale.setTo(0.05, 0.05)
+        
         //Boton mapa 1
-		buttonMap1 = game.add.button(game.world.centerX - 100,
+		buttonMap1 = game.add.button(game.world.centerX - 350,
             game.world.centerY - 150, 'button', actionOnClickMap1, this,
             0, 0, 0)
         buttonMap1.anchor.set(0.5)
-        buttonMap1.scale.setTo(2, 0.8)
+        buttonMap1.scale.setTo(0.8, 0.8)
         //Texto mapa 1
-		textButtonMap1 = game.add.text(game.world.centerX -100,
+		textButtonMap1 = game.add.text(game.world.centerX -350,
             game.world.centerY-150 , game.global.activeLanguage.Map1, game.global.style)
         textButtonMap1.anchor.set(0.5)
         textButtonMap1.scale.setTo(0.8,0.8)
 
         //Boton mapa 2
-		buttonMap2 = game.add.button(game.world.centerX -100,
+		buttonMap2 = game.add.button(game.world.centerX -350,
             game.world.centerY + 50 , 'button', actionOnClickMap2, this,
             0, 0, 0)
         buttonMap2.anchor.set(0.5)
-        buttonMap2.scale.setTo(2, 0.8)
+        buttonMap2.scale.setTo(0.8, 0.8)
         //Texto mapa 2
-		textButtonMap2 = game.add.text(game.world.centerX -100,
+		textButtonMap2 = game.add.text(game.world.centerX -350,
             game.world.centerY + 50 , game.global.activeLanguage.Map2, game.global.style)
         textButtonMap2.anchor.set(0.5)
         textButtonMap2.scale.setTo(0.8,0.8)
 
         //Boton mapa 3
-		buttonMap3 = game.add.button(game.world.centerX -100,
+		buttonMap3 = game.add.button(game.world.centerX -350,
             game.world.centerY +250 , 'button', actionOnClickMap3, this,
             0, 0, 0)
         buttonMap3.anchor.set(0.5)
-        buttonMap3.scale.setTo(2, 0.8)
+        buttonMap3.scale.setTo(0.8, 0.8)
         //Texto mapa 3
-		textButtonMap3 = game.add.text(game.world.centerX -100,
+		textButtonMap3 = game.add.text(game.world.centerX -350,
             game.world.centerY +250 , game.global.activeLanguage.Map3, game.global.style)
         textButtonMap3.anchor.set(0.5)
         textButtonMap3.scale.setTo(0.8,0.8)
+        
+        //Title myTime
+        bgMyTime1 = game.add.image(game.world.centerX +50,
+            game.world.centerY - 270, 'button')
+        bgMyTime1.anchor.set(0.5)
+        bgMyTime1.scale.setTo(0.6, 0.4)
+        tMyTime1 = game.add.text(game.world.centerX +50,
+        game.world.centerY-270 , game.global.activeLanguage.TitleMyTime, game.global.style)
+        tMyTime1.anchor.set(0.5)
+        tMyTime1.scale.setTo(0.8,0.8)
 
+        //Boton mapa 1
+		bgTime1 = game.add.image(game.world.centerX +50,
+            game.world.centerY - 150, 'button')
+        bgTime1.anchor.set(0.5)
+        bgTime1.scale.setTo(0.8, 0.6)
+        //Texto mapa 1
+        if (game.global.myTimes[1] < 1000000000) {
+            tTime1 = game.add.text(game.world.centerX +50,
+            game.world.centerY-150 , calculateTime(game.global.myTimes[1]), game.global.style)
+            tTime1.anchor.set(0.5)
+            tTime1.scale.setTo(0.8,0.8)
+        } else {
+            tTime1 = game.add.text(game.world.centerX +50,
+            game.world.centerY-150 , game.global.activeLanguage.NoPlayed, game.global.style)
+            tTime1.anchor.set(0.5)
+            tTime1.scale.setTo(0.8,0.8)
+        }
+		
+
+        //Boton mapa 2
+		bgTime2 = game.add.image(game.world.centerX +50,
+            game.world.centerY + 50, 'button')
+        bgTime2.anchor.set(0.5)
+        bgTime2.scale.setTo(0.8, 0.6)
+        //Texto mapa 2
+        if (game.global.myTimes[0] < 1000000000){
+            tTime2 = game.add.text(game.world.centerX+50,
+            game.world.centerY+ 50 , calculateTime(game.global.myTimes[0]), game.global.style)
+            tTime2.anchor.set(0.5)
+            tTime2.scale.setTo(0.8,0.8)
+        } else {
+            tTime2 = game.add.text(game.world.centerX+50,
+            game.world.centerY+ 50 , game.global.activeLanguage.NoPlayed, game.global.style)
+            tTime2.anchor.set(0.5)
+            tTime2.scale.setTo(0.8,0.8)
+        }
+		
+
+        //Boton mapa 3
+		bgTime3 = game.add.image(game.world.centerX+50,
+            game.world.centerY +250, 'button')
+        bgTime3.anchor.set(0.5)
+        bgTime3.scale.setTo(0.8, 0.6)
+        //Texto mapa 3
+        if (game.global.myTimes[2] < 1000000000) {
+            tTime3 = game.add.text(game.world.centerX+50,
+            game.world.centerY+ 250 , calculateTime(game.global.myTimes[2]), game.global.style)
+            tTime3.anchor.set(0.5)
+            tTime3.scale.setTo(0.8,0.8)
+        } else {
+            tTime3 = game.add.text(game.world.centerX+50,
+            game.world.centerY+ 250 , game.global.activeLanguage.NoPlayed, game.global.style)
+            tTime3.anchor.set(0.5)
+            tTime3.scale.setTo(0.8,0.8)
+        }
+
+         //Title mapTime
+        bgMapTime1 = game.add.image(game.world.centerX +450,
+            game.world.centerY - 270, 'button')
+        bgMapTime1.anchor.set(0.5)
+        bgMapTime1.scale.setTo(0.6, 0.4)
+        tMapTime1 = game.add.text(game.world.centerX +450,
+        game.world.centerY-270 , game.global.activeLanguage.TitleMapTime, game.global.style)
+        tMapTime1.anchor.set(0.5)
+        tMapTime1.scale.setTo(0.8,0.8)
+
+         //Boton mapa 1
+		bgMapTime1 = game.add.image(game.world.centerX +450,
+            game.world.centerY - 150, 'button')
+        bgMapTime1.anchor.set(0.5)
+        bgMapTime1.scale.setTo(0.8, 0.6)
+        //Texto mapa 1
+        tMapTime1 = game.add.text(game.world.centerX +450,
+        game.world.centerY-150 , calculateTime(game.global.mapTimes[0]), game.global.style)
+        tMapTime1.anchor.set(0.5)
+        tMapTime1.scale.setTo(0.8,0.8)
+        
+        //Boton mapa 2
+		bgMapTime2 = game.add.image(game.world.centerX +450,
+            game.world.centerY + 50, 'button')
+        bgMapTime2.anchor.set(0.5)
+        bgMapTime2.scale.setTo(0.8, 0.6)
+        //Texto mapa 2
+        tMapTime2 = game.add.text(game.world.centerX+450,
+        game.world.centerY+ 50 , calculateTime(game.global.mapTimes[1]), game.global.style)
+        tMapTime2.anchor.set(0.5)
+        tMapTime2.scale.setTo(0.8,0.8)	
+
+        //Boton mapa 3
+		bgMapTime3 = game.add.image(game.world.centerX+450,
+            game.world.centerY +250, 'button')
+        bgMapTime3.anchor.set(0.5)
+        bgMapTime3.scale.setTo(0.8, 0.6)
+        //Texto mapa 3
+        tMapTime3 = game.add.text(game.world.centerX+450,
+        game.world.centerY+ 250 , calculateTime(game.global.mapTimes[2]), game.global.style)
+        tMapTime3.anchor.set(0.5)
+        tMapTime3.scale.setTo(0.8,0.8)
+		
         //buttonMap1.inputEnabled = false;
         //buttonMap2.inputEnabled = false;
         //buttonMap3.inputEnabled = false;
+        
+        function calculateTime(time){
+            let ms
+            let seg
+            let min
+            min = parseInt(time / (60*1000))
+            seg = parseInt(time / 1000 % 60)
+            ms = time % 1000
+            let timeString
+            if(min > 0){
+                timeString = min+'´ '+seg+'´´ '+ms+'ms'
+            } else if (seg > 0) {
+                timeString =seg+'´´ '+ms+'ms'
+            } else {
+                timeString = ms+'ms'
+            }
+            
+            return timeString       
+        }
 
+        function getLifes(){
+
+        }
+        
         function actionOnClickBack(){
             game.state.start('mainMenuState')
         }
-
-        function actionOnClickWorld1 (){
-            //Textos mapa
-            textButtonMap1.setText('Mapa 1 - Pradera')
-            buttonMap1.inputEnabled = true;
-            textButtonMap2.setText('Mapa 2 - Pradera')
-            buttonMap2.inputEnabled = true;
-            textButtonMap3.setText('Mapa 3 - Pradera')
-            buttonMap3.inputEnabled = true;
-        }
-
-        function actionOnClickWorld2 (){
-            //Textos mapa
-            textButtonMap1.setText('Mapa 1 - Cocina')
-            buttonMap1.inputEnabled = true;
-            textButtonMap2.setText('Mapa 2 - Cocina')
-            buttonMap2.inputEnabled = true;
-            textButtonMap3.setText('Mapa 3 - Cocina')
-            buttonMap3.inputEnabled = true;
-        }
-
-        function actionOnClickWorld3 (){
-            //Textos mapa
-            textButtonMap1.setText('Mapa 1 - Hielo')
-            buttonMap1.inputEnabled = true;
-            textButtonMap2.setText('Mapa 2 - Hielo')
-            buttonMap2.inputEnabled = true;
-            textButtonMap3.setText('Mapa 3 - Hielo')
-            buttonMap3.inputEnabled = true;          
-        }
+        
 
         function actionOnClickMap1(){
             console.log('te mando enter lobby')

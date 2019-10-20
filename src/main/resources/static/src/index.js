@@ -168,6 +168,10 @@ window.onload = function () {
         irisStats:[],
         shellPrice: null,
         pointsPrice: null,
+        multiRoomName: "noRoom",
+        myTimes: [],
+        mapTimes: [],
+        lifes: null,
     }
 
     // Conexiones
@@ -1039,6 +1043,20 @@ window.onload = function () {
                 }
                 
                 game.state.start('shopState')
+            case 'ENTERSOLORS':
+                this.console.log("asiudhas")
+                let myTimesAux = JSON.parse(msg.myTimes);
+                let mapTimesAux = JSON.parse(msg.mapTimes)
+                for (var e = 0; e < myTimesAux.length; e++){
+                    game.global.myTimes[e] = myTimesAux[e];
+                }
+
+                for (var s = 0; s < mapTimesAux.length; s++){
+                    game.global.mapTimes[s] = mapTimesAux[s]
+                }
+                game.global.lifes = JSON.parse(msg.life)
+                game.state.start('menuSoloAndMultiLocalState')
+
         }   
 
 

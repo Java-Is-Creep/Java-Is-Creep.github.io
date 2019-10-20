@@ -267,8 +267,15 @@ Slooow.lobbyMultiState.prototype = {
 
 
         function actionOnClickBack(){
+            let msg = {
+                    event: 'EXITLOBBYMULTI',
+                    roomName: game.global.multiRoomName
+                }
+            game.global.socket.send(JSON.stringify(msg))
+            game.global.multiRoomName = "NoRoom"
             game.state.start('mainMenuState')
         }
+        
         function actionOnClickOK(){
             buttonBack.inputEnabled = false
             buttonBack.alpha = 0.6

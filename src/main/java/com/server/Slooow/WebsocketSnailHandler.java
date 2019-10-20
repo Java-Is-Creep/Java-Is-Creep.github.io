@@ -879,6 +879,38 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				jug.sessionLock.unlock();
 			}
 			break;
+
+		case "ENTERSOLO":
+			jug = game.bucarJugadorConectado(newSession);
+			ArrayList<Integer> myTimes = new ArrayList<>();
+			//Esta en segundo
+			ArrayList<Integer> mapTimes = new ArrayList<>();
+			for(String map : jug.records.keySet()){
+				myTimes.add(jug.records.get(map));
+			}
+			mapTimes.add(game.TIMETOPASSMAP1 * 1000);
+			mapTimes.add(game.TIMETOPASSMAP2 * 1000);
+			mapTimes.add(game.TIMETOPASSMAP3 * 1000);
+			Gson gsonTimes= new Gson();
+			String myTimesArray = gsonTimes.toJson(myTimes);
+			String mapTimesArray = gsonTimes.toJson(mapTimes);
+			JsonObject msgTimes = new JsonObject();
+			msgTimes.addProperty("event", "ENTERSOLORS");
+			msgTimes.addProperty("myTimes", myTimesArray);
+			msgTimes.addProperty("mapTimes", mapTimesArray);
+			msgTimes.addProperty("life", jug.getLifes());
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgTimes.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				jug.sessionLock.unlock();
+			}
+
+		break;
+
 		default:
 
 			break;
