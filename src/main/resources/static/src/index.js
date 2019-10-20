@@ -115,7 +115,7 @@ window.onload = function () {
         maxStamina: 0,
 
         //TOP 10
-        top10UserNames : [],
+        top10UserNames: [],
         top10Times: [],
 
         //Cosas visuales jugador (multi)
@@ -144,7 +144,7 @@ window.onload = function () {
         owned: [],
         notOwned: [],
         //Trofeos que tienes y que no
-        trophiesPlayer: [false,false,false,false,false,false,false,false],
+        trophiesPlayer: [false, false, false, false, false, false, false, false],
         //Elegir caracol y mapa
         snailChosen: null,
         mapChosen: null,
@@ -157,13 +157,13 @@ window.onload = function () {
         puntuationGameOver: null,
         money: null,
         points: null,
-        maxStamina : 0,
-        puntuationGameOver : null,
-        money : null,
-        points : null,
-        snailToBuy : null,
-        skinToBuy : null,
-        statSpeed : null,
+        maxStamina: 0,
+        puntuationGameOver: null,
+        money: null,
+        points: null,
+        snailToBuy: null,
+        skinToBuy: null,
+        statSpeed: null,
         statAc: null,
         statWeight: null,
         statStamina: null,
@@ -175,7 +175,7 @@ window.onload = function () {
         mercaStats: [],
         seaStats: [],
         robaStats: [],
-        irisStats:[],
+        irisStats: [],
         shellPrice: null,
         pointsPrice: null,
         multiRoomName: "noRoom",
@@ -489,7 +489,7 @@ window.onload = function () {
                 this.game.global.puntuationGameOver = puntos
 
                 //Resetear variables mapa
-                 //Array de suelos. Tiene: x, y, width, height
+                //Array de suelos. Tiene: x, y, width, height
                 game.global.arrayGrounds = []
                 //Array de paredes. Tiene: x, y, width, height
                 game.global.arrayWalls = []
@@ -603,6 +603,10 @@ window.onload = function () {
             case 'TAKEPOWERUP':
                 //DECIR DANI QUE ME MANDE ID
                 //this.console.log('take power up')
+                audio = this.game.add.audio('wowo')
+                audio.loop = false
+                audio.volume = 1
+                audio.play()
                 var id = JSON.parse(msg.id)
                 //Borrar powerup con ese id
                 this.game.global.arrayPowerUps[id].alpha = 0
@@ -792,14 +796,14 @@ window.onload = function () {
             case 'RECORDS':
                 this.game.global.top10UserNames = JSON.parse(msg.playerName)
                 this.game.global.top10Times = JSON.parse(msg.time)
-                break   
+                break
             case 'ACHIEVE':
                 this.console.log(msg)
                 this.index = JSON.stringify(msg.text)
-                index = index.substring(1, index.length-1)
+                index = index.substring(1, index.length - 1)
                 index = parseInt(index)
                 game.global.trophiesPlayer[index] = true
-                break;     
+                break;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////   MULTIJUGADOR   ///////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -841,10 +845,10 @@ window.onload = function () {
                     game.global.playersMulti[i].stamina2.scale.setTo(scale, 0.45)
                 }
                 */
-                
+
                 var scale = arrayStamina[this.game.global.myPlayerId] * 0.5 / game.global.maxStamina
                 game.global.playersMulti[this.game.global.myPlayerId].stamina2.scale.setTo(scale, 0.45)
-                
+
                 //Actualizar barra de progreso del jugador (MAS ADELANTE TODOS)
                 var posProgress = 100 + game.global.finishObject.x - game.global.playersMulti[this.game.global.myPlayerId].sprite.x
                 var scaleProgress = posProgress / game.global.finishObject.x
@@ -859,12 +863,11 @@ window.onload = function () {
                     //Animacion de cansarse
                     game.global.playersMulti[idPlayer].sprite.animations.play('tired');
                 } else if (recoverStamina) {
-                        //Animacion de andar normal
-                        game.global.playersMulti[idPlayer].sprite.animations.play('walk');
+                    //Animacion de andar normal
+                    game.global.playersMulti[idPlayer].sprite.animations.play('walk');
                 }
                 break
             case 'FINISHMULTI':
-                firstFrame = 0;
                 this.console.log('FIN DE PARTIDAAAAAAAA')
                 this.console.log(msg)
                 var myTime = JSON.parse(msg.time)
@@ -876,7 +879,7 @@ window.onload = function () {
                 game.global.myTimeMulti = myTime
                 //game.global.myRecord = myRecord
                 game.global.myPointsMulti = myPoints
-                for (var i = 0; i< arrayPositionNames.length; i++){
+                for (var i = 0; i < arrayPositionNames.length; i++) {
                     //arrayPositionNames[i] = arrayPositionNames[i].substring(1, arrayPositionNames[i].length-1)
                     game.global.finishedPlayersMulti[i] = arrayPositionNames[i]
                 }
@@ -916,10 +919,10 @@ window.onload = function () {
                 this.game.global.haveToRotateToWallMulti[idPlayer] = false
                 break
             case 'OBSTACLECOLLISIONMULTI':
-                
+
                 //Poner animacion de cansado
                 var id = JSON.parse(msg.id)
-                
+
                 //this.console.log('colision obstaculo ' + id)
                 game.global.playersMulti[id].sprite.animations.play('damage');
                 break
@@ -997,6 +1000,10 @@ window.onload = function () {
                 this.game.global.hasPowerUp = false
                 break
             case 'TAKEPOWERUPMULTI':
+                audio = this.game.add.audio('wowo')
+                audio.loop = false
+                audio.volume = 1
+                audio.play()
                 //DECIR DANI QUE ME MANDE ID
                 //this.console.log('take power up')
                 var id = JSON.parse(msg.id)
@@ -1073,15 +1080,15 @@ window.onload = function () {
                 let robaStatsAux = JSON.parse(msg.roba)
                 let irisStatsAux = JSON.parse(msg.iris)
 
-                for (var e = 0; e < ownedAux2.length; e++){
+                for (var e = 0; e < ownedAux2.length; e++) {
                     game.global.owned[e] = ownedAux2[e];
                 }
 
-                for (var s = 0; s < notOwnedAux2.length; s++){
+                for (var s = 0; s < notOwnedAux2.length; s++) {
                     game.global.notOwned[s] = notOwnedAux2[s]
                 }
 
-                for (var p = 0; p < normalStatsAux.length; p++){
+                for (var p = 0; p < normalStatsAux.length; p++) {
                     game.global.normalStats[p] = normalStatsAux[p]
                     game.global.tankStats[p] = tankStatsAux[p]
                     game.global.baguetteStats[p] = baguetteStatsAux[p]
@@ -1111,17 +1118,17 @@ window.onload = function () {
                 this.console.log("asiudhas")
                 let myTimesAux = JSON.parse(msg.myTimes);
                 let mapTimesAux = JSON.parse(msg.mapTimes)
-                for (var e = 0; e < myTimesAux.length; e++){
+                for (var e = 0; e < myTimesAux.length; e++) {
                     game.global.myTimes[e] = myTimesAux[e];
                 }
 
-                for (var s = 0; s < mapTimesAux.length; s++){
+                for (var s = 0; s < mapTimesAux.length; s++) {
                     game.global.mapTimes[s] = mapTimesAux[s]
                 }
                 game.global.lifes = JSON.parse(msg.life)
                 game.state.start('menuSoloAndMultiLocalState')
 
-        }   
+        }
 
 
     }

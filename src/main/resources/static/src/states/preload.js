@@ -172,6 +172,7 @@ Slooow.preloadState.prototype = {
 		game.load.audio('lettuce', './assets/audio/powerUps/letuce_editado.mp3');
 		game.load.audio('shield', './assets/audio/powerUps/shield_editado.mp3');
 		game.load.audio('wing', './assets/audio/powerUps/wing_editado.mp3');
+		game.load.audio('wowo', './assets/audio/powerUps/wowo1.mp3');
 
 		$.getJSON("./assets/language.json", function (data) {
 			game.global.languageData = (data);

@@ -1,6 +1,6 @@
 Slooow.mainMenuState = function (game) {
     var buttonStartSolo
-    var optionsClicked 
+    var optionsClicked
     var minAlpha
     var maxAlpha
     var activeSound
@@ -33,14 +33,17 @@ Slooow.mainMenuState.prototype = {
         //               4535760.527128731   
         //this.background.tint = Math.random() * 0xffffff;
         //this.background.tint = 4535760.527128731;
-		//console.log(this.background.tint)
-		this.background.tileScale.set(0.4, 0.4)
+        //console.log(this.background.tint)
+        this.background.tileScale.set(0.4, 0.4)
         this.background.anchor.set(0.5, 0.5)
 
     },
 
     create: function () {
         // Control de la pestaña de opciones
+        if (game.global.musicGame != undefined) {
+            game.global.musicGame.stop()
+        }
         optionsClicked = false
         // MinAlpha poner casi en invisible los botones no disponibles
         minAlpha = 0.1
@@ -63,7 +66,7 @@ Slooow.mainMenuState.prototype = {
             50, 'SLOOOW', styleTitle)
         textTitle.anchor.set(0.5)
         textTitle.scale.setTo(0.5, 0.5)
-        
+
 
         //User
         buttonUser = game.add.button(240,
@@ -130,33 +133,33 @@ Slooow.mainMenuState.prototype = {
         */
 
         //Boton tienda
-        buttonShop = game.add.button(game.world.centerX ,
+        buttonShop = game.add.button(game.world.centerX,
             game.world.centerY, 'storeBtn', actionOnClickStartShop, this,
             0, 0, 0)
         buttonShop.anchor.set(0.5)
         buttonShop.scale.setTo(0.6, 0.6)
 
         // Boton empezar records
-        buttonStartRecords = game.add.button(game.world.centerX+300,
-            game.world.centerY+100, 'button', actionOnClickStartRecords, this,
+        buttonStartRecords = game.add.button(game.world.centerX + 300,
+            game.world.centerY + 100, 'button', actionOnClickStartRecords, this,
             0, 0, 0)
         buttonStartRecords.anchor.set(0.5)
         buttonStartRecords.scale.setTo(0.6, 0.6)
         // Texto empezar records
-        textButtonStartRecords = game.add.text(game.world.centerX+300,
-            game.world.centerY+100, game.global.activeLanguage.RecordsOnly, game.global.style)
+        textButtonStartRecords = game.add.text(game.world.centerX + 300,
+            game.world.centerY + 100, game.global.activeLanguage.RecordsOnly, game.global.style)
         textButtonStartRecords.anchor.set(0.5)
         //textButtonStartRecords.scale.setTo(0.5, 0.5)
 
         // Boton empezar trofeos
-        buttonStartTrophies = game.add.button(game.world.centerX+300,
-            game.world.centerY-100, 'button', actionOnClickStartTrophies, this,
+        buttonStartTrophies = game.add.button(game.world.centerX + 300,
+            game.world.centerY - 100, 'button', actionOnClickStartTrophies, this,
             0, 0, 0)
         buttonStartTrophies.anchor.set(0.5)
         buttonStartTrophies.scale.setTo(0.6, 0.6)
         // Texto empezar trofeos
-        textButtonStartTrophies = game.add.text(game.world.centerX+300,
-            game.world.centerY-100, game.global.activeLanguage.Trophies, game.global.style)
+        textButtonStartTrophies = game.add.text(game.world.centerX + 300,
+            game.world.centerY - 100, game.global.activeLanguage.Trophies, game.global.style)
         textButtonStartTrophies.anchor.set(0.5)
         //textButtonStartTrophies.scale.setTo(0.5, 0.5)
 
@@ -214,7 +217,7 @@ Slooow.mainMenuState.prototype = {
         buttonSoundOff.inputEnabled = false
 
         //Boton ESPAÑITA AE
-        if(game.global.activeLanguage.Language == 'eng'){
+        if (game.global.activeLanguage.Language == 'eng') {
             this.language = 'eng'
         } else {
             this.language = 'ESPAÑITA'
@@ -233,7 +236,7 @@ Slooow.mainMenuState.prototype = {
         buttonEng.anchor.set(0.5)
         buttonEng.scale.setTo(0.3, 0.3)
         buttonEng.alpha = 0
-        buttonEng.inputEnabled = false 
+        buttonEng.inputEnabled = false
 
         //Boton contacto
         buttonContact = game.add.button(game.world.width - 60,
@@ -249,8 +252,8 @@ Slooow.mainMenuState.prototype = {
         function actionOnClickStartSolo() {
             game.global.gameMode = 'SOLO'
             let msg = {
-                    event: 'ENTERSOLO',    
-                }
+                event: 'ENTERSOLO',
+            }
             game.global.socket.send(JSON.stringify(msg))
         }
 
@@ -301,7 +304,7 @@ Slooow.mainMenuState.prototype = {
             window.open('https://twitter.com/Java_Is_Creep', this)
         }
 
-        function actionOnClickDisconnect() { 
+        function actionOnClickDisconnect() {
             let msg = {
                 event: 'DISCONNECT',
                 playerName: game.global.username
@@ -312,7 +315,7 @@ Slooow.mainMenuState.prototype = {
             //game.state.start('initSesionState')
         }
 
-        function actionOnClickStartTrophies(){
+        function actionOnClickStartTrophies() {
             game.state.start('trophiesState')
         }
 
@@ -330,7 +333,7 @@ Slooow.mainMenuState.prototype = {
                 buttonStartSolo.alpha = minAlpha
                 buttonStartSolo.inputEnabled = false;
                 textButtonStartSolo.alpha = minAlpha
-        
+
                 //buttonStartMarathon.alpha = minAlpha
                 //buttonStartMarathon.inputEnabled = false
                 //textButtonStartMarathon.alpha = minAlpha
@@ -366,21 +369,26 @@ Slooow.mainMenuState.prototype = {
                 buttonDisconnect.alpha = minAlpha
                 buttonDisconnect.inputEnabled = false
 
-                buttonSoundOn.alpha = 1
-                buttonSoundOn.inputEnabled = true
+                if (game.sound.mute == true) {
+                    buttonSoundOff.alpha = 1
+                    buttonSoundOff.inputEnabled = true
+                } else {
+                    buttonSoundOn.alpha = 1
+                    buttonSoundOn.inputEnabled = true
+                }
 
-                if(this.language == 'eng'){
+                if (this.language == 'eng') {
                     buttonEng.alpha = 1
                     buttonEng.inputEnabled = true
                 } else {
                     buttonAE.alpha = 1
                     buttonAE.inputEnabled = true
                 }
-                
+
 
                 buttonContact.alpha = 1
                 buttonContact.inputEnabled = true
-            } else{
+            } else {
 
                 optionsClicked = false
 
@@ -393,10 +401,10 @@ Slooow.mainMenuState.prototype = {
                 buttonStartSolo.alpha = maxAlpha
                 buttonStartSolo.inputEnabled = true;
                 textButtonStartSolo.alpha = maxAlpha
-        
-               // buttonStartMarathon.alpha = maxAlpha
-               // buttonStartMarathon.inputEnabled = true
-               // textButtonStartMarathon.alpha = maxAlpha
+
+                // buttonStartMarathon.alpha = maxAlpha
+                // buttonStartMarathon.inputEnabled = true
+                // textButtonStartMarathon.alpha = maxAlpha
 
                 buttonStartTrophies.alpha = maxAlpha
                 buttonStartTrophies.inputEnabled = true
@@ -411,7 +419,7 @@ Slooow.mainMenuState.prototype = {
                 textButtonStartMultiOnline.alpha = maxAlpha
 
                 //buttonStartMultiLocal.alpha = maxAlpha
-               // buttonStartMultiLocal.inputEnabled = true
+                // buttonStartMultiLocal.inputEnabled = true
                 //textButtonStartMultiLocal.alpha = maxAlpha
 
                 buttonShop.alpha = maxAlpha
@@ -429,29 +437,29 @@ Slooow.mainMenuState.prototype = {
                 buttonDisconnect.alpha = maxAlpha
                 buttonDisconnect.inputEnabled = true
 
-            
+
                 buttonSoundOn.alpha = 0
                 buttonSoundOn.inputEnabled = false
-            
+
                 buttonSoundOff.alpha = 0
                 buttonSoundOff.inputEnabled = false
-                
-            
+
+
                 buttonEng.alpha = 0
                 buttonEng.inputEnabled = false
-            
+
                 buttonAE.alpha = 0
                 buttonAE.inputEnabled = false
-                
+
 
                 buttonContact.alpha = 0
                 buttonContact.inputEnabled = false
             }
         }
 
-        function actionOnClickSound (){
+        function actionOnClickSound() {
             //TODO Cambio real de sonido
-            if(this.activeSound){
+            if (this.activeSound) {
                 buttonSoundOff.alpha = maxAlpha
                 buttonSoundOff.inputEnabled = true
                 buttonSoundOn.alpha = 0
@@ -473,9 +481,9 @@ Slooow.mainMenuState.prototype = {
 
         }
 
-        function actionOnClickLanguage(){
+        function actionOnClickLanguage() {
             //TODO Cambio real de idioma
-            if(this.language == 'eng'){
+            if (this.language == 'eng') {
                 buttonEng.alpha = 0
                 buttonEng.inputEnabled = false
                 buttonAE.alpha = maxAlpha
@@ -497,7 +505,7 @@ Slooow.mainMenuState.prototype = {
     },
 
     update: function () {
-        this.background.tilePosition.x+=0.5
-        this.background.tilePosition.y-=0.5
+        this.background.tilePosition.x += 0.5
+        this.background.tilePosition.y -= 0.5
     }
 }

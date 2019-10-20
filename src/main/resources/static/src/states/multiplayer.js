@@ -373,7 +373,7 @@ Slooow.multiplayerState.prototype = {
         for (var i = 0; i < game.global.playersMulti.length; i++) {
             if (this.game.global.haveToRotateToWallMulti[i] == true) {
                 if (game.global.playersMulti[i].sprite.angle > -90) {
-                    game.global.playersMulti[i].sprite.angle -= 2
+                    game.global.playersMulti[i].sprite.angle -= 4
                 } else {
                     game.global.haveToRotateToWallMulti[i] = false
                     game.global.playersMulti[i].sprite.angle = -90

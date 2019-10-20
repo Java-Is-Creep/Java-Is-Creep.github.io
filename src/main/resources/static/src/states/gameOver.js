@@ -152,6 +152,8 @@ Slooow.gameOverState.prototype = {
                 mapName: game.global.mapChosen
             }
             game.global.socket.send(JSON.stringify(msg))
+            game.global.musicGame.stop()
+            game.global.musicMenu.play()
             game.state.start('lobbyState')
         }
 

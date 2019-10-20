@@ -27,7 +27,7 @@ Slooow.gameOverMultiState.prototype = {
 
     create: function () {
 
-        console.log('CREATE GAME OVEEEER')
+        //console.log('CREATE GAME OVEEEER')
         //Boton monedas y monedas
         buttonTop = game.add.image(game.world.centerX, 100, 'button')
         buttonTop.anchor.set(0.5)
@@ -40,20 +40,20 @@ Slooow.gameOverMultiState.prototype = {
                 break
             }
         }
-        console.log('Despues de for myPosicion')
+        //console.log('Despues de for myPosicion')
         //Texto puestos
         textPosition = game.add.text(game.world.centerX - 300,
             100, game.global.activeLanguage.Position + ': ' + myPos, game.global.style)
         textPosition.anchor.set(0.5)
         textPosition.scale.setTo(0.5, 0.5)
-        console.log(' myPos printeada')
+        //console.log(' myPos printeada')
 
         //Texto monedas
         textCoins = game.add.text(game.world.centerX + 100,
             100, game.global.activeLanguage.Points + ': ' + game.global.myPointsMulti, game.global.style)
         textCoins.anchor.set(0.5)
         textCoins.scale.setTo(0.5, 0.5)
-        console.log(' monedas printeadas')
+        //console.log(' monedas printeadas')
 
         //Boton puesto 1
         buttonP1 = game.add.image(game.world.centerX, game.world.centerY - 150, 'button')
@@ -73,7 +73,7 @@ Slooow.gameOverMultiState.prototype = {
         }
         textP1.anchor.set(0.5)
         textP1.scale.setTo(0.5, 0.5)
-        console.log(' 1')
+        //console.log(' 1')
         //Boton puesto 2
         buttonP2 = game.add.image(game.world.centerX, game.world.centerY - 50, 'button')
         buttonP2.anchor.set(0.5)
@@ -92,7 +92,7 @@ Slooow.gameOverMultiState.prototype = {
         }
         textP2.anchor.set(0.5)
         textP2.scale.setTo(0.5, 0.5)
-        console.log(' 2')
+        //console.log(' 2')
         //Boton puesto 3
         buttonP3 = game.add.image(game.world.centerX, game.world.centerY + 50, 'button')
         buttonP3.anchor.set(0.5)
@@ -111,7 +111,7 @@ Slooow.gameOverMultiState.prototype = {
         }
         textP3.anchor.set(0.5)
         textP3.scale.setTo(0.5, 0.5)
-        console.log(' 3')
+        //console.log(' 3')
         //Boton puesto 4
         buttonP4 = game.add.image(game.world.centerX, game.world.centerY + 150, 'button')
         buttonP4.anchor.set(0.5)
@@ -131,7 +131,8 @@ Slooow.gameOverMultiState.prototype = {
         }
         textP4.anchor.set(0.5)
             textP4.scale.setTo(0.5, 0.5)
-        console.log(' 4')
+        //console.log(' 4')
+        /*
         //Boton replay
         buttonReplay = game.add.button(game.world.centerX - 200,
             game.world.centerY + 250, 'button', replay, this,
@@ -143,7 +144,7 @@ Slooow.gameOverMultiState.prototype = {
         textReplay = game.add.text(game.world.centerX - 200, game.world.centerY + 250, 'Replay', game.global.style)
         textReplay.anchor.set(0.5)
         textReplay.scale.setTo(0.5, 0.5)
-
+*/
 
         //Boton salir
         buttonExit = game.add.button(game.world.centerX + 200,
@@ -156,9 +157,10 @@ Slooow.gameOverMultiState.prototype = {
         textExit.anchor.set(0.5)
         textExit.scale.setTo(0.5, 0.5)
 
+        /*
         function replay() {
 
-        }
+        }*/
 
         function exit() {
             //Resetear parametros
