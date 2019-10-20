@@ -825,45 +825,6 @@ public class Room {
 		acumulativePosY = 400;
 
 		map.addMapObject(new FinishMap(unit*6, unit, acumulativePosX, 400, type.FINISH, this));
-
-
-
-		
-
-
-
-
-
-
-		
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-		
-
-
-
-
 	}
 
 	public void createLevel1() {
@@ -920,7 +881,7 @@ public class Room {
 				new MapGround(1 * unit, groundHeigth, acumulativePosX, acumulativePosY - (unit / 2), type.GROUND));
 		acumulativePosX += 1 * unit;
 
-		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY ,
+		Trampoline trampoline = new Trampoline(4 * unit, groundHeigth, acumulativePosX, acumulativePosY -unit ,
 				type.TRAMPOLINE, 4000, 250, 500, TICKTIME, 9, 22);
 
 		map.addMapObject(trampoline);
