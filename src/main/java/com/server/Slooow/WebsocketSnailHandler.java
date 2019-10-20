@@ -247,11 +247,24 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "ENTERLOBBYMULTI":
 			jug = game.bucarJugadorConectado(newSession);
 			game.createMultiRoom(post.roomName, jug, post.mapName);
+			/*JsonObject msgMultiN = new JsonObject();
+			msgMultiN.addProperty("event", "NUMMULTIPLAYERS");
+			msgMultiN.addProperty("numPlayers", game.multiPlayerRoomMap.get(post.roomName).getNumPlayers());
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgMultiN.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				jug.sessionLock.unlock();
+			}
 			break;
 
 		case "EXITLOBBYMULTI":
+			
 			game.multiPlayerRoomMap.remove(post.roomName);
-			break;
+			break;*/
 
 		case"EXITLOBBY":
 			game.singlePlayerRoomMaps.remove(post.roomName);

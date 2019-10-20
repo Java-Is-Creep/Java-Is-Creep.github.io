@@ -93,10 +93,29 @@ Slooow.lobbyMultiState.prototype = {
         chosen.events.onInputDown.add(chooseCharacter, this)
         
         //Texto datos sala
-		textLobbyData = game.add.text(game.world.centerX -400,
-            game.world.centerY -50, game.global.activeLanguage.LobbyData, game.global.style)
+        var lobbyInfoBg = game.add.image(game.world.centerX-250, game.world.centerY+170, 'squareBtn')
+        lobbyInfoBg.anchor.setTo(0.5, 0.5);
+        lobbyInfoBg.scale.setTo(2.5, 1.2)
+        
+        textLobbyData = game.add.text(game.world.centerX -380,
+            game.world.centerY + 105, game.global.activeLanguage.LobbyData+":", game.global.style)
         textLobbyData.anchor.set(0.5)
-        textLobbyData.scale.setTo(0.5,0.5)
+        textLobbyData.scale.setTo(.7,.7)
+
+        tMapData = game.add.text(game.world.centerX - 250,
+            game.world.centerY + 175, game.global.activeLanguage.Multiplayer, game.global.style)
+        tMapData.anchor.set(0.5)
+        tMapData.scale.setTo(.7,.7)
+
+        /*tMapData = game.add.text(game.world.centerX - 250,
+        game.world.centerY + 135, game.global.multiRoomName, game.global.style)
+        tMapData.anchor.set(0.5)
+        tMapData.scale.setTo(.7,.7)
+
+        tPlayersData = game.add.text(game.world.centerX - 250,
+        game.world.centerY + 135, game.global.multiRoomPlayer+"/4", game.global.style)
+        tPlayersData.anchor.set(0.5)
+        tPlayersData.scale.setTo(.7,.7)*/
 
         function loadChosen(){
             if (game.global.snailChosen != null){
@@ -267,11 +286,11 @@ Slooow.lobbyMultiState.prototype = {
 
 
         function actionOnClickBack(){
-            let msg = {
+            /*let msg = {
                     event: 'EXITLOBBYMULTI',
                     roomName: game.global.multiRoomName
                 }
-            game.global.socket.send(JSON.stringify(msg))
+            game.global.socket.send(JSON.stringify(msg))*/
             game.global.multiRoomName = "NoRoom"
             game.state.start('mainMenuState')
         }
@@ -309,6 +328,8 @@ Slooow.lobbyMultiState.prototype = {
 
 	// Se ejecuta siempre hasta que se consigue conexion, en ese caso, pasa a preload (escena)
 	update : function() {
+        //tPlayersData.setText(game.global.multiRoomPlayer+"/4")
+
         this.background.tilePosition.x+=0.5
         this.background.tilePosition.y-=0.5
 		

@@ -714,4 +714,12 @@ public class MultiplayerRoom extends Room {
 			}
 		}
 	}
+
+	public int getNumPlayers() {
+		return numPlayers;
+	}
+
+	public void setNumPlayers(int numPlayers) {
+		this.numPlayers = numPlayers;
+	}
 }

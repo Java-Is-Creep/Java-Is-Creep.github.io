@@ -54,7 +54,8 @@
         "ErrorLogin" : "Lo sentimos, credenciales incorrectas\no tu cuenta ya ha iniciado sesión",
         "ErrorSignIn" : "Lo sentimos, ese usuario ya está en\n uso o las contraseñas no coinciden",
         "TitleMyTime" : "Tus tiempos",
-        "TitleMapTime" : "Objetivo"
+        "TitleMapTime" : "Objetivo",
+        "Multiplayer" : "Sala Multijugador"
     },
     
     "eng" : {
@@ -112,7 +113,8 @@
         "ErrorLogin" : "Sorry, your account is already logged or\n you have submit wrong credentials",
         "ErrorSignIn" : "Sorry, username is already in use or\n  passwords don't match",
         "TitleMyTime" : "Your times",
-        "TitleMapTime" : "Goal"
+        "TitleMapTime" : "Goal",
+        "Multiplayer" : "Multiplayer Room"
         }
     
 }
