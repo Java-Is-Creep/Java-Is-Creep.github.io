@@ -65,7 +65,8 @@
         "Troph7": "7. Supera el mapa 3. Puntos: 200",
         "Troph8": "8. Bate tu propio record. Puntos: 300",
         "Conseguido": "¡CONSEGUIDO!",
-        "NoConseguido": "NO CONSEGUIDO"
+        "NoConseguido": "NO CONSEGUIDO",
+        "Multiplayer" : "Sala Multijugador"
     },
     
     "eng" : {
@@ -134,7 +135,8 @@
         "Troph7": "7. Beat map 3. Points: 200",
         "Troph8": "8. Beat your own record. Points: 300",
         "Conseguido": "ACHIEVED!",
-        "NoConseguido": "NOT ACHIEVED"
+        "NoConseguido": "NOT ACHIEVED",
+        "Multiplayer" : "Multiplayer Room"
         }
     
 }

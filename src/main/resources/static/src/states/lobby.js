@@ -116,10 +116,11 @@ Slooow.lobbyState.prototype = {
         textLobbyData.anchor.set(0.5)
         textLobbyData.scale.setTo(.7,.7)
 
-        textLobbyData = game.add.text(game.world.centerX -360,
-            game.world.centerY + 135, game.global.mapChosen, game.global.style)
-        textLobbyData.anchor.set(0.5)
-        textLobbyData.scale.setTo(.6,.6)
+        tMapData = game.add.text(game.world.centerX - 250,
+            game.world.centerY + 175, game.global.mapChosen, game.global.style)
+        tMapData.anchor.set(0.5)
+        tMapData.scale.setTo(.7,.7)
+
 
 
         function actionOnClickBack(){
