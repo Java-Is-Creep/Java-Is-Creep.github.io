@@ -484,7 +484,7 @@ public class Room {
 
 		//REPETIMOS MAPA
 
-		acumulativePosX += acumulativePosX + 5*unit;
+		acumulativePosX += 5*unit;
 		acumulativePosY = 400;
 
 				map.addMapObject(new MapWall(20, 4 * unit - wallDisplacement, acumulativePosX, acumulativePosY, type.WALL));
