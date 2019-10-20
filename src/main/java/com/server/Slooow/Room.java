@@ -61,7 +61,6 @@ public class Room {
 
 	public void destroyRoom() {
 		game.deleteRoom(this);
-		System.out.println("Sala Destruida");
 	}
 
 	public void createMap() {
@@ -1186,7 +1185,7 @@ public class Room {
 
 		map.addMapObject(new FinishMap(unit*6, unit, acumulativePosXRedPath, 400, type.FINISH, this));
 
-		System.out.println("POSICION DEL FIN: " + acumulativePosXRedPath);
+
 
 		// REALIZAMOS AHORA EL CAMINO NEGRO
 

@@ -49,11 +49,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			System.out.println("Mensaje de debug");
 
 			break;
-		/*
-		 * case "CONECTAR": jug = new PlayerConected(newSession, post.playerName);
-		 * System.out.println(" anadiendo jugador " + jug.getNombre());
-		 * game.conectarJugador(jug); game.room2.anadirJugador(jug); break;
-		 */
+
 		/*
 		 * Crea una Partida y añade al jugador a una sala single player De momento
 		 * comienza la partida también
@@ -77,11 +73,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			break;
 		case "MULTIPLAYER":
 			jug = game.bucarJugadorConectado(newSession);
-			System.out.println("Mensaje de jugador Ready");
 			jug.restartSnail();
-			System.out.println("Mi tipo de caracol es: "+ jug.mySnail.getClass());
-			System.out.println("Su velocidadX es: " + jug.mySnail.MAXNORMALVELOCITYX);
-			System.out.println("Su velocidadX acelerando es: " + jug.mySnail.MAXVELOCITYX);
 			game.multiPlayerRoomMap.get(post.roomName).addPlayerReady();
 			break;
 
@@ -110,7 +102,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			for (MultiplayerRoom multi : game.multiPlayerRoomMap.values()) {
 				if (!multi.isFull.get()) {
 					double preDiff = Math.abs((double) (multi.getMatchmakingPoints() - matchPoints));
-					System.out.println("PreDiff es: " + preDiff);
 					if (preDiff <= diff) {
 						diff = preDiff;
 						multiAux = multi;
@@ -120,7 +111,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			if (multiAux != null) {
 				multiAux.anadirJugador(jug);
 			} else {
-				System.out.println("Sala random no encontrada");
 				JsonObject msg = new JsonObject();
 				msg.addProperty("event", "MULTIROOMSFULL");
 
@@ -144,18 +134,13 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 						login = true;
 						game.jugadoresConectados.putIfAbsent(jug.getSession(), jug);
 						playerR.setConnected(true);
-						System.out.println("LOGGEADO");
 					} else {
 						login = false;
-						System.out.println("NO LOGGEADO");
 					}
 
 				}
 			} else {
-				System.out.println("No cotiene la clave");
-				for (String player : game.playerRegistered.keySet()) {
-					System.out.println(" Jugador: " + player);
-				}
+
 			}
 			lockLogIn.unlock();
 			JsonObject msg = new JsonObject();
@@ -164,7 +149,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				msg.addProperty("conectionStatus", true);
 			} else {
 				msg.addProperty("conectionStatus", false);
-				System.out.println("NO TE HAS LOGEADO");
 			}
 			lockSession.lock();
 			newSession.sendMessage(new TextMessage(msg.toString()));
@@ -184,10 +168,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					game.jugadoresConectados.putIfAbsent(newSession, jug);
 					registered = true;
 					newPlayer.setConnected(true);
-					System.out.println("CuentaCreada");
-					for (String player : game.playerRegistered.keySet()) {
-						System.out.println(" Jugador: " + player);
-					}
+					
 				}
 			}
 			lockLogIn.unlock();
@@ -211,10 +192,9 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				msg3.addProperty("event", "DISCONNECTSTATUS");
 				msg3.addProperty("disconnectionStatus", true);
 				newSession.sendMessage(new TextMessage(msg3.toString()));
-				System.out.println("JUGADOR DESCONECTADO");
 				playerR.setConnected(false);
 			} else {
-				System.out.println("JUGADOR NO EXISTE");
+
 			}
 
 			/*
@@ -801,7 +781,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					}
 					playerR.mySnails.put(SnailType.TANK, true);
 					playerR.setPoints(jug.getPoints());
-					System.out.println("HE comprado un tanque");
 					break;
 				case "BAGUETTE":
 					snailAux = new BaguetteSnail(newSession, lockSession);
@@ -906,20 +885,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 
 		}
 
-		// prueba mensajes
-		/*
-		 * System.out.println("Mensaje recibido " + message.getPayload()); String msg =
-		 * "Mensaje recibido por el server: " + message.getPayload();
-		 * session.sendMessage(new TextMessage(msg));
-		 */
-
-		// Create new JSON Object y prueba JSONS
-		/*
-		 * JsonObject person = new JsonObject(); person.addProperty("firstName",
-		 * "Sergey"); person.addProperty("lastName", "Kargopolov");
-		 * System.out.println(person.toString()); session.sendMessage(new
-		 * TextMessage(person.toString()));
-		 */
+		
 	}
 
 	/**
@@ -957,7 +923,6 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			playerR.setConnected(false);
 		}
 
-		System.out.println("Adios bb");
 	}
 
 }

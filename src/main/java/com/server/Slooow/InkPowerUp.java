@@ -18,7 +18,6 @@ public class InkPowerUp extends GenericPowerUp{
         } else {
             sendMessageSingle();
         }
-        System.out.println("Caracol ha lanzado tinta");
     }
 
 

@@ -48,7 +48,6 @@ public class AchivementList {
             msg3.addProperty("event", "ACHIEVE");
             msg3.addProperty("text", record.getText());
             msg3.addProperty("points", record.getPoints());
-            System.out.println(record.toString());
             player.sessionLock.lock();
             try {
                 player.getSession().sendMessage(new TextMessage(msg3.toString()));
@@ -73,7 +72,6 @@ public class AchivementList {
                                 msg3.addProperty("event", "ACHIEVE");
                                 msg3.addProperty("text", aux.getText());
                                 msg3.addProperty("points", aux.getPoints());
-                                System.out.println(aux.toString());
                                 player.sessionLock.lock();
                                 try {
                                     player.getSession().sendMessage(new TextMessage(msg3.toString()));
@@ -88,14 +86,13 @@ public class AchivementList {
                     }
                     break;
                 case GAMESPLAYED:
-                    System.out.println("Las Partidas jugadas de este tio son: " + player.gamesPlayed.get());
+                   
                     if (player.gamesPlayed.get() >= aux.getNumericCondition()) {
                         aux.setConseguido(true);
                         JsonObject msg3 = new JsonObject();
                         msg3.addProperty("event", "ACHIEVE");
                         msg3.addProperty("text", aux.getText());
                         msg3.addProperty("points", aux.getPoints());
-                        System.out.println(aux.toString());
                         player.sessionLock.lock();
                         try {
                             player.getSession().sendMessage(new TextMessage(msg3.toString()));
@@ -114,7 +111,6 @@ public class AchivementList {
                         msg3.addProperty("event", "ACHIEVE");
                         msg3.addProperty("text", aux.getText());
                         msg3.addProperty("points", aux.getPoints());
-                        System.out.println(aux.toString());
                         player.sessionLock.lock();
                         try {
                             player.getSession().sendMessage(new TextMessage(msg3.toString()));

@@ -19,18 +19,14 @@ public class LigthWeigthPowerUp extends GenericPowerUp {
         } else {
             sendMessageSingle();
         }
-        System.out.println("MASA INCREMENTADA, la nueva mas es: " + player.mySnail.mass);
     }
 
 
     public void decrementTime() { // se le debe pasar el tiempo por refresco
 		timeRemaining -= timeRest;
-		System.out.println(timeRemaining);
 		if(timeRemaining == 0) {
             player.mySnail.restoreValues();
-            System.out.println("MASA DISMINUIDA, la nueva mas es: " + player.mySnail.mass);
             player.mySnail.setUsingPowerUp(false);
-			System.out.println("Se acabo el tiempo de powerUp");
 		}
 	}
 

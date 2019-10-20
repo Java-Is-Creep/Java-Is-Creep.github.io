@@ -144,7 +144,6 @@ public class PlayerRegistered {
 		if (secondsWaitingForLife >= SECONDSTOGETALIFE) {
             lifes++;
 			secondsWaitingForLife = 0;
-            System.out.println("VIDA AUMENTADA");
             return true;
         }
         return false;

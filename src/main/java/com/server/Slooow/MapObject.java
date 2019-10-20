@@ -22,6 +22,5 @@ public class MapObject { // clase principal de la que heredaran todos los objeto
 	}
 	
 	public void collisionInfo() {
-		System.out.println("Hay collision");
 	}
 }

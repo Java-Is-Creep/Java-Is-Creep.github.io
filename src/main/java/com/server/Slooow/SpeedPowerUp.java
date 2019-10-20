@@ -33,17 +33,13 @@ public class SpeedPowerUp extends GenericPowerUp {
             sendMessageSingle();
         }
 
-        System.out.println("Velocidades Incrementadas");
     }
 
     public void decrementTime() { // se le debe pasar el tiempo por refresco
         timeRemaining -= timeRest;
-        System.out.println(timeRemaining);
         if (timeRemaining == 0) {
             player.mySnail.restoreValues();
-            System.out.println("VELOCIDADES RESTAURADAS");
             player.mySnail.setUsingPowerUp(false);
-            System.out.println("Se acabo el tiempo de powerUp");
         }
 
     }

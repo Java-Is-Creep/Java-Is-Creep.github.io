@@ -39,38 +39,26 @@ public class MapPowerUp extends MapObject {
             case 0:
                 powerCreated = powerType.SHIELD;
                 aux = new ShieldPowerUp(player, powerCreated,idPlayer,myRoom);
-
-                System.out.println("Se ha creado un power up de escudo");
                 break;
             case 1:
                 powerCreated = powerType.STAMINA;
                 aux = new BoostStaminaPowerUp(player, 120, powerCreated,idPlayer,myRoom);
-
-                System.out.println("Se ha creado un power de stamina");
                 break;
             case 2:
                 powerCreated = powerType.WEIGHT;
                 aux = new LigthWeigthPowerUp(player, 180, 0.1f, powerCreated,idPlayer,myRoom);
-
-                System.out.println("Se ha creado power up de ligth weigth");
                 break;
             case 3:
                 powerCreated = powerType.LETUCCE;
                 aux = new LetuccePowerUp(player, 0, 300, powerCreated,idPlayer,myRoom);
-
-                System.out.println("Se ha creado un power up de Lechuga");
                 break;
             case 4:
                 powerCreated = powerType.SPEED;
                 aux = new SpeedPowerUp(player, 90, 2.5f, 2f, 2f, 2f, powerCreated,idPlayer,myRoom);
-
-                System.out.println("Aumento velocidades");
                 break;
             case 5:
                 powerCreated = powerType.INK;
                 aux = new InkPowerUp(player, 300, powerCreated,idPlayer,myRoom);
-
-                System.out.println("Se ha creado un power de tinta");
                 break;
             default:
             }
@@ -92,9 +80,6 @@ public class MapPowerUp extends MapObject {
             } else {
                 sendMessageSingle(player, id);
             }
-            
-            
-            System.out.println("POWER GENERADO CON EXITO");
         }
 
     }

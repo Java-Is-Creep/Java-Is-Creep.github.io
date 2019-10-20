@@ -30,7 +30,6 @@ public class DoorMap extends MapObstacle  {
         if(timeActive < 0){
             estate = generalEstate.CLOSSING;
             timeActive = MAXTIMEACTIVE;
-            //System.out.println("PUERTA CERRANDO");
             
         }
         return false;
@@ -43,7 +42,6 @@ public class DoorMap extends MapObstacle  {
             timeClossing = MAXTIMECLOSSING;
             myType = type.WALL;
             return true;
-            //System.out.println("PUERTA CERRADA");
         }
         return false;
     }
@@ -55,7 +53,6 @@ public class DoorMap extends MapObstacle  {
             timeOpenning = MAXTIMEOPPENING;
             myType = type.DOOR;
             return true;
-            //System.out.println("PUERTA ABIERTA");
         }
         return false;
     }
@@ -65,8 +62,6 @@ public class DoorMap extends MapObstacle  {
         if(timeToActive < 0){
             estate = generalEstate.OPENNING;
             timeToActive = MAXTIMETOACTIVE;
-            
-            //System.out.println("PUERTA ABRIENDO");
         }
         return false;
     }

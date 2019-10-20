@@ -28,7 +28,6 @@ public class Wind extends MapObject{
             time -= tickTime;
             if(time <0){
                 goingRigth = !goingRigth;
-                //System.out.println(" Cambio en el viento, ahora va a: " + goingRigth);
                 time = maxtime;
                 return true;
             }

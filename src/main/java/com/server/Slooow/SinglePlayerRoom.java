@@ -185,7 +185,6 @@ public class SinglePlayerRoom extends Room {
 				case TRAPDOOR:
 					owner.mySnail.hasFallenTrap = true;
 					owner.mySnail.trapDoorPosY = object.posY;
-					// System.out.println("colision trampilla");
 					break;
 				case TRAMPOLINE:
 
@@ -222,7 +221,6 @@ public class SinglePlayerRoom extends Room {
 			if(!isClimbingADoor){
 				sendGroundCollision();
 			} else {
-				System.out.println("TOCANDO PUERTA Y SUELO");
 			}
 		}
 
@@ -292,16 +290,14 @@ public class SinglePlayerRoom extends Room {
 	public void finishRace() {
 		boolean success = false;
 		owner.gamesPlayed.incrementAndGet();
-		System.out.println("PARTIDAS JUGADAS: "+ owner.gamesPlayed.get());
 		// acummulative time esta en ml, para pasarlo a segundos se divide entre 1000
 		if (acummulativeTime > TIMETOSUCESS) {
-			System.out.println("Has perdido, tu tiempo ha sido: " + acummulativeTime);
 			owner.decrementLifes();
 
 		} else {
 			success = true;
 			owner.gamesWon.incrementAndGet();
-			System.out.println("Has ganado, tu tiempo ha sido: " + acummulativeTime);
+			
 		}
 
 		owner.myAchievements.checkAchievements(owner,mapName,success);
@@ -359,7 +355,6 @@ public class SinglePlayerRoom extends Room {
 			msg.addProperty("event", "SNAILUPDATE");
 			msg.addProperty("runOutStamina", owner.mySnail.sendRunOutStamina);
 			msg.addProperty("recoverStamina", owner.mySnail.sendRecoverStamina);
-			System.out.println(msg.toString());
 			try {
 				owner.sessionLock.lock();
 				owner.getSession().sendMessage(new TextMessage(msg.toString()));
@@ -379,7 +374,6 @@ public class SinglePlayerRoom extends Room {
 			acummulativeTime += TICKTIME;
 
 			if(!game.findRegistered(owner).isConnected()){
-				System.out.println("LA SALA SE APAGO DEBIDO A QUE NO QUEDAN JUGADORES");
 				executor.shutdown();
 				destroyRoom();
 			}

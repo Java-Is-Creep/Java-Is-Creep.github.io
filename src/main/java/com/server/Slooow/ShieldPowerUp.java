@@ -24,7 +24,6 @@ public class ShieldPowerUp extends GenericPowerUp {
             sendMessageSingle();
         }
         
-        System.out.println("Caracol protegido");
     }
 
 

@@ -15,7 +15,6 @@ public class LetuccePowerUp extends GenericPowerUp {
 
     @Override
     public void usePowerUp(){
-        System.out.println("Lechuga usada");
         player.mySnail.setUsingPowerUp(false);
         player.mySnail.powerUpList.removeFirst();
         player.mySnail.stamina += staminaRecover;

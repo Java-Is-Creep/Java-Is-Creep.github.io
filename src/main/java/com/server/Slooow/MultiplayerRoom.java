@@ -70,7 +70,7 @@ public class MultiplayerRoom extends Room {
 	 */
 
 	public void sendMap() {
-		System.out.println("ENVIANDO EL MAPA");
+		
 
 		// Inicializamos arraylist para cada atributo de cada elemento
 		ArrayList<Integer> posX = new ArrayList<>();
@@ -114,9 +114,6 @@ public class MultiplayerRoom extends Room {
 		String WindDirArray = gson.toJson(windDir);
 		String namesArray = gson.toJson(names);
 		String snailsArray = gson.toJson(snails);
-
-		System.out.println("Array de posX");
-		System.out.println(posXArray);
 
 		JsonObject msgMap = new JsonObject();
 		msgMap.addProperty("event", "DRAWMAP");
@@ -241,7 +238,6 @@ public class MultiplayerRoom extends Room {
 					case TRAPDOOR:
 						player.mySnail.hasFallenTrap = true;
 						player.mySnail.trapDoorPosY = object.posY;
-						// System.out.println("colision trampilla");
 						break;
 					case TRAMPOLINE:
 
@@ -268,7 +264,7 @@ public class MultiplayerRoom extends Room {
 						player.mySnail.wind = (Wind) object;
 						break;
 					default:
-						System.out.println("COLISION RARA");
+						System.err.println("COLISION SIN IDENTIFICAR");
 					}
 
 				}
@@ -435,10 +431,8 @@ public class MultiplayerRoom extends Room {
 			msg2.addProperty("event", "PLAYERENTER");
 			msg2.addProperty("name", jug.getNombre());
 			broadcast(msg2);
-			System.out.println("Jugador: " + jug.getNombre());
 		}
 		if (numPlayers == MAXNUMPLAYERS) {
-			System.out.println("empezando room");
 			isFull.set(true);
 			//tick();
 		}
@@ -492,15 +486,12 @@ public class MultiplayerRoom extends Room {
 			player.sessionLock.unlock();
 		}
 		//quitarJugador(player);
-		System.out.println("Jugadores terminados: "+ playerNamePosition.size());
 
 		if(playerNamePosition.size() == MAXNUMPLAYERS){
-			System.out.println("Dentro de apagar");
 			executor.shutdown();
 			destroyRoom();
 		}
 		
-		System.out.println("Tras comprobar los jugadores");
 
 
 	}
@@ -511,7 +502,6 @@ public class MultiplayerRoom extends Room {
 			quitarJugador(playerArray[i]);
 		}
 		game.deleteRoom(this);
-		System.out.println("Sala Destruida");
 	}
 
 	public void checkSnailState() {
@@ -528,7 +518,6 @@ public class MultiplayerRoom extends Room {
 				msg.addProperty("runOutStamina", player.mySnail.sendRunOutStamina);
 				msg.addProperty("recoverStamina", player.mySnail.sendRecoverStamina);
 				msg.addProperty("id", id);
-				System.out.println(msg);
 				broadcast(msg);
 			}
 			id++;
@@ -538,16 +527,13 @@ public class MultiplayerRoom extends Room {
 	}
 
 	public void addPlayerReady(){
-		System.out.println("Antes del lock");
 		playerReadyLock.lock();
-		System.out.println("JUGADOR AÑADIDO");
 		
 		if(readyPlayers.incrementAndGet() == MAXNUMPLAYERS){
 			hasStart = true;
 			map = new Map(2000, mapName);
 					createMap();
 					sendMap();		
-					System.out.println("Arrancando sala");
 					tick();
 		}
 		playerReadyLock.unlock();
@@ -585,7 +571,6 @@ public class MultiplayerRoom extends Room {
 				msg.addProperty("id", i);
 				msg.addProperty("state", door.estate.toString());
 
-				System.out.println(msg.toString());
 				broadcast(msg);
 			}
 			i++;
@@ -703,12 +688,8 @@ public class MultiplayerRoom extends Room {
 
 	public void quitarJugador(PlayerConected jug) {
 		playerLock.lock();
-		System.out.println("Valores restaurados");
 		jug.mySnail.restoreValues();
 		jug.mySnail.resetPosition();
-		System.out.println("PosX: " + jug.mySnail.posX);
-		System.out.println("PosY: " + jug.mySnail.posY);
-		
 		if (jugadoresEnSala.remove(jug.getSession()) != null) {
 			numPlayers--;
 			jug.mySnail.hasFinish = true;

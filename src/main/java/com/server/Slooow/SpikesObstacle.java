@@ -77,11 +77,6 @@ public class SpikesObstacle extends MapObstacle {
             return false;
 
         }
-        /*
-        System.out.println(estate);
-        System.out.println("PosX es: "+posX + "PosY es: " + posY);
-        collider.recalculatePosition(posX, posY);
-        */
     }
 
     public void playerCrash(){

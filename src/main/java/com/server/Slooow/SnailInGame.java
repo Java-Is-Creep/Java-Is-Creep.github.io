@@ -207,7 +207,6 @@ enum SkinType{Skin1,Skin2,Skin3}
 		this.mySession = mySession;
 		this.sessionLock = sessionLock;
 
-		System.out.println(MAXVELOCITYX);
 
 		// inicializamos los valores que varian con el power up
 		maxNormalSpeedX = MAXNORMALVELOCITYX;
@@ -271,18 +270,6 @@ enum SkinType{Skin1,Skin2,Skin3}
 	// se para hasta que la recupere.
 	// Actualizacion del movimiento y variables del caracol
 	public void updateSnail(Room room, int id) {
-		/*
-		 * 
-		 * System.out.println(" MAX NORMAL SPEEDX: " + maxNormalSpeedX);
-		 * System.out.println(" MAX NORMAL SPEEDY: " + maxNormalSpeedY);
-		 * System.out.println(" MAX ACELERATING SPEEDX: " + maxAceleratingSpeedX);
-		 * System.out.println(" MAX ACELERATING SPEEDY: " + maxAceleratingSpeedY);
-		 * System.out.println("Normal aceleration: " + normalAcelerationX);
-		 * System.out.println(" Acelerating aceleration: " +
-		 * maxAcelerationAceleratingX); System.out.println(" speedX: " + speedX);
-		 * System.out.println(" acelerationX: " + acelerationX);
-		 */
-
 		 if(isProtected){
 			 timeProtectedRemaining --;
 			 if(timeProtectedRemaining <= 0){
@@ -318,7 +305,6 @@ enum SkinType{Skin1,Skin2,Skin3}
 			useObject = lastMovement.useObject;
 			
 		} else {
-			//System.out.println("Last Movement ES NULL: " + lastMovement.isAcelerating);
 		}
 		lastMovementLock.unlock();
 
@@ -336,15 +322,12 @@ enum SkinType{Skin1,Skin2,Skin3}
 		}
 
 		if (useObject) {
-			System.out.println("Mandar Usando Power Up");
 			if (!usingPowerUp) {
 				if (powerUpList.size() >0) {
 					powerUpList.getFirst().usePowerUp();
 				} else {
-					System.out.println("No hay power up");
 				}
 			} else {
-				System.out.println("USANDO POWER UP");
 			}
 		}
 
@@ -366,9 +349,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 							} else {
 								sendCrashMessageMulti("LOSESHIELDMULTI",id,room);
 							}
-							System.out.println("se pincho pero se protegio con escudo");
 						} else if(isProtected){
-							System.out.println("Se estaba recuperando del impacto anterior");
 						}else {
 							spikes.playerCrash();
 							crashObstacle();
@@ -380,7 +361,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 								sendCrashMessageMulti("OBSTACLECOLLISIONMULTI",id,room);
 							}
 							
-							System.out.println("se pincho ");
+							
 						}
 					}
 				}
@@ -407,7 +388,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 				if (stamina <= 0) {
 					runOutStamina = true;
 					sendRunOutStamina = true;
-					System.out.println("Me quede sin stamina");
+					
 
 				}
 
@@ -425,7 +406,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 				if (stamina <= 0) {
 					runOutStamina = true;
 					sendRunOutStamina = true;
-					System.out.println("Me quede sin stamina");
+					
 
 				}
 				
@@ -500,14 +481,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 							maxSpeedInSlopeX = (float) (maxSpeedX * Math.cos(slopeRadians)) / wind.windForce;
 							maxSpeedInSlopeY = (float) (maxSpeedY * Math.sin(slopeRadians)) / wind.windForce;
 						}
-						/*
-						 * System.out.println("EN CUESTA"); System.out.println("IS IN WIND: " +
-						 * isInWind); System.out.println(" direccion der?: " + wind.goingRigth);
-						 * System.out.println(" maxSpeedX: " + maxSpeedInSlopeX);
-						 * System.out.println(" maxSpeedY: " + maxSpeedInSlopeY);
-						 * System.out.println(" acelerationX: " + acelerationX);
-						 * System.out.println(" acelerationY: " + acelerationY);
-						 */
+						
 					}
 
 				} else {
@@ -592,16 +566,7 @@ enum SkinType{Skin1,Skin2,Skin3}
 			posX += speedX;
 			posY += speedY;
 		}
-		/*
-		 * if (isInWind) { System.out.println("IS IN WIND: " + isInWind);
-		 * System.out.println(" direccion der?: " + wind.goingRigth);
-		 * System.out.println(" maxSpeedX: " + maxSpeedX);
-		 * System.out.println(" maxSpeedY: " + maxSpeedY);
-		 * System.out.println(" acelerationX: " + acelerationX);
-		 * System.out.println(" acelerationY: " + acelerationY);
-		 * 
-		 * }
-		 */
+		
 
 		// reseteamos lo del viiento
 		isInWind = false;
@@ -676,7 +641,6 @@ enum SkinType{Skin1,Skin2,Skin3}
 		JsonObject msg = new JsonObject();
 		msg.addProperty("event", event);
 		msg.addProperty("id", id);
-		System.out.println(msg.toString());
 		if(room.getClass() == MultiplayerRoom.class){
 			MultiplayerRoom aux = (MultiplayerRoom) room;
 			aux.broadcast(msg);

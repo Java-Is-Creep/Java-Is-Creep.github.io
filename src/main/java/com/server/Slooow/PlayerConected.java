@@ -71,7 +71,6 @@ public class PlayerConected {
 
 	public void decrementLifes() {
 		lifes--;
-		System.out.println("Vida restada");
 		if (lifes < 0) {
 			lifes = 0;
 		}
@@ -84,7 +83,6 @@ public class PlayerConected {
 		if (secondsWaitingForLife >= SECONDSTOGETALIFE) {
 			lifes++;
 			secondsWaitingForLife = 0;
-			System.out.println("VIDA AUMENTADA");
 		}
 	}
 
@@ -93,7 +91,6 @@ public class PlayerConected {
 		int pointsAux = 0;
         pointsAux += POINTSFORFINISH;
 		pointsAux += (int) (200-(time/500));
-		System.out.println("Mis puntos en esta carrera son: "+ pointsAux);
 		if(pointsAux <0){
 			pointsAux = 0;
 		}
