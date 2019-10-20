@@ -134,6 +134,10 @@ public class PlayerConected {
 		this.points = points;
 	}
 
+	public void addPoints(int points){
+		this.points += points;
+	}
+
 	public int getCash() {
 		return cash;
 	}

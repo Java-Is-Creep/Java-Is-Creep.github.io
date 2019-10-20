@@ -40,7 +40,7 @@ public class SeaSnail extends SnailInGame {
 	public final static int STATREGEN = 5;
 
 	public final static int CASHPRICE = 100;
-	public final static int POINTSPRICE = 100;
+	public final static int POINTSPRICE = 12000;
 
     public SeaSnail(WebSocketSession mySession, ReentrantLock sessionLock) {
 		super(mySession, sessionLock, MAXSTAMINA, 

@@ -4,6 +4,8 @@ Slooow.chooseCharacterState = function(game) {
     var stat3
     var stat4
     var stat5
+    var skins
+    var skinsBg
 }
 
 Slooow.chooseCharacterState.prototype = {
@@ -68,7 +70,9 @@ Slooow.chooseCharacterState.prototype = {
         stat3 = [];
         stat4 = [];
         stat5 = [];
-
+        
+        skins = [];
+        skinsBg = [];
         //Print image chosen
         var chosenShell = game.add.image(game.world.centerX-380, game.world.centerY-170, 'roundBtn')
         chosenShell.anchor.setTo(0.5, 0.5);
@@ -194,6 +198,7 @@ Slooow.chooseCharacterState.prototype = {
 
         rainbowShell.inputEnabled = true
         rainbowShell.events.onInputDown.add(chooseCharacterRainbow, this)
+
 
         for(var i = 0; i < game.global.owned.length; i++){
             switch (game.global.owned[i]){
@@ -384,6 +389,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.normalStats[3]
                         game.global.statWeight = game.global.normalStats[2]
                         game.global.statSpeed = game.global.normalStats[4]
+                        printSkins('normalCol','normalCol1','normalCol2')
                         
                     break
                 case ('TANK'):
@@ -401,6 +407,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.tankStats[3]
                         game.global.statWeight = game.global.tankStats[2]
                         game.global.statSpeed = game.global.tankStats[4]
+                        printSkins('tanqueCol','tanqueCol1','tanqueCol2')
                     break   
                 case ('BAGUETTE'):
                         if(chosen == null){
@@ -417,6 +424,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.baguetteStats[3]
                         game.global.statWeight = game.global.baguetteStats[2]
                         game.global.statSpeed = game.global.baguetteStats[4]
+                        printSkins('frenchCol','frenchCol1','frenchCol2')
                     break    
                 case ('MIAU'):
                         if(chosen == null){
@@ -434,6 +442,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.miauStats[3]
                         game.global.statWeight = game.global.miauStats[2]
                         game.global.statSpeed = game.global.miauStats[4]
+                        printSkins('catCol','catCol1','catCol2')
                     break    
                 case ('MERCA'):
                          if(chosen == null){
@@ -450,6 +459,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.mercaStats[3]
                         game.global.statWeight = game.global.mercaStats[2]
                         game.global.statSpeed = game.global.mercaStats[4]
+                        printSkins('slugCol','slugCol1','slugCol2')
                     break     
                 case ('SEA'):
                         if(chosen == null){
@@ -467,6 +477,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.seaStats[3]
                         game.global.statWeight = game.global.seaStats[2]
                         game.global.statSpeed = game.global.seaStats[4]
+                        printSkins('seaCol','seaCol1','seaCol2')
                     break
                 case ('ROBA'):
                         if(chosen == null){
@@ -484,6 +495,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.robaStats[3]
                         game.global.statWeight = game.global.robaStats[2]
                         game.global.statSpeed = game.global.robaStats[4]
+                        printSkins('thiefCol','thiefCol1','thiefCol2')
                     break
                 case ('IRIS'):
                         if(chosen == null){
@@ -501,6 +513,7 @@ Slooow.chooseCharacterState.prototype = {
                         game.global.statRegen = game.global.irisStats[3]
                         game.global.statWeight = game.global.irisStats[2]
                         game.global.statSpeed = game.global.irisStats[4]
+                        printSkins('irisCol','irisCol1','irisCol2')
                     break
                 default:
                     console.log('snail sprite no identificado')
@@ -572,6 +585,45 @@ Slooow.chooseCharacterState.prototype = {
             } 
             
             }
+
+        function printSkins(skin1, skin2, skin3){
+            
+            for (var i = 0; i < skins.length; i++){
+                skins[i].destroy();
+            }
+
+            if (skinsBg.length < 3){
+                skinsBg[0] = game.add.image(game.world.centerX + 110, game.world.centerY + 140, 'roundBtn')
+                skinsBg[0].anchor.setTo(0.5, 0.5);
+                skinsBg[0].scale.setTo(0.7,0.7)
+
+                skinsBg[1] = game.add.image(game.world.centerX + 330, game.world.centerY + 140, 'roundBtn')
+                skinsBg[1].anchor.setTo(0.5, 0.5);
+                skinsBg[1].scale.setTo(0.7,0.7)
+                skinsBg[1].alpha = 0.7;
+
+                skinsBg[2] = game.add.image(game.world.centerX + 550, game.world.centerY + 140, 'roundBtn')
+                skinsBg[2].anchor.setTo(0.5, 0.5);
+                skinsBg[2].scale.setTo(0.7,0.7)
+                skinsBg[2].alpha = 0.7;
+            }
+            
+
+            skins[0] = game.add.image(game.world.centerX + 110, game.world.centerY + 140, skin1)
+            skins[0].anchor.setTo(0.5, 0.5);
+            skins[0].scale.setTo(0.3,0.3)
+
+            skins[1] = game.add.image(game.world.centerX + 330, game.world.centerY + 140, skin2)
+            skins[1].anchor.setTo(0.5, 0.5);
+            skins[1].scale.setTo(0.3,0.3)
+            skins[1].alpha = 0.7;
+
+            skins[2] = game.add.image(game.world.centerX + 550, game.world.centerY + 140, skin3)
+            skins[2].anchor.setTo(0.5, 0.5);
+            skins[2].scale.setTo(0.3,0.3)
+            skins[2].alpha = 0.7;
+
+        }
     },
 
     update : function() {

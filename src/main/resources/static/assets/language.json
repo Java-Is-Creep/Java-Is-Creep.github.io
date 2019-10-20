@@ -49,7 +49,8 @@
         "Yes" : "Sí",
         "No" : "No",
         "Position": "Puesto",
-        "NotFinished": "No ha terminado la carrera"
+        "NotFinished": "No ha terminado la carrera",
+        "Owned" : "Ya en propiedad"
     },
     
     "eng" : {
@@ -102,7 +103,8 @@
         "Yes" : "Yes",
         "No" : "No",
         "Position": "Ranking",
-        "NotFinished": "Has not finished the race"
+        "NotFinished": "Has not finished the race",
+        "Owned" : "Owned"
         }
     
 }

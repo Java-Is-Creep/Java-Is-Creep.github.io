@@ -32,13 +32,13 @@ Slooow.createAccountState.prototype = {
         this.background.anchor.set(0.5, 0.5)
         
         // Campo nombre de usuario
-        usernameInput = game.add.inputField(game.world.centerX - 160,
-            game.world.centerY - 100, {
-            font: '18px Arial',
+        usernameInput = game.add.inputField(game.world.centerX - 240,
+            game.world.centerY - 180, {
+            font: '40px Arial',
             fill: '#212121',
             fontWeight: 'bold',
-            height: 30,
-            width: 300,
+            height: 55,
+            width: 450,
             padding: 8,
             borderWidth: 1,
             borderColor: '#000',
@@ -47,13 +47,13 @@ Slooow.createAccountState.prototype = {
         });
 
         // Campo PassWord
-        passwordInput = game.add.inputField(game.world.centerX - 160,
-            game.world.centerY - 30, {
-            font: '18px Arial',
+        passwordInput = game.add.inputField(game.world.centerX - 240,
+            game.world.centerY - 70, {
+            font: '40px Arial',
             fill: '#212121',
             fontWeight: 'bold',
-            height: 30,
-            width: 300,
+            height: 55,
+            width: 450,
             padding: 8,
             borderWidth: 1,
             borderColor: '#000',
@@ -63,13 +63,13 @@ Slooow.createAccountState.prototype = {
         });
 
         //Campo confirmar pass
-        confirmPasswordInput = game.add.inputField(game.world.centerX - 160,
-            game.world.centerY +40, {
-            font: '18px Arial',
+        confirmPasswordInput = game.add.inputField(game.world.centerX - 240,
+            game.world.centerY + 40, {
+            font: '40px Arial',
             fill: '#212121',
             fontWeight: 'bold',
-            height: 30,
-            width: 300,
+            height: 55,
+            width: 450,
             padding: 8,
             borderWidth: 1,
             borderColor: '#000',
@@ -106,15 +106,15 @@ Slooow.createAccountState.prototype = {
 
         //Boton crear cuenta
         buttonCreateAccount = game.add.button(game.world.centerX ,
-            game.world.centerY + 140, 'button', actionOnClickCreate, this,
+            game.world.centerY + 200, 'button', actionOnClickCreate, this,
             0, 0, 0)
         buttonCreateAccount.anchor.set(0.5)
-        buttonCreateAccount.scale.setTo(0.4, 0.3)
+        buttonCreateAccount.scale.setTo(0.65, 0.65)
         //Texto boton crear cuenta
         textButtonInit = game.add.text(game.world.centerX ,
-            game.world.centerY + 140, game.global.activeLanguage.SingIn, game.global.style)
+            game.world.centerY + 200, game.global.activeLanguage.SingIn, game.global.style)
         textButtonInit.anchor.set(0.5)
-        textButtonInit.scale.setTo(0.5, 0.5)
+        textButtonInit.scale.setTo(1, 1)
 
         //Boton atras
         buttonBack = game.add.button(50 ,

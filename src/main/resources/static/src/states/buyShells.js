@@ -211,6 +211,8 @@ Slooow.buyShellsState.prototype = {
             let msg = {
                         event: 'PURCHASE',
                         purchaseId: id,
+                        purchaseSnail: "noSnail",
+                        method: "noMethod",
                     }
             game.global.socket.send(JSON.stringify(msg))
         }

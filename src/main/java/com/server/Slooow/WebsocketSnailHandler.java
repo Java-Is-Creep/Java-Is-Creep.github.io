@@ -88,7 +88,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 		case "SEARCHNAMEROOM":
 			jug = game.bucarJugadorConectado(newSession);
 			MultiplayerRoom roomAux = game.multiPlayerRoomMap.get(post.roomName);
-			if(roomAux != null){
+			if (roomAux != null) {
 				roomAux.anadirJugador(jug);
 			} else {
 				JsonObject msg = new JsonObject();
@@ -98,7 +98,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 				jug.getSession().sendMessage(new TextMessage(msg.toString()));
 				lockSession.unlock();
 			}
-			
+
 			break;
 		case "SEARCHRANDOMROOM":
 			jug = game.bucarJugadorConectado(newSession);
@@ -110,7 +110,7 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			for (MultiplayerRoom multi : game.multiPlayerRoomMap.values()) {
 				if (!multi.isFull.get()) {
 					double preDiff = Math.abs((double) (multi.getMatchmakingPoints() - matchPoints));
-					System.out.println("PreDiff es: "+ preDiff);
+					System.out.println("PreDiff es: " + preDiff);
 					if (preDiff <= diff) {
 						diff = preDiff;
 						multiAux = multi;
@@ -275,78 +275,78 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 			JsonObject msg3 = new JsonObject();
 			msg3.addProperty("event", "ENTERLOBBY");
 			msg3.addProperty("snail", jug.snailType.toString());
-			switch(jug.snailType.toString()) {
-				case "NORMAL":
-					snailAux = new normalSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
+			switch (jug.snailType.toString()) {
+			case "NORMAL":
+				snailAux = new normalSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
 				break;
-				case "TANK":
-					snailAux = new TankSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
-				case "BAGUETTE":
-					snailAux = new BaguetteSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
+			case "TANK":
+				snailAux = new TankSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
+			case "BAGUETTE":
+				snailAux = new BaguetteSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
 
-				case "MIAU":
-					snailAux = new MiauSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
+			case "MIAU":
+				snailAux = new MiauSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
 
-				case "MERCA":
-					snailAux = new MercaSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
+			case "MERCA":
+				snailAux = new MercaSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
 
-				case "SEA":
-					snailAux = new SeaSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
+			case "SEA":
+				snailAux = new SeaSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
 
-				case "ROBA":
-					snailAux = new RobaSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
+			case "ROBA":
+				snailAux = new RobaSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
 
-				case "IRIS":
-					snailAux = new IrisSnail(newSession, lockSession);
-					msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msg3.addProperty("ac", snailAux.getSTATAC());
-					msg3.addProperty("weight", snailAux.getSTATWEIGHT());
-					msg3.addProperty("regen", snailAux.getSTATREGEN());
-					msg3.addProperty("speed", snailAux.getSTATSPEED());
-					break;
-				default:
-				
+			case "IRIS":
+				snailAux = new IrisSnail(newSession, lockSession);
+				msg3.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msg3.addProperty("ac", snailAux.getSTATAC());
+				msg3.addProperty("weight", snailAux.getSTATWEIGHT());
+				msg3.addProperty("regen", snailAux.getSTATREGEN());
+				msg3.addProperty("speed", snailAux.getSTATSPEED());
+				break;
+			default:
+
 				break;
 			}
 
@@ -438,279 +438,471 @@ public class WebsocketSnailHandler extends TextWebSocketHandler {
 					notOwned.add(snail.toString());
 				}
 			}
-				Gson gsonOwn = new Gson();
-				String ownedArray = gsonOwn.toJson(owned);
-				String notOwnedArray = gsonOwn.toJson(notOwned);
+			Gson gsonOwn = new Gson();
+			String ownedArray = gsonOwn.toJson(owned);
+			String notOwnedArray = gsonOwn.toJson(notOwned);
 
-				JsonObject msgShop = new JsonObject();
-				msgShop.addProperty("event", "SHOPENTER");
-				msgShop.addProperty("owned", ownedArray);
-				msgShop.addProperty("notOwned", notOwnedArray);
-				msgShop.addProperty("points", jug.getPoints());
-				msgShop.addProperty("money", jug.getCash());
-				try {
-					jug.sessionLock.lock();
-					jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
-				} catch (IOException e) {
+			JsonObject msgShop = new JsonObject();
+			msgShop.addProperty("event", "SHOPENTER");
+			msgShop.addProperty("owned", ownedArray);
+			msgShop.addProperty("notOwned", notOwnedArray);
+			msgShop.addProperty("points", jug.getPoints());
+			msgShop.addProperty("money", jug.getCash());
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgShop.toString()));
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				jug.sessionLock.unlock();
 			}
 
-
 			break;
 
-			case "CHOOSECHARSNAIL":
-				playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
-				ArrayList<String> owned2 = new ArrayList<>();
-				ArrayList<String> notOwned2 = new ArrayList<>();
-				for (SnailType snail : playerR.mySnails.keySet()){
-					if(playerR.mySnails.get(snail)){
-						owned2.add(snail.toString());
-					} else {
-						notOwned2.add(snail.toString());
-					}
+		case "CHOOSECHARSNAIL":
+			playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
+			ArrayList<String> owned2 = new ArrayList<>();
+			ArrayList<String> notOwned2 = new ArrayList<>();
+			for (SnailType snail : playerR.mySnails.keySet()) {
+				if (playerR.mySnails.get(snail)) {
+					owned2.add(snail.toString());
+				} else {
+					notOwned2.add(snail.toString());
 				}
-				Gson gsonOwn2 = new Gson();
-				String ownedArray2 = gsonOwn2.toJson(owned2);
-				String notOwnedArray2 = gsonOwn2.toJson(notOwned2);
+			}
+			Gson gsonOwn2 = new Gson();
+			String ownedArray2 = gsonOwn2.toJson(owned2);
+			String notOwnedArray2 = gsonOwn2.toJson(notOwned2);
 
-				JsonObject msgChoose = new JsonObject();
-				msgChoose.addProperty("event", "CHOOSEENTER");
-				msgChoose.addProperty("owned", ownedArray2);
-				msgChoose.addProperty("notOwned", notOwnedArray2);
-				ArrayList<Integer> NORMAL = new ArrayList<>();
-				snailAux = new normalSnail(newSession, lockSession);
-				NORMAL.add(snailAux.getSTATSTAMINA());
-				NORMAL.add(snailAux.getSTATAC());
-				NORMAL.add(snailAux.getSTATWEIGHT());
-				NORMAL.add(snailAux.getSTATREGEN());
-				NORMAL.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> TANK = new ArrayList<>();
-				snailAux = new TankSnail(newSession, lockSession);
-				TANK.add(snailAux.getSTATSTAMINA());
-				TANK.add(snailAux.getSTATAC());
-				TANK.add(snailAux.getSTATWEIGHT());
-				TANK.add(snailAux.getSTATREGEN());
-				TANK.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> BAGUETTE = new ArrayList<>();
-				snailAux = new BaguetteSnail(newSession, lockSession);
-				BAGUETTE.add(snailAux.getSTATSTAMINA());
-				BAGUETTE.add(snailAux.getSTATAC());
-				BAGUETTE.add(snailAux.getSTATWEIGHT());
-				BAGUETTE.add(snailAux.getSTATREGEN());
-				BAGUETTE.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> MIAU = new ArrayList<>();
-				snailAux = new MiauSnail(newSession, lockSession);
-				MIAU.add(snailAux.getSTATSTAMINA());
-				MIAU.add(snailAux.getSTATAC());
-				MIAU.add(snailAux.getSTATWEIGHT());
-				MIAU.add(snailAux.getSTATREGEN());
-				MIAU.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> MERCA= new ArrayList<>();
-				snailAux = new MercaSnail(newSession, lockSession);
-				MERCA.add(snailAux.getSTATSTAMINA());
-				MERCA.add(snailAux.getSTATAC());
-				MERCA.add(snailAux.getSTATWEIGHT());
-				MERCA.add(snailAux.getSTATREGEN());
-				MERCA.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> SEA = new ArrayList<>();
-				snailAux = new SeaSnail(newSession, lockSession);
-				SEA.add(snailAux.getSTATSTAMINA());
-				SEA.add(snailAux.getSTATAC());
-				SEA.add(snailAux.getSTATWEIGHT());
-				SEA.add(snailAux.getSTATREGEN());
-				SEA.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> ROBA = new ArrayList<>();
-				snailAux = new RobaSnail(newSession, lockSession);
-				ROBA.add(snailAux.getSTATSTAMINA());
-				ROBA.add(snailAux.getSTATAC());
-				ROBA.add(snailAux.getSTATWEIGHT());
-				ROBA.add(snailAux.getSTATREGEN());
-				ROBA.add(snailAux.getSTATSPEED());
-				ArrayList<Integer> IRIS = new ArrayList<>();
-				snailAux = new IrisSnail(newSession, lockSession);
-				IRIS.add(snailAux.getSTATSTAMINA());
-				IRIS.add(snailAux.getSTATAC());
-				IRIS.add(snailAux.getSTATWEIGHT());
-				IRIS.add(snailAux.getSTATREGEN());
-				IRIS.add(snailAux.getSTATSPEED());
-				String normalArray = gsonOwn2.toJson(NORMAL);
-				String tankArray = gsonOwn2.toJson(TANK);
-				String baguetteArray = gsonOwn2.toJson(BAGUETTE);
-				String miauArray = gsonOwn2.toJson(MIAU);
-				String mercaArray = gsonOwn2.toJson(MERCA);
-				String seaArray = gsonOwn2.toJson(SEA);
-				String robaArray = gsonOwn2.toJson(ROBA);
-				String irisArray = gsonOwn2.toJson(IRIS);
-				msgChoose.addProperty("normal", normalArray);
-				msgChoose.addProperty("tank", tankArray);
-				msgChoose.addProperty("baguette", baguetteArray);
-				msgChoose.addProperty("miau", miauArray);
-				msgChoose.addProperty("merca", mercaArray);
-				msgChoose.addProperty("sea", seaArray);
-				msgChoose.addProperty("roba", robaArray);
-				msgChoose.addProperty("iris", irisArray);
-				
+			JsonObject msgChoose = new JsonObject();
+			msgChoose.addProperty("event", "CHOOSEENTER");
+			msgChoose.addProperty("owned", ownedArray2);
+			msgChoose.addProperty("notOwned", notOwnedArray2);
+			ArrayList<Integer> NORMAL = new ArrayList<>();
+			snailAux = new normalSnail(newSession, lockSession);
+			NORMAL.add(snailAux.getSTATSTAMINA());
+			NORMAL.add(snailAux.getSTATAC());
+			NORMAL.add(snailAux.getSTATWEIGHT());
+			NORMAL.add(snailAux.getSTATREGEN());
+			NORMAL.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> TANK = new ArrayList<>();
+			snailAux = new TankSnail(newSession, lockSession);
+			TANK.add(snailAux.getSTATSTAMINA());
+			TANK.add(snailAux.getSTATAC());
+			TANK.add(snailAux.getSTATWEIGHT());
+			TANK.add(snailAux.getSTATREGEN());
+			TANK.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> BAGUETTE = new ArrayList<>();
+			snailAux = new BaguetteSnail(newSession, lockSession);
+			BAGUETTE.add(snailAux.getSTATSTAMINA());
+			BAGUETTE.add(snailAux.getSTATAC());
+			BAGUETTE.add(snailAux.getSTATWEIGHT());
+			BAGUETTE.add(snailAux.getSTATREGEN());
+			BAGUETTE.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> MIAU = new ArrayList<>();
+			snailAux = new MiauSnail(newSession, lockSession);
+			MIAU.add(snailAux.getSTATSTAMINA());
+			MIAU.add(snailAux.getSTATAC());
+			MIAU.add(snailAux.getSTATWEIGHT());
+			MIAU.add(snailAux.getSTATREGEN());
+			MIAU.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> MERCA = new ArrayList<>();
+			snailAux = new MercaSnail(newSession, lockSession);
+			MERCA.add(snailAux.getSTATSTAMINA());
+			MERCA.add(snailAux.getSTATAC());
+			MERCA.add(snailAux.getSTATWEIGHT());
+			MERCA.add(snailAux.getSTATREGEN());
+			MERCA.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> SEA = new ArrayList<>();
+			snailAux = new SeaSnail(newSession, lockSession);
+			SEA.add(snailAux.getSTATSTAMINA());
+			SEA.add(snailAux.getSTATAC());
+			SEA.add(snailAux.getSTATWEIGHT());
+			SEA.add(snailAux.getSTATREGEN());
+			SEA.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> ROBA = new ArrayList<>();
+			snailAux = new RobaSnail(newSession, lockSession);
+			ROBA.add(snailAux.getSTATSTAMINA());
+			ROBA.add(snailAux.getSTATAC());
+			ROBA.add(snailAux.getSTATWEIGHT());
+			ROBA.add(snailAux.getSTATREGEN());
+			ROBA.add(snailAux.getSTATSPEED());
+			ArrayList<Integer> IRIS = new ArrayList<>();
+			snailAux = new IrisSnail(newSession, lockSession);
+			IRIS.add(snailAux.getSTATSTAMINA());
+			IRIS.add(snailAux.getSTATAC());
+			IRIS.add(snailAux.getSTATWEIGHT());
+			IRIS.add(snailAux.getSTATREGEN());
+			IRIS.add(snailAux.getSTATSPEED());
+			String normalArray = gsonOwn2.toJson(NORMAL);
+			String tankArray = gsonOwn2.toJson(TANK);
+			String baguetteArray = gsonOwn2.toJson(BAGUETTE);
+			String miauArray = gsonOwn2.toJson(MIAU);
+			String mercaArray = gsonOwn2.toJson(MERCA);
+			String seaArray = gsonOwn2.toJson(SEA);
+			String robaArray = gsonOwn2.toJson(ROBA);
+			String irisArray = gsonOwn2.toJson(IRIS);
+			msgChoose.addProperty("normal", normalArray);
+			msgChoose.addProperty("tank", tankArray);
+			msgChoose.addProperty("baguette", baguetteArray);
+			msgChoose.addProperty("miau", miauArray);
+			msgChoose.addProperty("merca", mercaArray);
+			msgChoose.addProperty("sea", seaArray);
+			msgChoose.addProperty("roba", robaArray);
+			msgChoose.addProperty("iris", irisArray);
+
 			try {
-					jug.sessionLock.lock();
-					jug.getSession().sendMessage(new TextMessage(msgChoose.toString()));
-				} catch (IOException e) {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgChoose.toString()));
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					jug.sessionLock.unlock();
-				}
-				
+				e.printStackTrace();
+			} finally {
+				jug.sessionLock.unlock();
+			}
+
 			break;
 
-			case "SEESNAIL":
+		case "SEESNAIL":
 			jug = game.bucarJugadorConectado(newSession);
 			JsonObject msgCheck = new JsonObject();
-			switch(post.snailToSee) {
-				case "NORMAL":
-					snailAux = new normalSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+			switch (post.snailToSee) {
+			case "NORMAL":
+				snailAux = new normalSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
 				break;
-				case "TANK":
-					snailAux = new TankSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
-				case "BAGUETTE":
-					snailAux = new BaguetteSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
+			case "TANK":
+				snailAux = new TankSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
+			case "BAGUETTE":
+				snailAux = new BaguetteSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
 
-				case "MIAU":
-					snailAux = new MiauSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
+			case "MIAU":
+				snailAux = new MiauSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
 
-				case "MERCA":
-					snailAux = new MercaSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
+			case "MERCA":
+				snailAux = new MercaSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
 
-				case "SEA":
-					snailAux = new SeaSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
+			case "SEA":
+				snailAux = new SeaSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
 
-				case "ROBA":
-					snailAux = new RobaSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
+			case "ROBA":
+				snailAux = new RobaSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
 
-				case "IRIS":
-					snailAux = new IrisSnail(newSession, lockSession);
-					msgCheck.addProperty("event", "SEESNAILRS");
-					msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
-					msgCheck.addProperty("ac", snailAux.getSTATAC());
-					msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
-					msgCheck.addProperty("regen", snailAux.getSTATREGEN());
-					msgCheck.addProperty("speed", snailAux.getSTATSPEED());
-					msgCheck.addProperty("shells", snailAux.getCASHPRICE());
-					msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
-					break;
-				default:
-				
+			case "IRIS":
+				snailAux = new IrisSnail(newSession, lockSession);
+				msgCheck.addProperty("event", "SEESNAILRS");
+				msgCheck.addProperty("stamina", snailAux.getSTATSTAMINA());
+				msgCheck.addProperty("ac", snailAux.getSTATAC());
+				msgCheck.addProperty("weight", snailAux.getSTATWEIGHT());
+				msgCheck.addProperty("regen", snailAux.getSTATREGEN());
+				msgCheck.addProperty("speed", snailAux.getSTATSPEED());
+				msgCheck.addProperty("shells", snailAux.getCASHPRICE());
+				msgCheck.addProperty("baba", snailAux.getPOINTSPRICE());
+				break;
+			default:
+
 				break;
 			}
 			try {
 				jug.sessionLock.lock();
 				jug.getSession().sendMessage(new TextMessage(msgCheck.toString()));
 			} catch (IOException e) {
-			// TODO Auto-generated catch block
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				jug.sessionLock.unlock();
 			}
 			break;
-			case "PURCHASE" :
+		case "PURCHASE":
 			jug = game.bucarJugadorConectado(newSession);
+			playerR = game.findRegistered(jug = game.bucarJugadorConectado(newSession));
 			JsonObject msgPurchase = new JsonObject();
 			msgPurchase.addProperty("event", "PURCHASEOK");
-				switch(post.purchaseId){
-					case 1 :
-						jug.addCash(120);
+			switch (post.purchaseId) {
+			case 1:
+				jug.addCash(120);
+				break;
+			case 2:
+				jug.addCash(250);
+				break;
+			case 3:
+				jug.addCash(520);
+				break;
+			case 4:
+				jug.addCash(1050);
+				break;
+			default:
+				break;
+			}
+			switch (post.method) {
+			
+			case "cash":
+				switch (post.purchaseSnail) {
+				case "NORMAL":
+					snailAux = new normalSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.NORMAL, true);
+					playerR.setCash(jug.getCash());
 					break;
-					case 2 :
-						jug.addCash(250);
+				case "TANK":
+					snailAux = new TankSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.TANK, true);
+					playerR.setCash(jug.getCash());
 					break;
-					case 3 :
-						jug.addCash(520);
+				case "BAGUETTE":
+					snailAux = new BaguetteSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.BAGUETTE, true);
+					playerR.setCash(jug.getCash());
 					break;
-					case 4 :
-						jug.addCash(1050);
+
+				case "MIAU":
+					snailAux = new MiauSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.MIAU, true);
+					playerR.setCash(jug.getCash());
 					break;
-					default:
+
+				case "MERCA":
+					snailAux = new MercaSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.MERCA, true);
+					playerR.setCash(jug.getCash());
+					break;
+
+				case "SEA":
+					snailAux = new SeaSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.SEA, true);
+					playerR.setCash(jug.getCash());
+					break;
+
+				case "ROBA":
+					snailAux = new RobaSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.ROBA, true);
+					playerR.setCash(jug.getCash());
+					break;
+
+				case "IRIS":
+					snailAux = new IrisSnail(newSession, lockSession);
+					jug.addCash(-(snailAux.getCASHPRICE()));
+					if(jug.getCash() < 0){
+						jug.setCash(0);
+					}
+					playerR.mySnails.put(SnailType.IRIS, true);
+					playerR.setCash(jug.getCash());
+					break;
+				default:
+
 					break;
 				}
-				msgPurchase.addProperty("shells", jug.getCash());
-				try {
-				jug.sessionLock.lock();
-				jug.getSession().sendMessage(new TextMessage(msgPurchase.toString()));
-				} catch (IOException e) {
-				// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					jug.sessionLock.unlock();
-				}
-			break; 
+			break;
+			case "points":
+				switch(post.purchaseSnail) {
+				case "NORMAL":
+					snailAux = new normalSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.NORMAL, true);
+					playerR.setPoints(jug.getPoints());
+				break;
+				case "TANK":
+					snailAux = new TankSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.TANK, true);
+					playerR.setPoints(jug.getPoints());
+					System.out.println("HE comprado un tanque");
+					break;
+				case "BAGUETTE":
+					snailAux = new BaguetteSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.BAGUETTE, true);
+					playerR.setPoints(jug.getPoints());
+					break;
+
+				case "MIAU":
+					snailAux = new MiauSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.MIAU, true);
+					playerR.setPoints(jug.getPoints());
+					break;
+
+				case "MERCA":
+					snailAux = new MercaSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.MERCA, true);
+					playerR.setPoints(jug.getPoints());
+					break;
+
+				case "SEA":
+					snailAux = new SeaSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.SEA, true);
+					playerR.setPoints(jug.getPoints());
+					break;
+
+				case "ROBA":
+					snailAux = new RobaSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.ROBA, true);
+					playerR.setPoints(jug.getPoints());
+					break;
+
+				case "IRIS":
+					snailAux = new IrisSnail(newSession, lockSession);
+					jug.addPoints(-(snailAux.getPOINTSPRICE()));
+					if(jug.getPoints() < 0){
+						jug.setPoints(0);
+					}
+					playerR.mySnails.put(SnailType.IRIS, true);
+					playerR.setPoints(jug.getPoints());
+					break;
+				default:
+				
+				break;
+			}
+			
+			break;	
+
 			default:
 
 			break;
-			
+			}
+			ArrayList<String> owned3 = new ArrayList<>();
+			ArrayList<String> notOwned3 = new ArrayList<>();
+			for (SnailType snail : playerR.mySnails.keySet()) {
+				if (playerR.mySnails.get(snail)) {
+					owned3.add(snail.toString());
+				} else {
+					notOwned3.add(snail.toString());
+				}
+			}
+			Gson gsonOwn3 = new Gson();
+			String ownedArray3 = gsonOwn3.toJson(owned3);
+			String notOwnedArray3 = gsonOwn3.toJson(notOwned3);
+			msgPurchase.addProperty("shells", jug.getCash());
+			msgPurchase.addProperty("baba", jug.getPoints());
+			msgPurchase.addProperty("owned", ownedArray3);
+			msgPurchase.addProperty("notOwned", notOwnedArray3);
+
+			try {
+				jug.sessionLock.lock();
+				jug.getSession().sendMessage(new TextMessage(msgPurchase.toString()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				jug.sessionLock.unlock();
+			}
+			break;
+		default:
+
+			break;
 
 		}
 
