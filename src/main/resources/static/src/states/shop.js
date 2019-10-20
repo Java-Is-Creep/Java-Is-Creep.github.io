@@ -121,12 +121,6 @@ Slooow.shopState.prototype = {
         salesBg.addChild(sales[1])
         sales[1].alpha = 0;
 
-        sales[2] = game.add.image(0, 0, 'slugCol')
-        sales[2].anchor.setTo(0.5, 0.5);
-        sales[2].scale.setTo(0.4, 0.4)
-        salesBg.addChild(sales[2])
-        sales[2].alpha = 0;
-
 
         var saleText = game.add.text(0,
             -80, game.global.activeLanguage.Sales, game.global.style)
@@ -324,10 +318,7 @@ Slooow.shopState.prototype = {
             } else if (id == 1){
                 game.global.snailToBuy = 'TANK'
                 game.global.skinToBuy = 1
-            } else if (id == 2){
-                game.global.snailToBuy = 'SLUG'
-                game.global.skinToBuy = 1
-            }
+            } 
             let msg = {
                 event: 'SEESNAIL',
                 snailToSee : game.global.snailToBuy
